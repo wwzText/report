@@ -1,4 +1,22 @@
-.reporthoutui{
-    color: @primaryColor;
-    background-color: @primaryColor;
+.header_container{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-right: 10px;
+    box-sizing: border-box;
+    position: relative;
+    height: 38px;
+    justify-content: space-between;
+    .reporthoutui{
+        color: @fontColor;
+        width: 38px;
+        line-height: 38px;
+        text-align: center;
+    }
+    .header-title{
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
 }

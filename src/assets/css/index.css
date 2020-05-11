@@ -1,0 +1,14 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
+#app{
+    height: 100%;
+}
+.page-container{
+    height: 100%;
+}
+.page-container_main{
+    height: 100%;
+    overflow: auto;
+}

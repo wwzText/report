@@ -1,0 +1,7 @@
+class indexModule {
+
+}
+
+export {
+    indexModule
+}
