@@ -7,7 +7,6 @@ import '@/assets/iconfont/iconfont.css'
 import './assets/less/theme.less';
 
 import headerNav from '@/components/common/headerNav';
-
 Vue.component('HeaderNav', headerNav)
 
 Vue.config.productionTip = false
