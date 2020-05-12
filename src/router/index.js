@@ -11,9 +11,9 @@ const routes = [
     name: 'index',
     component: Index
   }, {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/pages/terminalReport')
+    path: '/terminalVisitReport',
+    name: 'TerminalVisitReport',
+    component: () => import('@/pages/terminalVisitReport')
   }
 ]
 

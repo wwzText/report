@@ -2,9 +2,23 @@
   "id": "1810812",
   "name": "report",
   "font_family": "iconfont",
-  "css_prefix_text": "report",
+  "css_prefix_text": "report-",
   "description": "symbio报表项目，H5放置app",
   "glyphs": [
+    {
+      "icon_id": "9848280",
+      "name": "交换",
+      "font_class": "jiaohuan",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "12254869",
+      "name": "展 开",
+      "font_class": "zhankai",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
     {
       "icon_id": "7509049",
       "name": "前进",

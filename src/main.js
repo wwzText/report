@@ -9,6 +9,8 @@ import './assets/less/theme.less';  // 主题less配置
 
 import headerNav from '@/components/common/headerNav';
 Vue.component('HeaderNav', headerNav)
+import dataMonthChange from './components/common/dataMonthChange';
+Vue.component('DataMonthChange', dataMonthChange)
 
 Vue.config.productionTip = false
 

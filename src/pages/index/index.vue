@@ -1,7 +1,12 @@
+/**
+ * 报表列表页面
+ */
 <template>
   <div class="page-container">
-    <HeaderNav title="终端报表-拜访主页"></HeaderNav>
-    <div class="page-container_main"></div>
+    <HeaderNav title="统计主页"></HeaderNav>
+    <div class="page-container_main">
+      <button @click="seeTerminalReportIndex">跳转终端报表主页</button>
+    </div>
   </div>
 </template>
 
@@ -10,6 +15,12 @@ import { indexModule } from "@/module/indexModule.js";
 export default {
   created() {
     console.log(indexModule);
+  },
+
+  methods: {
+    seeTerminalReportIndex() {
+      this.$router.push('/terminalVisitReport')
+    }
   }
 };
 </script>

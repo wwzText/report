@@ -1,6 +1,6 @@
 <template>
     <div class="header_container">
-        <span class="iconfont reporthoutui"></span>
+        <span class="iconfont report-houtui"></span>
         <span class="header-title">{{title || '报表'}}</span>
         <slot />
     </div>
