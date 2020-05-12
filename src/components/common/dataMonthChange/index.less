@@ -1,0 +1,39 @@
+.datachange-container{
+    position: relative;
+    height: 38px;
+}
+.datachange-isactive{
+    position: absolute;
+    animation: dataChangeShow 300ms linear;
+    animation-fill-mode: forwards;
+    left: 0;
+    opacity: 0;
+    width: 80px;
+    overflow: hidden;
+}
+.datachange-ishide{
+    position: absolute;
+    animation: dataChangeHide 200ms linear;
+    animation-fill-mode: forwards;
+    left: 0;
+    opacity: 1;
+}
+@keyframes dataChangeHide{
+    form {
+        left: 0;
+        opacity: 1;
+    } to {
+        left: 80px;
+        opacity: 0;
+    }
+}
+
+@keyframes dataChangeShow{
+    from {
+        left: 80px;
+        opacity: 0;
+    } to {
+        left: 0;
+        opacity: 1;
+    }
+}
