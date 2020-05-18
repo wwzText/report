@@ -1,24 +1,11 @@
 # code
 
-## Project setup
+## 描述
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+雪花crm系统报表H5
 ```
 
-### Compiles and minifies for production
+### 构建工具
 ```
-yarn build
+vue脚手架3.+，ui框架使用vant
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
