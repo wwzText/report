@@ -12,13 +12,7 @@ export default {
         title: String
     },
     created() {
-        console.log(this.$route)
-        console.log(window.history)
-    },
-    watch: {
-        $route(to, from) {
-            console.log(to, from, this.$route)
-        }
+        
     }
 }
 </script>
