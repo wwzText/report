@@ -1,13 +1,19 @@
 # code
 
 ## 项目描述
-```
-雪花crm系统*报表*H5
-```
+> 雪花crm系统*报表*H5
 
 ## 构建工具
+> vue脚手架3.+，ui框架使用vant
+
+#### 启动方式
 ```
-vue脚手架3.+，ui框架使用vant
+yarn serve
+```
+
+#### 打包
+```
+yarn build
 ```
 
 ## 项目结构说明(src文件夹)
@@ -28,13 +34,3 @@ vue脚手架3.+，ui框架使用vant
     * index将routes文件引入并注入到Vue
 * store
 
-
-#### 启动方式
-```
-yarn serve
-```
-
-#### 打包
-```
-yarn build
-```
