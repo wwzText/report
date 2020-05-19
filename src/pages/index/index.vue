@@ -10,23 +10,27 @@
       <span>{{test}}</span>
       <costomInput v-model="test1" />
       <span>{{test1}}</span>
+      <Button type="primary">测试</Button>
+      <!-- <van-button type="primary">测试</van-button> -->
     </div>
   </div>
 </template>
 
 <script>
 // import { indexModule } from "@/module/indexModule.js";
+
+
 export default {
   data() {
     return {
       test: 11,
-      test1: 'asa'
+      test1: "asa"
     };
   },
   methods: {
     seeTerminalReportIndex() {
       this.$router.push("/terminalVisitReport");
-    },
+    }
   }
 };
 </script>
