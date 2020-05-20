@@ -11,6 +11,7 @@
       <costomInput v-model="test1" />
       <span>{{test1}}</span>
       <Button type="primary">测试</Button>
+      <button class="test-active">测试active</button>
       <!-- <van-button type="primary">测试</van-button> -->
     </div>
   </div>
