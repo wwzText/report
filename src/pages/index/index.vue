@@ -2,17 +2,8 @@
  * 报表列表页面
  */
 <template>
-  <div class="page-container">
-    <div class="page-container_main">
-      <button @click="seeTerminalReportIndex">跳转终端报表主页</button>
-      <costomInput v-model="test" />
-      <span>{{test}}</span>
-      <costomInput v-model="test1" />
-      <span>{{test1}}</span>
-      <Button type="primary">测试</Button>
-      <button class="test-active">测试active</button>
-      <!-- <van-button type="primary">测试</van-button> -->
-    </div>
+  <div>
+    
   </div>
 </template>
 

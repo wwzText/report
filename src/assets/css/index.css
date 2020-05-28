@@ -4,11 +4,10 @@ html, body{
 }
 #app{
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .page-container{
-    height: 100%;
-}
-.page-container_main{
-    height: 100%;
+    flex: 1;
     overflow: auto;
 }
