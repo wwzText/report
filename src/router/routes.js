@@ -1,11 +1,3 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Entry from '@/pages/entry';
-import Index from '@/pages/index';
-import terminalVisitReport from '@/pages/terminalVisitReport';
-
-Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
@@ -13,7 +5,7 @@ const routes = [
   }, {
     path: '/workCircle',
     name: 'workCircleEntry',
-    component: Entry,
+    component: () => import('@/pages/entry'),
     children: [
       {
         path: '',
