@@ -3,7 +3,7 @@
  */
 <template>
     <div>
-        <DataMonthChange />
+        终端拜访首页
     </div>
 </template>
 
