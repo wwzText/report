@@ -1,7 +1,8 @@
 # 项目说明
 
 ## 项目描述
-> 雪花crm系统*报表*H5
+> 雪花crm系统*报表*H5 入口是pages/entry
+> 雪花工作圈拜访分享 *分享*H5 入口是pages/workCirclevisit
 
 ## 构建工具
 > vue脚手架3.+，ui框架使用vant
@@ -33,4 +34,6 @@ yarn build
     * routes文件存放页面引用
     * index将routes文件引入并注入到Vue
 * store
+
+
 

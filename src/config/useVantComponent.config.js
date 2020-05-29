@@ -1,8 +1,12 @@
 import {
-    Button
+    Button,
+    Calendar,
+    Popup,
 } from 'vant';
 
 
 export default {
-    Button
+    Button,
+    Calendar,
+    Popup,
 }

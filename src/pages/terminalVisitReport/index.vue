@@ -3,20 +3,24 @@
  */
 <template>
     <div>
-        终端拜访首页
+        <switchDataMonth />
     </div>
 </template>
 
 <script>
+import switchDataMonth from '@/components/terminalVisitReport/switchDataMonth';
 export default {
-    
+    created() {
+        this.$store.commit('changeHeaderNavTitle', {
+            name: '终端拜访首页'
+        })
+    },
+    components: {
+        switchDataMonth
+    }
 }
 </script>
 
 <style scoped>
 @import url('./index.css');
 </style>
-
-// distributor  经销商
-// visit    拜访
-// 

@@ -1,0 +1,42 @@
+.operation-btn_container{
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+    align-items: center;
+    border-bottom: 1px solid @borderColor;
+    .sure-btn{
+        background-color: transparent;
+        border: none;
+        color: @primaryColor;
+        padding: 0 18px;
+    }
+    .close-btn{
+        background-color: transparent;
+        border: none;
+        color: #737373;
+        padding: 0 18px;
+    }
+}
+.month-list{
+    >li{
+        text-align: center;
+        line-height: 60px;
+        border-bottom: 1px solid @borderColor;
+        height: 60px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    .choose-month{
+        color: @primaryColor;
+        animation: fontBig linear 100ms;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes fontBig {
+    from{
+
+    } to {
+        font-size: 18px;
+    }
+}

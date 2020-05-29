@@ -1,9 +1,9 @@
 const routes = [
   {
     path: '/',
-    redirect: '/workCircle',
+    redirect: '/report',
   }, {
-    path: '/workCircle',
+    path: '/report',
     name: 'workCircleEntry',
     component: () => import('@/pages/entry'),
     children: [
@@ -16,9 +16,9 @@ const routes = [
       }
     ]
   }, {
-    path: '/share',
-    name: 'wotkCircleShare',
-    component: () => import('@/pages/wotkCircleShare')
+    path: '/workCirclevisit',
+    name: 'workCirclevisit',
+    component: () => import('@/pages/workCirclevisit')
   }
 ]
 

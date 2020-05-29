@@ -1,11 +1,11 @@
 const headerNavStore = {
     state: {
-        headerNavTitle: '测试'
+        headerNavTitle: ''
     },
 
     mutations: {
-        changeHeaderNavTitle(state, newName) {
-            state.headerNavTitle = newName;
+        changeHeaderNavTitle(state, payload) {
+            state.headerNavTitle = payload.name;
         }
     }
     
