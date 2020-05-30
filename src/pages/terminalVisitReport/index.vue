@@ -4,11 +4,15 @@
 <template>
     <div>
         <switchDataMonth />
+        <staffMessage />
+        <visitSwap />
     </div>
 </template>
 
 <script>
 import switchDataMonth from '@/components/terminalVisitReport/switchDataMonth';
+import staffMessage from '@/components/terminalVisitReport/staffMessage';
+import visitSwap from '@/components/terminalVisitReport/visitSwap'
 export default {
     created() {
         this.$store.commit('changeHeaderNavTitle', {
@@ -16,7 +20,9 @@ export default {
         })
     },
     components: {
-        switchDataMonth
+        switchDataMonth,
+        staffMessage,
+        visitSwap,
     }
 }
 </script>

@@ -12,3 +12,10 @@ html, body{
     overflow: auto;
     background-color: #e8e8e8;
 }
+p{
+    margin: 0;
+}
+button{
+    border: none;
+    background-color: transparent;
+}
