@@ -12,7 +12,7 @@
 <script>
 import switchDataMonth from '@/components/terminalVisitReport/switchDataMonth';
 import staffMessage from '@/components/terminalVisitReport/staffMessage';
-import visitSwap from '@/components/terminalVisitReport/visitSwap'
+import visitSwap from '@/components/terminalVisitReport/visitSwap';
 export default {
     created() {
         this.$store.commit('changeHeaderNavTitle', {

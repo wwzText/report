@@ -1,0 +1,33 @@
+.title-nav-container{
+    display: flex;
+    justify-content: space-around;
+    > li{
+        padding: 18px 0;
+        font-size: 14px;
+        color: #686868;
+        font-weight: 500;
+    }
+    .cur-title-select{
+        color: @primaryColor;
+        position: relative;
+    }
+    .cur-title-select:after{
+        content: "";
+        position: absolute;
+        height: 100%;
+        top: -2px;
+        border-bottom: 2px solid @primaryColor;
+        animation: titleItemBorderAnimation linear 300ms;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes titleItemBorderAnimation{
+    from {
+        width: 0%;
+        left: 50%;
+    } to {
+        width: 50%;
+        left: 25%;
+    }
+}

@@ -1,0 +1,51 @@
+<template>
+  <!-- 拜访效率 -->
+  <div>
+    <visitData :visitData="visitData" />
+    <ViewTitle @click="visitTrend" title="当月拜访趋势" describe="测试随意写" style="marginTop: 10px; marginBottom: 10px" />
+    <ViewTitle title="所在工作站排行榜" describe="日均拜访家数" message="全部（10）" />
+    <currentRanking />
+  </div>
+</template>
+
+<script>
+import visitData from "./../visitData";
+
+export default {
+  components: {
+    visitData
+  },
+  data() {
+    return {
+      visitData: [
+        {
+          dataData: 2,
+          dataUnit: "家",
+          dataTitle: "日均拜访家数"
+        }, {
+          dataData: 3,
+          dataUnit: "次",
+          dataTitle: "日均次数"
+        }, {
+          dataData: 4,
+          dataUnit: "天",
+          dataTitle: "拜访天数"
+        }, {
+          dataData: 5,
+          dataUnit: "小时",
+          dataTitle: "日均拜访时长"
+        }
+      ]
+    };
+  },
+  methods: {
+      visitTrend() {
+          console.log('查看拜访趋势')
+      }
+  }
+};
+</script>
+
+<style lang="less" scoped>
+@import url("./index.less");
+</style>
