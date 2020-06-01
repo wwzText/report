@@ -3,10 +3,11 @@
     <div class="switch-conatiner">
       <div class="use-type-container" @click="changeSwitchType">
         <span>{{useDate ? '按日期' : '按月份'}}</span>
-        <span></span>
+        <span class="iconfont iconriqiqiehuan-01"></span>
       </div>
       <div class="select-container" @click="showSelectDateComponent">
         <span>{{showSelectDate}}</span>
+        <span class="iconfont iconmenu-down"></span>
       </div>
     </div>
     <calendar :showCalenar="showCalenar" @changeDate="changeDate" />

@@ -1,0 +1,40 @@
+.ranking-container{
+    padding: 0 10px;
+    box-sizing: border-box;
+    background-color: white;
+    .ranking-item{
+        padding: 10px 0;
+        border-top: 1px solid @borderColor;
+        display: flex;
+        align-items: center;
+        img{
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .ranking-index{
+            width: 24px;
+            margin-right: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #999999;
+            text-align: center;
+        }
+        .ranking-name{
+            font-size: 14px;
+            color: @fontColor;
+            flex: 1;
+        }
+        .ranking-message-value{
+            font-size: 16px;
+            font-weight: 500;
+            color: @fontColor;
+            margin-right: 5px;
+        }
+        .ranking-message-unit{
+            font-size: 12px;
+            color: #989898;
+        }
+    }
+
+}

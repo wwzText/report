@@ -13,15 +13,25 @@
         indicator-color="white" 
         :loop="false"
         :show-indicators="false"
+        @change="swipeIndexChange"
+        ref="visitSwipe"
     >
       <SwipeItem>
+        <!-- 拜访效率 -->
         <visitsOfNumber />
       </SwipeItem>
-      <SwipeItem>2</SwipeItem>
       <SwipeItem>
+        <!-- 拜访时长 -->
+        <visitTimeLong />
+      </SwipeItem>
+      <SwipeItem>
+          <!-- 拜访有效率 -->
           <visitEfficiency />
       </SwipeItem>
-      <SwipeItem>4</SwipeItem>
+      <SwipeItem>
+        <!-- 当月拜访计划 -->
+        <visitPlan />
+      </SwipeItem>
     </Swipe>
   </div>
 </template>
@@ -30,12 +40,15 @@
 import titleNav from "@/components/common/titleNav";
 import visitsOfNumber from "./../visitsOfNumber"; // 拜访效率
 import visitEfficiency from "@/components/terminalVisitReport/visitEfficiency"; //拜访有效率组件
-
+import visitTimeLong from "@/components/terminalVisitReport/visitTimeLong"; // 拜访时长
+import visitPlan from "@/components/terminalVisitReport/visitPlan"; //当月拜访计划
 export default {
   components: {
     titleNav,
     visitEfficiency,
     visitsOfNumber,
+    visitTimeLong,
+    visitPlan,
   },
   data() {
     return {
@@ -46,6 +59,11 @@ export default {
   methods: {
     navTitleIndexChange(obj) {
       this.curTitleIndex = obj.index;
+      this.$refs.visitSwipe.swipeTo(obj.index)
+    },
+
+    swipeIndexChange(e) {
+      this.curTitleIndex = e;
     }
   }
 };

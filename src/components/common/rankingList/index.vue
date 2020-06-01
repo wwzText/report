@@ -1,0 +1,26 @@
+<template>
+  <ul class="ranking-container">
+    <li v-for="(item, index) in rankList" :key="index" class="ranking-item">
+      <img v-if="index == 0" src="./../../../assets/img/ranking1.png" alt />
+      <img v-if="index == 1" src="./../../../assets/img/ranking2.png" alt />
+      <img v-if="index == 2" src="./../../../assets/img/ranking3.png" alt />
+      <span class="ranking-index" v-if="index != 0 && index != 1 && index != 2">{{index}}</span>
+      <span class="ranking-name">{{item.name}}</span>
+      <span class="ranking-message-value">{{item.rankingMessage}}</span>
+      <span class="ranking-message-unit">{{item.rankingMessageUnit}}</span>
+    </li>
+  </ul>
+</template>
+
+<script>
+export default {
+  props: {
+    rankList: Array, // 参与排名业务员列表
+    rangMessageList: Array // 用于展示的字段列表，复用时根据各自不同的配置改变显隐顺序
+  }
+};
+</script>
+
+<style lang="less" scoped>
+@import url("./index.less");
+</style>

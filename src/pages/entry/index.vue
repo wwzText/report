@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <HeaderNav :title="headerNavTitle"></HeaderNav>
-    <router-view></router-view>
+    <router-view class="view-main"></router-view>
   </div>
 </template>
 
