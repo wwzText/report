@@ -6,7 +6,9 @@ import {
     Calendar,
     Popup,
     Swipe,
-    SwipeItem
+    SwipeItem,
+    ImagePreview,
+    Image as VanImage
 } from 'vant';
 
 
@@ -15,5 +17,7 @@ export default {
     Calendar,
     Popup,
     Swipe,
-    SwipeItem
+    SwipeItem,
+    ImagePreview,
+    VanImage
 }

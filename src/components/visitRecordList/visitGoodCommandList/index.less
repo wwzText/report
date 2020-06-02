@@ -1,0 +1,63 @@
+.good-command-container{
+    padding: 0 10px 15px 10px;
+    background-color: white;
+    box-sizing: border-box;
+    .good-number-container{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .icondianzan-01,
+        .iconpinglun-01{
+            color: @primaryColor;
+            font-size: 24px;
+            margin-left: 15px;
+            margin-right: 2px;
+        }
+        .good-num{
+            font-size: 14px;
+            color: @fontColor;
+        }
+    }
+    .good-list-container{
+        padding: 10px;
+        background-color: #f7f7f7;
+        box-sizing: border-box;
+        border-bottom: 1px solid @borderColor;
+        display: flex;
+        align-items: center;
+        .icondianzan-01{
+            color: @primaryColor;
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        .good-people-container{
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            .good-prople-name{
+                font-size: 12px;
+                color: @primaryColor;
+            }
+        }
+        .all-good-text{
+            font-size: 12px;
+            color: @primaryColor;
+            background-color: #f7f7f7;
+            padding-left: 10px;
+        }
+    }
+    .command-list-container{
+        background-color: #f7f7f7;
+        padding: 0 10px;
+        font-size: 12px;
+        color: @fontColor;
+        .command-item{
+            padding: 10px 0;
+            border-bottom: 1px solid @borderColor;
+        }
+        .command-name{
+            color: @primaryColor;
+        }
+    }
+}
