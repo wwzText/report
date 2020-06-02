@@ -16,6 +16,9 @@ const routes = [
       }, {
         path: 'visitRecordList',
         component: () => import('@/pages/visitRecordList')
+      }, {
+        path: 'visitRanking',
+        component: () => import('@/pages/visitRanking')
       }
     ]
   }, {

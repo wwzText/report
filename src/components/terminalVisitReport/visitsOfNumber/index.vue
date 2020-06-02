@@ -3,7 +3,7 @@
   <div>
     <visitData :visitData="visitData" />
     <ViewTitle @click="visitTrend" title="当月拜访趋势" describe="测试随意写" style="marginTop: 10px; marginBottom: 10px" />
-    <ViewTitle title="所在工作站排行榜" describe="日均拜访家数" message="全部（10）" />
+    <ViewTitle title="所在工作站排行榜" @click="handleToRanking" describe="日均拜访家数" message="全部（10）" />
     <currentRanking />
     <RankingList :rankList="rankList" />
   </div>
@@ -65,6 +65,10 @@ export default {
   methods: {
       visitTrend() {
           console.log('查看拜访趋势')
+      },
+
+      handleToRanking() {
+        this.$router.push('visitRanking')
       }
   }
 };
