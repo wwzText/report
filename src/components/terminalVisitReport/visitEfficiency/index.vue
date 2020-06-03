@@ -3,7 +3,7 @@
   <div>
     <visitData :visitData="visitData" />
 
-    <ViewTitle title="分场所终端拜访率" style="marginTop: 10px; marginBottom: 10px" />
+    <ViewTitle title="分场所终端拜访率" @click="seePlaceVisitEfficiency" style="marginTop: 10px; marginBottom: 10px" />
     <ViewTitle title="所在工作站排行榜" describe="日均拜访家数" message="全部（10）" />
     <currentRanking />
     <RankingList :rankList="rankList" />
@@ -58,6 +58,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    seePlaceVisitEfficiency() {
+      this.$router.push('placeVisitEfficiency')
+    }
   }
 };
 </script>

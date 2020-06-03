@@ -10,7 +10,7 @@ class Http {
     })
 
     static async request(url, method = 'post', data = {}) {
-        console.log(url)
+
         return new Promise((resolve, reject) => {
 
             Http.instance[method](apis[url], data).then(res => {

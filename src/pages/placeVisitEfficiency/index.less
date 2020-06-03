@@ -1,0 +1,31 @@
+.place-container{
+    padding: 15px 18px 15px 10px;
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    .place-message-container{
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        .space-name-container{
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            .place-name{
+                font-size: 16px;
+                color: @fontColor;
+                font-weight: 500;
+                margin-left: 10px;
+            }
+        }
+        .place-visit-tip{
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            .place-visit-num{
+                font-size: 16px;
+                color: @fontColor;
+            }
+        }
+    }
+}

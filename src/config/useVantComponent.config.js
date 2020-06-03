@@ -8,7 +8,8 @@ import {
     Swipe,
     SwipeItem,
     ImagePreview,
-    Image as VanImage
+    Image as VanImage,
+    Circle as VanCircle,
 } from 'vant';
 
 
@@ -19,5 +20,6 @@ export default {
     Swipe,
     SwipeItem,
     ImagePreview,
-    VanImage
+    VanImage,
+    VanCircle
 }

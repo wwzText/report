@@ -19,6 +19,9 @@ const routes = [
       }, {
         path: 'visitRanking',
         component: () => import('@/pages/visitRanking')
+      }, {
+        path: 'placeVisitEfficiency',
+        component: () => import('@/pages/placeVisitEfficiency')
       }
     ]
   }, {
