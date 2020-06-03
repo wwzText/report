@@ -33,7 +33,6 @@ export default {
           data: ["21", "22", "23", "24", "25", "26", "27", "28"]
         },
         yAxis: {
-          name: "℃",
           nameLocation: "end",
           type: "value",
           axisLabel: {
@@ -44,7 +43,7 @@ export default {
           {
             name: "拜访次数",
             type: "line",
-            data: [1, 3, 4, 5, 6, 99],
+            data: [1, 3, 4, 5, 6, 99, 2],
             lineStyle: {
               //设置折线色颜色
               color: "#3780D9"
