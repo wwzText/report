@@ -22,6 +22,9 @@ const routes = [
       }, {
         path: 'placeVisitEfficiency',
         component: () => import('@/pages/placeVisitEfficiency')
+      }, {
+        path: 'visitTrend', 
+        component: () => import('@/pages/visitTrend')
       }
     ]
   }, {

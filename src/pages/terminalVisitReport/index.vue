@@ -20,7 +20,7 @@ export default {
         this.$store.commit('changeHeaderNavTitle', {
             name: '终端拜访首页'
         })
-        await Http.request('getWebTime');
+        await Http.request('getWebTime', 'post');
     },
     components: {
         switchDataMonth,

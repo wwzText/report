@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 import apis from './apis';
-
+axios.defaults.baseURL = '/api'
 // Vue.use(axios);
 
 class Http {
     static instance = axios.create({
-        baseURL: 'https://appuat.cresz.com.cn'
+        // baseURL: 'https://appuat.cresz.com.cn'
     })
 
     static async request(url, method = 'post', data = {}) {
