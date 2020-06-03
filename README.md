@@ -17,6 +17,10 @@ yarn serve
 yarn build
 ```
 
+#### 正式：https://app.cresz.com.cn
+#### 测试：https://appuat.cresz.com.cn
+#### api文档地址：https://vw3d.w.eolinker.com
+
 ## 项目结构说明(src文件夹)
 * assets(静态资源文件夹)
     * css (公用css文件)
@@ -34,7 +38,3 @@ yarn build
     * routes文件存放页面引用
     * index将routes文件引入并注入到Vue
 * store
-
-#### 正式：https://app.cresz.com.cn
-#### 测试：https://appuat.cresz.com.cn
-#### api文档地址：https://vw3d.w.eolinker.com
