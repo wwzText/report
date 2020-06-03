@@ -65,6 +65,7 @@ export default {
   methods: {
       visitTrend() {
           console.log('查看拜访趋势')
+          this.$router.push('visitTrend')
       },
 
       handleToRanking() {
