@@ -13,11 +13,14 @@
 import switchDataMonth from '@/components/terminalVisitReport/switchDataMonth';
 import staffMessage from '@/components/terminalVisitReport/staffMessage';
 import visitSwap from '@/components/terminalVisitReport/visitSwap';
+import { Http } from '@/api';
+
 export default {
-    created() {
+    async created() {
         this.$store.commit('changeHeaderNavTitle', {
             name: '终端拜访首页'
         })
+        await Http.request('getWebTime');
     },
     components: {
         switchDataMonth,

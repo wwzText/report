@@ -16,7 +16,6 @@ import visitQuestion from '@/components/visitRecordList/visitQuestion'; // 拜�
 import visitImgList from '@/components/visitRecordList/visitImgList'; // 拜访照片列表
 import visitGoodCommandList from '@/components/visitRecordList/visitGoodCommandList'; // 拜访点赞评论列表
 
-
 export default {
   components: {
     salesmanMessage,
