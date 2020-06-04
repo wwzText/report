@@ -20,7 +20,11 @@ export default {
         this.$store.commit('changeHeaderNavTitle', {
             name: '终端拜访首页'
         })
-        await Http.request('getWebTime', 'post');
+        let getWorkCircleDetail = await Http.request('getWorkCircleDetail', {
+            id: 'F6CE81F47F8D49708EB10E7BD00305BB',
+            appuser: '11223344',
+        });
+        console.log(getWorkCircleDetail)
     },
     components: {
         switchDataMonth,
