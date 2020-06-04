@@ -1,7 +1,7 @@
 <template>
     <div class="header_container">
-        <span class="iconfont report-houtui"></span>
-        <span class="header-title">{{title || '报表'}}</span>
+        <span class="iconfont iconhoutui-01" @click="navBackOrExit"></span>
+        <span class="header-title">{{title}}</span>
         <slot />
     </div>
 </template>
@@ -11,8 +11,12 @@ export default {
     props: {
         title: String
     },
-    created() {
-        
+    methods: {
+        // 后推或关闭H5
+        navBackOrExit() {
+            console.log(1)
+            this.$router.go(-1)
+        }
     }
 }
 </script>
