@@ -10,6 +10,7 @@ import {
     ImagePreview,
     Image as VanImage,
     Circle as VanCircle,
+    Loading
 } from 'vant';
 
 
@@ -21,5 +22,6 @@ export default {
     SwipeItem,
     ImagePreview,
     VanImage,
-    VanCircle
+    VanCircle,
+    Loading
 }

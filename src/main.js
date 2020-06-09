@@ -12,6 +12,17 @@ import 'vant/lib/button/style';
 // let vConsole = new Vconsole()
 // Vue.use(vConsole)
 
+
+/**
+ * loading组件
+ */
+import {
+  LoadingModel
+} from './components/common/showLoading';
+
+let loading = new LoadingModel();
+Vue.use(loading.install);
+
 // 全局使用的vant中的引入使用及注册
 import useVantComponent from './config/useVantComponent.config';
 for (let item in useVantComponent) {
