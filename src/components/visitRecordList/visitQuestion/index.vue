@@ -3,10 +3,10 @@
         <div class="question-main">
             <div class="address-container">
                 <img class="address-img" src="./../../../assets/img/address.png" alt="">
-                <span>XXX酒吧(大源店)</span>
+                <span>{{shareData.terminal_name}}</span>
             </div>
         </div>
-        <visitQuestionCard />
+        <visitQuestionCard :check_info="shareData.check_info" />
     </div>
 </template>
 
@@ -15,6 +15,9 @@ import visitQuestionCard from './../visitQuestionCard';
 export default {
     components: {
         visitQuestionCard
+    },
+    props: {
+        shareData: Object
     }
 }
 </script>

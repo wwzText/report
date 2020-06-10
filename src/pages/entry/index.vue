@@ -9,7 +9,9 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["headerNavTitle"])
+    ...mapState({
+      headerNavTitle: state => { return state.headerNavStore.headerNavTitle}
+    })
   }
 };
 </script>

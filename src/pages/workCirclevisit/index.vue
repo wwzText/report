@@ -1,38 +1,52 @@
 <template>
-  <div>这是工作圈分享页面</div>
+  <div>
+    <salesmanMessage :shareData="shareData" />
+    <salesmanNotesMessage :shareData="shareData" />
+    <visitQuestion :shareData="shareData" />
+    <visitImgList :shareData="shareData" />
+    <visitGoodCommandList :shareData="shareData" />
+  </div>
 </template>
 
 <script>
-import { Http } from "@/api";
-import { timeStampToTime } from "@/utils";
+
+import salesmanMessage from "@/components/visitRecordList/salesmanMessage"; // 业务员信息
+import salesmanNotesMessage from "@/components/visitRecordList/salesmanNotesMessage"; // 业务员离店备注
+import visitQuestion from '@/components/visitRecordList/visitQuestion'; // 拜访问题
+import visitImgList from '@/components/visitRecordList/visitImgList'; // 拜访照片列表
+import visitGoodCommandList from '@/components/visitRecordList/visitGoodCommandList'; // 拜访点赞评论列表
+
+import { getQueryObj } from "@/utils";
+
 export default {
+
+  components: {
+    salesmanMessage,
+    salesmanNotesMessage,
+    visitQuestion,
+    visitImgList,
+    visitGoodCommandList,
+  },
   created() {
     // 获取url上的参数
-    this.getQueryData();
-
-    // 获取工作圈分享内容
     this.getWorkShareData();
   },
 
+  data() {
+    return {
+      shareData: {}
+    }
+  },
+
   methods: {
-    getQueryData() {
-      this.$showLoading();
-      let query = location.href.split("?")[1].split("&");
-      let queryObj = {};
-      query.map(item => {
-        let itemArr = item.split("=");
-        queryObj[itemArr[0]] = itemArr[1];
-      });
-
-      this.getShareDataOfObj = queryObj;
-    },
-
+    // 获取分享的参数
     async getWorkShareData() {
-      let sharaData = await Http.request("getWorkCircleDetail", {
-        ...this.getShareDataOfObj
-      });
-			this.$hideLoading();
-			console.log(timeStampToTime(sharaData[0].visit_out_time, 'H:M:S'))
+      this.$showLoading();
+      this.shareData = await this.$store.dispatch('getShareTerminalVisitDetail', {
+        obj: getQueryObj()
+      })
+      console.log(this.shareData)
+      this.$hideLoading();
     }
   }
 };

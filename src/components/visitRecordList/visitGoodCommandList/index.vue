@@ -2,27 +2,28 @@
   <div class="good-command-container">
     <div class="good-number-container">
       <span class="iconfont icondianzan-01"></span>
-      <span class="good-num">{{goodPeopleList.length}}</span>
+      <span class="good-num">{{shareData.thumbups_tab.length}}</span>
       <span class="iconfont iconpinglun-01"></span>
-      <span class="good-num">32</span>
+      <span class="good-num">{{shareData.comments_tab.length}}</span>
     </div>
+
     <div class="good-list-container">
       <span class="iconfont icondianzan-01"></span>
       <div class="good-people-container">
         <span
           class="good-prople-name"
-          v-for="(item, index) in goodPeopleList"
+          v-for="(item, index) in shareData.thumbups_tab"
           :key="index"
-        >{{item}}，</span>
+        >{{item.usrname}}，</span>
       </div>
-      <span class="all-good-text">共{{goodPeopleList.length}}人点赞</span>
+      <span class="all-good-text">共{{shareData.thumbups_tab.length}}人点赞</span>
     </div>
     <div class="command-list-container">
-        <p v-for="(item, index) in commandPeopleList" :key="index" class="command-item">
-            <span class="command-name">{{item.from}}</span>
-            <span v-if="item.to"> 回复 </span>
-            <span v-if="item.to" class="command-name">{{item.to}}</span>
-            <span>：{{item.commandValue}}</span>
+        <p v-for="(item, index) in shareData.comments_tab" :key="index" class="command-item">
+            <span class="command-name">{{item.usrname}}</span>
+            <span v-if="item.to_usrname"> 回复 </span>
+            <span v-if="item.to_usrname" class="command-name">{{item.to_usrname}}</span>
+            <span>：{{item.zcomment}}</span>
         </p>
     </div>
   </div>
@@ -30,6 +31,9 @@
 
 <script>
 export default {
+  props: {
+    shareData: Object
+  },
   data() {
     return {
       goodPeopleList: [

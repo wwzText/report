@@ -38,7 +38,7 @@ yarn build
     * routes文件存放页面引用
     * index将routes文件引入并注入到Vue
 * store
-
+    * index为所有store入口，用vuex的module引入
 ```
 需要用到的原生接口
 退出H5、跳转到报表详情、获取用户信息
