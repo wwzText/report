@@ -14,7 +14,6 @@ export default {
     methods: {
         // 后推或关闭H5
         navBackOrExit() {
-            console.log(1)
             this.$router.go(-1)
         }
     }
