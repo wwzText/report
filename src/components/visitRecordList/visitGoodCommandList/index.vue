@@ -1,10 +1,10 @@
 <template>
   <div class="good-command-container">
     <div class="good-number-container">
-      <span class="iconfont icondianzan-01"></span>
-      <span class="good-num">{{shareData.thumbups_tab.length}}</span>
-      <span class="iconfont iconpinglun-01"></span>
-      <span class="good-num">{{shareData.comments_tab.length}}</span>
+      <span class="iconfont icondianzan-01" v-if="shareData.thumbups_tab.length"></span>
+      <span class="good-num" v-if="shareData.thumbups_tab.length">{{shareData.thumbups_tab.length}}</span>
+      <span class="iconfont iconpinglun-01" v-if="shareData.comments_tab.length"></span>
+      <span class="good-num" v-if="shareData.comments_tab.length">{{shareData.comments_tab.length}}</span>
     </div>
 
     <div class="good-list-container">
@@ -33,39 +33,6 @@
 export default {
   props: {
     shareData: Object
-  },
-  data() {
-    return {
-      goodPeopleList: [
-        "张三",
-        "李四",
-        "王五",
-        "赵6",
-        "张三",
-        "李四",
-        "王五",
-        "赵6",
-        "张三",
-        "李四",
-        "王五",
-        "赵6",
-        "张三",
-        "李四",
-        "王五",
-        "赵6"
-      ],
-      commandPeopleList: [
-        {
-          from: "张三",
-          commandValue: "测试评论"
-        },
-        {
-          from: "李四",
-          to: "张三",
-          commandValue: "测试评论回复功能测试评论回复功能测试评论回复功能"
-        }
-      ]
-    };
   }
 };
 </script>
