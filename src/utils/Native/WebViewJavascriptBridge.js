@@ -35,7 +35,7 @@
         messageHandlers[handlerName] = handler;
     }
     // 调用线程
-    function callHandler(handlerName, data, responseCallback) {
+    function callHandler(handlerName, responseCallback, data) {
 
         _doSend(handlerName, data, responseCallback);
     }

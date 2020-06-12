@@ -27,12 +27,11 @@ export default {
       name: "拜访首页"
     });
     
-    // NATIVE.getCurrentUserInfo(res => {
-    //     console.log('res', res)
-    // });
-    NATIVE.sendMessageToAndroid(res => {
-        console.log('res',res)
+    NATIVE.getCurrentUserInfo(res => {
+        console.log('res', res)
     });
+    // let userInfo = NATIVE.sendMessageToAndroid();
+    // console.log(userInfo)
   }
 };
 </script>

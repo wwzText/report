@@ -54,7 +54,14 @@ export const NATIVE = {
         setTimeout(function () { document.documentElement.removeChild(WVJBIframe) }, 0)
     },
 
-    setUpBridge: function (data, resultCallback, functionType = 'registerHandler') {
+    /**
+     * 
+     * @param {*} data 包含调用方法名
+     * @param {*} resultCallback 回调函数
+     * @param {*} functionType 桥接方式，registerHandler为H5获取原生的数据，callHandler为原生获取H5的数据
+     * @param {*} sendToAndroidMessage 提供给callHandler时传递给原生的数据
+     */
+    setUpBridge: function (data, resultCallback, functionType = 'registerHandler', sendToAndroidMessage) {
         var osType = this.getOSType();//获取系统类型
         //按系统类型 分别执行原生交互
         if (osType == 'IOS') {
@@ -69,10 +76,9 @@ export const NATIVE = {
         } else if (osType == 'ANDROID') {
             //安卓手机交互方式
             this.setUpAndroidBridge(function (bridge) {
-                console.log('72', bridge.callHandler)
-                bridge.callHandler('webSend', '22s', function(response) {
+                bridge[functionType](data.action, function(response) {
                     resultCallback(response)
-                })
+                }, sendToAndroidMessage)
             });
         } else {
             //其他类型
@@ -92,6 +98,8 @@ export const NATIVE = {
             'action': 'webSend',
             'data': '传递消息'
         };
-        this.setUpBridge(data, resultCallback, 'callHandler');
+        this.setUpBridge(data, resultCallback, 'callHandler', {
+            test: "测试传递消息"
+        });
     }
 }

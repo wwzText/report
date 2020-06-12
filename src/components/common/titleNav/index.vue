@@ -1,3 +1,4 @@
+// 横向滑动导航栏
 <template>
     <ul class="title-nav-container" :style="{'background': background}">
         <li v-for="(item, index) in titleList" @click="handleTitleItemClick(index)" :class="curTitleIndex == index ? 'cur-title-select' : ''" :key="index">
