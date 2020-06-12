@@ -26,12 +26,13 @@ export const NATIVE = {
      */
     setUpAndroidBridge: function (callback) {
         if (window.WebViewJavascriptBridge) {
-            return callback(WebViewJavascriptBridge);
+
+            return callback(window.WebViewJavascriptBridge);
         } else {
             document.addEventListener(
                 'WebViewJavascriptBridgeReady',
                 function () {
-                    return callback(WebViewJavascriptBridge);
+                    return callback(window.WebViewJavascriptBridge);
                 },
                 false
             );
@@ -53,13 +54,13 @@ export const NATIVE = {
         setTimeout(function () { document.documentElement.removeChild(WVJBIframe) }, 0)
     },
 
-    setUpBridge: function (data, resultCallback) {
+    setUpBridge: function (data, resultCallback, functionType = 'registerHandler') {
         var osType = this.getOSType();//获取系统类型
         //按系统类型 分别执行原生交互
         if (osType == 'IOS') {
             //苹果手机交互方式 消息体为字面量对象(json格式)： action 代表执行的动作 data 代表传递的数据
             this.setUpIOSBridge(function (bridge) {
-                bridge.callHandler('IOSNativeApp', data, function (response) {
+                bridge[functionType](data.action, data, function (response) {
                     if (typeof resultCallback == 'function') {
                         resultCallback(response);
                     }
@@ -68,22 +69,29 @@ export const NATIVE = {
         } else if (osType == 'ANDROID') {
             //安卓手机交互方式
             this.setUpAndroidBridge(function (bridge) {
-                bridge.callHandler('AndroidNativeApp', data, function (response) {
-                    if (typeof resultCallback == 'function') {
-                        resultCallback(response);
-                    }
-                });
+                console.log('72', bridge.callHandler)
+                bridge.callHandler('webSend', '22s', function(response) {
+                    resultCallback(response)
+                })
             });
         } else {
             //其他类型
         }
     },
 
-    getCurrentUserInfo: function (resultCallback) {
+    getCurrentUserInfo: async function (resultCallback) {
         var data = {
             'action': 'AndroidSend',
             'data': '获取用户信息'
         };
         this.setUpBridge(data, resultCallback);
     },
+
+    sendMessageToAndroid: function (resultCallback) {
+        var data = {
+            'action': 'webSend',
+            'data': '传递消息'
+        };
+        this.setUpBridge(data, resultCallback, 'callHandler');
+    }
 }

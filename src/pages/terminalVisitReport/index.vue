@@ -14,6 +14,7 @@ import switchDataMonth from "@/components/terminalVisitReport/switchDataMonth";
 import staffMessage from "@/components/terminalVisitReport/staffMessage";
 import visitSwap from "@/components/terminalVisitReport/visitSwap";
 import { NATIVE } from "@/utils/Native";
+import "@/utils/Native/WebViewJavascriptBridge";
 
 export default {
   components: {
@@ -25,15 +26,14 @@ export default {
     this.$store.commit("changeHeaderNavTitle", {
       name: "拜访首页"
     });
-    NATIVE.getCurrentUserInfo(function(res) {
-        console.log(res)
-    });
-
-    NATIVE.getCurrentUserInfo(res => {
-        console.log(res)
+    
+    // NATIVE.getCurrentUserInfo(res => {
+    //     console.log('res', res)
+    // });
+    NATIVE.sendMessageToAndroid(res => {
+        console.log('res',res)
     });
   }
-
 };
 </script>
 
