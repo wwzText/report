@@ -54,6 +54,14 @@ const terminalVisitReportStore = {
             context.commit('setShareWorkCircleDetail', workCircleDetail);
             
             return workCircleDetail
+        },
+
+        /**
+         * @description 获取员工指定日的报表数据
+         */
+        async getUserReportOfDay(context, payload) {
+            let userReportOfDay = await Http.request('getUserReportOfDay', payload)
+            console.log(userReportOfDay)
         }
     }
 

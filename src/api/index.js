@@ -48,6 +48,7 @@ class Http {
 
         // 拼接上私钥
         sign += `timestamp=${webTimeBack.appserver_time}&key=${SECRET_KEY}`
+        console.log(sign)
 
         // md5加密
         sign = md5(sign).toUpperCase();
@@ -73,7 +74,10 @@ class Http {
             data: {
                 data: JSON.stringify(data),
                 sign,
-                timestamp
+                timestamp,
+                imei: "865360032826820",
+                user_token: "eee859bbfb7543f2a0c993e4e18677ee",
+                
             },
             
             transformRequest: [
