@@ -1,6 +1,7 @@
 import axios from 'axios';
-
 import apis from './apis';
+
+import store from '@/store'
 // axios.defaults.baseURL = '/api';
 import { SECRET_KEY } from '@/config/md5.config';
 import md5 from 'js-md5';
@@ -10,7 +11,7 @@ class Http {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        baseURL: 'https://appuat.cresz.com.cn'
+        baseURL: 'http://appuat.cresz.com.cn'
     })
 
     // 获取服务端时间的时间戳
@@ -30,11 +31,14 @@ class Http {
 
     // 参数签名方法
     static dataSign(data, webTimeBack) {
+
         // 最后实际返回的签名字段
         let sign = '';
 
         // 接收排序后的对象
         const newData = {};
+
+        data['timestamp'] = webTimeBack.appserver_time;
 
         // 参数对象升序
         Object.keys(data).sort().forEach(function (key) {
@@ -47,8 +51,7 @@ class Http {
         }
 
         // 拼接上私钥
-        sign += `timestamp=${webTimeBack.appserver_time}&key=${SECRET_KEY}`
-        console.log(sign)
+        sign += `key=${SECRET_KEY}`
 
         // md5加密
         sign = md5(sign).toUpperCase();
@@ -56,8 +59,20 @@ class Http {
         return sign;
     }
 
+    // 验证用户信息，不存在时主动获取app接口提供的信息
+    static verificationUserInfo() {
+        if (store.state.userInfoStore.userInfo) {
+            return store.state.userInfoStore.userInfo;
+        } else {
+            return store.commit('getUserInfo')
+        }
+    }
+
     // 发送ajax请求
-    static async request(url, data = {}, method = 'post', ) {
+    static async request(url, data = {}, method = 'post',) {
+
+        let userInfo = Http.verificationUserInfo();
+
         // 服务器时间返回的数据
         let webTimeBack = await Http.getWebTime();
 
@@ -66,8 +81,8 @@ class Http {
 
         // 服务器时间戳
         let timestamp = webTimeBack.appserver_time;
-        
-        url = 'https://appuat.cresz.com.cn' + apis[url];
+
+        url = 'http://appuat.cresz.com.cn' + apis[url];
         return await axios({
             method,
             url,
@@ -75,11 +90,10 @@ class Http {
                 data: JSON.stringify(data),
                 sign,
                 timestamp,
-                imei: "865360032826820",
-                user_token: "eee859bbfb7543f2a0c993e4e18677ee",
-                
+                imei: userInfo ? userInfo.imei : "865360032826820",
+                user_token: userInfo ? userInfo.user_token : "eee859bbfb7543f2a0c993e4e18677ee",
             },
-            
+
             transformRequest: [
                 function (data) {
                     let ret = ''
@@ -94,7 +108,7 @@ class Http {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }).then(res => {
-            if(res.data.errcode === 200) {
+            if (res.data.errcode === 200) {
                 return res.data.data
             }
         })

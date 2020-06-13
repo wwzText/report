@@ -1,3 +1,5 @@
+import {NATIVE} from '@/utils/Native';
+
 const userInfoStore = {
     state: () => ({
         userInfo: null
@@ -5,8 +7,11 @@ const userInfoStore = {
 
     mutations: {
         // 从原生获取用户信息回来后绑定到全局
-        setUserInfo(state, payload) {
-            state.userInfo = payload.userInfo;
+        getUserInfo(state) {
+            NATIVE.getCurrentUserInfo(res => {
+                state.userInfo = res;
+                return res
+            });
         }
     }
     

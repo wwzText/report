@@ -26,7 +26,7 @@ export const NATIVE = {
      */
     setUpAndroidBridge: function (callback) {
         if (window.WebViewJavascriptBridge) {
-
+            
             return callback(window.WebViewJavascriptBridge);
         } else {
             document.addEventListener(
@@ -56,12 +56,12 @@ export const NATIVE = {
 
     /**
      * 
-     * @param {*} data 包含调用方法名
+     * @param {*} data 包含方法名对象
      * @param {*} resultCallback 回调函数
-     * @param {*} functionType 桥接方式，registerHandler为H5获取原生的数据，callHandler为原生获取H5的数据
-     * @param {*} sendToAndroidMessage 提供给callHandler时传递给原生的数据
+     * @param {*} functionType 调用方式，默认前端调用原生返回的数据
+     * @param {*} message 前端传给原生的数据
      */
-    setUpBridge: function (data, resultCallback, functionType = 'registerHandler', sendToAndroidMessage) {
+    setUpBridge: function (data, resultCallback, functionType = 'registerHandler', message) {
         var osType = this.getOSType();//获取系统类型
         //按系统类型 分别执行原生交互
         if (osType == 'IOS') {
@@ -76,9 +76,9 @@ export const NATIVE = {
         } else if (osType == 'ANDROID') {
             //安卓手机交互方式
             this.setUpAndroidBridge(function (bridge) {
-                bridge[functionType](data.action, function(response) {
+                bridge[functionType](data.action, function (response) {
                     resultCallback(response)
-                }, sendToAndroidMessage)
+                }, message)
             });
         } else {
             //其他类型
@@ -93,13 +93,11 @@ export const NATIVE = {
         this.setUpBridge(data, resultCallback);
     },
 
-    sendMessageToAndroid: function (resultCallback) {
+    sendMessageToAndroid: function (resultCallback, message) {
         var data = {
             'action': 'webSend',
             'data': '传递消息'
         };
-        this.setUpBridge(data, resultCallback, 'callHandler', {
-            test: "测试传递消息"
-        });
+        this.setUpBridge(data, resultCallback, 'callHandler', message);
     }
 }

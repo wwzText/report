@@ -2,9 +2,9 @@
   <!-- 业务员信息 -->
   <div class="staff-message-container">
     <div class="staff-message">
-      <span class="staff-name">李某某</span>
-      <span class="staff-duty">业务员</span>
-      <p class="staff-work-address">XXX大区-XXX业务部-XXX工作站</p>
+      <span class="staff-name">{{headerMessage.usertxt}}</span>
+      <span class="staff-duty">{{headerMessage.position_desc}}</span>
+      <p class="staff-work-address">{{headerMessage.org_desc}}</p>
     </div>
     <button class="see-record-btn" @click="seeVisitRecord">查看拜访记录></button>
   </div>
@@ -12,6 +12,10 @@
 
 <script>
 export default {
+
+  props: {
+    headerMessage: Object
+  },
   methods: {
     // 查看拜访记录
     seeVisitRecord() {

@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { NATIVE } from "@/utils/Native";
+
 import reportSelectTree from "@/components/reportSelectTree";
 export default {
   async created() {
@@ -50,9 +50,6 @@ export default {
       name: "分析报表"
     });
 
-    NATIVE.getCurrentUserInfo(res => {
-      console.log(res);
-    });
   },
   components: {
     reportSelectTree

@@ -6,7 +6,16 @@ import {
 const terminalVisitReportStore = {
     state: {
         // 用于分享的终端拜访详情
-        shareWorkCircleDetail: null
+        shareWorkCircleDetail: null,
+
+        // 业务员拜访按单日查询数据数据
+        userReportOfDay: {}, 
+
+        //页面展示人员信息还是组织信息
+        userOrOrganization: 'user',
+
+        // 页面展示日期时间状态 date为按天查询 month按月查询
+        dateOrMonth: 'date',
     },
 
     mutations: {
@@ -15,6 +24,10 @@ const terminalVisitReportStore = {
          */
         setShareWorkCircleDetail(state, payload) {
             state.shareWorkCircleDetail = payload.workCircleDetail
+        },
+
+        setUserReportOfDay(state, payload) {
+            state.userReportOfDay = payload.userReportOfDay
         }
     },
 
@@ -60,8 +73,11 @@ const terminalVisitReportStore = {
          * @description 获取员工指定日的报表数据
          */
         async getUserReportOfDay(context, payload) {
-            let userReportOfDay = await Http.request('getUserReportOfDay', payload)
-            console.log(userReportOfDay)
+            let userReportOfDay = await Http.request('getUserReportOfDay', payload);
+            context.commit('setUserReportOfDay', {
+                userReportOfDay
+            })
+            return userReportOfDay
         }
     }
 
