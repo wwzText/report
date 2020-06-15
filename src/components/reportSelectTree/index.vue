@@ -3,7 +3,7 @@
   <Collapse v-model="activeName" accordion>
     <div class="user-item-main" v-for="item in tree.userList" :key="item.id">
       <p class="user-item">{{item.name}}</p>
-      <img @click="navToVisitReport" src="./../../assets/img/report_icon.png" alt />
+      <img @click="navToVisitReport('RY')" src="./../../assets/img/report_icon.png" alt />
     </div>
     <Collapse-item
       :value="1"
@@ -14,7 +14,7 @@
     >
       <!-- {{item.name}} -->
       <template #value>
-        <img @click="navToVisitReport" src="./../../assets/img/report_icon.png" alt />
+        <img @click="navToVisitReport('ZZ')" src="./../../assets/img/report_icon.png" alt />
       </template>
       <reportSelectTree :tree="item.children" v-if="item.children" />
     </Collapse-item>
@@ -46,7 +46,10 @@ export default {
     },
 
     // 跳转到报表详情页面
-    navToVisitReport() {
+    navToVisitReport(payload) {
+      this.$store.commit('changeTerminalUserOrOrganization', {
+        type: payload === 'RY' ? 'user' : 'organization'
+      })
       this.$router.push("/report/terminalVisitReport");
     }
   }

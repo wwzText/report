@@ -62,6 +62,11 @@ const terminalVisitReportStore = {
         // 可能带日期可能不带日期，根据 state.dateOrMonth 来判断显示日期
         changeTerminalVisitQueryTime(state, payload) {
             state.terminalVisitQueryTime = payload.showSelectDate;
+        },
+
+        // 修改终端拜访人员还是组织
+        changeTerminalUserOrOrganization(state, payload) {
+            state.userOrOrganization = payload.type;
         }
     },
 
@@ -75,7 +80,7 @@ const terminalVisitReportStore = {
                 ...payload.obj
             });
             workCircleDetail = workCircleDetail[0];
-            console.log(workCircleDetail)
+
             // 实际用户头像换取
             workCircleDetail.user_head = await getImgOriginalUrl(workCircleDetail.user_head)
             workCircleDetail.leave_data = timeStampToTime(workCircleDetail.visit_out_time, 'MM月DD日 W');
@@ -104,14 +109,12 @@ const terminalVisitReportStore = {
         },
 
         /**
-         * @description 获取员工指定日的报表数据
+         * @description 获取报表数据
          */
-        async getUserReportOfDay(context, payload) {
-            let userReportOfDay = await Http.request('ZD_BF_DR_RY', payload);
-            context.commit('setUserReportOfDay', {
-                userReportOfDay
-            })
-            return userReportOfDay
+        async getReportData(context, payload) {
+            let reportMessage = await Http.request(payload.url, payload.queryObj);
+            
+            return reportMessage
         }
     }
 
