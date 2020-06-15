@@ -5,11 +5,11 @@ import {
 } from '@/utils'
 const terminalVisitReportStore = {
     state: {
-        // 用于分享的终端拜访详情
+        // 用于分享的终端拜访对象详情
         shareWorkCircleDetail: null,
 
         // 业务员拜访按单日查询数据数据
-        userReportOfDay: {}, 
+        userReportOfDay: {},
 
         //页面展示人员信息还是组织信息
         userOrOrganization: 'user',
@@ -28,6 +28,19 @@ const terminalVisitReportStore = {
 
         setUserReportOfDay(state, payload) {
             state.userReportOfDay = payload.userReportOfDay
+        },
+
+        changeUserOrOrganization(state) {
+            state.userOrOrganization = 
+                (state.userOrOrganization === 'user') ? 
+                    'organization ' : 'user';
+        },
+
+        // 改变日期时间状态
+        changeDateOrMonth(state) {
+            state.dateOrMonth = 
+                (state.dateOrMonth === 'date') ?
+                    'month' : 'date'
         }
     },
 
@@ -59,13 +72,13 @@ const terminalVisitReportStore = {
                 workCircleDetail.visit_photo_list.push(item.value)
             })
 
-            
+
             // 进店离店时间
             workCircleDetail.visit_in_time = timeStampToTime(workCircleDetail.visit_in_time, 'M:S');
             workCircleDetail.visit_out_time = timeStampToTime(workCircleDetail.visit_out_time, 'M:S');
 
             context.commit('setShareWorkCircleDetail', workCircleDetail);
-            
+
             return workCircleDetail
         },
 

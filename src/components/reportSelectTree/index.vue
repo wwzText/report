@@ -1,34 +1,37 @@
 // 报表入口页面弹出窗口的树组件
 <template>
-  <div class="tree-contaienr">
-    <template v-for="(item, index) in treeObj">
-      <div :key="index" class="tree-item-container">
-        <div class="tree-item-main">
-          <span class="tree-name">{{item.name}}</span>
-          <img class="tree-report-img" @click="navToVisitReport" src="./../../assets/img/report_icon.png" alt srcset />
-          <span
-            class="iconfont iconqianjin-01"
-            :class="[item.isOpen ? 'open-jiantou' : 'close-jiantou']"
-            @click="changeTreeOpenStatus(item)"
-            v-if="item.children"
-          ></span>
-        </div>
-        <reportSelectTree :tree="item.children" v-if="item.children && item.isOpen" />
-      </div>
-    </template>
-  </div>
+  <Collapse v-model="activeName" accordion>
+    <div class="user-item-main" v-for="item in tree.userList" :key="item.id">
+      <p class="user-item">{{item.name}}</p>
+      <img src="./../../assets/img/report_icon.png" alt />
+    </div>
+    <Collapse-item
+      :value="1"
+      :title="item.name"
+      :name="item.id"
+      v-for="item in tree.organizationList"
+      :key="item.id"
+    >
+      <!-- {{item.name}} -->
+      <template #value>
+        <img src="./../../assets/img/report_icon.png" alt />
+      </template>
+      <reportSelectTree :tree="item.children" v-if="item.children" />
+    </Collapse-item>
+  </Collapse>
 </template>
 
 <script>
 export default {
   name: "reportSelectTree",
   props: {
-    tree: Array
+    tree: Object
   },
   data() {
-      return {
-          treeObj: this.tree
-      }
+    return {
+      treeObj: this.tree,
+      activeName: ""
+    };
   },
   methods: {
     // 修改item的展开状态
@@ -44,12 +47,12 @@ export default {
 
     // 跳转到报表详情页面
     navToVisitReport() {
-      this.$router.push('/report/terminalVisitReport')
+      this.$router.push("/report/terminalVisitReport");
     }
   }
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import url("./index.less");
 </style>

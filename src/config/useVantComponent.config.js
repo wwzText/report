@@ -10,7 +10,9 @@ import {
     ImagePreview,
     Image as VanImage,
     Circle as VanCircle,
-    Loading
+    Loading,
+    Collapse,
+    CollapseItem
 } from 'vant';
 
 
@@ -23,5 +25,7 @@ export default {
     ImagePreview,
     VanImage,
     VanCircle,
-    Loading
+    Loading,
+    Collapse,
+    CollapseItem
 }

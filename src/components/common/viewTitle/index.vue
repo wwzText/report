@@ -2,7 +2,7 @@
     <div class="view-title-container" @click="handleViewTitleClick">
         <span class="view-title-title">{{title}}</span>
         <span class="view-title-describe">{{describe}}</span>
-        <span class="view-title-message">{{message || '查看'}}</span>
+        <span class="view-title-message" v-if="neednavTo">{{message || '查看'}}</span>
         <span class="iconfont iconqianjin-01" v-if="neednavTo"></span>
     </div>
 </template>

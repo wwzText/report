@@ -1,31 +1,33 @@
-.tree-contaienr{
-    padding: 10px 0 10px 10px;
+.user-item-main{
+    background: #f7f7f7;
+    padding: 13px 13px 13px 16px;
+    display: flex;
+    margin: 5px 0 5px 10px;
+    height: 40px;
     box-sizing: border-box;
-    .tree-item-container{
-        
-        .tree-item-main{
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid @borderColor;
-            .tree-name{
-                flex: 1;
-                font-size: 14px;
-                color: @fontColor;
-            }
-            .tree-report-img{
-                padding: 5px;
-            }
-            .iconqianjin-01{
-                padding: 5px;
-            }
-            .close-jiantou{
-                transform: rotate(90deg);
-                color: #B8CFE5;
-            }
-            .open-jiantou {
-                transform: rotate(-90deg);
-                color: #3780D9;
-            }
-        }
+    align-items: center;
+    .user-item{
+        flex: 1;
+        font-size: 14px;
+        color: #333;
     }
 }
+.van-collapse-item__content{
+    padding: 0;
+}
+.van-cell__title{
+    display: flex;
+    align-items: center;
+}
+.van-collapse-item{
+    margin-left: 10px;
+}
+.van-cell{
+    height: 48px;
+}
+.van-collapse::after{
+    border: none;
+}
+ .van-hairline--top-bottom{
+     border: none;
+ }

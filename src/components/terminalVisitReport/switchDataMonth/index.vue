@@ -2,7 +2,7 @@
   <div>
     <div class="switch-conatiner">
       <div class="use-type-container" @click="changeSwitchType">
-        <span>{{useDate ? '按日期' : '按月份'}}</span>
+        <span>{{dateOrMonth === 'date' ? '按日期' : '按月份'}}</span>
         <span class="iconfont iconriqiqiehuan-01"></span>
       </div>
       <div class="select-container" @click="showSelectDateComponent">
@@ -11,17 +11,18 @@
       </div>
     </div>
     <calendar :showCalenar="showCalenar" @changeDate="changeDate" />
-    <monthList :showMonth="showMonthSelect" @closePopup="closeMonthPopup"/>
+    <monthList :showMonth="showMonthSelect" @closePopup="closeMonthPopup" />
   </div>
 </template> 
 
 <script>
+import { mapState } from "vuex";
 import calendar from "./../calendar";
 import monthList from "./../monthList";
 export default {
   components: {
     calendar,
-    monthList,
+    monthList
   },
   created() {
     this.showSelectDate = "2020-05-29";
@@ -37,15 +38,13 @@ export default {
   methods: {
     // 改变日期或月份，并触发父组件重新根据新的值获取数据
     changeSwitchType() {
-      this.useDate = !this.useDate;
-      this.$emit("switchChange", {
-        useDate: this.useDate
-      });
+      // this.$store.commit('changeUserOrOrganization')
+      this.$store.commit("changeDateOrMonth");
     },
 
     // 弹出选择日期组件，根据useDate判断选择日期还是月份
     showSelectDateComponent() {
-      if (this.useDate) {
+      if (this.dateOrMonth === "date") {
         this.showCalenar = true;
       } else {
         this.showMonthSelect = true;
@@ -59,16 +58,23 @@ export default {
     },
 
     closeMonthPopup(obj) {
-        if(obj.timeStr !== '') {
-            this.showSelectDate = obj.timeStr;
-        }
-        this.showMonthSelect = false;
+      if (obj.timeStr !== "") {
+        this.showSelectDate = obj.timeStr;
+      }
+      this.showMonthSelect = false;
     }
   },
   watch: {
     showSelectDate(val) {
       console.log("查询时间变更为" + val + "需要重新查询数据");
     }
+  },
+  computed: {
+    ...mapState({
+      dateOrMonth: state => {
+        return state.terminalVisitReportStore.dateOrMonth;
+      }
+    })
   }
 };
 </script>

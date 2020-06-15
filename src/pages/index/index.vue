@@ -36,7 +36,7 @@
       </div>
     </div>
     <Popup v-model="showPopup" position="right" :style="{ height: '100%', width: '90%' }">
-      <reportSelectTree :tree="tree" />
+      <reportSelectTree :tree="userOrOrganizationList" />
     </Popup>
   </div>
 </template>
@@ -57,35 +57,76 @@ export default {
   data() {
     return {
       showPopup: true, // 是否弹出人员/部门选择框
-      tree: [
-        {
-          name: "一部门",
-          id: 1,
-          children: [
-            {
-              name: "1小组"
+
+      /**
+       * @description 组织业务员筛选列表JSON格式
+       * @param {Array} userList 业务员列表
+       * @param {Array} organizationList 组织列表
+       */
+      userOrOrganizationList: {
+        userList: [
+          {
+            name: "张三",
+            id: 1
+          },
+          {
+            name: "李四",
+            id: 2
+          }
+        ],
+        organizationList: [
+          {
+            name: "成都大区",
+            id: 10220,
+            children: {
+              userList: [
+                {
+                  name: "张三",
+                  id: 1
+                },
+                {
+                  name: "李四",
+                  id: 2
+                }
+              ],
+              organizationList: [
+                {
+                  name: "成都大区",
+                  id: 10220,
+                  children: {
+                    userList: [
+                      {
+                        name: "张三",
+                        id: 1
+                      },
+                      {
+                        name: "李四",
+                        id: 2
+                      }
+                    ]
+                  }
+                },
+                {
+                  name: "绵羊大区",
+                  id: 10221
+                },
+                {
+                  name: "乐山大区",
+                  id: 10222
+                }
+              ]
             }
-          ]
-        },
-        {
-          name: "二部门",
-          id: 2,
-          children: [
-            {
-              name: "2小组"
-            }
-          ]
-        },
-        {
-          name: "三部门",
-          id: 3,
-          children: [
-            {
-              name: "3小组"
-            }
-          ]
-        }
-      ]
+          },
+          {
+            name: "绵羊大区",
+            id: 10221
+          },
+          {
+            name: "乐山大区",
+            id: 10222
+          }
+        ]
+      }
     };
   },
   methods: {

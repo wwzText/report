@@ -6,7 +6,7 @@
     <switchDataMonth />
     <staffMessage :headerMessage="headerMessage" />
     <visitSwap v-if="userOfOrganization !== 'user'" />
-    <visitMessage v-if="userOfOrganization === 'user'" />
+    <visitMessage v-if="userOfOrganization === 'user'" :headerMessage="headerMessage" />
   </div>
 </template>
 
