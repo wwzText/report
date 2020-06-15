@@ -32,7 +32,10 @@ export default {
       name: "拜访首页"
     });
 
-    this.getUserReportOfDay();
+    // 根据 terminalVisitReportStore 仓库中的参数确定访问URL及访问参数
+    // this.determineUrlByStoreParam();
+
+    // this.getUserReportOfDay();
 
     // NATIVE.getCurrentUserInfo(res => {
     //     console.log('res', res)
@@ -48,6 +51,11 @@ export default {
   },
 
   methods: {
+    // 根据 terminalVisitReportStore 仓库中的参数确定访问URL及访问参数
+    determineUrlByStoreParam() {
+      let url = `${this.targetType == 'terminal' ? 'ZD' : 'JXS'}_${this.reoprtType}_${this.dateOrMonth == 'date' ? 'DR' : 'DY'}_${this.userOrOrganization == 'user' ? 'RY' : 'ZZ'}`;
+      console.log(url)
+    },
     async getUserReportOfDay() {
       this.$showLoading();
       let userReportOfDay = await this.$store.dispatch("getUserReportOfDay", {
@@ -64,10 +72,24 @@ export default {
     }
   },
 
+  watch: {
+    // 监听切换日期搜索范围，切换后重新获取数据
+    // dateOrMonth() {
+    //   this.determineUrlByStoreParam()
+    // },
+    // 监听切换日期
+    terminalVisitQueryTime() {
+      this.determineUrlByStoreParam()
+    }
+  },
+
   computed: {
     ...mapState({
       userOfOrganization: state => state.terminalVisitReportStore.userOrOrganization,
       dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth,
+      targetType: state => state.terminalVisitReportStore.targetType,
+      reoprtType: state => state.terminalVisitReportStore.reoprtType,
+      terminalVisitQueryTime: state => state.terminalVisitReportStore.terminalVisitQueryTime,
     })
   }
 };

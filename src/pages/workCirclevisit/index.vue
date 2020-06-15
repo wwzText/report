@@ -39,7 +39,7 @@ export default {
   methods: {
     // 获取分享的参数
     async getWorkShareData() {
-      // this.$showLoading();
+      this.$showLoading();
       this.shareData = await this.$store.dispatch(
         "getShareTerminalVisitDetail",
         {

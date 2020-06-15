@@ -3,7 +3,7 @@
   <Collapse v-model="activeName" accordion>
     <div class="user-item-main" v-for="item in tree.userList" :key="item.id">
       <p class="user-item">{{item.name}}</p>
-      <img src="./../../assets/img/report_icon.png" alt />
+      <img @click="navToVisitReport" src="./../../assets/img/report_icon.png" alt />
     </div>
     <Collapse-item
       :value="1"
@@ -14,7 +14,7 @@
     >
       <!-- {{item.name}} -->
       <template #value>
-        <img src="./../../assets/img/report_icon.png" alt />
+        <img @click="navToVisitReport" src="./../../assets/img/report_icon.png" alt />
       </template>
       <reportSelectTree :tree="item.children" v-if="item.children" />
     </Collapse-item>

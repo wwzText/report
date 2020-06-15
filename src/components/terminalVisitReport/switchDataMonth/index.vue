@@ -17,6 +17,8 @@
 
 <script>
 import { mapState } from "vuex";
+import {Http} from '@/api';
+import {timeStampToTime} from '@/utils'
 import calendar from "./../calendar";
 import monthList from "./../monthList";
 export default {
@@ -25,7 +27,7 @@ export default {
     monthList
   },
   created() {
-    this.showSelectDate = "2020-05-29";
+    this.getCurrentWebTime();
   },
   data() {
     return {
@@ -57,23 +59,38 @@ export default {
       this.showSelectDate = obj.timeStr;
     },
 
+    // 关闭月份选择弹窗，判断是否携带参数
     closeMonthPopup(obj) {
       if (obj.timeStr !== "") {
         this.showSelectDate = obj.timeStr;
       }
       this.showMonthSelect = false;
+    },
+
+    // 获取对应显示的初始化时间
+    async getCurrentWebTime() {
+      let webBackTimeObj = await Http.getWebTime();
+      this.showSelectDate = timeStampToTime(webBackTimeObj.appserver_time, `${this.dateOrMonth == 'date' ? 'YYYY-MM-DD' : 'YYYY-MM'}`);
+      this.$store.commit('changeTerminalVisitQueryTime', {
+        showSelectDate: this.showSelectDate
+      })
     }
   },
   watch: {
     showSelectDate(val) {
-      console.log("查询时间变更为" + val + "需要重新查询数据");
+      this.$store.commit('changeTerminalVisitQueryTime', {
+        showSelectDate: val
+      })
+    },
+
+    // 监听日/月切换，重新为显示赋予初始值
+    dateOrMonth() {
+      this.getCurrentWebTime();
     }
   },
   computed: {
     ...mapState({
-      dateOrMonth: state => {
-        return state.terminalVisitReportStore.dateOrMonth;
-      }
+      dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth
     })
   }
 };

@@ -4,32 +4,32 @@
 <template>
   <div>
     <div class="index-list-container">
-      <div class="index-list-item" @click="showPeopleSelectPopup(1)">
+      <div class="index-list-item" @click="showPeopleSelectPopup('terminal', 'BF')">
         <img class="index-list-item_img" src="./../../assets/img/zd_bf.png" />
         <span class="index-list-item_name">终端拜访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item index-list-margin-item">
+      <div class="index-list-item index-list-margin-item" @click="showPeopleSelectPopup('distributor', 'BF')">
         <img class="index-list-item_img" src="./../../assets/img/jxs_bf.png" />
         <span class="index-list-item_name">经销商拜访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item">
+      <div class="index-list-item" @click="showPeopleSelectPopup('terminal', 'ZF')">
         <img class="index-list-item_img" src="./../../assets/img/zd_zf.png" />
         <span class="index-list-item_name">终端走访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item index-list-margin-item">
+      <div class="index-list-item index-list-margin-item" @click="showPeopleSelectPopup('distributor', 'ZF')">
         <img class="index-list-item_img" src="./../../assets/img/jxs_zf.png" />
         <span class="index-list-item_name">经销商走访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item">
+      <div class="index-list-item" @click="showPeopleSelectPopup('terminal', 'DC')">
         <img class="index-list-item_img" src="./../../assets/img/zd_dc.png" />
         <span class="index-list-item_name">终端督查</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item index-list-margin-item">
+      <div class="index-list-item index-list-margin-item"  @click="showPeopleSelectPopup('distributor', 'DC')">
         <img class="index-list-item_img" src="./../../assets/img/jxs_dc.png" />
         <span class="index-list-item_name">经销商督查</span>
         <span class="iconfont iconqianjin-01"></span>
@@ -56,12 +56,13 @@ export default {
   },
   data() {
     return {
-      showPopup: true, // 是否弹出人员/部门选择框
+      showPopup: false, // 是否弹出人员/部门选择框
 
       /**
        * @description 组织业务员筛选列表JSON格式
        * @param {Array} userList 业务员列表
        * @param {Array} organizationList 组织列表
+       * 模拟数据
        */
       userOrOrganizationList: {
         userList: [
@@ -130,8 +131,11 @@ export default {
     };
   },
   methods: {
-    showPeopleSelectPopup(selectIndex) {
-      console.log(selectIndex);
+    showPeopleSelectPopup(targetType, reoprtType) {
+      this.$store.commit('changeTargetAndReportType', {
+        targetType,
+        reoprtType
+      })
       this.showPopup = true;
     }
   }
