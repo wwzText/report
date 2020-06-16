@@ -9,7 +9,10 @@
         <span class="index-list-item_name">终端拜访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item index-list-margin-item" @click="showPeopleSelectPopup('distributor', 'BF')">
+      <div
+        class="index-list-item index-list-margin-item"
+        @click="showPeopleSelectPopup('distributor', 'BF')"
+      >
         <img class="index-list-item_img" src="./../../assets/img/jxs_bf.png" />
         <span class="index-list-item_name">经销商拜访</span>
         <span class="iconfont iconqianjin-01"></span>
@@ -19,7 +22,10 @@
         <span class="index-list-item_name">终端走访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item index-list-margin-item" @click="showPeopleSelectPopup('distributor', 'ZF')">
+      <div
+        class="index-list-item index-list-margin-item"
+        @click="showPeopleSelectPopup('distributor', 'ZF')"
+      >
         <img class="index-list-item_img" src="./../../assets/img/jxs_zf.png" />
         <span class="index-list-item_name">经销商走访</span>
         <span class="iconfont iconqianjin-01"></span>
@@ -29,7 +35,10 @@
         <span class="index-list-item_name">终端督查</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item index-list-margin-item"  @click="showPeopleSelectPopup('distributor', 'DC')">
+      <div
+        class="index-list-item index-list-margin-item"
+        @click="showPeopleSelectPopup('distributor', 'DC')"
+      >
         <img class="index-list-item_img" src="./../../assets/img/jxs_dc.png" />
         <span class="index-list-item_name">经销商督查</span>
         <span class="iconfont iconqianjin-01"></span>
@@ -42,13 +51,16 @@
 </template>
 
 <script>
-import { Http } from '@/api';
+import { Http } from "@/api";
 import reportSelectTree from "@/components/reportSelectTree";
 export default {
   created() {
     this.$store.commit("changeHeaderNavTitle", {
       name: "分析报表"
     });
+    // 获取权限等级
+    this.getOrgInfo();
+    // 获取对应的完整的组织列表
     this.getOrganizationList();
   },
   components: {
@@ -132,23 +144,39 @@ export default {
   },
   methods: {
     showPeopleSelectPopup(targetType, reoprtType) {
-      this.$store.commit('changeTargetAndReportType', {
+      this.$store.commit("changeTargetAndReportType", {
         targetType,
         reoprtType
-      })
+      });
       this.showPopup = true;
     },
 
-    // 获取组织人员列表
+    // 获取组织人员列表树
     async getOrganizationList() {
       this.$showLoading();
-      let organizationList = await Http.request('getOrganizationList', {
-        
-        appuser: "11223344"
+      let organizationList = await Http.request("getOrganizationList", {
+        appuser: "10045595"
       });
-      // 10045595
-      this.$hideLoading()
+      this.$hideLoading();
       console.log(organizationList)
+    },
+
+    async getOrgInfo() {
+      // 登陆人权限等级 0-大区 1-业务部 2-工作站 3-普通员工
+      let orgLevel = 3;
+      
+      let orgInfo = await Http.request("getOrgInfo", {
+        appuser: "10045595"
+      });
+      if (orgInfo.et_sales_office.length > 1) {
+        orgLevel = 0
+      } else if(orgInfo.et_sales_group.length > 0) {
+        orgLevel = 1
+      } else if(orgInfo.et_sales_station.length > 1) {
+        orgLevel = 2
+      }
+
+      console.log(orgLevel)
     }
   }
 };

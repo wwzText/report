@@ -1,8 +1,10 @@
-import {NATIVE} from '@/utils/Native';
+import { NATIVE } from '@/utils/Native';
 
 const userInfoStore = {
     state: () => ({
-        userInfo: null
+        userInfo: {
+            appuser: '11223344'
+        }
     }),
 
     mutations: {
@@ -14,7 +16,7 @@ const userInfoStore = {
             });
         }
     }
-    
+
 }
 
 export {

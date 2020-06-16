@@ -1,6 +1,6 @@
 <template>
   <div>
-    <visitData :visitData="visitData" />
+    <visitData :visitData="visitMessage" />
     <ViewTitle title="Ta的拜访计划" message="全部（10）" style="marginTop: 10px;" />
     <planList :planList="planList" />
   </div>
@@ -8,24 +8,16 @@
 
 <script>
 import visitData from "./../visitData";
-import planList from './../planList';
+import planList from "./../planList";
+import { mapState } from "vuex";
 export default {
   components: {
     visitData,
-    planList,
+    planList
   },
   data() {
     return {
-      visitData: [
-        {
-          dataData: "18.0%",
-          dataTitle: "计划完成率"
-        },
-        {
-          dataData: "18/100",
-          dataTitle: "计划完成占比"
-        }
-      ],
+      visitMessage: [],
       planList: [
         {
           planName: "计划标题",
@@ -47,6 +39,25 @@ export default {
         }
       ]
     };
+  },
+  watch: {
+    es_summary(val) {
+      this.visitMessage = [
+         {
+          dataData: `${val.plan_rate || 0}%`,
+          dataTitle: "计划完成率"
+        },
+        {
+          dataData: val.plan_percent || 0,
+          dataTitle: "计划完成占比"
+        }
+      ]
+    }
+  },
+  computed: {
+    ...mapState({
+      es_summary: state => state.terminalVisitReportStore.es_summary
+    })
   }
 };
 </script>

@@ -1,6 +1,3 @@
-/**
- * 终端拜访首页
- */
 <template>
   <div>
     <switchDataMonth />
@@ -50,7 +47,7 @@ export default {
     // 根据 terminalVisitReportStore 仓库中的参数确定访问URL及访问参数
     determineUrlByStoreParam() {
       // 判断是否有时间，第一次初始化的情况下是没有的
-      if(!this.terminalVisitQueryTime) return;
+      if (!this.terminalVisitQueryTime) return;
 
       let url = `${this.targetType == "terminal" ? "ZD" : "JXS"}_${
         this.reoprtType
@@ -71,28 +68,34 @@ export default {
       if (this.userOrOrganization === "user") {
         queryObj["user_bp"] = "0011223344";
       } else {
-        queryObj["org_type"] = "";
+        queryObj["org_type"] = "3";
       }
       this.getReportData(url, queryObj);
     },
-    
+
     // 根据store中的很多参数实际发起请求
     async getReportData(url, queryObj) {
-      console.log(url)
+      console.log(url);
       this.$showLoading();
       let reportData = await this.$store.dispatch("getReportData", {
         url,
         queryObj
       });
-      for(let item in reportData){
-        if(item === 'es_summary') {
-          this.$store.commit('setEsSummary', {
+      for (let item in reportData) {
+        if (item === "es_summary") {
+          this.$store.commit("setEsSummary", {
             es_summary: reportData.es_summary
-          })
+          });
+          this.es_summary = reportData.es_summary;
         }
-        this[item] = reportData[item];
+        if (item === "es_visit_summary") {
+          this.$store.commit("setEsSummary", {
+            es_summary: reportData.es_visit_summary
+          });
+          this.es_summary = reportData.es_visit_summary
+        }
       }
-      console.log(reportData)
+      console.log(reportData);
       this.$hideLoading();
     }
   },
@@ -106,11 +109,13 @@ export default {
 
   computed: {
     ...mapState({
-      userOrOrganization: state => state.terminalVisitReportStore.userOrOrganization,
+      userOrOrganization: state =>
+        state.terminalVisitReportStore.userOrOrganization,
       dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth,
       targetType: state => state.terminalVisitReportStore.targetType,
       reoprtType: state => state.terminalVisitReportStore.reoprtType,
-      terminalVisitQueryTime: state => state.terminalVisitReportStore.terminalVisitQueryTime
+      terminalVisitQueryTime: state =>
+        state.terminalVisitReportStore.terminalVisitQueryTime
     })
   }
 };

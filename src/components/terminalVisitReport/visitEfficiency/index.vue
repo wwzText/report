@@ -1,9 +1,13 @@
 <template>
   <!-- 拜访有效率 -->
   <div>
-    <visitData :visitData="visitData" />
+    <visitData :visitData="visitMessage" />
 
-    <ViewTitle title="分场所终端拜访率" @click="seePlaceVisitEfficiency" style="marginTop: 10px; marginBottom: 10px" />
+    <ViewTitle
+      title="分场所终端拜访率"
+      @click="seePlaceVisitEfficiency"
+      style="marginTop: 10px; marginBottom: 10px"
+    />
     <ViewTitle title="所在工作站排行榜" describe="日均拜访家数" message="全部（10）" />
     <currentRanking />
     <RankingList :rankList="rankList" />
@@ -11,6 +15,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import visitData from "./../visitData";
 export default {
   components: {
@@ -18,18 +23,7 @@ export default {
   },
   data() {
     return {
-      visitData: [
-        {
-          dataData: "18.0%",
-          dataUnit: "59家",
-          dataTitle: "有效拜访率"
-        },
-        {
-          dataData: "21.0%",
-          dataUnit: "60家",
-          dataTitle: "拜访率"
-        }
-      ],
+      visitMessage: [],
       rankList: [
         {
           name: "张三",
@@ -61,8 +55,27 @@ export default {
   },
   methods: {
     seePlaceVisitEfficiency() {
-      this.$router.push('placeVisitEfficiency')
+      this.$router.push("placeVisitEfficiency");
     }
+  },
+  watch: {
+    es_summary(val) {
+      this.visitMessage = [
+        {
+          dataData: `${val.visit_efficient || 0}%`,
+          dataTitle: "有效拜访率"
+        },
+        {
+          dataData: `${val.visit_rate || 0}%`,
+          dataTitle: "拜访率"
+        }
+      ]
+    }
+  },
+  computed: {
+    ...mapState({
+      es_summary: state => state.terminalVisitReportStore.es_summary
+    })
   }
 };
 </script>

@@ -85,6 +85,11 @@ export const NATIVE = {
         }
     },
 
+    /**
+     * 
+     * @param {} resultCallback 
+     * @description 获取登陆用户信息
+     */
     getCurrentUserInfo: async function (resultCallback) {
         var data = {
             'action': 'AndroidSend',

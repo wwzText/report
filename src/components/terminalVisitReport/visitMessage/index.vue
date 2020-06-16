@@ -30,7 +30,6 @@ export default {
   },
   watch: {
     es_summary(val) {
-      console.log(val)
       this.visitMessage = [
         {
           dataData: val.visit_total_time,

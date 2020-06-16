@@ -50,7 +50,6 @@ const terminalVisitReportStore = {
 
         setTerminalUserOrOrganization(state, payload) {
             state.userOrOrganization = payload.type;
-            console.log(state.userOrOrganization)
         },
 
         // 改变日期时间状态
