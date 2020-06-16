@@ -1,7 +1,7 @@
 <template>
   <div>
     <ViewTitle title="拜访时长" style="marginTop: 10px; marginBottom: 1px" :neednavTo="false" />
-    <visitData :visitData="visitData" />
+    <visitData :visitData="visitMessage" />
     <ViewTitle
       title="所在工作站排行榜"
       describe="日均拜访家数"
@@ -13,21 +13,25 @@
 
 <script>
 import visitData from "./../visitData";
+import { mapState } from 'vuex';
 export default {
   components: {
     visitData
   },
-  props: {
-    headerMessage: Object
-  },
   data() {
     return {
-      visitData: [], //
+      visitMessage: [],
     };
   },
+  computed: {
+    ...mapState({
+      es_summary: state => state.terminalVisitReportStore.es_summary
+    })
+  },
   watch: {
-    headerMessage(val) {
-      this.visitData = [
+    es_summary(val) {
+      console.log(val)
+      this.visitMessage = [
         {
           dataData: val.visit_total_time,
           dataUnit: "小时",

@@ -31,18 +31,18 @@ class Http {
 
     // 参数签名方法
     static dataSign(data, webTimeBack) {
-
+        let dataObj = JSON.parse(JSON.stringify(data))
         // 最后实际返回的签名字段
         let sign = '';
 
         // 接收排序后的对象
         const newData = {};
 
-        data['timestamp'] = webTimeBack.appserver_time;
+        dataObj['timestamp'] = webTimeBack.appserver_time;
 
         // 参数对象升序
-        Object.keys(data).sort().forEach(function (key) {
-            newData[key] = data[key];
+        Object.keys(dataObj).sort().forEach(function (key) {
+            newData[key] = dataObj[key];
         });
 
         // 参数对象拼接数组
@@ -83,6 +83,7 @@ class Http {
         let timestamp = webTimeBack.appserver_time;
 
         url = 'http://appuat.cresz.com.cn' + apis[url];
+        
         return await axios({
             method,
             url,

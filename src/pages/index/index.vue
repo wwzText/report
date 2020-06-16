@@ -42,14 +42,14 @@
 </template>
 
 <script>
-
+import { Http } from '@/api';
 import reportSelectTree from "@/components/reportSelectTree";
 export default {
-  async created() {
+  created() {
     this.$store.commit("changeHeaderNavTitle", {
       name: "分析报表"
     });
-
+    this.getOrganizationList();
   },
   components: {
     reportSelectTree
@@ -137,6 +137,18 @@ export default {
         reoprtType
       })
       this.showPopup = true;
+    },
+
+    // 获取组织人员列表
+    async getOrganizationList() {
+      this.$showLoading();
+      let organizationList = await Http.request('getOrganizationList', {
+        
+        appuser: "11223344"
+      });
+      // 10045595
+      this.$hideLoading()
+      console.log(organizationList)
     }
   }
 };

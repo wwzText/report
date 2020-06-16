@@ -47,7 +47,7 @@ export default {
 
     // 跳转到报表详情页面
     navToVisitReport(payload) {
-      this.$store.commit('changeTerminalUserOrOrganization', {
+      this.$store.commit('setTerminalUserOrOrganization', {
         type: payload === 'RY' ? 'user' : 'organization'
       })
       this.$router.push("/report/terminalVisitReport");

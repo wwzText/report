@@ -40,7 +40,6 @@ export default {
   methods: {
     // 改变日期或月份，并触发父组件重新根据新的值获取数据
     changeSwitchType() {
-      // this.$store.commit('changeUserOrOrganization')
       this.$store.commit("changeDateOrMonth");
     },
 

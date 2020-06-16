@@ -24,7 +24,10 @@ const terminalVisitReportStore = {
         reoprtType: 'BF',
 
         // 终端拜访查询时间段
-        terminalVisitQueryTime: ""
+        terminalVisitQueryTime: "",
+        
+        // 按日期查看时业务员或组织信息
+        es_summary: {}
     },
 
     mutations: {
@@ -43,6 +46,11 @@ const terminalVisitReportStore = {
             state.userOrOrganization = 
                 (state.userOrOrganization === 'user') ? 
                     'organization ' : 'user';
+        },
+
+        setTerminalUserOrOrganization(state, payload) {
+            state.userOrOrganization = payload.type;
+            console.log(state.userOrOrganization)
         },
 
         // 改变日期时间状态
@@ -67,6 +75,11 @@ const terminalVisitReportStore = {
         // 修改终端拜访人员还是组织
         changeTerminalUserOrOrganization(state, payload) {
             state.userOrOrganization = payload.type;
+        },
+
+        // 设置按日期查看报表时业务员或组织展示信息
+        setEsSummary(state, payload) {
+            state.es_summary = payload.es_summary;
         }
     },
 
