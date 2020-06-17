@@ -22,3 +22,29 @@
     margin-top: 1px;
     margin-bottom: 10px;
 }
+.see-self-report{
+    margin: 10px;
+    box-sizing: border-box;
+    padding: 14px 0 14px 10px;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: @fontColor;
+    justify-content: space-between;
+    border-radius: 2px;
+    height: 40px;
+    position: relative;
+
+}
+.see-self-report::after{
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    width: 200%;
+    border-bottom: 1px solid #DBDBDB;
+    left: -50%;
+    transform: scale(.5);
+    right: 0;
+    height: 200%;
+}

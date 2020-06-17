@@ -45,6 +45,10 @@
       </div>
     </div>
     <Popup v-model="showPopup" position="right" :style="{ height: '100%', width: '90%' }">
+      <div class="see-self-report">
+        <button>查看个人统计报表</button>
+        <img src="./../../assets/img/report_icon.png" alt="" srcset="">
+      </div>
       <reportSelectTree :tree="organizationList" />
     </Popup>
   </div>
@@ -67,7 +71,7 @@ export default {
     return {
       showPopup: false, // 是否弹出人员/部门选择框
 
-      organizationList: [], // 组织树
+      organizationList: [] // 组织树
     };
   },
   methods: {
@@ -84,9 +88,11 @@ export default {
     // 获取组织列表
     async getOrgInfo() {
       this.$showLoading();
-      this.organizationList = await this.$store.dispatch('getLocalOrganizationTree')
+      this.organizationList = await this.$store.dispatch(
+        "getLocalOrganizationTree"
+      );
       this.$hideLoading();
-    },
+    }
   }
 };
 </script>
