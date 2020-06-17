@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { Http } from "@/api";
 import reportSelectTree from "@/components/reportSelectTree";
 export default {
   created() {
@@ -68,10 +67,12 @@ export default {
     return {
       showPopup: false, // 是否弹出人员/部门选择框
 
-      organizationList: []
+      organizationList: [], // 组织树
     };
   },
   methods: {
+    // 点击展开弹出框，弹出时修改目标类型及报表类型
+    // 目标类型及报表类型用于报表主页24个接口判读是哪一个
     showPeopleSelectPopup(targetType, reoprtType) {
       this.$store.commit("changeTargetAndReportType", {
         targetType,
@@ -80,43 +81,12 @@ export default {
       this.showPopup = true;
     },
 
-    // 先获取权限等级，再获取组织列表，再根据权限等级选取正确显示的组织列表
+    // 获取组织列表
     async getOrgInfo() {
       this.$showLoading();
-      // 登陆人权限等级 0-大区 1-业务部 2-工作站 3-普通员工
-      let orgLevel = 3;
-
-      let orgInfo = await Http.request("getOrgInfo", {
-        appuser: "10045595"
-      });
-      if (orgInfo.et_sales_office.length > 1) {
-        orgLevel = 0;
-      } else if (orgInfo.et_sales_group.length > 0) {
-        orgLevel = 1;
-      } else if (orgInfo.et_sales_station.length > 1) {
-        orgLevel = 2;
-      }
-
-      // 获取组织人员列表树
-      let organizationList = await Http.request("getOrganizationList", {
-        appuser: "10045595"
-      });
-
-      // 根据权限等级和返回的权限列表截取出正确的权限树
-      this.splitRightOrganizationList(organizationList, orgLevel)
-
+      this.organizationList = await this.$store.dispatch('getLocalOrganizationTree')
       this.$hideLoading();
     },
-
-    // 根据权限等级和返回的权限列表截取出正确的权限树
-    splitRightOrganizationList(organizationList, orgLevel) {
-      if(orgLevel === 0) {
-        this.organizationList = organizationList;
-        console.log(this.organizationList)
-      } else {
-        this.splitRightOrganizationList(organizationList[0].children, orgLevel - 1)
-      }
-    }
   }
 };
 </script>
