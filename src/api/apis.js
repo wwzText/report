@@ -10,6 +10,7 @@ const JXS_BF_DY_RY = '/h5/report/getIF8206Lst'; // 经销商-拜访-当月-人�
 const JXS_BF_DR_RY = '/h5/report/getIF8196Lst'; // 经销商-拜访-当日-人员
 const getOrganizationList = '/h5/report/getIF8119Lst'; // 获取组织人员列表
 const getOrgInfo = '/h5/report/getOrgInfo'; // 获取组织结构
+const getVisitRecordList = '/h5/report/getWorkCircleVisitMessages'; // 获取拜访记录列表
 
 module.exports = {
     getWebTime,
@@ -25,5 +26,6 @@ module.exports = {
     JXS_BF_DR_RY,
 
     getOrganizationList,
-    getOrgInfo
+    getOrgInfo,
+    getVisitRecordList
 }

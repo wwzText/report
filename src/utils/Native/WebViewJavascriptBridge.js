@@ -1,7 +1,7 @@
 //notation: js file can only use this kind of comments
 //since comments will cause error when use in webview.loadurl,
 //comments will be remove by java use regexp
-(function() {
+(function () {
     if (window.WebViewJavascriptBridge) {
         return;
     }
@@ -36,43 +36,42 @@
     }
     // 调用线程
     function callHandler(handlerName, responseCallback, data) {
-
         _doSend(handlerName, data, responseCallback);
     }
 
     //sendMessage add message, 触发native处理 sendMessage
     function _doSend(handlerName, message, responseCallback) {
         var callbackId;
-        if(typeof responseCallback === 'string'){
+        if (typeof responseCallback === 'string') {
             callbackId = responseCallback;
         } else if (responseCallback) {
             callbackId = 'cb_' + (uniqueId++) + '_' + new Date().getTime();
             responseCallbacks[callbackId] = responseCallback;
-        }else{
+        } else {
             callbackId = '';
         }
         try {
-             var fn = eval('window.android.' + handlerName);
-         } catch(e) {
-             console.log(e);
-         }
-         if (typeof fn === 'function'){
-             var responseData = fn.call(this, JSON.stringify(message), callbackId);
-             if(responseData){
-              console.log('response message: '+ responseData);
-                 responseCallback = responseCallbacks[callbackId];
-                 if (!responseCallback) {
-                     return;
-                  }
-                 responseCallback(responseData);
-                 delete responseCallbacks[callbackId];
-             }
-         }
+            var fn = eval('window.android.' + handlerName);
+        } catch (e) {
+            console.log(e);
+        }
+        if (typeof fn === 'function') {
+            var responseData = fn.call(this, JSON.stringify(message), callbackId);
+            if (responseData) {
+                console.log('response message: ' + responseData);
+                responseCallback = responseCallbacks[callbackId];
+                if (!responseCallback) {
+                    return;
+                }
+                responseCallback(responseData);
+                delete responseCallbacks[callbackId];
+            }
+        }
     }
 
     //提供给native使用,
     function _dispatchMessageFromNative(messageJSON) {
-        setTimeout(function() {
+        setTimeout(function () {
             var message = JSON.parse(messageJSON);
             var responseCallback;
             //java call finished, now need to call js callback function
@@ -87,7 +86,7 @@
                 //直接发送
                 if (message.callbackId) {
                     var callbackResponseId = message.callbackId;
-                    responseCallback = function(responseData) {
+                    responseCallback = function (responseData) {
                         _doSend('response', responseData, callbackResponseId);
                     };
                 }
@@ -110,12 +109,12 @@
 
     //提供给native调用,receiveMessageQueue 在会在页面加载完后赋值为null,所以
     function _handleMessageFromNative(messageJSON) {
-        console.log('handle message: '+ messageJSON);
+        console.log('handle message: ' + messageJSON);
         if (receiveMessageQueue) {
             receiveMessageQueue.push(messageJSON);
         }
         _dispatchMessageFromNative(messageJSON);
-       
+
     }
 
     var WebViewJavascriptBridge = window.WebViewJavascriptBridge = {

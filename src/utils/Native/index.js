@@ -61,7 +61,7 @@ export const NATIVE = {
      * @param {*} functionType 调用方式，默认前端调用原生返回的数据
      * @param {*} message 前端传给原生的数据
      */
-    setUpBridge: function (data, resultCallback, functionType = 'registerHandler', message) {
+    setUpBridge: function (data, resultCallback, message, functionType = 'registerHandler') {
         var osType = this.getOSType();//获取系统类型
         //按系统类型 分别执行原生交互
         if (osType == 'IOS') {
@@ -76,7 +76,7 @@ export const NATIVE = {
         } else if (osType == 'ANDROID') {
             //安卓手机交互方式
             this.setUpAndroidBridge(function (bridge) {
-                bridge[functionType](data.action, function (response) {
+                bridge.callHandler(data.action, function (response) {
                     resultCallback(response)
                 }, message)
             });
@@ -90,7 +90,7 @@ export const NATIVE = {
      * @param {} resultCallback 
      * @description 获取登陆用户信息
      */
-    getCurrentUserInfo: async function (resultCallback) {
+    getCurrentUserInfo: function (resultCallback) {
         var data = {
             'action': 'AndroidSend',
             'data': '获取用户信息'
@@ -98,11 +98,11 @@ export const NATIVE = {
         this.setUpBridge(data, resultCallback);
     },
 
-    sendMessageToAndroid: function (resultCallback, message) {
+    sendMessageToAndroid: function (message, resultCallback) {
         var data = {
             'action': 'webSend',
             'data': '传递消息'
         };
-        this.setUpBridge(data, resultCallback, 'callHandler', message);
+        this.setUpBridge(data, resultCallback, message, 'callHandler');
     }
 }
