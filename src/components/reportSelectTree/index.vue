@@ -1,31 +1,25 @@
 // 报表入口页面弹出窗口的树组件
 <template>
-  <Collapse v-model="activeName" accordion>
-    <div class="user-item-main" v-for="item in tree.userList" :key="item.id">
-      <p class="user-item">{{item.name}}</p>
-      <img @click="navToVisitReport('RY')" src="./../../assets/img/report_icon.png" alt />
-    </div>
-    <Collapse-item
-      :value="1"
-      :title="item.name"
-      :name="item.id"
-      v-for="item in tree.organizationList"
-      :key="item.id"
-    >
-      <!-- {{item.name}} -->
-      <template #value>
-        <img @click="navToVisitReport('ZZ')" src="./../../assets/img/report_icon.png" alt />
+  <div>
+    <Collapse v-model="activeName" accordion>
+      <template v-for="item in tree">
+        <Collapse-item :value="1" v-if="item.children" :key="item.id" :title="rightName(item)" :name="item.id">
+          <!-- {{item.name}} -->
+          <template #value>
+            <img @click="navToVisitReport('ZZ')" src="./../../assets/img/report_icon.png" alt />
+          </template>
+          <reportSelectTree :tree="item.children" v-if="item.children" />
+        </Collapse-item>
       </template>
-      <reportSelectTree :tree="item.children" v-if="item.children" />
-    </Collapse-item>
-  </Collapse>
+    </Collapse>
+  </div>
 </template>
 
 <script>
 export default {
   name: "reportSelectTree",
   props: {
-    tree: Object
+    tree: Array
   },
   data() {
     return {
@@ -47,10 +41,33 @@ export default {
 
     // 跳转到报表详情页面
     navToVisitReport(payload) {
-      this.$store.commit('setTerminalUserOrOrganization', {
-        type: payload === 'RY' ? 'user' : 'organization'
-      })
+      this.$store.commit("setTerminalUserOrOrganization", {
+        type: payload === "RY" ? "user" : "organization"
+      });
       this.$router.push("/report/terminalVisitReport");
+    },
+    rightName(item) {
+      if (item.usertxt) {
+        return item.usertxt;
+      }
+      if (item.zorg3_txt) {
+        return item.zorg3_txt;
+      }
+      if (item.zorg2_txt) {
+        return item.zorg2_txt;
+      }
+      if (item.zorg1_txt) {
+        return item.zorg1_txt;
+      }
+    }
+  },
+  computed: {
+    componentIsCollapse() {
+      console.log(this.tree[0].children[0].children);
+      if (this.tree[0].children[0].children) {
+        return true;
+      }
+      return false;
     }
   }
 };

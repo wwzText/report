@@ -45,7 +45,7 @@
       </div>
     </div>
     <Popup v-model="showPopup" position="right" :style="{ height: '100%', width: '90%' }">
-      <reportSelectTree :tree="userOrOrganizationList" />
+      <reportSelectTree :tree="organizationList" />
     </Popup>
   </div>
 </template>
@@ -60,8 +60,6 @@ export default {
     });
     // 获取权限等级
     this.getOrgInfo();
-    // 获取对应的完整的组织列表
-    this.getOrganizationList();
   },
   components: {
     reportSelectTree
@@ -70,76 +68,7 @@ export default {
     return {
       showPopup: false, // 是否弹出人员/部门选择框
 
-      /**
-       * @description 组织业务员筛选列表JSON格式
-       * @param {Array} userList 业务员列表
-       * @param {Array} organizationList 组织列表
-       * 模拟数据
-       */
-      userOrOrganizationList: {
-        userList: [
-          {
-            name: "张三",
-            id: 1
-          },
-          {
-            name: "李四",
-            id: 2
-          }
-        ],
-        organizationList: [
-          {
-            name: "成都大区",
-            id: 10220,
-            children: {
-              userList: [
-                {
-                  name: "张三",
-                  id: 1
-                },
-                {
-                  name: "李四",
-                  id: 2
-                }
-              ],
-              organizationList: [
-                {
-                  name: "成都大区",
-                  id: 10220,
-                  children: {
-                    userList: [
-                      {
-                        name: "张三",
-                        id: 1
-                      },
-                      {
-                        name: "李四",
-                        id: 2
-                      }
-                    ]
-                  }
-                },
-                {
-                  name: "绵羊大区",
-                  id: 10221
-                },
-                {
-                  name: "乐山大区",
-                  id: 10222
-                }
-              ]
-            }
-          },
-          {
-            name: "绵羊大区",
-            id: 10221
-          },
-          {
-            name: "乐山大区",
-            id: 10222
-          }
-        ]
-      }
+      organizationList: []
     };
   },
   methods: {
@@ -151,32 +80,42 @@ export default {
       this.showPopup = true;
     },
 
-    // 获取组织人员列表树
-    async getOrganizationList() {
-      this.$showLoading();
-      let organizationList = await Http.request("getOrganizationList", {
-        appuser: "10045595"
-      });
-      this.$hideLoading();
-      console.log(organizationList)
-    },
-
+    // 先获取权限等级，再获取组织列表，再根据权限等级选取正确显示的组织列表
     async getOrgInfo() {
+      this.$showLoading();
       // 登陆人权限等级 0-大区 1-业务部 2-工作站 3-普通员工
       let orgLevel = 3;
-      
+
       let orgInfo = await Http.request("getOrgInfo", {
         appuser: "10045595"
       });
       if (orgInfo.et_sales_office.length > 1) {
-        orgLevel = 0
-      } else if(orgInfo.et_sales_group.length > 0) {
-        orgLevel = 1
-      } else if(orgInfo.et_sales_station.length > 1) {
-        orgLevel = 2
+        orgLevel = 0;
+      } else if (orgInfo.et_sales_group.length > 0) {
+        orgLevel = 1;
+      } else if (orgInfo.et_sales_station.length > 1) {
+        orgLevel = 2;
       }
 
-      console.log(orgLevel)
+      // 获取组织人员列表树
+      let organizationList = await Http.request("getOrganizationList", {
+        appuser: "10045595"
+      });
+
+      // 根据权限等级和返回的权限列表截取出正确的权限树
+      this.splitRightOrganizationList(organizationList, orgLevel)
+
+      this.$hideLoading();
+    },
+
+    // 根据权限等级和返回的权限列表截取出正确的权限树
+    splitRightOrganizationList(organizationList, orgLevel) {
+      if(orgLevel === 0) {
+        this.organizationList = organizationList;
+        console.log(this.organizationList)
+      } else {
+        this.splitRightOrganizationList(organizationList[0].children, orgLevel - 1)
+      }
     }
   }
 };
