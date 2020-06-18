@@ -6,7 +6,6 @@ const visitRecordListStore = {
 
     mutations: {
         handleItemMessage(state, payload) {
-            console.log(payload.item)
             return payload.item
         }
     },
@@ -23,7 +22,6 @@ const visitRecordListStore = {
                 let newItem = context.commit('handleItemMessage', {
                     item
                 })
-                console.log(newItem)
             })
             return list
         }

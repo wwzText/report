@@ -13,9 +13,9 @@ import staffMessage from "@/components/terminalVisitReport/staffMessage";
 import visitSwap from "@/components/terminalVisitReport/visitSwap";
 // 人员状态下
 import visitMessage from "@/components/terminalVisitReport/visitMessage";
-
-import "@/utils/Native/WebViewJavascriptBridge";
+import '@/utils/Native/index';
 import { mapState } from "vuex";
+
 
 export default {
   components: {
@@ -28,12 +28,6 @@ export default {
     this.$store.commit("changeHeaderNavTitle", {
       name: "拜访首页"
     });
-
-    // NATIVE.getCurrentUserInfo(res => {
-    //     console.log('res', res)
-    // });
-    // let userInfo = NATIVE.sendMessageToAndroid();
-    // console.log(userInfo)
     this.determineUrlByStoreParam();
   },
 
@@ -75,7 +69,6 @@ export default {
 
     // 根据store中的很多参数实际发起请求
     async getReportData(url, queryObj) {
-      console.log(url);
       this.$showLoading();
       let reportData = await this.$store.dispatch("getReportData", {
         url,
@@ -95,7 +88,6 @@ export default {
           this.es_summary = reportData.es_visit_summary
         }
       }
-      console.log(reportData);
       this.$hideLoading();
     }
   },

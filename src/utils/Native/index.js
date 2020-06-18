@@ -1,6 +1,7 @@
-import WebViewJavascriptBridge from './WebViewJavascriptBridge';
+// import './WebViewJavascriptBridge';
 
-export const NATIVE = {
+export const Native = {
+    initTwice: true,
     /**
      * 获取系统类型 （根据userAgent判断）
      * IOS 苹果
@@ -19,14 +20,13 @@ export const NATIVE = {
             return 'UNKOWN';
         }
     },
-
     /**
      * android系统js桥接口设置
      * @param {Object} callback 桥接口回调函数 桥接方式固定写法
      */
     setUpAndroidBridge: function (callback) {
         if (window.WebViewJavascriptBridge) {
-            
+
             return callback(window.WebViewJavascriptBridge);
         } else {
             document.addEventListener(
@@ -44,7 +44,7 @@ export const NATIVE = {
      * @param {Object} callback 桥接口回调函数 桥接方式固定写法
      */
     setUpIOSBridge: function (callback) {
-        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
         if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
         window.WVJBCallbacks = [callback];
         var WVJBIframe = document.createElement('iframe');
@@ -76,12 +76,20 @@ export const NATIVE = {
         } else if (osType == 'ANDROID') {
             //安卓手机交互方式
             this.setUpAndroidBridge(function (bridge) {
-                bridge.callHandler(data.action, function (response) {
-                    resultCallback(response)
-                }, message)
+                // 安卓手机特殊处理，需要init一次
+                try {
+                    bridge[functionType](data.action, function (response) {
+                        resultCallback(response)
+                    }, message)
+                } catch {
+                    bridge.init(function (message, responseCallback) {
+                        responseCallback(data);
+                    });
+                    bridge[functionType](data.action, function (response) {
+                        resultCallback(response)
+                    }, message)
+                }
             });
-        } else {
-            //其他类型
         }
     },
 
@@ -90,19 +98,19 @@ export const NATIVE = {
      * @param {} resultCallback 
      * @description 获取登陆用户信息
      */
-    getCurrentUserInfo: function (resultCallback) {
-        var data = {
-            'action': 'AndroidSend',
-            'data': '获取用户信息'
-        };
-        this.setUpBridge(data, resultCallback);
-    },
+    // getCurrentUserInfo: function (resultCallback) {
+    //     var data = {
+    //         'action': 'AndroidSend',
+    //         'data': '获取用户信息'
+    //     };
+    //     this.setUpBridge(data, resultCallback);
+    // },
 
-    sendMessageToAndroid: function (message, resultCallback) {
-        var data = {
-            'action': 'webSend',
-            'data': '传递消息'
-        };
-        this.setUpBridge(data, resultCallback, message, 'callHandler');
-    }
+    // sendMessageToAndroid: function (message, resultCallback) {
+    //     var data = {
+    //         'action': 'webSend',
+    //         'data': '传递消息'
+    //     };
+    //     this.setUpBridge(data, resultCallback, message, 'callHandler');
+    // }
 }

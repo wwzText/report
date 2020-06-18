@@ -35,7 +35,6 @@ export default {
       this.recordList = await this.$store.dispatch('getVisitRecordList', {
         appuser: '11223344'
       });
-      console.log(this.recordList)
     }
   }
 };

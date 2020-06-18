@@ -32,10 +32,12 @@
 
     // 注册线程 往数组里面添加值
     function registerHandler(handlerName, handler) {
+        console.log('register')
         messageHandlers[handlerName] = handler;
     }
     // 调用线程
     function callHandler(handlerName, responseCallback, data) {
+        console.log('callHandler')
         _doSend(handlerName, data, responseCallback);
     }
 

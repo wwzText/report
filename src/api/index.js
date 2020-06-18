@@ -64,7 +64,7 @@ class Http {
         if (store.state.userInfoStore.userInfo) {
             return store.state.userInfoStore.userInfo;
         } else {
-            return store.commit('getUserInfo')
+            // return store.commit('getUserInfo')
         }
     }
 

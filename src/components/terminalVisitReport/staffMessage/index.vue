@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { NATIVE } from "@/utils/Native";
 export default {
   props: {
     headerMessage: Object
@@ -22,18 +21,21 @@ export default {
     // 查看拜访记录
     // 跳转到原生页面
     seeVisitRecord() {
-      // this.$router.push("visitRecordList");
-      NATIVE.sendMessageToAndroid("11", res => {
-        console.log(res);
-      }); 
+      // this.$bridge.registerhandler("AndroidSend", (data, responseCallback) => {
+      //   console.log(data);
+      //   responseCallback(data);
+      // });
+      
+      this.$bridge.registerhandler("AndroidSend", (data, responseCallback) => {
+        alert("AndroidSend called with:", data);
+        responseCallback(data);
+      });
+  
+      this.$bridge.callhandler("webSend", "终于过来了");
     }
   },
 
-  created() {
-    NATIVE.sendMessageToAndroid("11", res => {
-      console.log(res);
-    });
-  }
+  created() {}
 };
 </script> 
 

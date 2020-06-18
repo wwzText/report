@@ -12,9 +12,14 @@ import Vconsole from 'vconsole'
 let vConsole = new Vconsole()
 Vue.use(vConsole)
 
-/**
- * loading组件
- */
+// import './utils/rgzSDK/index';
+// window.crhReady()
+
+import Bridge from './utils/bridge.js'
+
+Vue.prototype.$bridge = Bridge
+
+// loading组件
 import {
   LoadingModel
 } from './components/common/showLoading';
@@ -40,3 +45,4 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+

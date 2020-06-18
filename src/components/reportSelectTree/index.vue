@@ -67,7 +67,6 @@ export default {
   },
   computed: {
     componentIsCollapse() {
-      console.log(this.tree[0].children[0].children);
       if (this.tree[0].children[0].children) {
         return true;
       }
