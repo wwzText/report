@@ -45,9 +45,9 @@
       </div>
     </div>
     <Popup v-model="showPopup" position="right" :style="{ height: '100%', width: '90%' }">
-      <div class="see-self-report">
+      <div class="see-self-report" @click="seeUserSelfReport">
         <button>查看个人统计报表</button>
-        <img src="./../../assets/img/report_icon.png" alt="" srcset="">
+        <img src="./../../assets/img/report_icon.png" alt srcset />
       </div>
       <reportSelectTree :tree="organizationList" />
     </Popup>
@@ -92,6 +92,14 @@ export default {
         "getLocalOrganizationTree"
       );
       this.$hideLoading();
+    },
+
+    // 查看当前登陆用户自己的报表
+    seeUserSelfReport() {
+      this.$store.commit("setTerminalUserOrOrganization", {
+        type: "user"
+      });
+      this.$router.push("/report/terminalVisitReport");
     }
   }
 };

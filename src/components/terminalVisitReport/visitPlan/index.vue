@@ -41,14 +41,15 @@ export default {
     };
   },
   watch: {
-    es_summary(val) {
+    reportMessage(val) {
+      let es_summary = val.es_summary;
       this.visitMessage = [
          {
-          dataData: `${val.plan_rate || 0}%`,
+          dataData: `${es_summary.plan_rate || 0}%`,
           dataTitle: "计划完成率"
         },
         {
-          dataData: val.plan_percent || 0,
+          dataData: es_summary.plan_percent || 0,
           dataTitle: "计划完成占比"
         }
       ]
@@ -56,7 +57,7 @@ export default {
   },
   computed: {
     ...mapState({
-      es_summary: state => state.terminalVisitReportStore.es_summary
+      reportMessage: state => state.terminalVisitReportStore.reportMessage
     })
   }
 };

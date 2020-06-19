@@ -1,13 +1,19 @@
 <template>
   <div>
-    <ViewTitle title="拜访时长" style="marginTop: 10px; marginBottom: 1px" :neednavTo="false" />
+    <ViewTitle :title="reportStr + '时长'" style="marginTop: 10px; marginBottom: 1px" :neednavTo="false" />
     <visitData :visitData="visitMessage" />
     <ViewTitle
       title="所在工作站排行榜"
-      describe="日均拜访家数"
+      :describe="'日均' + reportStr +'家数'"
       message="全部"
       style="marginTop: 10px; marginBottom: 1px"
     />
+    <ViewTitle
+      v-if="reoprtType=='ZF'"
+      title="已走访终端问题统计"
+      :neednavTo="false"
+    ></ViewTitle>
+
   </div>
 </template>
 
@@ -25,28 +31,53 @@ export default {
   },
   computed: {
     ...mapState({
-      es_summary: state => state.terminalVisitReportStore.es_summary
-    })
+      reportMessage: state => state.terminalVisitReportStore.reportMessage,
+      reoprtType: state => state.terminalVisitReportStore.reoprtType,
+    }),
+    reportStr() {
+      switch(this.reoprtType) {
+        case 'BF':
+           return'拜访';
+        case 'ZF':
+          return '走访';
+        case 'DC':
+          return '督查';
+      }
+    }
   },
   watch: {
-    es_summary(val) {
+    reportMessage(val) {
+      let es_summary = val.es_summary
       this.visitMessage = [
         {
-          dataData: val.visit_total_time,
+          dataData: es_summary.visit_total_time,
           dataUnit: "小时",
-          dataTitle: "总拜访时长"
+          dataTitle: `${this.reoprtType == 'BF' ? '拜访' : '走访'}总时长`
         },
         {
-          dataData: val.visit_time,
+          dataData: es_summary.visit_time,
           dataUnit: "次",
-          dataTitle: "拜访次数"
+          dataTitle: `${this.reoprtType == 'BF' ? '拜访' : '走访'}次数`
         },
         {
-          dataData: val.avg_time,
+          dataData: es_summary.avg_time,
           dataUnit: "min/次",
-          dataTitle: "平均拜访时长"
+          dataTitle: `平均${this.reoprtType == 'BF' ? '拜访' : '走访'}时长`
         }
       ];
+    },
+    reoprtType(val) {
+      switch(val) {
+        case 'BF':
+          this.reportStr = '拜访';
+          break;
+        case 'ZF':
+          this.reportStr = '走访';
+          break;
+        case 'DC':
+          this.reportStr = '督查';
+          break;
+      }
     }
   }
 };

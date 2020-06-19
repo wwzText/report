@@ -26,8 +26,8 @@ const terminalVisitReportStore = {
         // 终端拜访查询时间段
         terminalVisitQueryTime: "",
         
-        // 按日期查看时业务员或组织信息
-        es_summary: {}
+        // 
+        reportMessage: {}
     },
 
     mutations: {
@@ -74,11 +74,6 @@ const terminalVisitReportStore = {
         // 修改终端拜访人员还是组织
         changeTerminalUserOrOrganization(state, payload) {
             state.userOrOrganization = payload.type;
-        },
-
-        // 设置按日期查看报表时业务员或组织展示信息
-        setEsSummary(state, payload) {
-            state.es_summary = payload.es_summary;
         }
     },
 
@@ -125,8 +120,7 @@ const terminalVisitReportStore = {
          */
         async getReportData(context, payload) {
             let reportMessage = await Http.request(payload.url, payload.queryObj);
-            
-            return reportMessage
+            context.state.reportMessage = reportMessage;
         }
     }
 

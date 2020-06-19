@@ -70,20 +70,21 @@ export default {
     };
   },
   watch: {
-    es_summary(val) {
+    reportMessage(val) {
+      let es_summary = val.es_summary;
       this.visitMessage = [
         {
-          dataData: val.visit_total_time,
+          dataData: es_summary.visit_total_time,
           dataUnit: "小时",
           dataTitle: "总拜访时长"
         },
         {
-          dataData: val.visit_time,
+          dataData: es_summary.visit_time,
           dataUnit: "次",
           dataTitle: "拜访次数"
         },
         {
-          dataData: val.avg_time,
+          dataData: es_summary.avg_time,
           dataUnit: "min/次",
           dataTitle: "平均拜访时长"
         }
@@ -92,7 +93,7 @@ export default {
   },
   computed: {
     ...mapState({
-      es_summary: state => state.terminalVisitReportStore.es_summary
+      reportMessage: state => state.terminalVisitReportStore.reportMessage
     })
   }
 };

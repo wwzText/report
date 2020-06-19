@@ -59,14 +59,15 @@ export default {
     }
   },
   watch: {
-    es_summary(val) {
+    reportMessage(val) {
+      let es_summary = val.es_summary;
       this.visitMessage = [
         {
-          dataData: `${val.visit_efficient || 0}%`,
+          dataData: `${es_summary.visit_efficient || 0}%`,
           dataTitle: "有效拜访率"
         },
         {
-          dataData: `${val.visit_rate || 0}%`,
+          dataData: `${es_summary.visit_rate || 0}%`,
           dataTitle: "拜访率"
         }
       ]
@@ -74,7 +75,7 @@ export default {
   },
   computed: {
     ...mapState({
-      es_summary: state => state.terminalVisitReportStore.es_summary
+      reportMessage: state => state.terminalVisitReportStore.reportMessage
     })
   }
 };

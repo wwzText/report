@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapState({
-      es_summary: state => state.terminalVisitReportStore.es_summary
+      es_summary: state => state.terminalVisitReportStore.reportMessage.es_summary
     })
   }
 };

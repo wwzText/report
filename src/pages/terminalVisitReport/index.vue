@@ -1,9 +1,9 @@
 <template>
   <div>
     <switchDataMonth />
-    <staffMessage :headerMessage="es_summary" />
+    <staffMessage :headerMessage="reportMessage.es_summary" />
     <visitSwap v-if="dateOrMonth === 'month'" />
-    <visitMessage v-if="dateOrMonth === 'date'" :headerMessage="es_summary" />
+    <visitMessage v-if="dateOrMonth === 'date'" :headerMessage="reportMessage.es_summary" />
   </div>
 </template>
 
@@ -15,7 +15,6 @@ import visitSwap from "@/components/terminalVisitReport/visitSwap";
 import visitMessage from "@/components/terminalVisitReport/visitMessage";
 import { mapState } from "vuex";
 
-
 export default {
   components: {
     switchDataMonth,
@@ -24,9 +23,7 @@ export default {
     visitMessage
   },
   created() {
-    this.$store.commit("changeHeaderNavTitle", {
-      name: "拜访首页"
-    });
+    this.changePageTitleName();
     this.determineUrlByStoreParam();
   },
 
@@ -37,6 +34,20 @@ export default {
   },
 
   methods: {
+    // 修改页面标题
+    changePageTitleName() {
+      let name = `${this.targetType == "terminal" ? "终端" : "经销商"}${
+        this.reoprtType == "BF"
+          ? "拜访"
+          : this.reoprtType == "ZF"
+          ? "走访"
+          : "督查"
+      }`;
+
+      this.$store.commit("changeHeaderNavTitle", {
+        name
+      });
+    },
     // 根据 terminalVisitReportStore 仓库中的参数确定访问URL及访问参数
     determineUrlByStoreParam() {
       // 判断是否有时间，第一次初始化的情况下是没有的
@@ -52,41 +63,29 @@ export default {
         org_code: "50030414"
       };
 
+      // 判断日期方式，按月份筛选月份只取月，日期自己加上去，按日期正常传
       if (this.dateOrMonth === "date") {
         queryObj["visit_date"] = this.terminalVisitQueryTime;
       } else {
         queryObj["start_date"] = `${this.terminalVisitQueryTime}-1`;
         queryObj["end_date"] = `${this.terminalVisitQueryTime}-31`;
       }
+
       if (this.userOrOrganization === "user") {
         queryObj["user_bp"] = "0011223344";
-      } else {
-        queryObj["org_type"] = "3";
       }
+
+      queryObj["org_type"] = "3";
       this.getReportData(url, queryObj);
     },
 
     // 根据store中的很多参数实际发起请求
     async getReportData(url, queryObj) {
       this.$showLoading();
-      let reportData = await this.$store.dispatch("getReportData", {
+      await this.$store.dispatch("getReportData", {
         url,
         queryObj
       });
-      for (let item in reportData) {
-        if (item === "es_summary") {
-          this.$store.commit("setEsSummary", {
-            es_summary: reportData.es_summary
-          });
-          this.es_summary = reportData.es_summary;
-        }
-        if (item === "es_visit_summary") {
-          this.$store.commit("setEsSummary", {
-            es_summary: reportData.es_visit_summary
-          });
-          this.es_summary = reportData.es_visit_summary
-        }
-      }
       this.$hideLoading();
     }
   },
@@ -100,13 +99,12 @@ export default {
 
   computed: {
     ...mapState({
-      userOrOrganization: state =>
-        state.terminalVisitReportStore.userOrOrganization,
+      userOrOrganization: state => state.terminalVisitReportStore.userOrOrganization,
       dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth,
       targetType: state => state.terminalVisitReportStore.targetType,
       reoprtType: state => state.terminalVisitReportStore.reoprtType,
-      terminalVisitQueryTime: state =>
-        state.terminalVisitReportStore.terminalVisitQueryTime
+      terminalVisitQueryTime: state => state.terminalVisitReportStore.terminalVisitQueryTime,
+      reportMessage: state => state.terminalVisitReportStore.reportMessage
     })
   }
 };
