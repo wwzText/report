@@ -21,17 +21,11 @@ export default {
     // 查看拜访记录
     // 跳转到原生页面
     seeVisitRecord() {
-      // this.$bridge.registerhandler("AndroidSend", (data, responseCallback) => {
-      //   console.log(data);
-      //   responseCallback(data);
-      // });
-      
-      this.$bridge.registerhandler("AndroidSend", (data, responseCallback) => {
-        alert("AndroidSend called with:", data);
-        responseCallback(data);
+      this.$bridge.callhandler({
+        type: 'getUserInfo'
+      }, res => {
+        console.log(res)
       });
-  
-      this.$bridge.callhandler("webSend", "终于过来了");
     }
   },
 

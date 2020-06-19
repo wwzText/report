@@ -8,16 +8,24 @@ import './assets/css/index.css';  // 通用样式
 import './assets/less/theme.less';  // 主题less配置
 import 'vant/lib/button/style';
 
+import { APP_VERSION } from './config/system.config';
 import Vconsole from 'vconsole'
-let vConsole = new Vconsole()
-Vue.use(vConsole)
+if (APP_VERSION === 'uat') {
+  let vConsole = new Vconsole()
+  Vue.use(vConsole)
+}
 
-// import './utils/rgzSDK/index';
-// window.crhReady()
-
+// 引用调用原生方法绑定在Vue上
 import Bridge from './utils/bridge.js'
-
 Vue.prototype.$bridge = Bridge
+
+Bridge.callhandler({
+  type: "getUserInfo"
+}, res => {
+  store.commit('setUserInfo', {
+    res: JSON.parse(res)
+  })
+})
 
 // loading组件
 import {

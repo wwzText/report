@@ -13,7 +13,6 @@ import staffMessage from "@/components/terminalVisitReport/staffMessage";
 import visitSwap from "@/components/terminalVisitReport/visitSwap";
 // 人员状态下
 import visitMessage from "@/components/terminalVisitReport/visitMessage";
-import '@/utils/Native/index';
 import { mapState } from "vuex";
 
 

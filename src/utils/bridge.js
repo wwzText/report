@@ -1,7 +1,9 @@
+/**
+ * @description 调用原生方法封装
+ */
 let setupWebViewJavascriptBridge;
 
 if(navigator.userAgent.match(/android/i)) {
-    console.log('this\'s android')
     setupWebViewJavascriptBridge = function setupWebViewJavascriptBridge(
         callback
     ) {
@@ -20,7 +22,6 @@ if(navigator.userAgent.match(/android/i)) {
 
     // 安卓特殊处理
     setupWebViewJavascriptBridge(function (bridge) {
-        console.log('初始化')
         // 注册以下函数，不然回调方法不会被调用
         bridge.init(function (message, responseCallback) {
             responseCallback(data);
@@ -28,6 +29,7 @@ if(navigator.userAgent.match(/android/i)) {
     });
 } else {
 
+    // IOS处理代码
     setupWebViewJavascriptBridge = function setupWebViewJavascriptBridge(callback) {
 
         if (window.WebViewJavascriptBridge) {
@@ -47,7 +49,8 @@ if(navigator.userAgent.match(/android/i)) {
         WVJBIframe.style.display = 'none'
     
         WVJBIframe.src = 'https://__bridge_loaded__' + document.documentElement.appendChild(WVJBIframe)
-    
+        
+        // IOS特殊处理
         setTimeout(() => {
     
             document.documentElement.removeChild(WVJBIframe)
@@ -58,21 +61,22 @@ if(navigator.userAgent.match(/android/i)) {
 
 export default {
 
-    callhandler(name, data, callback) {
+    // 仅可前端主动调用原生方法
+    callhandler(data, callback) {
 
         setupWebViewJavascriptBridge(function (bridge) {
-            bridge.callHandler(name, data, callback)
+            bridge.callHandler('webSend', data, callback)
         })
 
     },
 
-    registerhandler(name, callback) {
-        setupWebViewJavascriptBridge(function (bridge) {
-            bridge.registerHandler(name, function (data, responseCallback) {
-                callback(data, responseCallback)
-            })
-        })
+    // registerhandler(name, callback) {
+    //     setupWebViewJavascriptBridge(function (bridge) {
+    //         bridge.registerHandler(name, function (data, responseCallback) {
+    //             callback(data, responseCallback)
+    //         })
+    //     })
 
-    }
+    // }
 
 }

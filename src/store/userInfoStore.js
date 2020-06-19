@@ -15,6 +15,10 @@ const userInfoStore = {
         //         return res
         //     });
         // }
+        setUserInfo(state, payload) {
+            console.log(payload)
+            state.userInfo = payload.res;
+        }
     }
 
 }
