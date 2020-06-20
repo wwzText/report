@@ -3,10 +3,10 @@
     <ul class="visit-data-main">
       <li class="visit-data-item" v-for="(item, index) in visitData" :key="index">
         <div class="visit-data-message">
-          <span class="visit-data-data">{{item.dataData}}</span>
-          <span class="visit-data-unit">{{item.dataUnit}}</span>
+          <span class="visit-data-data">{{item.value}}</span>
+          <span class="visit-data-unit">{{item.unit}}</span>
         </div>
-        <p class="visit-data-title">{{item.dataTitle}}</p>
+        <p class="visit-data-title">{{item.name}}</p>
       </li>
     </ul>
   </div>

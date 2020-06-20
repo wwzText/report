@@ -21,7 +21,6 @@ export default {
       try {
         this.$router.go(-1);
       } catch {
-          console.log('close')
         this.$bridge.callhandler({
             type: 'closeWebView'
         });

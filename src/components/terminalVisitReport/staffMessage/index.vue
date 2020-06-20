@@ -13,10 +13,9 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 export default {
-  props: {
-    headerMessage: Object
-  },
   methods: {
     // 查看拜访记录
     // 跳转到原生页面
@@ -28,8 +27,11 @@ export default {
       });
     }
   },
-
-  created() {}
+  computed: {
+    ...mapState({
+      headerMessage: state => state.terminalVisitReportStore.headerMessage
+    })
+  }
 };
 </script> 
 

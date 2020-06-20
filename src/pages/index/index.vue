@@ -4,40 +4,40 @@
 <template>
   <div>
     <div class="index-list-container">
-      <div class="index-list-item" @click="showPeopleSelectPopup('terminal', 'BF')">
+      <div class="index-list-item" @click="showPeopleSelectPopup('ZD', 'BF')">
         <img class="index-list-item_img" src="./../../assets/img/zd_bf.png" />
         <span class="index-list-item_name">终端拜访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
       <div
         class="index-list-item index-list-margin-item"
-        @click="showPeopleSelectPopup('distributor', 'BF')"
+        @click="showPeopleSelectPopup('JXS', 'BF')"
       >
         <img class="index-list-item_img" src="./../../assets/img/jxs_bf.png" />
         <span class="index-list-item_name">经销商拜访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item" @click="showPeopleSelectPopup('terminal', 'ZF')">
+      <div class="index-list-item" @click="showPeopleSelectPopup('ZD', 'ZF')">
         <img class="index-list-item_img" src="./../../assets/img/zd_zf.png" />
         <span class="index-list-item_name">终端走访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
       <div
         class="index-list-item index-list-margin-item"
-        @click="showPeopleSelectPopup('distributor', 'ZF')"
+        @click="showPeopleSelectPopup('JXS', 'ZF')"
       >
         <img class="index-list-item_img" src="./../../assets/img/jxs_zf.png" />
         <span class="index-list-item_name">经销商走访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item" @click="showPeopleSelectPopup('terminal', 'DC')">
+      <div class="index-list-item" @click="showPeopleSelectPopup('ZD', 'DC')">
         <img class="index-list-item_img" src="./../../assets/img/zd_dc.png" />
         <span class="index-list-item_name">终端督查</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
       <div
         class="index-list-item index-list-margin-item"
-        @click="showPeopleSelectPopup('distributor', 'DC')"
+        @click="showPeopleSelectPopup('JXS', 'DC')"
       >
         <img class="index-list-item_img" src="./../../assets/img/jxs_dc.png" />
         <span class="index-list-item_name">经销商督查</span>
@@ -77,10 +77,11 @@ export default {
   methods: {
     // 点击展开弹出框，弹出时修改目标类型及报表类型
     // 目标类型及报表类型用于报表主页24个接口判读是哪一个
-    showPeopleSelectPopup(targetType, reoprtType) {
+    showPeopleSelectPopup(targetType, reportType) {
+      console.log(targetType, reportType)
       this.$store.commit("changeTargetAndReportType", {
         targetType,
-        reoprtType
+        reportType
       });
       this.showPopup = true;
     },
@@ -94,10 +95,10 @@ export default {
       this.$hideLoading();
     },
 
-    // 查看当前登陆用户自己的报表
+    // 查看当前登陆用于自己的报表
     seeUserSelfReport() {
       this.$store.commit("setTerminalUserOrOrganization", {
-        type: "user"
+        type: "RY"
       });
       this.$router.push("/report/terminalVisitReport");
     }

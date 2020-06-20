@@ -11,21 +11,21 @@ const terminalVisitReportStore = {
         // 业务员拜访按单日查询数据数据
         userReportOfDay: {},
 
-        // 页面展示日期时间状态 date为按天查询 month按月查询
-        dateOrMonth: 'date',
+        // 页面展示日期时间状态 DR为按天查询 DY按月查询
+        dateOrMonth: 'DR',
 
         // 页面展示人员信息还是组织信息
-        userOrOrganization: 'user',
+        userOrOrganization: 'RY',
 
         // 目标类别 terminal终端 distributor经销商
-        targetType: 'terminal',
+        targetType: 'ZD',
 
         // 报表类型 BF拜访 ZF走访 DC督查
-        reoprtType: 'BF',
+        reportType: 'BF',
 
         // 终端拜访查询时间段
         terminalVisitQueryTime: "",
-        
+
         // 
         reportMessage: {}
     },
@@ -43,9 +43,9 @@ const terminalVisitReportStore = {
         },
 
         changeUserOrOrganization(state) {
-            state.userOrOrganization = 
-                (state.userOrOrganization === 'user') ? 
-                    'organization ' : 'user';
+            state.userOrOrganization =
+                (state.userOrOrganization === 'RY') ?
+                    'ZZ ' : 'RY';
         },
 
         setTerminalUserOrOrganization(state, payload) {
@@ -54,15 +54,15 @@ const terminalVisitReportStore = {
 
         // 改变日期时间状态
         changeDateOrMonth(state) {
-            state.dateOrMonth = 
-                (state.dateOrMonth === 'date') ?
-                    'month' : 'date'
+            state.dateOrMonth =
+                (state.dateOrMonth === 'DR') ?
+                    'DY' : 'DR'
         },
 
-        // 修改 targetType 和 reoprtType
+        // 修改 targetType 和 reportType
         changeTargetAndReportType(state, payload) {
             state.targetType = payload.targetType;
-            state.reoprtType = payload.reoprtType;
+            state.reportType = payload.reportType;
         },
 
         // 改变终端拜访查询时间
@@ -119,8 +119,17 @@ const terminalVisitReportStore = {
          * @description 获取报表数据
          */
         async getReportData(context, payload) {
+
             let reportMessage = await Http.request(payload.url, payload.queryObj);
+
+            // 头部板块，仅将数据返回就好
+            let headerMessage = {
+                ...reportMessage.es_visit_summary,
+                ...reportMessage.es_summary
+            };
+
             context.state.reportMessage = reportMessage;
+            context.state.headerMessage = headerMessage;
         }
     }
 

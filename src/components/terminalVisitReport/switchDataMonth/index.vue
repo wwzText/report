@@ -2,7 +2,7 @@
   <div>
     <div class="switch-conatiner">
       <div class="use-type-container" @click="changeSwitchType">
-        <span>{{dateOrMonth === 'date' ? '按日期' : '按月份'}}</span>
+        <span>{{dateOrMonth === 'DR' ? '按日期' : '按月份'}}</span>
         <span class="iconfont iconriqiqiehuan-01"></span>
       </div>
       <div class="select-container" @click="showSelectDateComponent">
@@ -45,7 +45,7 @@ export default {
 
     // 弹出选择日期组件，根据useDate判断选择日期还是月份
     showSelectDateComponent() {
-      if (this.dateOrMonth === "date") {
+      if (this.dateOrMonth === "DR") {
         this.showCalenar = true;
       } else {
         this.showMonthSelect = true;
@@ -69,7 +69,7 @@ export default {
     // 获取对应显示的初始化时间
     async getCurrentWebTime() {
       let webBackTimeObj = await Http.getWebTime();
-      this.showSelectDate = timeStampToTime(webBackTimeObj.appserver_time, `${this.dateOrMonth == 'date' ? 'YYYY-MM-DD' : 'YYYY-MM'}`);
+      this.showSelectDate = timeStampToTime(webBackTimeObj.appserver_time, `${this.dateOrMonth == 'DR' ? 'YYYY-MM-DD' : 'YYYY-MM'}`);
       this.$store.commit('changeTerminalVisitQueryTime', {
         showSelectDate: this.showSelectDate
       })
