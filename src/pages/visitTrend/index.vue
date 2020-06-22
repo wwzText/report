@@ -4,7 +4,8 @@
 </template>
 
 <script type="text/javascript">
-import echarts from 'echarts';
+import echarts from "echarts";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -30,7 +31,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["21", "22", "23", "24", "25", "26", "27", "28"]
+          data: []
         },
         yAxis: {
           nameLocation: "end",
@@ -43,7 +44,7 @@ export default {
           {
             name: "拜访次数",
             type: "line",
-            data: [1, 3, 4, 5, 6, 99, 2],
+            data: [],
             lineStyle: {
               //设置折线色颜色
               color: "#3780D9"
@@ -58,7 +59,7 @@ export default {
           {
             name: "拜访家数",
             type: "line",
-            data: [9, 10, 6, 7, 12, 11, 8],
+            data: [],
             lineStyle: {
               //设置折线色颜色
               color: "#F99C34"
@@ -74,11 +75,20 @@ export default {
       }
     };
   },
-  mounted: function() {
+  mounted() {
     this.get_echarts();
   },
   methods: {
     get_echarts: function() {
+
+      this.reportMessage.et_trend.map(item => {
+        
+        item.date = item.date.split('-');
+        this.seven_option.xAxis.data.push(item.date[2]);
+        this.seven_option.series[0].data.push(item.visit_time)
+        this.seven_option.series[1].data.push(item.visit_num)
+      })
+      
       this.seven_chart = echarts.init(document.getElementById("seven"));
       // 把配置和数据放这里
       this.seven_chart.setOption(this.seven_option);
@@ -90,6 +100,11 @@ export default {
     }
     this.seven_chart.dispose();
     this.seven_chart = null;
+  },
+  computed: {
+    ...mapState({
+      reportMessage: state => state.terminalVisitReportStore.reportMessage
+    })
   }
 };
 </script>

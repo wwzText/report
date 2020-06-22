@@ -12,6 +12,7 @@ import staffMessage from "@/components/terminalVisitReport/staffMessage";
 import ZD_BF_DR_RY from '@/components/terminalVisitPage/ZD_BF_DR_RY';
 import ZD_BF_DR_ZZ from '@/components/terminalVisitPage/ZD_BF_DR_ZZ';
 import ZD_BF_DY_RY from '@/components/terminalVisitPage/ZD_BF_DY_RY';
+import ZD_BF_DY_ZZ from '@/components/terminalVisitPage/ZD_BF_DY_ZZ';
 import { mapState } from "vuex";
 
 export default {
@@ -21,6 +22,7 @@ export default {
     ZD_BF_DR_RY,
     ZD_BF_DR_ZZ,
     ZD_BF_DY_RY,
+    ZD_BF_DY_ZZ,
   },
   created() {
     this.changePageTitleName();
