@@ -4,17 +4,17 @@
       <li v-for="(item, index) in header" :key='index'>{{item.title}}</li>
     </ul>
     <ul class="ranking-container">
-      <li v-for="(item, index) in rankList" :key="index" class="ranking-item">
-        <img v-if="index == 0" src="./../../../assets/img/ranking1.png" alt />
-        <img v-if="index == 1" src="./../../../assets/img/ranking2.png" alt />
-        <img v-if="index == 2" src="./../../../assets/img/ranking3.png" alt />
+      <li v-for="(item, index) in rankList" :style="{display: item.rank == 0 ? 'none' : ''}" :key="index" class="ranking-item">
+        <img v-if="item.rank == 1" src="./../../../assets/img/ranking1.png" alt />
+        <img v-if="item.rank == 2" src="./../../../assets/img/ranking2.png" alt />
+        <img v-if="item.rank == 3" src="./../../../assets/img/ranking3.png" alt />
         <span class="ranking-index" v-if="index != 0 && index != 1 && index != 2">{{index}}</span>
-        <span class="ranking-name" :class="header  ? '' : 'ranking-name--have-header'">{{item.name}}</span>
+        <span class="ranking-name" :class="header  ? '' : 'ranking-name--have-header'">{{item.usertxt}}</span>
         <template v-for="(value, index) in header">
           <span :key="index" v-if="value.code != 'title'" class="table-message-item">{{item[value.code]}}</span>
         </template>
-        <span class="ranking-message-value">{{item.rankingMessage}}</span>
-        <span class="ranking-message-unit">{{item.rankingMessageUnit}}</span>
+        <span class="ranking-message-value">{{item.rankShowValue}}</span>
+        <span class="ranking-message-unit">家</span>
       </li>
     </ul>
   </div>

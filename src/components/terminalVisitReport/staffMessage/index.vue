@@ -6,7 +6,7 @@
       <span class="staff-duty">{{headerMessage.position_desc}}</span>
       <p
         class="staff-work-address"
-      >{{headerMessage.usertxt ? headerMessage.org_desc : headerMessage.org_desc_sup}}</p>
+      >{{headerMessage.org_desc || headerMessage.org_desc_sup}}</p>
     </div>
     <button class="see-record-btn" @click="seeVisitRecord">查看拜访记录></button>
   </div>
@@ -17,14 +17,11 @@ import {mapState} from 'vuex';
 
 export default {
   methods: {
-    // 查看拜访记录
-    // 跳转到原生页面
-    seeVisitRecord() {
-      this.$bridge.callhandler({
-        type: 'getUserInfo'
-      }, res => {
-        console.log(res)
-      });
+    seeVisitRecord(){}
+  },
+  watch: {
+    headerMessage(val) {
+      console.log(val)
     }
   },
   computed: {

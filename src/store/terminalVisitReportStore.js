@@ -27,7 +27,9 @@ const terminalVisitReportStore = {
         terminalVisitQueryTime: "",
 
         // 
-        reportMessage: {}
+        reportMessage: {},
+        
+        headerMessage: {}
     },
 
     mutations: {
@@ -121,13 +123,11 @@ const terminalVisitReportStore = {
         async getReportData(context, payload) {
 
             let reportMessage = await Http.request(payload.url, payload.queryObj);
-
             // 头部板块，仅将数据返回就好
             let headerMessage = {
                 ...reportMessage.es_visit_summary,
                 ...reportMessage.es_summary
             };
-
             context.state.reportMessage = reportMessage;
             context.state.headerMessage = headerMessage;
         }

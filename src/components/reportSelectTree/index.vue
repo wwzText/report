@@ -10,7 +10,7 @@
           </template>
           <reportSelectTree :tree="item.children" v-if="item.children" />
         </Collapse-item>
-        <div :key="'people' + index" v-if='item.usertxt' class="tree-people-main">
+        <div :key="'people' + index" v-if='item' class="tree-people-main">
             <span class="tree-people-name">{{item.usertxt}}</span>
             <img @click="navToVisitReport('RY')" class="pc-img" src="./../../assets/img/report_icon.png" alt />
         </div>

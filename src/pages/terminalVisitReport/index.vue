@@ -9,7 +9,9 @@
 <script>
 import switchDataMonth from "@/components/terminalVisitReport/switchDataMonth";
 import staffMessage from "@/components/terminalVisitReport/staffMessage";
-import ZD_BF_DR_RY from '@/components/terminalVisitPage/ZD_BF_DR_RY'
+import ZD_BF_DR_RY from '@/components/terminalVisitPage/ZD_BF_DR_RY';
+import ZD_BF_DR_ZZ from '@/components/terminalVisitPage/ZD_BF_DR_ZZ';
+import ZD_BF_DY_RY from '@/components/terminalVisitPage/ZD_BF_DY_RY';
 import { mapState } from "vuex";
 
 export default {
@@ -17,6 +19,8 @@ export default {
     switchDataMonth,
     staffMessage,
     ZD_BF_DR_RY,
+    ZD_BF_DR_ZZ,
+    ZD_BF_DY_RY,
   },
   created() {
     this.changePageTitleName();

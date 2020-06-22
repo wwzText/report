@@ -23,7 +23,7 @@ const organizationTreeStore = {
         // 接口调用获取组织树
         async getOrganizationTreeOfWebRequest(context) {
             let orgInfo = await Http.request("getOrgInfo", {
-                appuser: "11223344"
+                appuser: "10045595"
             });
             // orgLevel 登陆人权限等级 0-大区 1-业务部 2-工作站 3-普通员工
             // 用于判断组织树 organizationTree 的范围
@@ -37,7 +37,7 @@ const organizationTreeStore = {
             }
 
             let organizationList = await Http.request("getOrganizationList", {
-                appuser: "11223344"
+                appuser: "10045595"
             });
 
             return await context.dispatch('verificationAndSetOrganization', {
