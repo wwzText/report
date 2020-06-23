@@ -8,7 +8,7 @@ const ZD_BF_DR_ZZ = '/h5/report/getIF8198Lst'; // 终端-拜访-当日-组织
 const ZD_BF_DY_RY = '/h5/report/getIF8197Lst'; // 终端-拜访-当月-人员
 const ZD_BF_DY_ZZ = '/h5/report/getIF8199Lst'; // 终端-拜访-当月-组织
 const JXS_BF_DY_RY = '/h5/report/getIF8206Lst'; // 经销商-拜访-当月-人员
-const JXS_BF_DR_RY = '/h5/report/getIF8196Lst'; // 经销商-拜访-当日-人员
+const JXS_BF_DR_RY = '/h5/report/getIF8205Lst'; // 经销商-拜访-当日-人员
 
 // 走访
 const ZD_ZF_DR_RY = '/h5/report/getIF8184Lst'; // 终端-走访-当日-人员

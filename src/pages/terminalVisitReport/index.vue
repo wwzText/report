@@ -13,6 +13,12 @@ import ZD_BF_DR_RY from '@/components/terminalVisitPage/ZD_BF_DR_RY';
 import ZD_BF_DR_ZZ from '@/components/terminalVisitPage/ZD_BF_DR_ZZ';
 import ZD_BF_DY_RY from '@/components/terminalVisitPage/ZD_BF_DY_RY';
 import ZD_BF_DY_ZZ from '@/components/terminalVisitPage/ZD_BF_DY_ZZ';
+
+import JXS_BF_DR_ZZ from '@/components/terminalVisitPage/JXS_BF_DR_ZZ';
+import JXS_BF_DY_ZZ from '@/components/terminalVisitPage/JXS_BF_DY_ZZ';
+import JXS_BF_DR_RY from '@/components/terminalVisitPage/JXS_BF_DR_RY';
+import JXS_BF_DY_RY from '@/components/terminalVisitPage/JXS_BF_DY_RY';
+
 import { mapState } from "vuex";
 
 export default {
@@ -23,6 +29,10 @@ export default {
     ZD_BF_DR_ZZ,
     ZD_BF_DY_RY,
     ZD_BF_DY_ZZ,
+    JXS_BF_DY_ZZ,
+    JXS_BF_DR_ZZ,
+    JXS_BF_DR_RY,
+    JXS_BF_DY_RY,
   },
   created() {
     this.changePageTitleName();

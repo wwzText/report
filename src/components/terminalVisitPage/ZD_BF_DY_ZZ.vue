@@ -21,17 +21,17 @@
           <ViewTitle
             title="同级排行榜"
             describe="日均家数"
-            :message="'全部(' + (total_visit_rankLength - 1)+ ')'"
+            :message="'全部(' + (et_rank_sameorg_egvnumber.length - 1)+ ')'"
             style="marginTop: 10px"
           />
-
+          <RankingList :rankList="et_rank_sameorg_egvnumber" />
           <ViewTitle
             title="下级排行榜"
             describe="日均家数"
-            :message="'全部(' + (total_visit_rankLength - 1)+ ')'"
+            :message="'全部(' + (et_rank_suborg_egvnumber.length - 1)+ ')'"
             style="marginTop: 10px"
           />
-          <RankingList :rankList="et_total_visit_rank" />
+          <RankingList :rankList="et_rank_suborg_egvnumber" />
         </template>
       </SwipeItem>
       <!-- 拜访时长 -->
@@ -39,12 +39,19 @@
         <template>
           <visitData :visitData="visitLongTimeData" style="margin: 10px 0" />
           <ViewTitle
-            title="所在工作站排行榜"
+            title="同级排行榜"
             describe="拜访总时长"
-            :message="'全部（' + (totle_visit_timeLength - 1) + '）'"
+            :message="'全部（' + (et_rank_sameorg_egvtimes.length - 1) + '）'"
             style="marginTop: 10px"
           />
-          <RankingList :rankList="et_total_visit_time" />
+          <RankingList :rankList="et_rank_sameorg_egvtimes" />
+          <ViewTitle
+            title="下级排行榜"
+            describe="拜访总时长"
+            :message="'全部（' + (et_rank_suborg_egvtimes.length) + '）'"
+            style="marginTop: 10px"
+          />
+          <RankingList :rankList="et_rank_suborg_egvtimes" />
         </template>
       </SwipeItem>
       <!-- 拜访有效率 -->
@@ -54,10 +61,17 @@
         <ViewTitle
           title="所在工作站排行榜"
           describe="有效拜访率"
-          :message="'全部（' + (totle_visit_efficientLength - 1) + '）'"
+          :message="'全部（' + (et_rank_sameorg_efficient.length - 1) + '）'"
           style="marginTop: 10px"
         />
-        <RankingList :rankList="et_total_visit_efficient" />
+        <RankingList :rankList="et_rank_sameorg_efficient" />
+        <ViewTitle
+          title="所在工作站排行榜"
+          describe="有效拜访率"
+          :message="'全部（' + (et_rank_suborg_efficient.length - 1) + '）'"
+          style="marginTop: 10px"
+        />
+        <RankingList :rankList="et_rank_suborg_efficient" />
       </SwipeItem>
     </Swipe>
   </div>
@@ -76,9 +90,12 @@ export default {
       visitEfficiencyData: [],
       visitPlanData: [],
 
-      et_total_visit_rank: [], // 日均拜访家数排行榜
-      et_total_visit_time: [], // 拜访总时长排行榜
-      et_total_visit_efficient: [], // 拜访有效率排行榜
+      et_rank_suborg_egvtimes: [],
+      et_rank_sameorg_egvnumber: [],
+      et_rank_suborg_egvnumber: [],
+      et_rank_sameorg_egvtimes: [], // 拜访有效率排行榜
+      et_rank_sameorg_efficient: [],
+      et_rank_suborg_efficient: [],
       total_visit_rankLength: 0, // 参与日均拜访家数人数
       totle_visit_timeLength: 0, // 参与拜访总时长排名人数
       totle_visit_efficientLength: 0 // 参与拜访有效率排名人数
@@ -105,6 +122,7 @@ export default {
   },
   watch: {
     reportMessage(val) {
+      console.log('watchVal', val)
       this.visitNumVisitData = [
         {
           value: val.es_visit_summary.average_number,
@@ -156,29 +174,42 @@ export default {
           unit: "小时"
         }
       ];
-      // 拜访效率
-      val.et_total_visit_rank = val.et_total_visit_rank.map(item => {
-        item["rankShowValue"] = item.average_number;
+
+      // 同级拜访有效率
+      this.et_rank_sameorg_efficient = val.et_rank_sameorg_efficient.map(item => {
+        item["rankShowValue"] = item.org_desc;
         return item;
       });
-      this.total_visit_rankLength = val.et_total_visit_rank.length;
-      this.et_total_visit_rank = val.et_total_visit_rank.splice(0, 6);
 
-      // 拜访时长
-      val.et_total_visit_time = val.et_total_visit_time.map(item => {
-        item["rankShowValue"] = item.visit_total_time;
-        return item;
-      });
-      this.totle_visit_timeLength = val.et_total_visit_time.length;
-      this.et_total_visit_time = val.et_total_visit_time.splice(0, 6);
-
-      // 拜访有效率
-      val.et_total_visit_efficient = val.et_total_visit_efficient.map(item => {
+      // 下级拜访有效率
+      this.et_rank_suborg_efficient = val.et_rank_suborg_efficient.map(item => {
         item["rankShowValue"] = item.visit_efficient;
         return item;
       });
-      this.totle_visit_efficientLength = val.et_total_visit_efficient.length;
-      this.et_total_visit_efficient = val.et_total_visit_efficient.splice(0, 6);
+
+      // 同级拜访时长
+      this.et_rank_sameorg_egvtimes = val.et_rank_sameorg_egvtimes.map(item => {
+        item["rankShowValue"] = item.visit_total_time;
+        return item;
+      });
+
+      // 下级拜访时长
+      this.et_rank_suborg_egvtimes = val.et_rank_suborg_egvtimes.map(item => {
+        item["rankShowValue"] = item.total_visit_time;
+        return item;
+      });
+
+      // 同级平均家数
+      this.et_rank_sameorg_egvnumber = val.et_rank_sameorg_egvnumber.map(item => {
+        item["rankShowValue"] = item.average_number;
+        return item;
+      });
+
+      // 下级平均家数
+      this.et_rank_suborg_egvnumber = val.et_rank_suborg_egvnumber.map(item => {
+        item["rankShowValue"] = item.average_number;
+        return item;
+      });
     }
   },
   computed: {

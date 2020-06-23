@@ -9,7 +9,7 @@
         <img v-if="item.rank == 2" src="./../../../assets/img/ranking2.png" alt />
         <img v-if="item.rank == 3" src="./../../../assets/img/ranking3.png" alt />
         <span class="ranking-index" v-if="index != 0 && index != 1 && index != 2">{{index}}</span>
-        <span class="ranking-name" :class="header  ? '' : 'ranking-name--have-header'">{{item.usertxt}}</span>
+        <span class="ranking-name" :class="header  ? '' : 'ranking-name--have-header'">{{item.usertxt || item.org_desc}}</span>
         <template v-for="(value, index) in header">
           <span :key="index" v-if="value.code != 'title'" class="table-message-item">{{item[value.code]}}</span>
         </template>
