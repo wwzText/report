@@ -19,6 +19,22 @@ import JXS_BF_DY_ZZ from '@/components/terminalVisitPage/JXS_BF_DY_ZZ';
 import JXS_BF_DR_RY from '@/components/terminalVisitPage/JXS_BF_DR_RY';
 import JXS_BF_DY_RY from '@/components/terminalVisitPage/JXS_BF_DY_RY';
 
+
+import ZD_ZF_DR_RY from '@/components/terminalVisitPage/ZD_ZF_DR_RY';
+import ZD_ZF_DY_RY from '@/components/terminalVisitPage/ZD_ZF_DY_RY';
+import ZD_ZF_DR_ZZ from '@/components/terminalVisitPage/ZD_ZF_DR_ZZ';
+import ZD_ZF_DY_ZZ from '@/components/terminalVisitPage/ZD_ZF_DY_ZZ';
+
+import JXS_ZF_DR_RY from '@/components/terminalVisitPage/JXS_ZF_DR_RY';
+import JXS_ZF_DY_RY from '@/components/terminalVisitPage/JXS_ZF_DY_RY';
+import JXS_ZF_DR_ZZ from '@/components/terminalVisitPage/JXS_ZF_DR_ZZ';
+import JXS_ZF_DY_ZZ from '@/components/terminalVisitPage/JXS_ZF_DY_ZZ';
+
+import ZD_DC_DR_RY from '@/components/terminalVisitPage/ZD_DC_DR_RY';
+import ZD_DC_DY_RY from '@/components/terminalVisitPage/ZD_DC_DY_RY';
+import ZD_DC_DR_ZZ from '@/components/terminalVisitPage/ZD_DC_DR_ZZ';
+import ZD_DC_DY_ZZ from '@/components/terminalVisitPage/ZD_DC_DY_ZZ';
+
 import { mapState } from "vuex";
 
 export default {
@@ -33,6 +49,21 @@ export default {
     JXS_BF_DR_ZZ,
     JXS_BF_DR_RY,
     JXS_BF_DY_RY,
+
+    ZD_ZF_DR_RY,
+    ZD_ZF_DY_RY,
+    ZD_ZF_DR_ZZ,
+    ZD_ZF_DR_ZZ,
+
+    JXS_ZF_DR_RY,
+    JXS_ZF_DY_RY,
+    JXS_ZF_DR_ZZ,
+    JXS_ZF_DR_ZZ,
+
+    ZD_DC_DR_RY,
+    ZD_DC_DY_RY,
+    ZD_DC_DR_ZZ,
+    ZD_DC_DR_ZZ,
   },
   created() {
     this.changePageTitleName();

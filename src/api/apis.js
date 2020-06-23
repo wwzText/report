@@ -14,6 +14,16 @@ const JXS_BF_DY_ZZ = '/h5/report/getIF8208Lst'; // 经销商-拜访-当月-组�
 // 走访
 const ZD_ZF_DR_RY = '/h5/report/getIF8184Lst'; // 终端-走访-当日-人员
 const ZD_ZF_DY_RY = '/h5/report/getIF8185Lst'; // 终端-走访-当月-人员
+const ZD_ZF_DR_ZZ = '/h5/report/getIF8188Lst'; // 终端-走访-当日-组织
+const ZD_ZF_DY_ZZ = '/h5/report/getIF8189Lst'; // 终端-走访-当月-组织
+const JXS_ZF_DR_RY = '/h5/report/getIF8186Lst'; //经销商-走访/督查-当日-人员
+const JXS_ZF_DY_RY = '/h5/report/getIF8187Lst'  // 经销商-走访/督查-当月-人员
+const JXS_ZF_DR_ZZ = '/h5/report/getIF8190Lst'; // 经销商-走访/督查-当日-组织
+const JXS_ZF_DY_ZZ = '/h5/report/getIF8191Lst'; // 经销商-走访/督查-当月-组织
+const ZD_DC_DR_RY = '/h5/report/getIF8192Lst'; // 终端-督查-当日-人员
+const ZD_DC_DY_RY = '/h5/report/getIF8193Lst'; // 终端-督查-当月-人员
+const ZD_DC_DR_ZZ = '/h5/report/getIF8194Lst'; // 终端-督查-当日-组织
+const ZD_DC_DY_ZZ = '/h5/report/getIF8195Lst'; // 终端-督查-当月-组织
 
 const getOrganizationList = '/h5/report/getIF8119Lst'; // 获取组织人员列表
 const getOrgInfo = '/h5/report/getOrgInfo'; // 获取组织结构
@@ -35,7 +45,17 @@ module.exports = {
     ZD_ZF_DY_RY,
     JXS_BF_DR_ZZ,
     JXS_BF_DY_ZZ,
-    
+    ZD_ZF_DR_ZZ,
+    ZD_ZF_DY_ZZ,
+    JXS_ZF_DR_RY,
+    JXS_ZF_DY_RY,
+    JXS_ZF_DR_ZZ,
+    JXS_ZF_DY_ZZ,
+    ZD_DC_DR_RY,
+    ZD_DC_DY_RY,
+    ZD_DC_DR_ZZ,
+    ZD_DC_DY_ZZ,
+
     getOrganizationList,
     getOrgInfo,
     getVisitRecordList
