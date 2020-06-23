@@ -16,7 +16,6 @@ const userInfoStore = {
         //     });
         // }
         setUserInfo(state, payload) {
-            console.log(payload)
             state.userInfo = payload.res;
         }
     }

@@ -78,7 +78,6 @@ export default {
     // 点击展开弹出框，弹出时修改目标类型及报表类型
     // 目标类型及报表类型用于报表主页24个接口判读是哪一个
     showPeopleSelectPopup(targetType, reportType) {
-      console.log(targetType, reportType)
       this.$store.commit("changeTargetAndReportType", {
         targetType,
         reportType

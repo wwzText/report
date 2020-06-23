@@ -11,7 +11,7 @@ class Http {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        baseURL: 'https://appuat.cresz.com.cn'
+        baseURL: 'http://appuat.cresz.com.cn'
     })
 
     // 获取服务端时间的时间戳
@@ -82,7 +82,7 @@ class Http {
         // 服务器时间戳
         let timestamp = webTimeBack.appserver_time;
 
-        url = 'https://appuat.cresz.com.cn' + apis[url];
+        url = 'http://appuat.cresz.com.cn' + apis[url];
         
         return await axios({
             method,
@@ -110,7 +110,6 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
-                console.log(res.data.data)
                 return res.data.data
             }
         })

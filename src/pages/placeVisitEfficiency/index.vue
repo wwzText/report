@@ -111,11 +111,6 @@ export default {
       curRate: 0
     };
   },
-  watch: {
-    es_summary(val) {
-      console.log('val', val)
-    }
-  },
   computed: {
     ...mapState({
       es_summary: state =>
