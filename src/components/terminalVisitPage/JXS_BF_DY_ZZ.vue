@@ -1,7 +1,8 @@
 <template>
   <div>
     <visitData :visitData="visitData" style="margin: 10px 0" />
-    <ViewTitle title="所在工作站排行榜" describe="拜访总时长" message="全部（10）" />
+    <ViewTitle title="已拜访经销商统计" :neednavTo="false" style="marginTop: 10px" />
+    <QuestionList :list="questionList" />
   </div>
 </template>
 
@@ -10,26 +11,28 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      visitData: []
+      visitData: [],
+      questionList: []
     };
   },
   watch: {
     reportMessage(val) {
         this.visitData = [
             {
-                value: val.es_summary.visit_total_time,
-                name: "拜访总时长",
-                unit: '小时'
-            }, {
-                value: val.es_summary.visit_time,
+                value: val.es_visit_summary.visit_number,
                 name: "拜访总数",
-                unit: '小时'
+                unit: '家'
             }, {
-                value: val.es_summary.avg_time,
+                value: val.es_visit_summary.average_number,
+                name: "日均拜访数",
+                unit: '家/人'
+            }, {
+                value: val.es_visit_summary.question_number,
                 name: "平均拜访时长",
-                unit: 'min/次'
+                unit: '有问题经销商数'
             }
-        ]
+        ];
+        this.questionList = val.et_visit_quest;
     }
   },
   computed: {

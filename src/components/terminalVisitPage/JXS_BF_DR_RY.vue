@@ -2,7 +2,6 @@
   <div>
     <ViewTitle title="基础数据" :neednavTo="false" style="marginTop: 10px"/>
     <visitData :visitData="visitData" />
-    <ViewTitle title="已拜访经销商统计" :neednavTo="false" style="marginTop: 10px"/>
   </div>
 </template>
 

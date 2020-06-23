@@ -1,7 +1,6 @@
 <template>
   <div>
     <visitData :visitData="visitData" style="margin: 10px 0" />
-    <ViewTitle title="所在工作站排行榜" describe="拜访总时长" message="全部（10）" />
   </div>
 </template>
 
@@ -17,17 +16,17 @@ export default {
     reportMessage(val) {
         this.visitData = [
             {
-                value: val.es_summary.visit_total_time,
-                name: "拜访总时长",
-                unit: '小时'
-            }, {
-                value: val.es_summary.visit_time,
+                value: val.es_visit_summary.visit_number,
                 name: "拜访总数",
-                unit: '小时'
+                unit: '家'
             }, {
-                value: val.es_summary.avg_time,
-                name: "平均拜访时长",
-                unit: 'min/次'
+                value: val.es_visit_summary.average_number,
+                name: "人均拜访数",
+                unit: '家/人'
+            }, {
+                value: val.es_visit_summary.question_number,
+                name: "有问题经销商数",
+                unit: '家'
             }
         ]
     }
