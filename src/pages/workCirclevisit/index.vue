@@ -28,6 +28,7 @@ export default {
   created() {
     // 获取url上的参数
     this.getWorkShareData();
+    document.title = '工作圈分享';
   },
 
   data() {

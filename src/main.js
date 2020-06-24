@@ -48,6 +48,14 @@ for (let item in useCommonComponent) {
 }
 
 
+let url = window.location.href;
+if(url.includes('?from')) {
+  
+  url = url.replace(/page.+.#/, 'page/#')
+  // console.log(url)
+  window.location.href = url;
+}
+
 new Vue({
   router,
   store,

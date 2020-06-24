@@ -11,17 +11,17 @@ const terminalVisitReportStore = {
         // 业务员拜访按单日查询数据数据
         userReportOfDay: {},
 
-        // 页面展示日期时间状态 DR为按天查询 DY按月查询
-        dateOrMonth: 'DR',
-
-        // 页面展示人员信息还是组织信息
-        userOrOrganization: 'RY',
-
         // 目标类别 terminal终端 distributor经销商
         targetType: 'ZD',
 
         // 报表类型 BF拜访 ZF走访 DC督查
-        reportType: 'BF',
+        reportType: 'ZF',
+
+        // 页面展示日期时间状态 DR为按天查询 DY按月查询
+        dateOrMonth: 'DY',
+
+        // 页面展示人员信息还是组织信息
+        userOrOrganization: 'ZZ',
 
         // 终端拜访查询时间段
         terminalVisitQueryTime: "",

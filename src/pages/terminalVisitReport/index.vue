@@ -53,12 +53,12 @@ export default {
     ZD_ZF_DR_RY,
     ZD_ZF_DY_RY,
     ZD_ZF_DR_ZZ,
-    ZD_ZF_DR_ZZ,
+    ZD_ZF_DY_ZZ,
 
     JXS_ZF_DR_RY,
     JXS_ZF_DY_RY,
     JXS_ZF_DR_ZZ,
-    JXS_ZF_DR_ZZ,
+    JXS_ZF_DY_ZZ,
 
     ZD_DC_DR_RY,
     ZD_DC_DY_RY,
