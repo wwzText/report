@@ -8,12 +8,9 @@ import './assets/css/index.css';  // 通用样式
 import './assets/less/theme.less';  // 主题less配置
 import 'vant/lib/button/style';
 
-import { APP_VERSION } from './config/system.config';
-import Vconsole from 'vconsole'
-if (APP_VERSION === 'uat') {
-  let vConsole = new Vconsole()
-  Vue.use(vConsole)
-}
+// import Vconsole from 'vconsole'
+// let vConsole = new Vconsole()
+// Vue.use(vConsole)
 
 // 引用调用原生方法绑定在Vue上
 import Bridge from './utils/bridge.js'
@@ -49,12 +46,13 @@ for (let item in useCommonComponent) {
 
 
 let url = window.location.href;
-if(url.includes('?from')) {
-  
-  url = url.replace(/page.+.#/, 'page/#')
-  // console.log(url)
+if (url.includes('?from')) {
+  console.log('参数错误')
+  url = url.replace(/page.+.#/, 'page/#');
+  console.log(url)
   window.location.href = url;
 }
+
 
 new Vue({
   router,

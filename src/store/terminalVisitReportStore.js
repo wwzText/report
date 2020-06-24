@@ -12,7 +12,7 @@ const terminalVisitReportStore = {
         userReportOfDay: {},
 
         // 目标类别 terminal终端 distributor经销商
-        targetType: 'ZD',
+        targetType: 'JXS',
 
         // 报表类型 BF拜访 ZF走访 DC督查
         reportType: 'ZF',
@@ -21,7 +21,7 @@ const terminalVisitReportStore = {
         dateOrMonth: 'DY',
 
         // 页面展示人员信息还是组织信息
-        userOrOrganization: 'ZZ',
+        userOrOrganization: 'RY',
 
         // 终端拜访查询时间段
         terminalVisitQueryTime: "",
