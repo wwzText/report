@@ -16,11 +16,6 @@ Vue.use(vConsole)
 import Bridge from './utils/bridge.js'
 Vue.prototype.$bridge = Bridge
 
-// Bridge.callhandler({
-//   type: "getUserInfo"
-// }, res => {
-//   console.log(res)
-// })
 
 // loading组件
 import {

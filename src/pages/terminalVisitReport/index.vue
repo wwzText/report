@@ -97,8 +97,8 @@ export default {
 
       let url = `${this.targetType}_${this.reportType}_${this.dateOrMonth}_${this.userOrOrganization}`;
       let queryObj = {
-        appuser: userInfo.appuser,
-        org_code: userInfo.sales_station
+        appuser: this.userInfo.appuser,
+        org_code: this.userInfo.sales_station
       };
 
       // 判断日期方式，按月份筛选月份只取月，日期自己加上去，按日期正常传
@@ -110,7 +110,7 @@ export default {
       }
 
       if (this.userOrOrganization === "RY") {
-        queryObj["user_bp"] = userInfo.partner;
+        queryObj["user_bp"] = this.userInfo.partner;
       }
 
       queryObj["org_type"] = "3";

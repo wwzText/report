@@ -98,6 +98,7 @@ export default {
       this.organizationList = await this.$store.dispatch(
         "getLocalOrganizationTree"
       );
+      
       this.$hideLoading();
     },
 

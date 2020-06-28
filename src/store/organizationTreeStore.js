@@ -8,6 +8,18 @@ const organizationTreeStore = {
 
     mutations: {
 
+        // 验证权限等级并设置组织树
+        verificationAndSetOrganization(context, payload) {
+            if (payload.orgLevel === 0) {
+                context.state.organizationTree = payload.organizationList;
+                return context.state.organizationTree;
+            } else {
+                context.commit('verificationAndSetOrganization', {
+                    orgLevel: payload.orgLevel - 1,
+                    organizationList: payload.organizationList[0].children
+                })
+            }
+        }
 
     },
 
@@ -23,6 +35,7 @@ const organizationTreeStore = {
 
         // 接口调用获取组织树
         async getOrganizationTreeOfWebRequest(context) {
+            
             let orgInfo = await Http.request("getOrgInfo", {
                 appuser: store.state.userInfoStore.userInfo.appuser
             });
@@ -37,30 +50,16 @@ const organizationTreeStore = {
                 orgLevel = 2;
             }
 
-            let organizationList = await Http.request("getOrganizationList", {
+            return await Http.request("getOrganizationList", {
                 appuser: store.state.userInfoStore.userInfo.appuser
             });
 
-            return await context.dispatch('verificationAndSetOrganization', {
-                orgLevel,
-                organizationList
-            })
+            // return context.commit('verificationAndSetOrganization', {
+            //     orgLevel,
+            //     organizationList
+            // })
         },
 
-        // 验证权限等级并设置组织树
-        verificationAndSetOrganization(context, payload) {
-            if (payload.orgLevel === 0) {
-                // this.organizationList = payload.organizationList;
-                context.state.organizationTree = payload.organizationList;
-                return payload.organizationList;
-            } else {
-                context.dispatch('verificationAndSetOrganization', {
-                    orgLevel: payload.orgLevel - 1,
-                    organizationList: payload.organizationList[0].children
-                })
-                // this.splitRightOrganizationList(payload.organizationList[0].children, payload.orgLevel - 1)
-            }
-        }
     }
 
 }

@@ -71,7 +71,6 @@ class Http {
     // 发送ajax请求
     static async request(url, data = {}, method = 'post',) {
         let userInfo = await Http.verificationUserInfo();
-        console.log('userInfo', userInfo)
         // 服务器时间返回的数据
         let webTimeBack = await Http.getWebTime();
 
