@@ -110,7 +110,6 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
-                console.log('res', res.data.data)
                 return res.data.data
             }
         })

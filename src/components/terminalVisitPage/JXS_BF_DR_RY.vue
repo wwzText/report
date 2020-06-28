@@ -15,7 +15,6 @@ export default {
   },
   watch: {
     reportMessage(val) {
-      console.log('watchVal', val)
         this.visitData = [
             {
                 value: val.es_summary.visit_number,

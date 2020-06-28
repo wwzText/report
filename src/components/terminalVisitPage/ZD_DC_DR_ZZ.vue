@@ -51,7 +51,6 @@ export default {
   methods: {},
   watch: {
     reportMessage(val) {
-      console.log("watchVal", val);
       
       this.zfxlData = [
         {

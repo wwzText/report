@@ -122,7 +122,6 @@ export default {
   },
   watch: {
     reportMessage(val) {
-      console.log('watchVal', val)
       this.visitNumVisitData = [
         {
           value: val.es_visit_summary.average_number,

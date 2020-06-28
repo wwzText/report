@@ -78,7 +78,6 @@ export default {
   },
   watch: {
     reportMessage(val) {
-      console.log('watchVal', val)
       // 走访效率
       this.zfxlData = [
         {

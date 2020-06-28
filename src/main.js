@@ -47,9 +47,7 @@ for (let item in useCommonComponent) {
 
 let url = window.location.href;
 if (url.includes('?from')) {
-  console.log('参数错误')
   url = url.replace(/page.+.#/, 'page/#');
-  console.log(url)
   window.location.href = url;
 }
 

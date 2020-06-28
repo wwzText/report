@@ -31,7 +31,6 @@ export default {
         }
       ];
       this.questionList = val.et_visit_quest;
-      console.log(this.questionList)
     }
   },
   computed: {
