@@ -63,7 +63,7 @@ export default {
     ZD_DC_DR_RY,
     ZD_DC_DY_RY,
     ZD_DC_DR_ZZ,
-    ZD_DC_DR_ZZ,
+    ZD_DC_DY_ZZ,
   },
   created() {
     this.changePageTitleName();
