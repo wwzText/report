@@ -8,7 +8,7 @@
         class="staff-work-address"
       >{{headerMessage.org_desc_sup || headerMessage.org_desc}}</p>
     </div>
-    <button class="see-record-btn" @click="seeVisitRecord">查看拜访记录></button>
+    <button class="see-record-btn" v-if="userOrOrganization == 'RY'" @click="seeVisitRecord">查看拜访记录></button>
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
   },
   computed: {
     ...mapState({
+      userOrOrganization: state => state.terminalVisitReportStore.userOrOrganization,
       headerMessage: state => state.terminalVisitReportStore.headerMessage
     })
   }

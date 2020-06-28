@@ -4,12 +4,12 @@
 <template>
   <div>
     <div class="index-list-container">
-      <div class="index-list-item" @click="showPeopleSelectPopup('ZD', 'BF')">
+      <div v-if="userInfo && userInfo.appxs == 'X'" class="index-list-item" @click="showPeopleSelectPopup('ZD', 'BF')">
         <img class="index-list-item_img" src="./../../assets/img/zd_bf.png" />
         <span class="index-list-item_name">终端拜访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div
+      <div v-if="userInfo && userInfo.appxs == 'X'" 
         class="index-list-item index-list-margin-item"
         @click="showPeopleSelectPopup('JXS', 'BF')"
       >
@@ -17,12 +17,12 @@
         <span class="index-list-item_name">经销商拜访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item" @click="showPeopleSelectPopup('ZD', 'ZF')">
+      <div v-if="userInfo && userInfo.appgl == 'X'"  class="index-list-item" @click="showPeopleSelectPopup('ZD', 'ZF')">
         <img class="index-list-item_img" src="./../../assets/img/zd_zf.png" />
         <span class="index-list-item_name">终端走访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div
+      <div v-if="userInfo && userInfo.appgl == 'X'" 
         class="index-list-item index-list-margin-item"
         @click="showPeopleSelectPopup('JXS', 'ZF')"
       >
@@ -30,12 +30,12 @@
         <span class="index-list-item_name">经销商走访</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div class="index-list-item" @click="showPeopleSelectPopup('ZD', 'DC')">
+      <div v-if="userInfo && userInfo.appdc == 'X'"  class="index-list-item" @click="showPeopleSelectPopup('ZD', 'DC')">
         <img class="index-list-item_img" src="./../../assets/img/zd_dc.png" />
         <span class="index-list-item_name">终端督查</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
-      <div
+      <div v-if="userInfo && userInfo.appdc == 'X'" 
         class="index-list-item index-list-margin-item"
         @click="showPeopleSelectPopup('JXS', 'DC')"
       >
@@ -56,6 +56,7 @@
 
 <script>
 import reportSelectTree from "@/components/reportSelectTree";
+import {mapState} from 'vuex';
 export default {
   created() {
     this.$store.commit("changeHeaderNavTitle", {
@@ -74,6 +75,11 @@ export default {
       organizationList: [] // 组织树
     };
   },
+  computed: {
+    ...mapState({
+      userInfo: state => state.userInfoStore.userInfo
+    })
+  },
   methods: {
     // 点击展开弹出框，弹出时修改目标类型及报表类型
     // 目标类型及报表类型用于报表主页24个接口判读是哪一个
@@ -88,6 +94,7 @@ export default {
     // 获取组织列表
     async getOrgInfo() {
       this.$showLoading();
+      await this.$store.dispatch('getUserInfo');
       this.organizationList = await this.$store.dispatch(
         "getLocalOrganizationTree"
       );

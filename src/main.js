@@ -8,21 +8,19 @@ import './assets/css/index.css';  // 通用样式
 import './assets/less/theme.less';  // 主题less配置
 import 'vant/lib/button/style';
 
-// import Vconsole from 'vconsole'
-// let vConsole = new Vconsole()
-// Vue.use(vConsole)
+import Vconsole from 'vconsole'
+let vConsole = new Vconsole()
+Vue.use(vConsole)
 
 // 引用调用原生方法绑定在Vue上
 import Bridge from './utils/bridge.js'
 Vue.prototype.$bridge = Bridge
 
-Bridge.callhandler({
-  type: "getUserInfo"
-}, res => {
-  store.commit('setUserInfo', {
-    res: JSON.parse(res)
-  })
-})
+// Bridge.callhandler({
+//   type: "getUserInfo"
+// }, res => {
+//   console.log(res)
+// })
 
 // loading组件
 import {

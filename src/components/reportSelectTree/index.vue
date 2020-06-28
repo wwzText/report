@@ -1,6 +1,6 @@
 // 报表入口页面弹出窗口的树组件
 <template>
-  <div>
+  <div class="tree-main">
     <Collapse v-model="activeName" accordion>
       <template v-for="(item, index) in tree">
         <Collapse-item :value="1" v-if="item.children" :key="item.id" :title="rightName(item)" :name="item.id">

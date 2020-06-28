@@ -14,9 +14,6 @@ const routes = [
         path: 'terminalVisitReport',
         component: () => import('@/pages/terminalVisitReport')
       }, {
-        path: 'visitRecordList',
-        component: () => import('@/pages/visitRecordList')
-      }, {
         path: 'visitRanking',
         component: () => import('@/pages/visitRanking')
       }, {

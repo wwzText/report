@@ -11,7 +11,7 @@ class Http {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        baseURL: 'https://appuat.cresz.com.cn'
+        baseURL: 'http://appuat.cresz.com.cn'
     })
 
     // 获取服务端时间的时间戳
@@ -60,19 +60,18 @@ class Http {
     }
 
     // 验证用户信息，不存在时主动获取app接口提供的信息
-    static verificationUserInfo() {
+    static async verificationUserInfo() {
         if (store.state.userInfoStore.userInfo) {
             return store.state.userInfoStore.userInfo;
         } else {
-            // return store.commit('getUserInfo')
+            return await store.dispatch('getUserInfo');
         }
     }
 
     // 发送ajax请求
     static async request(url, data = {}, method = 'post',) {
-        console.log(url)
-        let userInfo = Http.verificationUserInfo();
-
+        let userInfo = await Http.verificationUserInfo();
+        console.log('userInfo', userInfo)
         // 服务器时间返回的数据
         let webTimeBack = await Http.getWebTime();
 
@@ -82,7 +81,7 @@ class Http {
         // 服务器时间戳
         let timestamp = webTimeBack.appserver_time;
 
-        url = 'https://appuat.cresz.com.cn' + apis[url];
+        url = 'http://appuat.cresz.com.cn' + apis[url];
         
         return await axios({
             method,
@@ -91,8 +90,8 @@ class Http {
                 data: JSON.stringify(data),
                 sign,
                 timestamp,
-                imei: userInfo ? userInfo.imei : "865360032826820",
-                user_token: userInfo ? userInfo.user_token : "eee859bbfb7543f2a0c993e4e18677ee",
+                imei: userInfo.imei,
+                user_token: userInfo.user_token,
             },
 
             transformRequest: [
@@ -110,7 +109,6 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
-                console.log(res.data.data)
                 return res.data.data
             }
         })

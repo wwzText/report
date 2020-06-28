@@ -1,25 +1,29 @@
-// import { NATIVE } from '@/utils/Native';
-
+import Vue from 'vue';
 const userInfoStore = {
     state: () => ({
-        userInfo: {
-            appuser: '11223344'
-        }
+        userInfo: null
     }),
 
     mutations: {
-        // 从原生获取用户信息回来后绑定到全局
-        // getUserInfo(state) {
-        //     NATIVE.getCurrentUserInfo(res => {
-        //         state.userInfo = res;
-        //         return res
-        //     });
-        // }
         setUserInfo(state, payload) {
-            state.userInfo = payload.res;
+            state.userInfo = JSON.parse(payload.res)
+        }
+    },
+    actions: {
+        // 异步获取userInfo
+        async getUserInfo(context) {
+            return new Promise(resolve => {
+                Vue.prototype.$bridge.callhandler({
+                    type: "getUserInfo"
+                }, res => {
+                    context.commit('setUserInfo', {
+                        res
+                    })
+                    resolve(JSON.parse(res))
+                })
+            })
         }
     }
-
 }
 
 export {
