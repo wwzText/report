@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      maxDate: new Date(2020, 4, 29)
+      maxDate: new Date(2020, 5, 29)
     };
   },
   methods: {

@@ -29,7 +29,7 @@ export default {
         {
           value: val.es_visit_summary.visit_time,
           name: "拜访总数",
-          unit: "小时"
+          unit: "次"
         },
         {
           value: val.es_visit_summary.avg_time,

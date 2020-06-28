@@ -70,6 +70,7 @@ class Http {
 
     // 发送ajax请求
     static async request(url, data = {}, method = 'post',) {
+        console.log(url, data)
         let userInfo = await Http.verificationUserInfo();
         // 服务器时间返回的数据
         let webTimeBack = await Http.getWebTime();
@@ -108,6 +109,7 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
+                console.log(res.data.data)
                 return res.data.data
             }
         })
