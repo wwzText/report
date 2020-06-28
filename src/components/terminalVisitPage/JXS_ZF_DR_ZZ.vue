@@ -1,5 +1,10 @@
 <template>
   <div>
+    <ViewTitle
+      title="管辖工作站直属管理员同级数据"
+      style="marginTop: 10px"
+      :neednavTo="false"
+    />
     <visitData :visitData="visitData" style="margin: 10px 0" />
   </div>
 </template>

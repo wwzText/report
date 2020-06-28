@@ -1,6 +1,10 @@
 <template>
   <div>
     <visitData :visitData="visitData" style="margin: 10px 0" />
+    <ViewTitle title="同级排行榜" describe="拜访总时长" style="margin: 10px 0" :message="'全部（' + (et_rank_sameorg_egvtimes.length - 1) + ')'" />
+    <RankingList :rankList="et_rank_sameorg_egvtimes" />
+    <ViewTitle title="下级排行榜" describe="拜访总时长" style="margin: 10px 0" :message="'全部（' + (et_rank_suborg_egvtimes.length - 1) + ')'" />
+    <RankingList :rankList="et_rank_suborg_egvtimes" />
   </div>
 </template>
 
@@ -9,7 +13,9 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      visitData: []
+      visitData: [],
+      et_rank_sameorg_egvtimes: [],
+      et_rank_suborg_egvtimes: []
     };
   },
   watch: {
@@ -31,6 +37,8 @@ export default {
           unit: "min/次"
         }
       ];
+      this.et_rank_sameorg_egvtimes = val.et_rank_sameorg_egvtimes;
+      this.et_rank_suborg_egvtimes = val.et_rank_suborg_egvtimes;
     }
   },
   computed: {

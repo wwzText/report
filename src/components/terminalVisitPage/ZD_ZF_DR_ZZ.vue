@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ViewTitle title="管辖工作站直属管理员统计数据" :neednavTo="false" style="marginTop: 10px" />
+    <ViewTitle title="走访时长" :neednavTo="false" style="marginTop: 10px" />
     <visitData :visitData="visitData" />
 
     <ViewTitle

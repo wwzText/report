@@ -140,22 +140,20 @@ export default {
       this.visitEfficiencyData = [
         {
           value: val.es_summary.visit_efficient,
-          name: "拜访有效率",
-          unit: "小时"
+          name: "拜访有效率"
         },
         {
           value: val.es_summary.visit_rate,
           name: "拜访率",
-          unit: "小时"
         }
       ];
       this.visitPlanData = [
         {
-          value: val.es_summary.plan_rate || 0,
+          value: val.es_summary.plan_rate,
           name: "计划完成率"
         },
         {
-          value: val.es_summary.plan_percent || 0,
+          value: val.es_summary.plan_percent,
           name: "计划完成比例"
         }
       ];

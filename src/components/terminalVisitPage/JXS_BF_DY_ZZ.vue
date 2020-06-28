@@ -29,7 +29,7 @@ export default {
             }, {
                 value: val.es_visit_summary.question_number,
                 name: "平均拜访时长",
-                unit: '有问题经销商数'
+                unit: '家'
             }
         ];
         this.questionList = val.et_visit_quest;

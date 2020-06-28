@@ -38,6 +38,12 @@
             style="marginTop: 10px"
           />
           <RankingList :rankList="et_visit_time" />
+
+          <ViewTitle
+            title="已走访终端问题统计"
+            style="marginTop: 10px"
+          />
+          <QuestionList :list="questionList" />
         </template>
       </SwipeItem>
     </Swipe>
@@ -54,7 +60,8 @@ export default {
       zfscData: [],
       et_visit_rank: [], // 日均走访家数排行榜
       curTitleIndex: 0,
-      et_visit_time: []
+      et_visit_time: [],
+      questionList: []
     };
   },
   methods: {
@@ -117,6 +124,8 @@ export default {
       this.et_visit_time = val.et_visit_time;
       // 日均家数排行榜
       this.et_visit_rank = val.et_visit_rank;
+
+      this.questionList = val.et_visit_quest;
     }
   },
   computed: {

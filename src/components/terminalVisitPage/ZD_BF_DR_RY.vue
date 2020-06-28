@@ -1,7 +1,8 @@
 <template>
   <div>
     <visitData :visitData="visitData" style="margin: 10px 0" />
-    <ViewTitle title="所在工作站排行榜" describe="拜访总时长" message="全部（10）" />
+    <ViewTitle title="所在工作站排行榜" describe="拜访总时长" :message="'全部（' + (et_total_visit_time.length - 1) + ')'" />
+    <RankingList :rankList="et_total_visit_time" />
   </div>
 </template>
 
@@ -10,7 +11,8 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      visitData: []
+      visitData: [],
+      et_total_visit_time: []
     };
   },
   watch: {
@@ -23,13 +25,14 @@ export default {
             }, {
                 value: val.es_summary.visit_time,
                 name: "拜访总数",
-                unit: '小时'
+                unit: '次'
             }, {
                 value: val.es_summary.avg_time,
                 name: "平均拜访时长",
                 unit: 'min/次'
             }
         ]
+        this.et_total_visit_time = val.et_total_visit_time
     }
   },
   computed: {
