@@ -14,16 +14,12 @@ export default {
   methods: {
     // 后推或关闭H5
     navBackOrExit() {
-    //   this.$bridge.callhandler({
-    //       type: "closeWebView"
-    //     }
-    //   );
-      try {
-        this.$router.go(-1);
-      } catch {
+      if (this.$route.path == "/report") {
         this.$bridge.callhandler({
-            type: 'closeWebView'
+          type: "closeWebView"
         });
+      } else {
+        this.$router.go(-1);
       }
     }
   }

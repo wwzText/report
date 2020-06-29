@@ -34,13 +34,6 @@ export default {
     };
   },
   methods: {
-    // 确认选择月份
-    sureMonth() {
-      let timeStr = "2020-1";
-      this.$emit("changeMonth", {
-        timeStr
-      });
-    },
 
     // 生成最近的6个月的月份列表
     generateMonthList() {
@@ -52,16 +45,22 @@ export default {
         if (month > i) {
           list.push({
             showTimeStr: `${year}年${month - i}月`,
-            chooseTimeStr: `${year}-${month - i}`
+            chooseTimeStr: `${year}-${this.zero(month - i)}`
           });
         } else {
           list.push({
             showTimeStr: `${year - 1}年${12 + month - i}月`,
-            chooseTimeStr: `${year}-${month - i}`
+            chooseTimeStr: `${year}-${this.zero(month - i)}`
           });
         }
       }
       this.selectMonthList = list;
+    },
+    zero(num) {
+      if(num < 10) {
+        return `0${num}`
+      }
+      return num
     },
 
     // 点击选中某个月份

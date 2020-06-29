@@ -25,7 +25,7 @@
       describe="人均督查总数"
       :message="'全部(' + (et_rank_direct__egvnum.length - 1)+ ')'"
       style="marginTop: 10px"
-      v-if="et_rank_direct__egvnum"
+      v-if="et_rank_direct__egvnum.length"
     />
     <RankingList :rankList="et_rank_direct__egvnum" />
     <ViewTitle

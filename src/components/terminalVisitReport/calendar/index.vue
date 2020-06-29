@@ -6,9 +6,8 @@
     :style="{ height: '420px' }"
     v-model="showCalenar"
     @confirm="confirmDate"
-    :min-date="new Date(2020, 1, 29)"
+    :min-date="minDate"
     :max-date="maxDate"
-    :close-on-click-overlay="false"
   />
 </template>
 
@@ -20,14 +19,29 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      maxDate: new Date(2020, 5, 29)
-    };
+
+  computed: {
+    maxDate() {
+      let time = new Date();
+      return new Date(time.getFullYear(), time.getMonth(), time.getDate());
+    },
+    minDate() {
+      let time = new Date();
+      let year = time.getFullYear();
+      let month = time.getMonth();
+      let date = time.getDate();
+      if (month <= 5) {
+        year -= 1;
+        month = 12 - 6 + month;
+      }
+      return new Date(year, month, date)
+    }
   },
   methods: {
     confirmDate(e) {
-        let timeStr = `${e.getFullYear()}-${this.zero(e.getMonth() + 1)}-${this.zero(e.getDate())}`;
+      let timeStr = `${e.getFullYear()}-${this.zero(
+        e.getMonth() + 1
+      )}-${this.zero(e.getDate())}`;
       this.$emit("changeDate", {
         timeStr
       });
@@ -43,22 +57,22 @@ export default {
 </script>
 
 <style lang="less">
-.van-calendar__selected-day{
-    background-color: transparent;
-    color: #074FB3;
-    animation: fontBig linear 100ms;
-    animation-fill-mode: forwards;
+.van-calendar__selected-day {
+  background-color: transparent;
+  color: #074fb3;
+  animation: fontBig linear 100ms;
+  animation-fill-mode: forwards;
 }
 @keyframes fontBig {
-    from{
-
-    } to {
-        font-size: 28px;
-    }
+  from {
+  }
+  to {
+    font-size: 28px;
+  }
 }
-.van-button--danger{
-    background-color: #074FB3;
-    color: white;
-    border: none;
+.van-button--danger {
+  background-color: #074fb3;
+  color: white;
+  border: none;
 }
 </style>
