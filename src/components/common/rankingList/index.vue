@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="rankList.length">
     <ul class="table-header-container">
       <li v-for="(item, index) in header" :key='index'>{{item.title}}</li>
     </ul>

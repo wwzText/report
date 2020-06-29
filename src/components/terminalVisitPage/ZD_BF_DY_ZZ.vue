@@ -23,6 +23,7 @@
             describe="日均家数"
             :message="'全部(' + (et_rank_sameorg_egvnumber.length - 1)+ ')'"
             style="marginTop: 10px"
+            v-if="et_rank_sameorg_egvnumber.length"
           />
           <RankingList :rankList="et_rank_sameorg_egvnumber" />
           <ViewTitle
@@ -30,6 +31,7 @@
             describe="日均家数"
             :message="'全部(' + (et_rank_suborg_egvnumber.length - 1)+ ')'"
             style="marginTop: 10px"
+            v-if="et_rank_suborg_egvnumber.length"
           />
           <RankingList :rankList="et_rank_suborg_egvnumber" />
         </template>
@@ -43,6 +45,7 @@
             describe="拜访总时长"
             :message="'全部（' + (et_rank_sameorg_egvtimes.length - 1) + '）'"
             style="marginTop: 10px"
+            v-if="et_rank_sameorg_egvtimes.length"
           />
           <RankingList :rankList="et_rank_sameorg_egvtimes" />
           <ViewTitle
@@ -50,6 +53,7 @@
             describe="拜访总时长"
             :message="'全部（' + (et_rank_suborg_egvtimes.length) + '）'"
             style="marginTop: 10px"
+            v-if="et_rank_suborg_egvtimes.length"
           />
           <RankingList :rankList="et_rank_suborg_egvtimes" />
         </template>
@@ -63,6 +67,7 @@
           describe="有效拜访率"
           :message="'全部（' + (et_rank_sameorg_efficient.length - 1) + '）'"
           style="marginTop: 10px"
+          v-if="et_rank_sameorg_efficient.length"
         />
         <RankingList :rankList="et_rank_sameorg_efficient" />
         <ViewTitle
@@ -70,6 +75,7 @@
           describe="有效拜访率"
           :message="'全部（' + (et_rank_suborg_efficient.length - 1) + '）'"
           style="marginTop: 10px"
+          v-if="et_rank_suborg_efficient.length"
         />
         <RankingList :rankList="et_rank_suborg_efficient" />
       </SwipeItem>

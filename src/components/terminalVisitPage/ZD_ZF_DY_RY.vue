@@ -23,6 +23,7 @@
             describe="日均家数"
             :message="'全部(' + (et_visit_rank.length - 1)+ ')'"
             style="marginTop: 10px"
+            v-if="et_visit_rank.length"
           />
           <RankingList :rankList="et_visit_rank" />
         </template>
@@ -36,6 +37,7 @@
             describe="走访总时长"
             :message="'全部（' + (et_visit_time.length - 1) + '）'"
             style="marginTop: 10px"
+            v-if="et_visit_time.length"
           />
           <RankingList :rankList="et_visit_time" />
 

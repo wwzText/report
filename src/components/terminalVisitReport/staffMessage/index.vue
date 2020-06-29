@@ -17,7 +17,11 @@ import {mapState} from 'vuex';
 
 export default {
   methods: {
-    seeVisitRecord(){}
+    seeVisitRecord(){
+      this.$bridge.callhandler({
+            type: 'navToAppPath'
+        });
+    }
   },
   computed: {
     ...mapState({

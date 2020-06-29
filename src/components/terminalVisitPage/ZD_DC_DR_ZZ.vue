@@ -7,6 +7,7 @@
       describe="人均督查总数"
       :message="'全部(' + (et_rank_sameorg_egvnum.length - 1)+ ')'"
       style="marginTop: 10px"
+      v-if="et_rank_sameorg_egvnum.length"
     />
     <RankingList :rankList="et_rank_sameorg_egvnum" />  
 
@@ -15,6 +16,7 @@
       describe="人均督查总数"
       :message="'全部(' + (et_rank_suborg_egvnum.length - 1)+ ')'"
       style="marginTop: 10px"
+      v-if="et_rank_suborg_egvnum.length"
     />
     <RankingList :rankList="et_rank_suborg_egvnum" />
 
@@ -23,6 +25,7 @@
       describe="人均督查总数"
       :message="'全部(' + (et_rank_direct_egvnum.length - 1)+ ')'"
       style="marginTop: 10px"
+      v-if="et_rank_direct_egvnum.length"
     />
     <RankingList :rankList="et_rank_direct_egvnum" />
     <ViewTitle

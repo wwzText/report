@@ -23,6 +23,7 @@
             describe="日均拜访家数"
             :message="'全部(' + (total_visit_rankLength - 1)+ ')'"
             style="marginTop: 10px"
+            v-if="et_total_visit_rank.length"
           />
           <RankingList :rankList="et_total_visit_rank" />
         </template>
@@ -36,6 +37,7 @@
             describe="拜访总时长"
             :message="'全部（' + (totle_visit_timeLength - 1) + '）'"
             style="marginTop: 10px"
+            v-if="et_total_visit_time.length"
           />
           <RankingList :rankList="et_total_visit_time" />
         </template>
@@ -44,7 +46,7 @@
         <!-- 拜访有效率 -->
         <visitData :visitData="visitEfficiencyData" style="margin: 10px 0" />
         <ViewTitle title="分场所终端拜访率" @click="placeVisitEfficiency" message="查看" />
-        <ViewTitle title="所在工作站排行榜" describe="有效拜访率" :message="'全部（' + (totle_visit_efficientLength - 1) + '）'" style="marginTop: 10px" />
+        <ViewTitle v-if="et_total_visit_efficient.length" title="所在工作站排行榜" describe="有效拜访率" :message="'全部（' + (totle_visit_efficientLength - 1) + '）'" style="marginTop: 10px" />
         <RankingList :rankList="et_total_visit_efficient" />
       </SwipeItem>
       <SwipeItem>

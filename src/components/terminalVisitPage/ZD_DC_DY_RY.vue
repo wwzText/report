@@ -7,6 +7,7 @@
       describe="督查终端总数"
       :message="'全部(' + (et_visit_number.length - 1)+ ')'"
       style="marginTop: 10px"
+      v-if="et_visit_number.length"
     />
     <RankingList :rankList="et_visit_number" />
     <ViewTitle

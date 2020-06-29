@@ -1,7 +1,7 @@
 <template>
   <div>
     <visitData :visitData="visitData" style="margin: 10px 0" />
-    <ViewTitle title="所在工作站排行榜" describe="拜访总时长" :message="'全部（' + (et_total_visit_time.length - 1) + ')'" />
+    <ViewTitle v-if="et_total_visit_time.length" title="所在工作站排行榜" describe="拜访总时长" :message="'全部（' + (et_total_visit_time.length - 1) + ')'" />
     <RankingList :rankList="et_total_visit_time" />
   </div>
 </template>
