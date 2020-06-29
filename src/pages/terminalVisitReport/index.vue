@@ -2,79 +2,69 @@
   <div>
     <switchDataMonth />
     <staffMessage />
-    <component :is="componentName"></component>
+    <!-- 没有swiper的状态 -->
+    <visitData
+      v-if="swiperList.length == 1"
+      :visitData="swiperList[0].visitData"
+      style="margin: 10px 0"
+    />
+    <div v-if="swiperList.length == 1">
+      <template v-for="(item, index) in swiperList[0].rankLists">
+        <ViewTitle
+          v-if="item.list.length"
+          :key="index"
+          :title="item.title"
+          :describe="item.desc"
+          :message="'全部（' + (item.list.length - 1) +'）'"
+          style="marginTop: 10px"
+        />
+        <RankingList v-if="item.list.length" :rankList="item.list" :key="index" />
+      </template>
+    </div>
+    <!-- 有swiper的状态 -->
+    <div v-else style="marginTop: 10px">
+      <titleNav
+        :titleList="swiperNavList"
+        :curTitleIndex="curTitleIndex"
+        @navTitleIndexChange="navTitleIndexChange"
+      />
+      <Swipe
+        indicator-color="white"
+        :loop="false"
+        :show-indicators="false"
+        @change="swipeIndexChange"
+        ref="visitSwipe"
+      >
+        <SwipeItem v-for="(swiperItem, index) in swiperList" :key="index">
+          <visitData :visitData="swiperItem.visitData" style="marginTop: 10px" />
+          <div v-for="(rankItem, i) in swiperItem.rankLists" :key="i">
+            <ViewTitle
+              v-if="rankItem.list.length"
+              :key="index"
+              :title="rankItem.title"
+              :describe="rankItem.desc"
+              :message="'全部（' + (rankItem.list.length - 1) +'）'"
+              style="marginTop: 10px"
+            />
+            <RankingList v-if="rankItem.list.length" :rankList="rankItem.list" :key="index" />
+          </div>
+        </SwipeItem>
+      </Swipe>
+    </div>
+    <!-- <component :is="componentName"></component> -->
   </div>
 </template>
 
 <script>
 import switchDataMonth from "@/components/terminalVisitReport/switchDataMonth";
 import staffMessage from "@/components/terminalVisitReport/staffMessage";
-import ZD_BF_DR_RY from '@/components/terminalVisitPage/ZD_BF_DR_RY';
-import ZD_BF_DR_ZZ from '@/components/terminalVisitPage/ZD_BF_DR_ZZ';
-import ZD_BF_DY_RY from '@/components/terminalVisitPage/ZD_BF_DY_RY';
-import ZD_BF_DY_ZZ from '@/components/terminalVisitPage/ZD_BF_DY_ZZ';
-
-import JXS_BF_DR_ZZ from '@/components/terminalVisitPage/JXS_BF_DR_ZZ';
-import JXS_BF_DY_ZZ from '@/components/terminalVisitPage/JXS_BF_DY_ZZ';
-import JXS_BF_DR_RY from '@/components/terminalVisitPage/JXS_BF_DR_RY';
-import JXS_BF_DY_RY from '@/components/terminalVisitPage/JXS_BF_DY_RY';
-
-
-import ZD_ZF_DR_RY from '@/components/terminalVisitPage/ZD_ZF_DR_RY';
-import ZD_ZF_DY_RY from '@/components/terminalVisitPage/ZD_ZF_DY_RY';
-import ZD_ZF_DR_ZZ from '@/components/terminalVisitPage/ZD_ZF_DR_ZZ';
-import ZD_ZF_DY_ZZ from '@/components/terminalVisitPage/ZD_ZF_DY_ZZ';
-
-import JXS_ZF_DR_RY from '@/components/terminalVisitPage/JXS_ZF_DR_RY';
-import JXS_ZF_DY_RY from '@/components/terminalVisitPage/JXS_ZF_DY_RY';
-import JXS_ZF_DR_ZZ from '@/components/terminalVisitPage/JXS_ZF_DR_ZZ';
-import JXS_ZF_DY_ZZ from '@/components/terminalVisitPage/JXS_ZF_DY_ZZ';
-
-import ZD_DC_DR_RY from '@/components/terminalVisitPage/ZD_DC_DR_RY';
-import ZD_DC_DY_RY from '@/components/terminalVisitPage/ZD_DC_DY_RY';
-import ZD_DC_DR_ZZ from '@/components/terminalVisitPage/ZD_DC_DR_ZZ';
-import ZD_DC_DY_ZZ from '@/components/terminalVisitPage/ZD_DC_DY_ZZ';
-
-import JXS_DC_DR_RY from '@/components/terminalVisitPage/JXS_DC_DR_RY';
-import JXS_DC_DY_RY from '@/components/terminalVisitPage/JXS_DC_DY_RY';
-import JXS_DC_DR_ZZ from '@/components/terminalVisitPage/JXS_DC_DR_ZZ';
-import JXS_DC_DY_ZZ from '@/components/terminalVisitPage/JXS_DC_DY_ZZ';
 
 import { mapState } from "vuex";
 
 export default {
   components: {
     switchDataMonth,
-    staffMessage,
-    ZD_BF_DR_RY,
-    ZD_BF_DR_ZZ,
-    ZD_BF_DY_RY,
-    ZD_BF_DY_ZZ,
-
-    JXS_BF_DY_ZZ,
-    JXS_BF_DR_ZZ,
-    JXS_BF_DR_RY,
-    JXS_BF_DY_RY,
-
-    ZD_ZF_DR_RY,
-    ZD_ZF_DY_RY,
-    ZD_ZF_DR_ZZ,
-    ZD_ZF_DY_ZZ,
-
-    JXS_ZF_DR_RY,
-    JXS_ZF_DY_RY,
-    JXS_ZF_DR_ZZ,
-    JXS_ZF_DY_ZZ,
-
-    ZD_DC_DR_RY,
-    ZD_DC_DY_RY,
-    ZD_DC_DR_ZZ,
-    ZD_DC_DY_ZZ,
-
-    JXS_DC_DY_ZZ,
-    JXS_DC_DR_ZZ,
-    JXS_DC_DR_RY,
-    JXS_DC_DY_RY,
+    staffMessage
   },
   created() {
     this.changePageTitleName();
@@ -82,8 +72,9 @@ export default {
   },
   data() {
     return {
-      componentName: ""
-    }
+      componentName: "",
+      curTitleIndex: 0
+    };
   },
 
   methods: {
@@ -100,6 +91,14 @@ export default {
       this.$store.commit("changeHeaderNavTitle", {
         name
       });
+    },
+
+    navTitleIndexChange(e) {
+      this.curTitleIndex = e.index;
+      this.$refs.visitSwipe.swipeTo(e.index);
+    },
+    swipeIndexChange(e) {
+      this.curTitleIndex = e;
     },
     // 根据 terminalVisitReportStore 仓库中的参数确定访问URL及访问参数
     determineUrlByStoreParam() {
@@ -159,7 +158,8 @@ export default {
       terminalVisitQueryTime: state =>
         state.terminalVisitReportStore.terminalVisitQueryTime,
       reportMessage: state => state.terminalVisitReportStore.reportMessage,
-
+      swiperList: state => state.terminalVisitReportStore.swiperList,
+      swiperNavList: state => state.terminalVisitReportStore.swiperNavList,
       userInfo: state => state.userInfoStore.userInfo
     })
   }

@@ -11,7 +11,7 @@ class Http {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        baseURL: 'https://appuat.cresz.com.cn'
+        baseURL: 'http://appuat.cresz.com.cn'
     })
 
     // 获取服务端时间的时间戳
@@ -71,6 +71,7 @@ class Http {
     // 发送ajax请求
     static async request(url, data = {}, method = 'post',) {
         let userInfo = await Http.verificationUserInfo();
+
         // 服务器时间返回的数据
         let webTimeBack = await Http.getWebTime();
 
@@ -81,7 +82,7 @@ class Http {
         let timestamp = webTimeBack.appserver_time;
 
         // 拼接url
-        url = 'https://appuat.cresz.com.cn' + apis[url];
+        url = 'http://appuat.cresz.com.cn' + apis[url];
         
         // 实际调用axios
         return await axios({
@@ -110,6 +111,7 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
+                console.log('接口返回原始数据', res.data.data)
                 return res.data.data
             }
         })
