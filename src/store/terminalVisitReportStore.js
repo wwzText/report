@@ -545,7 +545,7 @@ const terminalVisitReportStore = {
                                             value: 'visit_num1',
                                         }
                                     ]
-                                },  {
+                                }, {
                                     title: '同级排行榜',
                                     desc: '有效拜访率',
                                     list: reportMessage.et_rank_suborg_efficient,
@@ -589,13 +589,778 @@ const terminalVisitReportStore = {
                     ];
                     break;
                 case 'JXS_BF_DY_RY':
-
                     swiperList = [
                         {
                             visitData: [
                                 {
                                     name: '拜访总数',
                                     value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'JXS_BF_DR_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '拜访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '人均拜访数',
+                                    value: headerMessage.average_number,
+                                    util: '家/人'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ]
+                        }
+                    ];
+                    break;
+                case 'JXS_BF_DY_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '拜访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '人均拜访数',
+                                    value: headerMessage.average_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_ZF_DR_RY':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '拜访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '人均拜访数',
+                                    value: headerMessage.average_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+
+                            rankLists: [
+                                {
+                                    title: '所在业务部排行榜',
+                                    desc: '走访总时长',
+                                    list: reportMessage.et_visit_time,
+                                    onlyValue: 'visit_total_time',
+                                    header: [
+                                        {
+                                            name: '走访总时长',
+                                            value: 'visit_total_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '走访总数',
+                                            value: 'visit_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '平均走访时长',
+                                            value: 'avg_time',
+                                            util: 'min/次'
+                                        }
+                                    ]
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_ZF_DY_RY':
+                    swiperNavList = ['走访效率', '走访时长']
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '日均家数',
+                                    value: headerMessage.average_number,
+                                    util: '家'
+                                }, {
+                                    name: '走访天数',
+                                    value: headerMessage.visit_days,
+                                    util: '天'
+                                }, {
+                                    name: '日均走访时长',
+                                    value: headerMessage.average_time,
+                                    util: '小时'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '所在工作站排行榜',
+                                    desc: '日均拜访家数',
+                                    list: reportMessage.et_visit_rank,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '日均走访家数',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '拜访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均走访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }, {
+                            title: '走访时长',
+                            visitData: [
+                                {
+                                    name: '走访总时长',
+                                    value: headerMessage.visit_total_time,
+                                    util: '小时'
+                                }, {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '次'
+                                }, {
+                                    name: '平均走访时长',
+                                    value: headerMessage.avg_time,
+                                    util: 'min/次'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '所在工作站排行榜',
+                                    desc: '走访总时长',
+                                    list: reportMessage.et_visit_time,
+                                    onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
+                                    header: [
+                                        {
+                                            name: '走访总时长',
+                                            value: 'visit_total_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '走访总数',
+                                            value: 'visit_time',
+                                            util: '次'
+                                        }, {
+                                            name: '平均走访时长',
+                                            value: 'avg_time',
+                                            util: 'min/次'
+                                        }
+                                    ]
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_ZF_DR_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总时长',
+                                    value: headerMessage.visit_total_time,
+                                    util: '家'
+                                }, {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_time,
+                                    util: '家'
+                                }, {
+                                    name: '平均走访时长',
+                                    value: headerMessage.avg_time,
+                                    util: '家'
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_ZF_DY_ZZ':
+                    swiperNavList = ['走访效率', '走访时长']
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '日均家数',
+                                    value: headerMessage.average_number,
+                                    util: '家'
+                                }, {
+                                    name: '走访天数',
+                                    value: headerMessage.visit_days,
+                                    util: '天'
+                                }, {
+                                    name: '日均走访时长',
+                                    value: headerMessage.average_day_time,
+                                    util: '小时'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '所在大区排行榜',
+                                    desc: '日均走访家数',
+                                    list: reportMessage.et_rank_sameorg_egvtimes,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '日均走访家数',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '走访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均走访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }, {
+                                    title: '管辖工作站排行榜',
+                                    desc: '日均走访家数',
+                                    list: reportMessage.et_rank_suborg_egvtimes,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '日均走访家数',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '拜访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均走访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }, {
+                                    title: '工作站直属管理员',
+                                    desc: '日均走访家数',
+                                    list: reportMessage.et_rank_direct_egvtimes,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '日均走访家数',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '拜访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均走访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }, {
+                            visitData: [
+                                {
+                                    name: '走访总时长',
+                                    value: headerMessage.visit_total_time,
+                                    util: '小时'
+                                }, {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_time,
+                                    util: '次'
+                                }, {
+                                    name: '平均走访时长',
+                                    value: headerMessage.avg_time,
+                                    util: 'min/次'
+                                }
+                            ],
+
+                            rankLists: [
+                                {
+                                    title: '所在大区排行榜',
+                                    desc: '走访总时长',
+                                    list: reportMessage.et_rank_sameorg_totaltime,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '走访总时长',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '走访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均走访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }, {
+                                    title: '管辖工作站排行榜',
+                                    desc: '走访总时长',
+                                    list: reportMessage.et_rank_suborg_totaltime,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '走访总时长',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '拜访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均走访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }, {
+                                    title: '工作站直属管理员',
+                                    desc: '走访总时长',
+                                    list: reportMessage.et_rank_direct_totaltime,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '走访总时长',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '拜访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均走访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'JXS_ZF_DR_RY':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                        }
+                    ];
+                    break;
+                case 'JXS_ZF_DY_RY':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'JXS_ZF_DR_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                },{
+                                    name: '日均走访数',
+                                    value: headerMessage.ave_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ]
+                        }
+                    ];
+                    break;
+                case 'JXS_ZF_DY_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                },{
+                                    name: '日均走访数',
+                                    value: headerMessage.ave_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_DC_DR_RY':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '督查总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '所在工作站排行榜',
+                                    desc: '督查总数',
+                                    list: reportMessage.et_visit_number,
+                                    onlyValue: 'visit_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'visit_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_DC_DY_RY':
+
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '督查总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '所在工作站排行榜',
+                                    desc: '督查总数',
+                                    list: reportMessage.et_visit_number,
+                                    onlyValue: 'visit_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'visit_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_DC_DR_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '督查总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                },{
+                                    name: '人均督查数',
+                                    value: headerMessage.ave_number,
+                                    util: '家'
+                                }, {
+                                    name: '终端总数',
+                                    value: headerMessage.termial_number,
+                                    util: '家'
+                                }, 
+                                
+                            ],
+                            rankLists: [
+                                {
+                                    title: '所在大区排行榜',
+                                    desc: '人均督查总数',
+                                    list: reportMessage.et_rank_sameorg_egvnum,
+                                    onlyValue: 'ave_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'visit_number',
+                                            util: '家'
+                                        }, {
+                                            name: '人均督查数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '终端总数',
+                                            value: 'termial_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                },{
+                                    title: '管辖工作站',
+                                    desc: '人均督查总数',
+                                    list: reportMessage.et_rank_suborg_egvnum,
+                                    onlyValue: 'ave_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '人均督查数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '终端总数',
+                                            value: 'termial_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                },{
+                                    title: '直属管理员排行榜',
+                                    desc: '人均督查总数',
+                                    list: reportMessage.et_rank_direct_egvnum,
+                                    onlyValue: 'ave_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'visit_number',
+                                            util: '家'
+                                        }, {
+                                            name: '人均督查数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '终端总数',
+                                            value: 'termial_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'ZD_DC_DY_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '督查总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                },{
+                                    name: '人均督查数',
+                                    value: headerMessage.ave_number,
+                                    util: '家'
+                                }, {
+                                    name: '终端总数',
+                                    value: headerMessage.termial_number,
+                                    util: '家'
+                                }, 
+                                
+                            ],
+                            rankLists: [
+                                {
+                                    title: '所在大区排行榜',
+                                    desc: '人均督查总数',
+                                    list: reportMessage.et_rank_sameorg_egvnum,
+                                    onlyValue: 'ave_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'visit_number',
+                                            util: '家'
+                                        }, {
+                                            name: '人均督查数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '终端总数',
+                                            value: 'termial_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                },{
+                                    title: '管辖工作站',
+                                    desc: '人均督查总数',
+                                    list: reportMessage.et_rank_suborg_egvnum,
+                                    onlyValue: 'ave_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '人均督查数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '终端总数',
+                                            value: 'termial_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                },{
+                                    title: '直属管理员排行榜',
+                                    desc: '人均督查总数',
+                                    list: reportMessage.et_rank_direct_egvnum,
+                                    onlyValue: 'ave_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '督查总数',
+                                            value: 'visit_number',
+                                            util: '家'
+                                        }, {
+                                            name: '人均督查数',
+                                            value: 'ave_number',
+                                            util: '家'
+                                        }, {
+                                            name: '终端总数',
+                                            value: 'termial_number',
+                                            util: '家'
+                                        }
+                                    ]
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'JXS_DC_DR_RY':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                        }
+                    ];
+                    break;
+                case 'JXS_DC_DY_RY':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+                case 'JXS_DC_DR_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                },{
+                                    name: '日均走访数',
+                                    value: headerMessage.ave_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ]
+                        }
+                    ];
+                    break;
+                case 'JXS_DC_DY_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '走访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                },{
+                                    name: '日均走访数',
+                                    value: headerMessage.ave_number,
                                     util: '家'
                                 }, {
                                     name: '有问题经销商数',

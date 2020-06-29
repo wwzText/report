@@ -18,7 +18,7 @@
           <RankingList v-if="item.list.length" :rankList="item.list" :key="index" />
         </template>
       </div>
-      <ViewTitle title="已拜访经销商统计" />
+      <ViewTitle title="已拜访经销商统计" v-if="swiperList[0].question" />
       <QuestionList :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
@@ -53,6 +53,8 @@
               :rankList="rankItem.list"
               :key="'rankitem' + index"
             />
+            <ViewTitle v-if="swiperItem.question" title="已拜访经销商统计" style="marginTop: 10px" />
+            <QuestionList :list="swiperItem.question" />
           </div>
         </SwipeItem>
       </Swipe>
