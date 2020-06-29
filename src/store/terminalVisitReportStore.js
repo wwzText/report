@@ -207,23 +207,24 @@ const terminalVisitReportStore = {
                                     title: '所在工作站排行榜',
                                     desc: '日均拜访家数',
                                     list: reportMessage.et_total_visit_rank,
-                                    onlyValue: 'total_visit_time',
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
                                     header: [
                                         {
                                             name: '日均拜访家数',
-                                            value: 'total_visit_time',
+                                            value: 'average_number',
                                             util: '家'
                                         }, {
                                             name: '日均次数',
-                                            value: 'visit_time',
+                                            value: 'average_visit_time',
                                             util: '次'
                                         }, {
                                             name: '拜访天数',
-                                            value: 'average_number',
+                                            value: 'visit_days',
                                             util: '天'
                                         }, {
                                             name: '日均拜访时长',
-                                            value: 'average_number',
+                                            value: 'average_day_time',
                                             util: '小时'
                                         }
                                     ]
@@ -252,6 +253,7 @@ const terminalVisitReportStore = {
                                     desc: '拜访总时长',
                                     list: reportMessage.et_total_visit_time,
                                     onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
                                     header: [
                                         {
                                             name: '拜访总时长',
@@ -283,7 +285,7 @@ const terminalVisitReportStore = {
                             rankLists: [
                                 {
                                     title: '所在工作站排行榜',
-                                    desc: '拜访总时长',
+                                    desc: '有效拜访率',
                                     list: reportMessage.et_total_visit_efficient,
                                     onlyValue: 'visit_efficient',
                                     header: [
@@ -305,7 +307,307 @@ const terminalVisitReportStore = {
                                 }
                             ]
                         }
-                    ]
+                    ];
+                    break;
+                case 'ZD_BF_DR_ZZ':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '拜访总时长',
+                                    value: headerMessage.visit_total_time,
+                                    util: '小时'
+                                }, {
+                                    name: '拜访总数',
+                                    value: headerMessage.visit_time,
+                                    util: '次'
+                                }, {
+                                    name: '平均拜访时长',
+                                    value: headerMessage.avg_time,
+                                    util: 'min/次'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '同级排行榜',
+                                    desc: '拜访总时长',
+                                    list: reportMessage.et_rank_sameorg_egvtimes,
+                                    onlyValue: 'visit_total_time',
+                                    header: [
+                                        {
+                                            name: '拜访总时长',
+                                            value: 'visit_total_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '拜访总数',
+                                            value: 'visit_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '平均拜访时长',
+                                            value: 'avg_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }, {
+                                    title: '下级排行榜',
+                                    desc: '拜访总时长',
+                                    list: reportMessage.et_rank_suborg_egvtimes,
+                                    onlyValue: 'visit_total_time',
+                                    header: [
+                                        {
+                                            name: '拜访总时长',
+                                            value: 'visit_total_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '拜访总数',
+                                            value: 'visit_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '平均拜访时长',
+                                            value: 'avg_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ];
+                    break;
+                case 'ZD_BF_DY_ZZ':
+                    swiperNavList = ['拜访效率', '拜访时长', '拜访有效率']
+                    swiperList = [
+                        {
+                            title: '拜访效率',
+                            visitData: [
+                                {
+                                    name: '日均家数',
+                                    value: headerMessage.average_number,
+                                    util: '家'
+                                }, {
+                                    name: '日均次数',
+                                    value: headerMessage.average_visit_time,
+                                    util: '次'
+                                }, {
+                                    name: '拜访天数',
+                                    value: headerMessage.visit_days,
+                                    util: '天'
+                                }, {
+                                    name: '日均拜访时长',
+                                    value: headerMessage.average_day_time,
+                                    util: '小时'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '同级排行榜',
+                                    desc: '日均家数',
+                                    list: reportMessage.et_rank_sameorg_egvnumber,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '日均拜访家数',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '日均次数',
+                                            value: 'average_visit_time',
+                                            util: '次'
+                                        }, {
+                                            name: '拜访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均拜访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }, {
+                                    title: '下级排行榜',
+                                    desc: '日均家数',
+                                    list: reportMessage.et_rank_suborg_egvnumber,
+                                    onlyValue: 'average_number',
+                                    onlyUtil: '家',
+                                    header: [
+                                        {
+                                            name: '日均拜访家数',
+                                            value: 'average_number',
+                                            util: '家'
+                                        }, {
+                                            name: '日均次数',
+                                            value: 'average_visit_time',
+                                            util: '次'
+                                        }, {
+                                            name: '拜访天数',
+                                            value: 'visit_days',
+                                            util: '天'
+                                        }, {
+                                            name: '日均拜访时长',
+                                            value: 'average_day_time',
+                                            util: '小时'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }, {
+                            title: '拜访时长',
+                            visitData: [
+                                {
+                                    name: '拜访总时长',
+                                    value: headerMessage.visit_total_time,
+                                    util: '小时'
+                                }, {
+                                    name: '拜访总数',
+                                    value: headerMessage.visit_time,
+                                    util: '次'
+                                }, {
+                                    name: '平均拜访时长',
+                                    value: headerMessage.avg_time,
+                                    util: 'min/次'
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '同级排行榜',
+                                    desc: '拜访总时长',
+                                    list: reportMessage.et_rank_sameorg_egvtimes,
+                                    onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
+                                    header: [
+                                        {
+                                            name: '拜访总时长',
+                                            value: 'visit_total_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '拜访总数',
+                                            value: 'visit_time',
+                                            util: '次'
+                                        }, {
+                                            name: '平均拜访时长',
+                                            value: 'avg_time',
+                                            util: 'min/次'
+                                        }
+                                    ]
+                                }, {
+                                    title: '下级排行榜',
+                                    desc: '拜访总时长',
+                                    list: reportMessage.et_rank_suborg_egvtimes,
+                                    onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
+                                    header: [
+                                        {
+                                            name: '拜访总时长',
+                                            value: 'visit_total_time',
+                                            util: '小时'
+                                        }, {
+                                            name: '拜访总数',
+                                            value: 'visit_time',
+                                            util: '次'
+                                        }, {
+                                            name: '平均拜访时长',
+                                            value: 'avg_time',
+                                            util: 'min/次'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }, {
+                            title: '拜访有效率',
+                            visitData: [
+                                {
+                                    name: '有效拜访率',
+                                    value: headerMessage.visit_efficient
+                                }, {
+                                    name: '拜访率',
+                                    value: headerMessage.visit_rate
+                                }
+                            ],
+                            rankLists: [
+                                {
+                                    title: '同级排行榜',
+                                    desc: '有效拜访率',
+                                    list: reportMessage.et_rank_sameorg_efficient,
+                                    onlyValue: 'visit_efficient',
+                                    header: [
+                                        {
+                                            name: '有效拜访率',
+                                            value: 'visit_efficient',
+                                        }, {
+                                            name: '有效拜访',
+                                            value: 'visit_num2',
+                                            util: '家'
+                                        }, {
+                                            name: '拜访率',
+                                            value: 'visit_rate',
+                                        }, {
+                                            name: '拜访总数',
+                                            value: 'visit_num1',
+                                        }
+                                    ]
+                                },  {
+                                    title: '同级排行榜',
+                                    desc: '有效拜访率',
+                                    list: reportMessage.et_rank_suborg_efficient,
+                                    onlyValue: 'visit_efficient',
+                                    header: [
+                                        {
+                                            name: '有效拜访率',
+                                            value: 'visit_efficient',
+                                        }, {
+                                            name: '有效拜访',
+                                            value: 'visit_num2',
+                                            util: '家'
+                                        }, {
+                                            name: '拜访率',
+                                            value: 'visit_rate',
+                                        }, {
+                                            name: '拜访总数',
+                                            value: 'visit_num1',
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ];
+                    break;
+                case 'JXS_BF_DR_RY':
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '拜访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ]
+                        }
+                    ];
+                    break;
+                case 'JXS_BF_DY_RY':
+
+                    swiperList = [
+                        {
+                            visitData: [
+                                {
+                                    name: '拜访总数',
+                                    value: headerMessage.visit_number,
+                                    util: '家'
+                                }, {
+                                    name: '有问题经销商数',
+                                    value: headerMessage.question_number,
+                                    util: '家'
+                                }
+                            ],
+                            question: reportMessage.et_visit_quest
+                        }
+                    ];
+                    break;
+
             }
             context.state.swiperList = swiperList;
             context.state.swiperNavList = swiperNavList;

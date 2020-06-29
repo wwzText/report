@@ -13,8 +13,8 @@
         <template v-for="(value, index) in header">
           <span :key="index" v-if="value.code != 'title'" class="table-message-item">{{item[value.code]}}</span>
         </template>
-        <span class="ranking-message-value">{{item.rankShowValue}}</span>
-        <span class="ranking-message-unit">家</span>
+        <span class="ranking-message-value">{{item[only]}}</span>
+        <span class="ranking-message-unit">{{onlyUtil}}</span>
       </li>
     </ul>
   </div>
@@ -25,8 +25,12 @@ export default {
   props: {
     rankList: Array, // 参与排名业务员列表
     rangMessageList: Array, // 用于展示的字段列表，复用时根据各自不同的配置改变显隐顺序
-
+    only: String,
     header: Array, // 表头数组，并用于显示表单中的字段
+    onlyUtil: String
+  },
+  created() {
+    console.log(this.only)
   }
 };
 </script>

@@ -3,23 +3,23 @@
     <switchDataMonth />
     <staffMessage />
     <!-- 没有swiper的状态 -->
-    <visitData
-      v-if="swiperList.length == 1"
-      :visitData="swiperList[0].visitData"
-      style="margin: 10px 0"
-    />
     <div v-if="swiperList.length == 1">
-      <template v-for="(item, index) in swiperList[0].rankLists">
-        <ViewTitle
-          v-if="item.list.length"
-          :key="index"
-          :title="item.title"
-          :describe="item.desc"
-          :message="'全部（' + (item.list.length - 1) +'）'"
-          style="marginTop: 10px"
-        />
-        <RankingList v-if="item.list.length" :rankList="item.list" :key="index" />
-      </template>
+      <visitData :visitData="swiperList[0].visitData" style="margin: 10px 0" />
+      <div>
+        <template v-for="(item, index) in swiperList[0].rankLists">
+          <ViewTitle
+            v-if="item.list.length"
+            :key="index"
+            :title="item.title"
+            :describe="item.desc"
+            :message="'全部（' + (item.list.length - 1) +'）'"
+            style="marginTop: 10px"
+          />
+          <RankingList v-if="item.list.length" :rankList="item.list" :key="index" />
+        </template>
+      </div>
+      <ViewTitle title="已拜访经销商统计" />
+      <QuestionList :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
     <div v-else style="marginTop: 10px">
@@ -35,18 +35,24 @@
         @change="swipeIndexChange"
         ref="visitSwipe"
       >
-        <SwipeItem v-for="(swiperItem, index) in swiperList" :key="index">
+        <SwipeItem v-for="(swiperItem, index) in swiperList" :key="'o' + index">
           <visitData :visitData="swiperItem.visitData" style="marginTop: 10px" />
-          <div v-for="(rankItem, i) in swiperItem.rankLists" :key="i">
+          <div v-for="(rankItem, i) in swiperItem.rankLists" :key="'t' + i">
             <ViewTitle
               v-if="rankItem.list.length"
-              :key="index"
+              :key="'w' + i"
               :title="rankItem.title"
               :describe="rankItem.desc"
               :message="'全部（' + (rankItem.list.length - 1) +'）'"
               style="marginTop: 10px"
             />
-            <RankingList v-if="rankItem.list.length" :rankList="rankItem.list" :key="index" />
+            <RankingList
+              v-if="rankItem.list.length"
+              :onlyUtil="rankItem.onlyUtil"
+              :only="rankItem.onlyValue"
+              :rankList="rankItem.list"
+              :key="'rankitem' + index"
+            />
           </div>
         </SwipeItem>
       </Swipe>
