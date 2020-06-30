@@ -7,4 +7,3 @@
 // uat 测试
 // prod 生产
 export const APP_VERSION = 'dev';
-

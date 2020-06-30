@@ -12,6 +12,7 @@
     </div>
 
     <monthList :showMonth="showMonthSelect" @closePopup="closeMonthPopup" />
+    <calendar :showCalenar="showCalenar" @changeDate="changeDate" />
     <ActionSheet
       @cancel="closeRankingTypeAction"
       @select="selectRankingType"
@@ -20,7 +21,11 @@
       v-model="showRankingSelect"
     ></ActionSheet>
 
-    <RankingList style="marginTop: 10px" :header="swiperList[CompSwiperIndex].rankLists[rankIndex].header" :rankList="swiperList[CompSwiperIndex].rankLists[rankIndex].list" />
+    <RankingList
+      style="marginTop: 10px"
+      :header="swiperList[CompSwiperIndex].rankLists[rankIndex].header"
+      :rankList="swiperList[CompSwiperIndex].rankLists[rankIndex].list"
+    />
   </div>
 </template>
 
@@ -37,6 +42,7 @@ export default {
     return {
       showSelectDate: "",
       showMonthSelect: false, // 显示最近6个月选择器
+      showCalenar: false,
       showRankingSelect: false, // 显示排行榜类型选择器
       rankingTypeStr: "11",
       tableHeaderConfig: [],
@@ -55,9 +61,9 @@ export default {
     });
 
     this.CompSwiperIndex = this.swiperIndex;
-    console.log(this.swiperList[this.CompSwiperIndex].rankLists[this.rankIndex].header)
   },
   methods: {
+
     // 初始化月份为当月
     curShowSelectDate() {
       let date = new Date();
@@ -67,7 +73,11 @@ export default {
     },
     // 显示选择查看时间
     showSelectDateComponent() {
-      this.showMonthSelect = true;
+      if (this.dateOrMonth == "DY") {
+        this.showMonthSelect = true;
+      } else {
+        this.showCalenar = true
+      }
     },
 
     // 弹出选择排行榜类型
@@ -79,6 +89,11 @@ export default {
     closeMonthPopup(e) {
       this.showMonthSelect = false;
       e.timeStr ? (this.showSelectDate = e.timeStr) : null;
+    },
+    // 日历确认回调
+    changeDate(obj) {
+      this.showCalenar = false;
+      this.showSelectDate = obj.timeStr;
     },
 
     // 关闭类型选择器
@@ -104,7 +119,8 @@ export default {
       swiperList: state => state.terminalVisitReportStore.swiperList,
       swiperIndex: state => state.terminalVisitReportStore.swiperIndex,
       rankIndex: state => state.terminalVisitReportStore.rankIndex,
-      swiperNavList: state => state.terminalVisitReportStore.swiperNavList
+      swiperNavList: state => state.terminalVisitReportStore.swiperNavList,
+      dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth
     })
   }
 };

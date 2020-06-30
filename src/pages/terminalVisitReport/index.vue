@@ -56,8 +56,21 @@
               :key="'rankitem' + index"
             />
           </div>
-          <ViewTitle v-if="swiperItem.question.length" title="已拜访经销商统计" style="marginTop: 10px" />
+          <ViewTitle
+            v-if="swiperItem.question"
+            title="已拜访经销商统计"
+            @click="seeQuestionInNative"
+            style="marginTop: 10px"
+          />
           <QuestionList :list="swiperItem.question" />
+
+          <ViewTitle
+            v-if="swiperItem.planList"
+            title="TA的拜访计划"
+            @click="seeAllPlan(swiperItem.planList)"
+            style="marginTop: 10px"
+          />
+          <planList :planList="swiperItem.planList" />
         </SwipeItem>
       </Swipe>
     </div>
@@ -67,13 +80,14 @@
 <script>
 import switchDataMonth from "@/components/terminalVisitReport/switchDataMonth";
 import staffMessage from "@/components/terminalVisitReport/staffMessage";
-
+import planList from "@/components/terminalVisitReport/planList";
 import { mapState } from "vuex";
 
 export default {
   components: {
     switchDataMonth,
-    staffMessage
+    staffMessage,
+    planList
   },
   created() {
     this.changePageTitleName();
@@ -87,6 +101,48 @@ export default {
   },
 
   methods: {
+    seeAllPlan(list) {
+      this.$bridge.callhandler({
+        type: "personPlanList",
+        data: {
+          appuser: this.reportAjaxData
+            ? this.reportAjaxData.username
+            : this.userInfo.appuser,
+
+          user_bp: this.reportAjaxData
+            ? this.reportAjaxData.userbp
+            : this.userInfo.partner
+        }
+      });
+    },
+    // 查看所有问题
+    seeQuestionInNative() {
+      let data = {
+        sales_office: this.reportAjaxData
+          ? this.reportAjaxData.zorg1
+          : this.userInfo.sales_org,
+
+        sales_group: this.reportAjaxData
+          ? this.reportAjaxData.zorg2
+          : this.userInfo.sales_group,
+
+        sales_station: this.reportAjaxData
+          ? this.reportAjaxData.zorg3
+          : this.userInfo.sales_station,
+
+        ywy_no: this.reportAjaxData
+          ? this.reportAjaxData.username
+          : this.userInfo.appuser,
+
+        detail_type: `${this.targetType}_${this.reportType}`,
+        warning: "X"
+      };
+
+      this.$bridge.callhandler({
+        type: "navToAppPath",
+        data
+      });
+    },
     // 修改页面标题
     changePageTitleName() {
       let name = `${this.targetType == "ZD" ? "终端" : "经销商"}${
@@ -160,7 +216,43 @@ export default {
           queryObj["org_type"] = "3";
         }
       }
-      console.log(queryObj);
+
+      if (this.userOrOrganization === "RY" && this.reportType !== "BF") {
+        if (this.reportType == "ZF") {
+          queryObj["visit_type"] = "ZZ01";
+        } else {
+          queryObj["visit_type"] = "ZB03";
+        }
+        
+        if (this.reportAjaxData) {
+          if (this.reportAjaxData.zorg1) {
+            queryObj["org_code"] = this.reportAjaxData.zorg1;
+            queryObj["org_type"] = "1";
+          }
+          if (this.reportAjaxData.zorg2) {
+            queryObj["org_code"] = this.reportAjaxData.zorg2;
+            queryObj["org_type"] = "2";
+          }
+          if (this.reportAjaxData.zorg3) {
+            queryObj["org_code"] = this.reportAjaxData.zorg3;
+            queryObj["org_type"] = "3";
+          }
+        } else {
+          if (this.userInfo.sales_office) {
+            queryObj["org_code"] = this.userInfo.sales_office;
+            queryObj["org_type"] = "1";
+          }
+          if (this.userInfo.sales_group) {
+            queryObj["org_code"] = this.userInfo.sales_group;
+            queryObj["org_type"] = "2";
+          }
+          if (this.userInfo.sales_station) {
+            queryObj["org_code"] = this.userInfo.sales_station;
+            queryObj["org_type"] = "3";
+          }
+        }
+      }
+
       this.getReportData(url, queryObj);
     },
 

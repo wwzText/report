@@ -197,7 +197,7 @@ const terminalVisitReportStore = {
                     ];
                     break;
                 case 'ZD_BF_DY_RY':
-                    swiperNavList = ['拜访效率', '拜访时长', '拜访有效率']
+                    swiperNavList = ['拜访效率', '拜访时长', '拜访有效率', '当月拜访计划']
                     swiperList = [
                         {
                             title: '拜访效率',
@@ -324,6 +324,17 @@ const terminalVisitReportStore = {
                                     ]
                                 }
                             ]
+                        }, {
+                            visitData: [
+                                {
+                                    name: '计划完成率',
+                                    value: headerMessage.plan_rate
+                                }, {
+                                    name: '计划完成比例',
+                                    value: headerMessage.plan_percent
+                                }
+                            ],
+                            planList: reportMessage.et_visit_plan
                         }
                     ];
                     break;

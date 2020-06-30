@@ -20,15 +20,29 @@ import { mapState } from "vuex";
 export default {
   methods: {
     seeVisitRecord() {
+      let data = {
+        sales_office: this.reportAjaxData
+          ? this.reportAjaxData.zorg1
+          : this.userInfo.sales_org,
+
+        sales_group: this.reportAjaxData
+          ? this.reportAjaxData.zorg2
+          : this.userInfo.sales_group,
+
+        sales_station: this.reportAjaxData
+          ? this.reportAjaxData.zorg3
+          : this.userInfo.sales_station,
+
+        ywy_no: this.reportAjaxData
+          ? this.reportAjaxData.username
+          : this.userInfo.appuser,
+
+        detail_type: `${this.targetType}_${this.reportType}`
+      };
+      
       this.$bridge.callhandler({
-        type: "navToAppPath", 
-        data: {
-          sales_office: this.reportAjaxData.zorg1,
-          sales_station: this.reportAjaxData.zorg2,
-          sales_group: this.reportAjaxData.zorg3,
-          ywy_no: this.reportAjaxData.username,
-          detail_type: `${this.targetType}_${this.reportType}`
-        }
+        type: "navToAppPath",
+        data
       });
     }
   },
@@ -39,9 +53,11 @@ export default {
       dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth,
       headerMessage: state => state.terminalVisitReportStore.headerMessage,
       reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData,
-      terminalVisitQueryTime: state => state.terminalVisitReportStore.terminalVisitQueryTime,
+      terminalVisitQueryTime: state =>
+        state.terminalVisitReportStore.terminalVisitQueryTime,
       targetType: state => state.terminalVisitReportStore.targetType,
-      reportType:  state => state.terminalVisitReportStore.reportType,
+      reportType: state => state.terminalVisitReportStore.reportType,
+      userInfo: state => state.userInfoStore.userInfo
     })
   }
 };
