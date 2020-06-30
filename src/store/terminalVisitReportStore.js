@@ -61,10 +61,12 @@ const terminalVisitReportStore = {
                 (state.userOrOrganization === 'RY') ?
                     'ZZ ' : 'RY';
         },
+        
 
         setTerminalUserOrOrganization(state, payload) {
             state.userOrOrganization = payload.type;
-            state.reportAjaxData = payload.reportAjaxData
+            state.reportAjaxData = payload.reportAjaxData;
+            console.log(state.reportAjaxData)
         },
 
         // 改变日期时间状态

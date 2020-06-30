@@ -6,7 +6,11 @@
       <span class="staff-duty">{{headerMessage.position_desc}}</span>
       <p class="staff-work-address">{{headerMessage.org_desc_sup || headerMessage.org_desc}}</p>
     </div>
-    <button class="see-record-btn" v-if="userOrOrganization == 'RY'" @click="seeVisitRecord">查看拜访记录></button>
+    <button
+      class="see-record-btn"
+      v-if="userOrOrganization == 'RY' && dateOrMonth == 'DR'"
+      @click="seeVisitRecord"
+    >查看拜访记录></button>
   </div>
 </template>
 
@@ -17,7 +21,14 @@ export default {
   methods: {
     seeVisitRecord() {
       this.$bridge.callhandler({
-        type: "navToAppPath"
+        type: "navToAppPath", 
+        data: {
+          sales_office: this.reportAjaxData.zorg1,
+          sales_station: this.reportAjaxData.zorg2,
+          sales_group: this.reportAjaxData.zorg3,
+          ywy_no: this.reportAjaxData.username,
+          detail_type: `${this.targetType}_${this.reportType}`
+        }
       });
     }
   },
@@ -25,7 +36,12 @@ export default {
     ...mapState({
       userOrOrganization: state =>
         state.terminalVisitReportStore.userOrOrganization,
-      headerMessage: state => state.terminalVisitReportStore.headerMessage
+      dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth,
+      headerMessage: state => state.terminalVisitReportStore.headerMessage,
+      reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData,
+      terminalVisitQueryTime: state => state.terminalVisitReportStore.terminalVisitQueryTime,
+      targetType: state => state.terminalVisitReportStore.targetType,
+      reportType:  state => state.terminalVisitReportStore.reportType,
     })
   }
 };

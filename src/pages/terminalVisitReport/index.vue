@@ -55,9 +55,9 @@
               :rankList="rankItem.list"
               :key="'rankitem' + index"
             />
-            <ViewTitle v-if="swiperItem.question" title="已拜访经销商统计" style="marginTop: 10px" />
-            <QuestionList :list="swiperItem.question" />
           </div>
+          <ViewTitle v-if="swiperItem.question.length" title="已拜访经销商统计" style="marginTop: 10px" />
+          <QuestionList :list="swiperItem.question" />
         </SwipeItem>
       </Swipe>
     </div>
