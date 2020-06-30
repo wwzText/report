@@ -147,19 +147,20 @@ export default {
           ? this.reportAjaxData.zposition
           : this.userInfo.sales_station;
       } else {
-        if (this.reportAjaxData.zorg3) {
-          queryObj["org_code"] = this.reportAjaxData.zorg3;
-          queryObj["org_type"] = "3";
+        if (this.reportAjaxData.zorg1) {
+          queryObj["org_code"] = this.reportAjaxData.zorg1;
+          queryObj["org_type"] = "1";
         }
         if (this.reportAjaxData.zorg2) {
           queryObj["org_code"] = this.reportAjaxData.zorg2;
           queryObj["org_type"] = "2";
-        }if (this.reportAjaxData.zorg1) {
-          queryObj["org_code"] = this.reportAjaxData.zorg1;
-          queryObj["org_type"] = "1";
+        }
+        if (this.reportAjaxData.zorg3) {
+          queryObj["org_code"] = this.reportAjaxData.zorg3;
+          queryObj["org_type"] = "3";
         }
       }
-      console.log(queryObj)
+      console.log(queryObj);
       this.getReportData(url, queryObj);
     },
 
@@ -203,6 +204,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url("./index.css");
+<style lang="less" scoped>
+@import url("./index.less");
 </style>

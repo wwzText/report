@@ -20,15 +20,12 @@ const userInfoStore = {
         // 异步获取userInfo
         async getUserInfo(context) {
             return new Promise(resolve => {
-                console.log(11)
                 Vue.prototype.$bridge.callhandler({
                     type: "getUserInfo"
                 }, res => {
-                    console.log(res)
                     context.commit('setUserInfo', {
                         res
                     })
-                    
                     resolve(JSON.parse(res))
                 })
             })
