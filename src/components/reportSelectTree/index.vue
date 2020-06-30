@@ -6,13 +6,13 @@
         <Collapse-item :value="1" v-if="item.children" :key="item.id" :title="rightName(item)" :name="item.id">
           <!-- {{item.name}} -->
           <template #value>
-            <img @click="navToVisitReport('ZZ')" class="pc-img" src="./../../assets/img/report_icon.png" alt />
+            <img @click="navToVisitReport('ZZ', item)" class="pc-img" src="./../../assets/img/report_icon.png" alt />
           </template>
           <reportSelectTree :tree="item.children" v-if="item.children" />
         </Collapse-item>
         <div :key="'people' + index" v-if='item.usertxt' class="tree-people-main">
             <span class="tree-people-name">{{item.usertxt}}</span>
-            <img @click="navToVisitReport('RY')" class="pc-img" src="./../../assets/img/report_icon.png" alt />
+            <img @click="navToVisitReport('RY', item)" class="pc-img" src="./../../assets/img/report_icon.png" alt />
         </div>
       </template>
     </Collapse>
@@ -44,10 +44,13 @@ export default {
     },
 
     // 跳转到报表详情页面
-    navToVisitReport(payload) {
+    navToVisitReport(payload, item) {
       this.$store.commit("setTerminalUserOrOrganization", {
-        type: payload === "RY" ? "RY" : "ZZ"
+        type: payload === "RY" ? "RY" : "ZZ",
+        reportAjaxData: item
       });
+      
+      console.log(item)
       this.$router.push("/report/terminalVisitReport");
     },
     rightName(item) {

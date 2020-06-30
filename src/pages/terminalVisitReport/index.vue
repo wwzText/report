@@ -14,6 +14,7 @@
             :describe="item.desc"
             :message="'全部（' + (item.list.length - 1) +'）'"
             style="marginTop: 10px"
+            @click="seeRankAllList(0, index)"
           />
           <RankingList v-if="item.list.length" :rankList="item.list" :key="index" />
         </template>
@@ -45,6 +46,7 @@
               :describe="rankItem.desc"
               :message="'全部（' + (rankItem.list.length - 1) +'）'"
               style="marginTop: 10px"
+              @click="seeRankAllList(index, i)"
             />
             <RankingList
               v-if="rankItem.list.length"
@@ -59,7 +61,6 @@
         </SwipeItem>
       </Swipe>
     </div>
-    <!-- <component :is="componentName"></component> -->
   </div>
 </template>
 
@@ -101,6 +102,15 @@ export default {
       });
     },
 
+    // 跳转到排行榜列表页
+    seeRankAllList(index, i) {
+      this.$store.commit("changeSwiperIndex", {
+        index,
+        i
+      });
+      this.$router.push("visitRanking");
+    },
+
     navTitleIndexChange(e) {
       this.curTitleIndex = e.index;
       this.$refs.visitSwipe.swipeTo(e.index);
@@ -108,6 +118,7 @@ export default {
     swipeIndexChange(e) {
       this.curTitleIndex = e;
     },
+
     // 根据 terminalVisitReportStore 仓库中的参数确定访问URL及访问参数
     determineUrlByStoreParam() {
       // 判断是否有时间，第一次初始化的情况下是没有的
@@ -128,10 +139,27 @@ export default {
       }
 
       if (this.userOrOrganization === "RY") {
-        queryObj["user_bp"] = this.userInfo.partner;
-      }
+        queryObj["user_bp"] = this.reportAjaxData
+          ? this.reportAjaxData.userbp
+          : this.userInfo.partner;
 
-      queryObj["org_type"] = "3";
+        queryObj["org_code"] = this.reportAjaxData
+          ? this.reportAjaxData.zposition
+          : this.userInfo.sales_station;
+      } else {
+        if (this.reportAjaxData.zorg3) {
+          queryObj["org_code"] = this.reportAjaxData.zorg3;
+          queryObj["org_type"] = "3";
+        }
+        if (this.reportAjaxData.zorg2) {
+          queryObj["org_code"] = this.reportAjaxData.zorg2;
+          queryObj["org_type"] = "2";
+        }if (this.reportAjaxData.zorg1) {
+          queryObj["org_code"] = this.reportAjaxData.zorg1;
+          queryObj["org_type"] = "1";
+        }
+      }
+      console.log(queryObj)
       this.getReportData(url, queryObj);
     },
 
@@ -168,7 +196,8 @@ export default {
       reportMessage: state => state.terminalVisitReportStore.reportMessage,
       swiperList: state => state.terminalVisitReportStore.swiperList,
       swiperNavList: state => state.terminalVisitReportStore.swiperNavList,
-      userInfo: state => state.userInfoStore.userInfo
+      userInfo: state => state.userInfoStore.userInfo,
+      reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData
     })
   }
 };

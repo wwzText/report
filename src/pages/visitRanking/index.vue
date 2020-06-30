@@ -6,29 +6,28 @@
         <span class="iconfont iconmenu-down"></span>
       </div>
       <div class="use-type-container" @click="chooseRankingType">
-        <span>{{rankingTypeStr}}</span>
+        <span>{{swiperNavList[CompSwiperIndex]}}</span>
         <span class="iconfont iconmenu-down"></span>
       </div>
     </div>
 
     <monthList :showMonth="showMonthSelect" @closePopup="closeMonthPopup" />
     <ActionSheet
-      :close-on-click-overlay="false"
       @cancel="closeRankingTypeAction"
       @select="selectRankingType"
-      :actions="rankingType"
-      v-model="showRankingSelect"
+      :actions="headerList"
       cancel-text="取消"
+      v-model="showRankingSelect"
     ></ActionSheet>
 
-    <RankingList style="marginTop: 10px" :header="tableHeaderConfig" :rankList="rankList" />
+    <RankingList style="marginTop: 10px" :header="swiperList[CompSwiperIndex].rankLists[rankIndex].header" :rankList="swiperList[CompSwiperIndex].rankLists[rankIndex].list" />
   </div>
 </template>
 
 <script>
 import monthList from "@/components/terminalVisitReport/monthList";
 import { ActionSheet } from "vant";
-
+import { mapState } from "vuex";
 export default {
   components: {
     monthList,
@@ -37,80 +36,26 @@ export default {
   data() {
     return {
       showSelectDate: "",
-      rankingTypeStr: "日均拜访天数",
       showMonthSelect: false, // 显示最近6个月选择器
-
       showRankingSelect: false, // 显示排行榜类型选择器
-      tableHeaderConfig: [
-          {
-              title: '排行/名称',
-              code: 'title'
-          }, {
-              title: '日均拜访家数',
-              code: 'one'
-          }, {
-              title: '日均次数',
-              code: 'two'
-          }, {
-              title: '拜访天数',
-              code: 'three'
-          }, {
-              title: '日均拜访时长',
-              code: 'four'
-          }
-      ],
-      rankList: [
-        {
-          name: "张三",
-          one: 11,
-          two: 12,
-          three: 13,
-          four: 14,
-        },
-        {
-          name: "李四",
-          one: 11,
-          two: 12,
-          three: 13,
-          four: 14,
-        },
-        {
-          name: "王五",
-          one: 11,
-          two: 12,
-          three: 13,
-          four: 14,
-        },
-        {
-          name: "赵六",
-          one: 11,
-          two: 12,
-          three: 13,
-          four: 14,
-        },
-        {
-          name: "孙七",
-          one: 11,
-          two: 12,
-          three: 13,
-          four: 14,
-        }
-      ],
-      rankingType: [
-        {
-          name: "日均拜访家数"
-        },
-        {
-          name: "拜访总时长"
-        },
-        {
-          name: "有效拜访率"
-        }
-      ]
+      rankingTypeStr: "11",
+      tableHeaderConfig: [],
+      rankList: [],
+      headerList: [],
+
+      CompSwiperIndex: 0
     };
   },
   created() {
     this.curShowSelectDate();
+    this.swiperNavList.map(item => {
+      this.headerList.push({
+        name: item
+      });
+    });
+
+    this.CompSwiperIndex = this.swiperIndex;
+    console.log(this.swiperList[this.CompSwiperIndex].rankLists[this.rankIndex].header)
   },
   methods: {
     // 初始化月份为当月
@@ -143,9 +88,24 @@ export default {
 
     // 选择排名类型
     selectRankingType(e) {
-      this.rankingTypeStr = e.name;
+      console.log(e);
+      this.headerList.map((item, index) => {
+        if (item.name == e.name) {
+          this.CompSwiperIndex = index;
+        }
+      });
+
+      // this.rankingTypeStr = e.name;
       this.showRankingSelect = false;
     }
+  },
+  computed: {
+    ...mapState({
+      swiperList: state => state.terminalVisitReportStore.swiperList,
+      swiperIndex: state => state.terminalVisitReportStore.swiperIndex,
+      rankIndex: state => state.terminalVisitReportStore.rankIndex,
+      swiperNavList: state => state.terminalVisitReportStore.swiperNavList
+    })
   }
 };
 </script>

@@ -5,7 +5,7 @@
     background-color: #F9FCFF;
     display: flex;
     align-items: flex-start;
-    padding: 6px 10px;
+    padding: 6px 0 0 24px;
     box-sizing: border-box;
     > li{
         flex: 1;
@@ -21,6 +21,13 @@
         border-top: 1px solid @borderColor;
         display: flex;
         align-items: center;
+        .rank-data-main{
+            display: flex;
+            flex: 1;
+            > span{
+                flex: 1;
+            }
+        }
         img{
             width: 24px;
             height: 24px;

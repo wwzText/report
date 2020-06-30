@@ -70,13 +70,12 @@ export default {
 
     },
 
-    // registerhandler(name, callback) {
-    //     setupWebViewJavascriptBridge(function (bridge) {
-    //         bridge.registerHandler(name, function (data, responseCallback) {
-    //             callback(data, responseCallback)
-    //         })
-    //     })
-
-    // }
+    registerhandler(name, callback) {
+        setupWebViewJavascriptBridge(function (bridge) {
+            bridge.registerHandler(name, function (data, responseCallback) {
+                callback(data, responseCallback)
+            })
+        })
+    }
 
 }

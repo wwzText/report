@@ -64,6 +64,8 @@ export default {
     });
     // 获取权限等级
     this.getOrgInfo();
+
+    this.clearReoprtAjaxData();
   },
   components: {
     reportSelectTree
@@ -81,6 +83,12 @@ export default {
     })
   },
   methods: {
+
+    // 清空搜索条件
+    clearReoprtAjaxData() {
+      this.$store.commit('clearReoprtAjaxData')
+    },
+
     // 点击展开弹出框，弹出时修改目标类型及报表类型
     // 目标类型及报表类型用于报表主页24个接口判读是哪一个
     showPeopleSelectPopup(targetType, reportType) {
@@ -95,6 +103,7 @@ export default {
     async getOrgInfo() {
       this.$showLoading();
       await this.$store.dispatch('getUserInfo');
+      
       this.organizationList = await this.$store.dispatch(
         "getLocalOrganizationTree"
       );

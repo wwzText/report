@@ -1,6 +1,13 @@
 import Vue from 'vue';
 const userInfoStore = {
     state: () => ({
+        // userInfo: {
+        //     appuser: '11223344',
+        //     partner: '0011223344',
+        //     appxs: 'X',
+        //     appgl: 'X',
+        //     appdc: 'X'
+        // }
         userInfo: null
     }),
 
@@ -13,12 +20,15 @@ const userInfoStore = {
         // 异步获取userInfo
         async getUserInfo(context) {
             return new Promise(resolve => {
+                console.log(11)
                 Vue.prototype.$bridge.callhandler({
                     type: "getUserInfo"
                 }, res => {
+                    console.log(res)
                     context.commit('setUserInfo', {
                         res
                     })
+                    
                     resolve(JSON.parse(res))
                 })
             })

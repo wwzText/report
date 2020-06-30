@@ -14,7 +14,7 @@ export default {
   methods: {
     // 后推或关闭H5
     navBackOrExit() {
-      if (this.$route.path == "/report") {
+      if (this.$route.path == "/report/") {
         this.$bridge.callhandler({
           type: "closeWebView"
         });
