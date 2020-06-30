@@ -183,7 +183,7 @@ export default {
     // 获取组织列表
     async getOrgInfo() {
       this.$showLoading();
-      // await this.$store.dispatch("getUserInfo");
+      await this.$store.dispatch("getUserInfo");
 
       this.organizationList = await this.$store.dispatch(
         "getLocalOrganizationTree"

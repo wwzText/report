@@ -1,14 +1,14 @@
 import Vue from 'vue';
 const userInfoStore = {
     state: () => ({
-        userInfo: {
-            appuser: '11223344',
-            partner: '0011223344',
-            appxs: 'X',
-            appgl: 'X',
-            appdc: 'X'
-        }
-        // userInfo: null
+        // userInfo: {
+        //     appuser: '11223344',
+        //     partner: '0011223344',
+        //     appxs: 'X',
+        //     appgl: 'X',
+        //     appdc: 'X'
+        // }
+        userInfo: null
     }),
 
     mutations: {
