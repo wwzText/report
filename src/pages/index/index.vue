@@ -19,6 +19,7 @@
         <img src="./../../assets/img/JXS_BF.png" alt />
         <span>经销商拜访</span>
       </div>
+
       <div class="report-item" @click="showPeopleSelectPopup('ZD', 'ZF')">
         <img src="./../../assets/img/ZD_ZF.png" alt />
         <span>终端走访</span>
@@ -72,6 +73,9 @@ export default {
     this.getOrgInfo();
 
     this.clearReoprtAjaxData();
+    this.$store.commit("changeHeaderNavTitle", {
+        name: ''
+      });
   },
   components: {
     reportSelectTree

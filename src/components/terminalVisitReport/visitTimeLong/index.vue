@@ -35,7 +35,7 @@ export default {
         },
         {
           dataData: 48.7,
-          dataUnit: "min/次",
+          dataUnit: "分/次",
           dataTitle: "平均拜访时长"
         }
       ],
@@ -85,7 +85,7 @@ export default {
         },
         {
           dataData: es_summary.avg_time,
-          dataUnit: "min/次",
+          dataUnit: "分/次",
           dataTitle: "平均拜访时长"
         }
       ]

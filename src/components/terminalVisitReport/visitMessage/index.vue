@@ -63,7 +63,7 @@ export default {
           },
           {
             dataData: es_summary.avg_time,
-            dataUnit: "min/次",
+            dataUnit: "分/次",
             dataTitle: `平均${this.reportType == "BF" ? "拜访" : "走访"}时长`
           }
         ];

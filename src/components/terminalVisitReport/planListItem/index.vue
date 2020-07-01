@@ -29,7 +29,7 @@ export default {
 
           userBp: this.reportAjaxData
             ? this.reportAjaxData.userbp
-            : this.userInfo.partner
+            : this.userInfo.partner,
         }
       });
     }

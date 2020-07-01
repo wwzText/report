@@ -38,7 +38,7 @@
       >
         <SwipeItem v-for="(swiperItem, index) in swiperList" :key="'o' + index">
           <visitData :visitData="swiperItem.visitData" style="marginTop: 10px" />
-  
+
           <ViewTitle
             v-if="swiperItem.showPlace"
             title="分场所终端拜访率"
@@ -48,7 +48,7 @@
           />
           <ViewTitle
             v-if="swiperItem.trend"
-            :title="'查看当月' + reportType == 'BF' ? '拜访' : '走访' + '趋势'"
+            :title="'查看当月' + (reportType == 'BF' ? '拜访' : '走访') + '趋势'"
             message="查看"
             style="marginTop: 10px"
             @click="seeTrend"
@@ -77,14 +77,16 @@
             @click="seeQuestionInNative"
             style="marginTop: 10px"
           />
-          <QuestionList :list="swiperItem.question" />
-
+          <QuestionList v-if="swiperItem.question" :list="swiperItem.question" />
           <ViewTitle
             v-if="swiperItem.planList"
             title="TA的拜访计划"
             @click="seeAllPlan(swiperItem.planList)"
             style="marginTop: 10px"
           />
+          <div class="add-visit-btn-main" >
+            <button class="add-visit-btn" @click="addPlanToSale">给Ta新增拜访计划+</button>
+          </div>
           <planList :planList="swiperItem.planList" />
         </SwipeItem>
       </Swipe>
@@ -120,6 +122,20 @@ export default {
   },
 
   methods: {
+    // 给销售员添加计划
+    addPlanToSale() {
+      this.$bridge({
+        type: 'addPlan',
+        data: {
+          detailType: 'PLAN_CREATE',
+          isTaPlan:true,
+          userBp: this.reportAjaxData
+            ? this.reportAjaxData.userbp
+            : this.userInfo.partner
+        }
+      })
+    },
+    // 查看所有计划
     seeAllPlan(list) {
       this.$bridge.callhandler({
         type: "personPlanList",
@@ -137,12 +153,12 @@ export default {
 
     // 查看分场所终端拜访率
     seePlace() {
-      this.$router.push('placeVisitEfficiency')
+      this.$router.push("placeVisitEfficiency");
     },
 
     // 查看拜访走访趋势
     seeTrend() {
-      this.$router.push('visitTrend')
+      this.$router.push("visitTrend");
     },
     // 查看所有问题
     seeQuestionInNative() {
@@ -303,6 +319,9 @@ export default {
     // 监听切换日期
     terminalVisitQueryTime() {
       this.determineUrlByStoreParam();
+    },
+    curTitleIndex(val) {
+      this.curTitleIndex = val;
     }
   },
 
@@ -319,7 +338,8 @@ export default {
       swiperList: state => state.terminalVisitReportStore.swiperList,
       swiperNavList: state => state.terminalVisitReportStore.swiperNavList,
       userInfo: state => state.userInfoStore.userInfo,
-      reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData
+      reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData,
+      curTitleIndex: state => state.terminalVisitReportStore.curTitleIndex
     })
   }
 };

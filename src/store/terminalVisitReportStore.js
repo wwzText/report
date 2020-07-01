@@ -38,10 +38,16 @@ const terminalVisitReportStore = {
         swiperNavList: [],
         swiperIndex: 0,
         rankIndex: 0,
+        
+        // swiper当前下标，用于页面跳转后的数据记录
+        curTitleIndex: 1
     },
 
     mutations: {
-
+        saveSwiperTitleIndex(state, payload) {
+            console.log('页面离开', payload.index)
+            state.curTitleIndex = payload.index
+        },
         clearReoprtAjaxData(state) {
             state.reportAjaxData = null;
         },
@@ -167,7 +173,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '平均拜访时长',
                                     value: headerMessage.avg_time,
-                                    util: 'min/次'
+                                    util: '分/次'
                                 }
                             ],
                             rankLists: [
@@ -188,7 +194,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均拜访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }
@@ -263,7 +269,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '平均拜访时长',
                                     value: headerMessage.avg_time,
-                                    util: 'min/次'
+                                    util: '分/次'
                                 }
                             ],
                             rankLists: [
@@ -285,7 +291,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均拜访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }
@@ -355,7 +361,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '平均拜访时长',
                                     value: headerMessage.avg_time,
-                                    util: 'min/次'
+                                    util: '分/次'
                                 }
                             ],
                             rankLists: [
@@ -495,7 +501,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '平均拜访时长',
                                     value: headerMessage.avg_time,
-                                    util: 'min/次'
+                                    util: '分/次'
                                 }
                             ],
                             rankLists: [
@@ -517,7 +523,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均拜访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }, {
@@ -538,7 +544,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均拜访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }
@@ -611,10 +617,6 @@ const terminalVisitReportStore = {
                                     name: '拜访总数',
                                     value: headerMessage.visit_number,
                                     util: '家'
-                                }, {
-                                    name: '有问题经销商数',
-                                    value: headerMessage.question_number,
-                                    util: '家'
                                 }
                             ]
                         }
@@ -628,13 +630,8 @@ const terminalVisitReportStore = {
                                     name: '拜访总数',
                                     value: headerMessage.visit_number,
                                     util: '家'
-                                }, {
-                                    name: '有问题经销商数',
-                                    value: headerMessage.question_number,
-                                    util: '家'
                                 }
-                            ],
-                            question: reportMessage.et_visit_quest
+                            ]
                         }
                     ];
                     break;
@@ -718,7 +715,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均走访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }
@@ -785,7 +782,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '平均走访时长',
                                     value: headerMessage.avg_time,
-                                    util: 'min/次'
+                                    util: '分/次'
                                 }
                             ],
                             rankLists: [
@@ -807,7 +804,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均走访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }
@@ -936,7 +933,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '平均走访时长',
                                     value: headerMessage.avg_time,
-                                    util: 'min/次'
+                                    util: '分/次'
                                 }
                             ],
 

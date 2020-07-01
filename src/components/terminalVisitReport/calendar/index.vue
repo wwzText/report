@@ -33,6 +33,8 @@ export default {
       if (month <= 5) {
         year -= 1;
         month = 12 - 6 + month;
+      } else {
+        month = month - 6
       }
       return new Date(year, month, date)
     }

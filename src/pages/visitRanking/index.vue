@@ -55,15 +55,16 @@ export default {
   created() {
     this.curShowSelectDate();
     this.swiperNavList.map(item => {
-      this.headerList.push({
-        name: item
-      });
+      if (item != "当月拜访计划") {
+        this.headerList.push({
+          name: item
+        });
+      }
     });
 
     this.CompSwiperIndex = this.swiperIndex;
   },
   methods: {
-
     // 初始化月份为当月
     curShowSelectDate() {
       let date = new Date();
@@ -76,7 +77,7 @@ export default {
       if (this.dateOrMonth == "DY") {
         this.showMonthSelect = true;
       } else {
-        this.showCalenar = true
+        this.showCalenar = true;
       }
     },
 
@@ -120,7 +121,8 @@ export default {
       swiperIndex: state => state.terminalVisitReportStore.swiperIndex,
       rankIndex: state => state.terminalVisitReportStore.rankIndex,
       swiperNavList: state => state.terminalVisitReportStore.swiperNavList,
-      dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth
+      dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth,
+      terminalVisitQueryTime: state => state.terminalVisitReportStore.terminalVisitQueryTime
     })
   }
 };

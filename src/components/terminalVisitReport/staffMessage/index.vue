@@ -21,6 +21,7 @@ export default {
   methods: {
     seeVisitRecord() {
       let data = {
+        im_date: this.terminalVisitQueryTime,
         sales_office: this.reportAjaxData
           ? this.reportAjaxData.zorg1
           : this.userInfo.sales_org,
