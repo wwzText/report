@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   props: {
     item: Object
@@ -22,10 +23,22 @@ export default {
       this.$bridge.callhandler({
         type: "personPlanDetail",
         data: {
-            ...this.item
+          appuser: this.reportAjaxData
+            ? this.reportAjaxData.username
+            : this.userInfo.appuser,
+
+          userBp: this.reportAjaxData
+            ? this.reportAjaxData.userbp
+            : this.userInfo.partner
         }
       });
     }
+  },
+  computed: {
+    ...mapState({
+      userInfo: state => state.userInfoStore.userInfo,
+      reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData
+    })
   }
 };
 </script>

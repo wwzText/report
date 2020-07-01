@@ -93,6 +93,8 @@ export default {
     this.$store.commit("changeHeaderNavTitle", {
       name: "分析报表"
     });
+
+    this.NativeCanClose()
     // 获取权限等级
     this.getOrgInfo();
 
@@ -128,6 +130,12 @@ export default {
     })
   },
   methods: {
+    NativeCanClose() {
+      this.$bridge.callhandler({
+        type: 'isBack',
+        data: 'true'
+      })
+    },
     // 跳转到报表详情页面
     navToVisitReport(payload, item) {
       this.$store.commit("setTerminalUserOrOrganization", {

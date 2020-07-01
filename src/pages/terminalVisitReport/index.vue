@@ -92,6 +92,10 @@ export default {
   created() {
     this.changePageTitleName();
     this.determineUrlByStoreParam();
+    this.$bridge.callhandler({
+        type: 'isBack',
+        data: 'false'
+      })
   },
   data() {
     return {
@@ -109,9 +113,11 @@ export default {
             ? this.reportAjaxData.username
             : this.userInfo.appuser,
 
-          user_bp: this.reportAjaxData
+          userBp: this.reportAjaxData
             ? this.reportAjaxData.userbp
-            : this.userInfo.partner
+            : this.userInfo.partner,
+    
+
         }
       });
     },
