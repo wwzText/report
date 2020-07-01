@@ -3,85 +3,36 @@
  */
 <template>
   <div class="index-page-container">
-    <!-- <div class="index-list-container">
-      <div
-        v-if="userInfo && userInfo.appxs == 'X'"
-        class="index-list-item"
-        @click="showPeopleSelectPopup('ZD', 'BF')"
-      >
-        <img class="index-list-item_img" src="./../../assets/img/zd_bf.png" />
-        <span class="index-list-item_name">终端拜访</span>
-        <span class="iconfont iconqianjin-01"></span>
+    <div class="index-banner-main">
+      <img src="./../../assets/img/index_banner.png" class="index-banner-img" alt />
+      <div class="index-page-header">
+        <span class="iconfont iconhoutui-01" @click="closeWebView"></span>
+        <span class="index-page-header-title">分享报表</span>
       </div>
-      <div
-        v-if="userInfo && userInfo.appxs == 'X'"
-        class="index-list-item index-list-margin-item"
-        @click="showPeopleSelectPopup('JXS', 'BF')"
-      >
-        <img class="index-list-item_img" src="./../../assets/img/jxs_bf.png" />
-        <span class="index-list-item_name">经销商拜访</span>
-        <span class="iconfont iconqianjin-01"></span>
-      </div>
-      <div
-        v-if="userInfo && userInfo.appgl == 'X'"
-        class="index-list-item"
-        @click="showPeopleSelectPopup('ZD', 'ZF')"
-      >
-        <img class="index-list-item_img" src="./../../assets/img/zd_zf.png" />
-        <span class="index-list-item_name">终端走访</span>
-        <span class="iconfont iconqianjin-01"></span>
-      </div>
-      <div
-        v-if="userInfo && userInfo.appgl == 'X'"
-        class="index-list-item index-list-margin-item"
-        @click="showPeopleSelectPopup('JXS', 'ZF')"
-      >
-        <img class="index-list-item_img" src="./../../assets/img/jxs_zf.png" />
-        <span class="index-list-item_name">经销商走访</span>
-        <span class="iconfont iconqianjin-01"></span>
-      </div>
-      <div
-        v-if="userInfo && userInfo.appdc == 'X'"
-        class="index-list-item"
-        @click="showPeopleSelectPopup('ZD', 'DC')"
-      >
-        <img class="index-list-item_img" src="./../../assets/img/zd_dc.png" />
-        <span class="index-list-item_name">终端督查</span>
-        <span class="iconfont iconqianjin-01"></span>
-      </div>
-      <div
-        v-if="userInfo && userInfo.appdc == 'X'"
-        class="index-list-item index-list-margin-item"
-        @click="showPeopleSelectPopup('JXS', 'DC')"
-      >
-        <img class="index-list-item_img" src="./../../assets/img/jxs_dc.png" />
-        <span class="index-list-item_name">经销商督查</span>
-        <span class="iconfont iconqianjin-01"></span>
-      </div>
-    </div> -->
+    </div>
     <div class="report-entry-main">
-      <div class='report-item' @click="showPeopleSelectPopup('ZD', 'BF')">
-        <img src="./../../assets/img/ZD_BF.png" alt="">
+      <div class="report-item" @click="showPeopleSelectPopup('ZD', 'BF')">
+        <img src="./../../assets/img/ZD_BF.png" alt />
         <span>终端拜访</span>
       </div>
-      <div class='report-item' @click="showPeopleSelectPopup('JXS', 'BF')">
-        <img src="./../../assets/img/JXS_BF.png" alt="">
+      <div class="report-item" @click="showPeopleSelectPopup('JXS', 'BF')">
+        <img src="./../../assets/img/JXS_BF.png" alt />
         <span>经销商拜访</span>
       </div>
-      <div class='report-item' @click="showPeopleSelectPopup('ZD', 'ZF')">
-        <img src="./../../assets/img/ZD_ZF.png" alt="">
+      <div class="report-item" @click="showPeopleSelectPopup('ZD', 'ZF')">
+        <img src="./../../assets/img/ZD_ZF.png" alt />
         <span>终端走访</span>
       </div>
-      <div class='report-item' @click="showPeopleSelectPopup('JXS', 'ZF')">
-        <img src="./../../assets/img/JXS_ZF.png" alt="">
+      <div class="report-item" @click="showPeopleSelectPopup('JXS', 'ZF')">
+        <img src="./../../assets/img/JXS_ZF.png" alt />
         <span>经销商走访</span>
       </div>
-      <div class='report-item' @click="showPeopleSelectPopup('ZD', 'DC')">
-        <img src="./../../assets/img/ZD_DC.png" alt="">
+      <div class="report-item" @click="showPeopleSelectPopup('ZD', 'DC')">
+        <img src="./../../assets/img/ZD_DC.png" alt />
         <span>终端督查</span>
       </div>
-      <div class='report-item' @click="showPeopleSelectPopup('JXS', 'DC')">
-        <img src="./../../assets/img/JXS_DC.png" alt="">
+      <div class="report-item" @click="showPeopleSelectPopup('JXS', 'DC')">
+        <img src="./../../assets/img/JXS_DC.png" alt />
         <span>经销商督查</span>
       </div>
     </div>
@@ -116,10 +67,6 @@ import reportSelectTree from "@/components/reportSelectTree";
 import { mapState } from "vuex";
 export default {
   created() {
-    this.$store.commit("changeHeaderNavTitle", {
-      name: "分析报表"
-    });
-
     this.NativeCanClose();
     // 获取权限等级
     this.getOrgInfo();
@@ -156,6 +103,13 @@ export default {
     })
   },
   methods: {
+    // 关闭H5
+    closeWebView() {
+      console.log(1);
+      this.$bridge.callhandler({
+        type: "closeWebView"
+      });
+    },
     // 调用原生方法，表示这个页面可以在手机上直接使用android手机的返回按钮退出webview
     NativeCanClose() {
       this.$bridge.callhandler({

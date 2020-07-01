@@ -1,6 +1,6 @@
 const headerNavStore = {
     state: () => ({
-        headerNavTitle: "1"
+        headerNavTitle: ""
     }),
 
     mutations: {

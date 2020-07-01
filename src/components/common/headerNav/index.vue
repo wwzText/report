@@ -1,5 +1,5 @@
 <template>
-  <div class="header_container">
+  <div v-if="title" class="header_container">
     <span class="iconfont iconhoutui-01" @click="navBackOrExit"></span>
     <span class="header-title">{{title}}</span>
     <slot />
@@ -14,13 +14,7 @@ export default {
   methods: {
     // 后推或关闭H5
     navBackOrExit() {
-      if (this.$route.path == "/report/") {
-        this.$bridge.callhandler({
-          type: "closeWebView"
-        });
-      } else {
-        this.$router.go(-1);
-      }
+      this.$router.go(-1);
     }
   }
 };
