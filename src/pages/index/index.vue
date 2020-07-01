@@ -130,6 +130,7 @@ export default {
     })
   },
   methods: {
+    // 调用原生方法，表示这个页面可以在手机上直接使用android手机的返回按钮退出webview
     NativeCanClose() {
       this.$bridge.callhandler({
         type: 'isBack',
