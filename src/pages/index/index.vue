@@ -2,8 +2,8 @@
  * 报表列表页面
  */
 <template>
-  <div>
-    <div class="index-list-container">
+  <div class="index-page-container">
+    <!-- <div class="index-list-container">
       <div
         v-if="userInfo && userInfo.appxs == 'X'"
         class="index-list-item"
@@ -58,6 +58,32 @@
         <span class="index-list-item_name">经销商督查</span>
         <span class="iconfont iconqianjin-01"></span>
       </div>
+    </div> -->
+    <div class="report-entry-main">
+      <div class='report-item' @click="showPeopleSelectPopup('ZD', 'BF')">
+        <img src="./../../assets/img/ZD_BF.png" alt="">
+        <span>终端拜访</span>
+      </div>
+      <div class='report-item' @click="showPeopleSelectPopup('JXS', 'BF')">
+        <img src="./../../assets/img/JXS_BF.png" alt="">
+        <span>经销商拜访</span>
+      </div>
+      <div class='report-item' @click="showPeopleSelectPopup('ZD', 'ZF')">
+        <img src="./../../assets/img/ZD_ZF.png" alt="">
+        <span>终端走访</span>
+      </div>
+      <div class='report-item' @click="showPeopleSelectPopup('JXS', 'ZF')">
+        <img src="./../../assets/img/JXS_ZF.png" alt="">
+        <span>经销商走访</span>
+      </div>
+      <div class='report-item' @click="showPeopleSelectPopup('ZD', 'DC')">
+        <img src="./../../assets/img/ZD_DC.png" alt="">
+        <span>终端督查</span>
+      </div>
+      <div class='report-item' @click="showPeopleSelectPopup('JXS', 'DC')">
+        <img src="./../../assets/img/JXS_DC.png" alt="">
+        <span>经销商督查</span>
+      </div>
     </div>
     <Popup v-model="showPopup" position="right" :style="{ height: '100%', width: '90%' }">
       <div class="see-self-report" @click="seeUserSelfReport">
@@ -94,7 +120,7 @@ export default {
       name: "分析报表"
     });
 
-    this.NativeCanClose()
+    this.NativeCanClose();
     // 获取权限等级
     this.getOrgInfo();
 
@@ -120,7 +146,7 @@ export default {
         return;
       }
 
-      this.$showLoading()
+      this.$showLoading();
       this.keyWordThrottle();
     }
   },
@@ -133,9 +159,9 @@ export default {
     // 调用原生方法，表示这个页面可以在手机上直接使用android手机的返回按钮退出webview
     NativeCanClose() {
       this.$bridge.callhandler({
-        type: 'isBack',
-        data: 'true'
-      })
+        type: "isBack",
+        data: "true"
+      });
     },
     // 跳转到报表详情页面
     navToVisitReport(payload, item) {
@@ -172,7 +198,7 @@ export default {
           }
         }
       });
-      this.$hideLoading()
+      this.$hideLoading();
     },
     // 清空报表请求参数
     clearReoprtAjaxData() {
