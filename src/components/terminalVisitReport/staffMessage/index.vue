@@ -23,15 +23,15 @@ export default {
       let data = {
         im_date: this.terminalVisitQueryTime,
         sales_office: this.reportAjaxData
-          ? this.reportAjaxData.zorg1
+          ? this.reportAjaxData.zorg1.replice('O ', '')
           : this.userInfo.sales_org,
 
         sales_group: this.reportAjaxData
-          ? this.reportAjaxData.zorg2
+          ? this.reportAjaxData.zorg2.replice('O ', '')
           : this.userInfo.sales_group,
 
         sales_station: this.reportAjaxData
-          ? this.reportAjaxData.zorg3
+          ? this.reportAjaxData.zorg3.replice('O ', '')
           : this.userInfo.sales_station,
 
         ywy_no: this.reportAjaxData

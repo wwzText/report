@@ -16,7 +16,7 @@
             style="marginTop: 10px"
             @click="seeRankAllList(0, index)"
           />
-          <RankingList v-if="item.list.length" :rankList="item.list" :key="index" />
+          <RankingList v-if="item.list.length" :rankList="item.list.slice(0, 4)" :key="index" />
         </template>
       </div>
       <ViewTitle title="已拜访经销商统计" v-if="swiperList[0].question" />
@@ -67,7 +67,7 @@
               v-if="rankItem.list.length"
               :onlyUtil="rankItem.onlyUtil"
               :only="rankItem.onlyValue"
-              :rankList="rankItem.list"
+              :rankList="rankItem.list.slice(0, 4)"
               :key="'rankitem' + index"
             />
           </div>
@@ -84,7 +84,7 @@
             @click="seeAllPlan(swiperItem.planList)"
             style="marginTop: 10px"
           />
-          <div class="add-visit-btn-main" >
+          <div class="add-visit-btn-main" v-if="swiperItem.planList">
             <button class="add-visit-btn" @click="addPlanToSale">给Ta新增拜访计划+</button>
           </div>
           <planList :planList="swiperItem.planList" />
@@ -124,11 +124,12 @@ export default {
   methods: {
     // 给销售员添加计划
     addPlanToSale() {
-      this.$bridge({
+      this.$bridge.callhandler({
         type: 'addPlan',
         data: {
-          detailType: 'PLAN_CREATE',
-          isTaPlan:true,
+          appuser: this.reportAjaxData
+            ? this.reportAjaxData.username
+            : this.userInfo.appuser,
           userBp: this.reportAjaxData
             ? this.reportAjaxData.userbp
             : this.userInfo.partner

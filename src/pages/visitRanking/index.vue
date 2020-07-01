@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="switch-conatiner">
-      <div class="select-container" @click="showSelectDateComponent">
-        <span>{{showSelectDate}}</span>
-        <span class="iconfont iconmenu-down"></span>
-      </div>
-      <div class="use-type-container" v-if="swiperNavList.length" @click="chooseRankingType">
+    <div class="switch-conatiner" v-if="swiperNavList.length">
+      <div class="use-type-container" @click="chooseRankingType">
         <span>{{swiperNavList[CompSwiperIndex]}}</span>
         <span class="iconfont iconmenu-down"></span>
       </div>
@@ -78,6 +74,7 @@ export default {
         this.showMonthSelect = true;
       } else {
         this.showCalenar = true;
+        console.log(this.showCalenar)
       }
     },
 

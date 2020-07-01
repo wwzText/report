@@ -19,8 +19,8 @@
         <img v-if="item.rank == 3" src="./../../../assets/img/ranking3.png" alt />
         <span
           class="ranking-index"
-          v-if="index != 0 && index != 1 && index != 2 && index != 3"
-        >{{index}}</span>
+          v-if="item.rank != 0 && item.rank != 1 && item.rank != 2 && item.rank != 3"
+        >{{item.rank}}</span>
         <div class="rank-data-main">
           <span
             class="ranking-name"
