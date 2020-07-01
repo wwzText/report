@@ -2,7 +2,10 @@
   <div v-if="rankList.length">
     <ul class="table-header-container">
       <li v-if="header">名字</li>
-      <li v-for="(item, index) in header" :key="index">{{item.name}}</li>
+      <li v-for="(item, index) in header" :key="index" class="header-item-main">
+        <span>{{item.name}}</span>
+        <span class="header-item-util">{{item.util}}</span>
+      </li>
     </ul>
     <ul class="ranking-container">
       <li
@@ -14,7 +17,10 @@
         <img v-if="item.rank == 1" src="./../../../assets/img/ranking1.png" alt />
         <img v-if="item.rank == 2" src="./../../../assets/img/ranking2.png" alt />
         <img v-if="item.rank == 3" src="./../../../assets/img/ranking3.png" alt />
-        <span class="ranking-index" v-if="index != 0 && index != 1 && index != 2">{{index}}</span>
+        <span
+          class="ranking-index"
+          v-if="index != 0 && index != 1 && index != 2 && index != 3"
+        >{{index}}</span>
         <div class="rank-data-main">
           <span
             class="ranking-name"
@@ -25,10 +31,10 @@
               :key="index"
               v-if="value.code != 'title'"
               class="table-message-item"
-            >{{item[value.value]}}</span>
+            >{{item[value.value] || 0}}</span>
           </template>
         </div>
-        <span class="ranking-message-value">{{item[only]}}</span>
+        <span v-if="!header" class="ranking-message-value">{{item[only] || 0}}</span>
         <span class="ranking-message-unit">{{onlyUtil}}</span>
       </li>
     </ul>

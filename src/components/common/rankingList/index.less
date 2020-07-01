@@ -4,12 +4,20 @@
     color: @fontColor;
     background-color: #F9FCFF;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 6px 0 0 24px;
     box-sizing: border-box;
     > li{
         flex: 1;
         text-align: center;
+        padding-bottom: 10px;
+    }
+    .header-item-main{
+        display: flex;
+        flex-direction: column;
+        .header-item-util{
+            color: #999999;
+        }
     }
 }
 .ranking-container{

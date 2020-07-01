@@ -9,20 +9,20 @@
         </div>
         <span class="place-visit-tip">
           拜访家数
-          <span class="place-visit-num">{{es_summary.visit_ev}}</span> 家
+          <span class="place-visit-num">{{headerMessage.visit_ev}}</span> 家
         </span>
         <span class="place-visit-tip">
           终端数
-          <span class="place-visit-num">{{es_summary.count_ev}}</span> 家
+          <span class="place-visit-num">{{headerMessage.count_ev}}</span> 家
         </span>
       </div>
       <VanCircle
-        :text="es_summary.rate_ev"
+        :text="headerMessage.rate_ev"
         :speed="10"
         size="64"
         layer-color="#e8e8e8"
         color="#F99C34"
-        :value="(es_summary.visit_ev / es_summary.count_ev).toFixed(0)"
+        :value="(headerMessage.visit_ev / headerMessage.count_ev)"
       />
     </div>
 
@@ -34,20 +34,20 @@
         </div>
         <span class="place-visit-tip">
           拜访家数
-          <span class="place-visit-num">{{es_summary.visit_re}}</span> 家
+          <span class="place-visit-num">{{headerMessage.visit_re}}</span> 家
         </span>
         <span class="place-visit-tip">
           终端数
-          <span class="place-visit-num">{{es_summary.count_re}}</span> 家
+          <span class="place-visit-num">{{headerMessage.count_re}}</span> 家
         </span>
       </div>
       <VanCircle
-        :text="es_summary.rate_re"
+        :text="headerMessage.rate_re"
         :speed="10"
         size="64"
         layer-color="#e8e8e8"
         color="#F99C34"
-        :value="(es_summary.visit_re / es_summary.count_re).toFixed(0)"
+        :value="(headerMessage.visit_re / headerMessage.count_re)"
       />
     </div>
 
@@ -59,20 +59,20 @@
         </div>
         <span class="place-visit-tip">
           拜访家数
-          <span class="place-visit-num">{{es_summary.visit_ka}}</span> 家
+          <span class="place-visit-num">{{headerMessage.visit_ka}}</span> 家
         </span>
         <span class="place-visit-tip">
           终端数
-          <span class="place-visit-num">{{es_summary.count_ka}}</span> 家
+          <span class="place-visit-num">{{headerMessage.count_ka}}</span> 家
         </span>
       </div>
       <VanCircle
-        :text="es_summary.rate_ka"
+        :text="headerMessage.rate_ka"
         :speed="10"
         size="64"
         layer-color="#e8e8e8"
         color="#F99C34"
-        :value="(es_summary.visit_ka / es_summary.count_ka).toFixed(0)"
+        :value="(headerMessage.visit_ka / headerMessage.count_ka)"
       />
     </div>
 
@@ -84,20 +84,20 @@
         </div>
         <span class="place-visit-tip">
           拜访家数
-          <span class="place-visit-num">{{es_summary.visit_rt}}</span> 家
+          <span class="place-visit-num">{{headerMessage.visit_rt}}</span> 家
         </span>
         <span class="place-visit-tip">
           终端数
-          <span class="place-visit-num">{{es_summary.count_rt}}</span> 家
+          <span class="place-visit-num">{{headerMessage.count_rt}}</span> 家
         </span>
       </div>
       <VanCircle
-        :text="es_summary.rate_rt"
+        :text="headerMessage.rate_rt"
         :speed="10"
         size="64"
         layer-color="#e8e8e8"
         color="#F99C34"
-        :value="(es_summary.visit_rt / es_summary.count_rt).toFixed(0)"
+        :value="(headerMessage.visit_rt / headerMessage.count_rt)"
       />
     </div>
   </div>
@@ -113,8 +113,8 @@ export default {
   },
   computed: {
     ...mapState({
-      es_summary: state =>
-        state.terminalVisitReportStore.reportMessage.es_summary
+      headerMessage: state =>
+        state.terminalVisitReportStore.headerMessage
     })
   }
 };

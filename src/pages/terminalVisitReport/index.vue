@@ -38,6 +38,21 @@
       >
         <SwipeItem v-for="(swiperItem, index) in swiperList" :key="'o' + index">
           <visitData :visitData="swiperItem.visitData" style="marginTop: 10px" />
+  
+          <ViewTitle
+            v-if="swiperItem.showPlace"
+            title="分场所终端拜访率"
+            message="查看"
+            style="marginTop: 10px"
+            @click="seePlace"
+          />
+          <ViewTitle
+            v-if="swiperItem.trend"
+            :title="'查看当月' + reportType == 'BF' ? '拜访' : '走访' + '趋势'"
+            message="查看"
+            style="marginTop: 10px"
+            @click="seeTrend"
+          />
           <div v-for="(rankItem, i) in swiperItem.rankLists" :key="'t' + i">
             <ViewTitle
               v-if="rankItem.list.length"
@@ -93,9 +108,9 @@ export default {
     this.changePageTitleName();
     this.determineUrlByStoreParam();
     this.$bridge.callhandler({
-        type: 'isBack',
-        data: 'false'
-      })
+      type: "isBack",
+      data: "false"
+    });
   },
   data() {
     return {
@@ -115,11 +130,19 @@ export default {
 
           userBp: this.reportAjaxData
             ? this.reportAjaxData.userbp
-            : this.userInfo.partner,
-    
-
+            : this.userInfo.partner
         }
       });
+    },
+
+    // 查看分场所终端拜访率
+    seePlace() {
+      this.$router.push('placeVisitEfficiency')
+    },
+
+    // 查看拜访走访趋势
+    seeTrend() {
+      this.$router.push('visitTrend')
     },
     // 查看所有问题
     seeQuestionInNative() {
@@ -196,7 +219,7 @@ export default {
       if (this.dateOrMonth === "DR") {
         queryObj["visit_date"] = this.terminalVisitQueryTime;
       } else {
-        queryObj["start_date"] = `${this.terminalVisitQueryTime}-1`;
+        queryObj["start_date"] = `${this.terminalVisitQueryTime}-01`;
         queryObj["end_date"] = `${this.terminalVisitQueryTime}-31`;
       }
 
@@ -229,7 +252,7 @@ export default {
         } else {
           queryObj["visit_type"] = "ZB03";
         }
-        
+
         if (this.reportAjaxData) {
           if (this.reportAjaxData.zorg1) {
             queryObj["org_code"] = this.reportAjaxData.zorg1;

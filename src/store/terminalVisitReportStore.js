@@ -184,11 +184,11 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '拜访总数',
                                             value: 'visit_time',
-                                            util: '小时'
+                                            util: '次'
                                         }, {
                                             name: '平均拜访时长',
                                             value: 'avg_time',
-                                            util: '小时'
+                                            util: 'min/次'
                                         }
                                     ]
                                 }
@@ -220,6 +220,7 @@ const terminalVisitReportStore = {
                                     util: '小时'
                                 }
                             ],
+                            trend: true,
                             rankLists: [
                                 {
                                     title: '所在工作站排行榜',
@@ -300,6 +301,7 @@ const terminalVisitReportStore = {
                                     value: headerMessage.visit_rate
                                 }
                             ],
+                            showPlace: true,
                             rankLists: [
                                 {
                                     title: '所在工作站排行榜',
@@ -552,6 +554,7 @@ const terminalVisitReportStore = {
                                     value: headerMessage.visit_rate
                                 }
                             ],
+                            showPlace: true,
                             rankLists: [
                                 {
                                     title: '同级排行榜',
@@ -743,6 +746,7 @@ const terminalVisitReportStore = {
                                     util: '小时'
                                 }
                             ],
+                            trend: true,
                             rankLists: [
                                 {
                                     title: '所在工作站排行榜',

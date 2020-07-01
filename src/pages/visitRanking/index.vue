@@ -5,7 +5,7 @@
         <span>{{showSelectDate}}</span>
         <span class="iconfont iconmenu-down"></span>
       </div>
-      <div class="use-type-container" @click="chooseRankingType">
+      <div class="use-type-container" v-if="swiperNavList.length" @click="chooseRankingType">
         <span>{{swiperNavList[CompSwiperIndex]}}</span>
         <span class="iconfont iconmenu-down"></span>
       </div>
