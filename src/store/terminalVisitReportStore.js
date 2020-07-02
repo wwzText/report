@@ -843,7 +843,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '走访总数',
                                     value: headerMessage.visit_time,
-                                    util: '家'
+                                    util: '次'
                                 }, {
                                     name: '平均走访时长',
                                     value: headerMessage.avg_time,
