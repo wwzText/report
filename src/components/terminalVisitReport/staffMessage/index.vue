@@ -23,16 +23,16 @@ export default {
       let data = {
         im_date: this.terminalVisitQueryTime,
         sales_office: this.reportAjaxData
-          ? this.reportAjaxData.zorg1.replice('O ', '')
-          : this.userInfo.sales_org,
+          ? this.reportAjaxData.zorg1.replace("O ", "")
+          : this.userInfo.sales_org.replace("O ", ""),
 
         sales_group: this.reportAjaxData
-          ? this.reportAjaxData.zorg2.replice('O ', '')
-          : this.userInfo.sales_group,
+          ? this.reportAjaxData.zorg2.replace("O ", "")
+          : this.userInfo.sales_group.replace("O ", ""),
 
         sales_station: this.reportAjaxData
-          ? this.reportAjaxData.zorg3.replice('O ', '')
-          : this.userInfo.sales_station,
+          ? this.reportAjaxData.zorg3.replace("O ", "")
+          : this.userInfo.sales_station.replace("O ", ""),
 
         ywy_no: this.reportAjaxData
           ? this.reportAjaxData.username
@@ -40,7 +40,7 @@ export default {
 
         detail_type: `${this.targetType}_${this.reportType}`
       };
-      
+
       this.$bridge.callhandler({
         type: "navToAppPath",
         data

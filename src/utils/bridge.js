@@ -3,7 +3,7 @@
  */
 let setupWebViewJavascriptBridge;
 
-if(navigator.userAgent.match(/android/i)) {
+if (navigator.userAgent.match(/android/i)) {
     setupWebViewJavascriptBridge = function setupWebViewJavascriptBridge(
         callback
     ) {
@@ -32,30 +32,14 @@ if(navigator.userAgent.match(/android/i)) {
     // IOS处理代码
     setupWebViewJavascriptBridge = function setupWebViewJavascriptBridge(callback) {
 
-        if (window.WebViewJavascriptBridge) {
-    
-            return callback(window.WebViewJavascriptBridge)
-        }
-    
-        if (window.WVJBCallbacks) {
-    
-            return window.WVJBCallbacks.push(callback)
-        }
-    
-        window.WVJBCallbacks = [callback]
-    
-        let WVJBIframe = document.createElement('iframe')
-    
-        WVJBIframe.style.display = 'none'
-    
-        WVJBIframe.src = 'https://__bridge_loaded__' + document.documentElement.appendChild(WVJBIframe)
-        
-        // IOS特殊处理
-        setTimeout(() => {
-    
-            document.documentElement.removeChild(WVJBIframe)
-        }, 0)
-    
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'https://__bridge_loaded__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function () { document.documentElement.removeChild(WVJBIframe) }, 0)
     }
 }
 
@@ -63,7 +47,6 @@ export default {
 
     // 仅可前端主动调用原生方法
     callhandler(data, callback) {
-
         setupWebViewJavascriptBridge(function (bridge) {
             bridge.callHandler('webSend', data, callback)
         })
