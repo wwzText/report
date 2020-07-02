@@ -19,7 +19,7 @@
           <RankingList v-if="item.list.length" :rankList="item.list.slice(0, 4)" :key="index" />
         </template>
       </div>
-      <ViewTitle title="已拜访经销商统计" v-if="swiperList[0].question" />
+      <ViewTitle title="已拜访问题统计" v-if="swiperList[0].question" />
       <QuestionList :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
