@@ -29,33 +29,41 @@ const terminalVisitReportStore = {
         // 用于获取报表数据的参数
         reportAjaxData: null,
 
-        // 
+        // 报表详情页url
+        reportUrl: '',
+
+        // 报表详情页数据
         reportMessage: {},
 
+        // 用户或组织信息
         headerMessage: {},
 
         swiperList: [],
+
         swiperNavList: [],
+
         swiperIndex: 0,
+
         rankIndex: 0,
         
-        // swiper当前下标，用于页面跳转后的数据记录
-        curTitleIndex: 0
     },
 
     mutations: {
 
         // 保存拜访详情页swiper下标
         saveSwiperTitleIndex(state, payload) {
-            console.log('页面离开', payload.index)
-            state.curTitleIndex = payload.index
+            state.swiperIndex = payload.index
         },
         clearReoprtAjaxData(state) {
             state.reportAjaxData = null;
             state.terminalVisitQueryTime = "";
-            state.curTitleIndex = 0
+            state.swiperIndex = 0;
+            state.reportUrl = ''
         },
-
+        // 首页重置swiper下标
+        removeSwiperIndex(state){
+            state.swiperIndex = 0
+        },
         clearVisitTime(state) {
             state.terminalVisitQueryTime = "";
         },
@@ -163,6 +171,7 @@ const terminalVisitReportStore = {
                 ...reportMessage.es_visit_summary,
                 ...reportMessage.es_summary
             };
+            context.state.reportUrl = payload.url;
             let swiperList = [];
             let swiperNavList = [];
             switch (payload.url) {
@@ -189,11 +198,11 @@ const terminalVisitReportStore = {
                                     title: '所在工作站排行榜',
                                     desc: '拜访总时长',
                                     list: reportMessage.et_total_visit_time,
-                                    onlyValue: 'total_visit_time',
+                                    onlyValue: 'visit_total_time',
                                     header: [
                                         {
                                             name: '拜访总时长',
-                                            value: 'total_visit_time',
+                                            value: 'visit_total_time',
                                             util: '小时'
                                         }, {
                                             name: '拜访总数',

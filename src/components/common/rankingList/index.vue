@@ -34,7 +34,7 @@
             >{{item[value.value] || 0}}</span>
           </template>
         </div>
-        <span v-if="!header" class="ranking-message-value">{{item[only] || 0}}</span>
+        <span v-if="!header" class="ranking-message-value">{{item[only]}}</span>
         <span class="ranking-message-unit">{{onlyUtil}}</span>
       </li>
     </ul>
@@ -43,6 +43,9 @@
 
 <script>
 export default {
+  created(){
+    console.log(this.only)
+  },
   props: {
     rankList: Array, // 参与排名业务员列表
     rangMessageList: Array, // 用于展示的字段列表，复用时根据各自不同的配置改变显隐顺序

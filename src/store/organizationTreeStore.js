@@ -26,6 +26,7 @@ const organizationTreeStore = {
     actions: {
         // 获取组织树，如果已获取直接返回，没有就调用接口获取并存储
         async getLocalOrganizationTree(context) {
+            console.log(context.state.organizationTree)
             if (context.state.organizationTree.length) {
                 return context.state.organizationTree
             } else {
@@ -35,7 +36,6 @@ const organizationTreeStore = {
 
         // 接口调用获取组织树
         async getOrganizationTreeOfWebRequest(context) {
-            
             let orgInfo = await Http.request("getOrgInfo", {
                 appuser: store.state.userInfoStore.userInfo.appuser
             });
@@ -50,9 +50,12 @@ const organizationTreeStore = {
                 orgLevel = 2;
             }
 
-            return await Http.request("getOrganizationList", {
+            let tree = await Http.request("getOrganizationList", {
                 appuser: store.state.userInfoStore.userInfo.appuser
             });
+
+            context.state.organizationTree = tree;
+            return tree
 
             // return context.commit('verificationAndSetOrganization', {
             //     orgLevel,

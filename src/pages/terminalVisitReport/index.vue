@@ -5,27 +5,35 @@
     <!-- 没有swiper的状态 -->
     <div v-if="swiperList.length == 1">
       <visitData :visitData="swiperList[0].visitData" style="margin: 10px 0" />
-      <div>
+      <div v-if="swiperList[0].rankLists">
         <template v-for="(item, index) in swiperList[0].rankLists">
           <ViewTitle
             v-if="item.list.length"
-            :key="index"
+            :key="'aa' + index"
             :title="item.title"
             :describe="item.desc"
             :message="'全部（' + (item.list.length - 1) +'）'"
             style="marginTop: 10px"
             @click="seeRankAllList(0, index)"
           />
-          <RankingList v-if="item.list.length" :rankList="item.list.slice(0, 4)" :key="index" />
+          
+          <RankingList
+            v-if="item.list.length"
+            :rankList="item.list.slice(0, 4)"
+            :key="'bb' + index"
+            :only="item.onlyValue"
+            :onlyUtil="item.onlyUtil"
+          />
         </template>
       </div>
       <ViewTitle
         title="已拜访问题统计"
-        style="marginTop: 10px"
+        :neednavTo="dateOrMonth == 'DR'"
+        style="marginTop: 10px;"
         @click="seeQuestionInNative"
         v-if="swiperList[0].question"
       />
-      <QuestionList :list="swiperList[0].question" />
+      <QuestionList style="marginTop: 1px;" :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
     <div v-else style="marginTop: 10px">
@@ -58,28 +66,31 @@
             style="marginTop: 10px"
             @click="seeTrend"
           />
-          <div v-for="(rankItem, i) in swiperItem.rankLists" :key="'t' + i">
-            <ViewTitle
-              v-if="rankItem.list.length"
-              :key="'w' + i"
-              :title="rankItem.title"
-              :describe="rankItem.desc"
-              :message="'全部（' + (rankItem.list.length - 1) +'）'"
-              style="marginTop: 10px"
-              @click="seeRankAllList(index, i)"
-            />
-            <RankingList
-              v-if="rankItem.list.length"
-              :onlyUtil="rankItem.onlyUtil"
-              :only="rankItem.onlyValue"
-              :rankList="rankItem.list.slice(0, 4)"
-              :key="'rankitem' + index"
-            />
-          </div>
+          <template v-if="swiperItem.rankLists">
+            <div v-for="(rankItem, i) in swiperItem.rankLists" :key="'t' + i">
+              <ViewTitle
+                v-if="rankItem.list.length"
+                :key="'w' + i"
+                :title="rankItem.title"
+                :describe="rankItem.desc"
+                :message="'全部（' + (rankItem.list.length - 1) +'）'"
+                style="marginTop: 10px"
+                @click="seeRankAllList(index, i)"
+              />
+              <RankingList
+                v-if="rankItem.list.length"
+                :onlyUtil="rankItem.onlyUtil"
+                :only="rankItem.onlyValue"
+                :rankList="rankItem.list.slice(0, 4)"
+                :key="'rankitem' + index"
+              />
+            </div>
+          </template>
           <ViewTitle
             v-if="swiperItem.question"
             title="已拜访问题统计"
             @click="seeQuestionInNative"
+            :neednavTo="dateOrMonth == 'DR'"
             style="marginTop: 10px"
           />
           <QuestionList v-if="swiperItem.question" :list="swiperItem.question" />
@@ -112,18 +123,35 @@ export default {
     planList
   },
   created() {
+    // 修改对应页面标题
     this.changePageTitleName();
+
+    // 获取数据
     this.determineUrlByStoreParam();
+
+    // 告诉原生这个页面不能直接退出
     this.$bridge.callhandler({
       type: "isBack",
       data: {
         isBack: false
       }
     });
+
+    if (this.swiperIndex) {
+      this.$nextTick(() => {
+        this.navTitleIndexChange({
+          index: this.swiperIndex
+        });
+      });
+    }
+  },
+  destroyed() {
+    this.$store.commit("saveSwiperTitleIndex", {
+      index: this.curTitleIndex
+    });
   },
   data() {
     return {
-      componentName: "",
       curTitleIndex: 0
     };
   },
@@ -225,20 +253,25 @@ export default {
       this.$router.push("visitRanking");
     },
 
-    navTitleIndexChange(e) {
-      this.curTitleIndex = e.index;
-      this.$refs.visitSwipe.swipeTo(e.index);
-    },
     swipeIndexChange(e) {
       this.curTitleIndex = e;
     },
 
+    navTitleIndexChange(e) {
+      this.curTitleIndex = e.index;
+      this.$refs.visitSwipe.swipeTo(e.index);
+    },
+
     // 根据 terminalVisitReportStore 仓库中的参数确定访问URL及访问参数
-    determineUrlByStoreParam() {
+    determineUrlByStoreParam(bool = false) {
       // 判断是否有时间，第一次初始化的情况下是没有的
       if (!this.terminalVisitQueryTime) return;
 
+      // this.swiperList = []
       let url = `${this.targetType}_${this.reportType}_${this.dateOrMonth}_${this.userOrOrganization}`;
+      if (url === this.reportUrl && !bool) {
+        return;
+      }
       let queryObj = {
         appuser: this.userInfo.appuser,
         org_code: this.userInfo.sales_station
@@ -252,73 +285,115 @@ export default {
         queryObj["end_date"] = `${this.terminalVisitQueryTime}-31`;
       }
 
-      if (this.userOrOrganization === "RY") {
-        queryObj["user_bp"] = this.reportAjaxData
-          ? this.reportAjaxData.userbp
-          : this.userInfo.partner;
+      let havaAjaxData = !!this.reportAjaxData;
+      let reportAjaxData = this.reportAjaxData;
+      let userInfo = this.userInfo;
 
-        queryObj["org_code"] = this.reportAjaxData
-          ? this.reportAjaxData.zposition
-          : this.userInfo.sales_station;
+      queryObj["user_bp"] = havaAjaxData
+        ? reportAjaxData.userbp
+        : userInfo.partner;
+
+      if (this.reportType == "ZF") {
+        queryObj["visit_type"] = "ZZ01";
       } else {
-        if (this.reportAjaxData.zorg1) {
-          queryObj["org_code"] = this.reportAjaxData.zorg1;
-          queryObj["org_type"] = "1";
-        }
-        if (this.reportAjaxData.zorg2) {
-          queryObj["org_code"] = this.reportAjaxData.zorg2;
-          queryObj["org_type"] = "2";
-        }
-        if (this.reportAjaxData.zorg3) {
-          queryObj["org_code"] = this.reportAjaxData.zorg3;
-          queryObj["org_type"] = "3";
-        }
+        queryObj["visit_type"] = "ZB03";
       }
 
-      if (this.userOrOrganization === "RY" && this.reportType !== "BF") {
-        if (this.reportType == "ZF") {
-          queryObj["visit_type"] = "ZZ01";
-        } else {
-          queryObj["visit_type"] = "ZB03";
-        }
+      queryObj["org_code"] = havaAjaxData
+        ? this.reportAjaxData.zorg3 ||
+          this.reportAjaxData.zorg2 ||
+          this.reportAjaxData.zorg1
+        : userInfo.sales_station ||
+          userInfo.sales_group ||
+          userInfo.sales_office;
 
-        if (this.reportAjaxData) {
-          if (this.reportAjaxData.zorg1) {
-            queryObj["org_code"] = this.reportAjaxData.zorg1;
-            queryObj["org_type"] = "1";
-          }
-          if (this.reportAjaxData.zorg2) {
-            queryObj["org_code"] = this.reportAjaxData.zorg2;
-            queryObj["org_type"] = "2";
-          }
-          if (this.reportAjaxData.zorg3) {
-            queryObj["org_code"] = this.reportAjaxData.zorg3;
-            queryObj["org_type"] = "3";
-          }
-        } else {
-          if (this.userInfo.sales_office) {
-            queryObj["org_code"] = this.userInfo.sales_office;
-            queryObj["org_type"] = "1";
-          }
-          if (this.userInfo.sales_group) {
-            queryObj["org_code"] = this.userInfo.sales_group;
-            queryObj["org_type"] = "2";
-          }
-          if (this.userInfo.sales_station) {
-            queryObj["org_code"] = this.userInfo.sales_station;
-            queryObj["org_type"] = "3";
-          }
-        }
-      }
+      queryObj["org_type"] = havaAjaxData
+        ? this.reportAjaxData.zorg3
+          ? 3
+          : this.reportAjaxData.zorg2
+          ? 2
+          : 1
+        : userInfo.sales_station
+        ? 3
+        : userInfosales_group
+        ? 2
+        : 1;
+      // if (this.userOrOrganization === "RY") {
+      //   queryObj["user_bp"] = havaAjaxData
+      //     ? reportAjaxData.userbp
+      //     : userInfo.partner;
 
+      //   queryObj["org_code"] = havaAjaxData
+      //     ? reportAjaxData.zposition
+      //     : userInfo.sales_station;
+      // } else {
+
+      // }
+
+      // if (this.userOrOrganization === "RY") {
+      //   queryObj["user_bp"] = this.reportAjaxData
+      //     ? this.reportAjaxData.userbp
+      //     : this.userInfo.partner;
+
+      //   queryObj["org_code"] = this.reportAjaxData
+      //     ? this.reportAjaxData.zposition
+      //     : this.userInfo.sales_station;
+      // } else {
+      //   if (this.reportAjaxData.zorg1) {
+      //     queryObj["org_code"] = this.reportAjaxData.zorg1;
+      //     queryObj["org_type"] = "1";
+      //   }
+      //   if (this.reportAjaxData.zorg2) {
+      //     queryObj["org_code"] = this.reportAjaxData.zorg2;
+      //     queryObj["org_type"] = "2";
+      //   }
+      //   if (this.reportAjaxData.zorg3) {
+      //     queryObj["org_code"] = this.reportAjaxData.zorg3;
+      //     queryObj["org_type"] = "3";
+      //   }
+      // }
+
+      // if (this.userOrOrganization === "RY" && this.reportType !== "BF") {
+      //   if (this.reportType == "ZF") {
+      //     queryObj["visit_type"] = "ZZ01";
+      //   } else {
+      //     queryObj["visit_type"] = "ZB03";
+      //   }
+
+      //   if (this.reportAjaxData) {
+      //     if (this.reportAjaxData.zorg1) {
+      //       queryObj["org_code"] = this.reportAjaxData.zorg1;
+      //       queryObj["org_type"] = "1";
+      //     }
+      //     if (this.reportAjaxData.zorg2) {
+      //       queryObj["org_code"] = this.reportAjaxData.zorg2;
+      //       queryObj["org_type"] = "2";
+      //     }
+      //     if (this.reportAjaxData.zorg3) {
+      //       queryObj["org_code"] = this.reportAjaxData.zorg3;
+      //       queryObj["org_type"] = "3";
+      //     }
+      //   } else {
+      //     if (this.userInfo.sales_office) {
+      //       queryObj["org_code"] = this.userInfo.sales_office;
+      //       queryObj["org_type"] = "1";
+      //     }
+      //     if (this.userInfo.sales_group) {
+      //       queryObj["org_code"] = this.userInfo.sales_group;
+      //       queryObj["org_type"] = "2";
+      //     }
+      //     if (this.userInfo.sales_station) {
+      //       queryObj["org_code"] = this.userInfo.sales_station;
+      //       queryObj["org_type"] = "3";
+      //     }
+      //   }
+      // }
+      console.log(url, queryObj);
       this.getReportData(url, queryObj);
     },
 
     // 根据store中的很多参数实际发起请求
     async getReportData(url, queryObj) {
-      // 数据组件展示名称
-      this.componentName = url;
-
       this.$showLoading();
       await this.$store.dispatch("getReportData", {
         url,
@@ -331,10 +406,7 @@ export default {
   watch: {
     // 监听切换日期
     terminalVisitQueryTime() {
-      this.determineUrlByStoreParam();
-    },
-    curTitleIndex(val) {
-      this.curTitleIndex = val;
+      this.determineUrlByStoreParam(true);
     }
   },
 
@@ -352,7 +424,8 @@ export default {
       swiperNavList: state => state.terminalVisitReportStore.swiperNavList,
       userInfo: state => state.userInfoStore.userInfo,
       reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData,
-      curTitleIndex: state => state.terminalVisitReportStore.curTitleIndex
+      swiperIndex: state => state.terminalVisitReportStore.swiperIndex,
+      reportUrl: state => state.terminalVisitReportStore.reportUrl
     })
   }
 };

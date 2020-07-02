@@ -22,6 +22,7 @@ export default {
     seeVisitRecord() {
       let data = {
         im_date: this.terminalVisitQueryTime,
+
         sales_office: this.reportAjaxData
           ? this.reportAjaxData.zorg1.replace("O ", "")
             ? this.reportAjaxData.zorg1.replace("O", "")

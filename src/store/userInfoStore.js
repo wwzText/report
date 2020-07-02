@@ -23,6 +23,7 @@ const userInfoStore = {
                 Vue.prototype.$bridge.callhandler({
                     type: "getUserInfo"
                 }, res => {
+                    console.log(res)
                     context.commit('setUserInfo', {
                         res
                     })

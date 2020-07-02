@@ -69,13 +69,16 @@ import { mapState } from "vuex";
 export default {
   created() {
     this.NativeCanClose();
+    this.clearReoprtAjaxData();
+    this.removeSwiperIndex();
+
+    this.$store.commit("changeHeaderNavTitle", {
+      name: ""
+    });
+  },
+  mounted() {
     // 获取权限等级
     this.getOrgInfo();
-
-    this.clearReoprtAjaxData();
-    this.$store.commit("changeHeaderNavTitle", {
-        name: ''
-      });
   },
   components: {
     reportSelectTree
@@ -162,6 +165,9 @@ export default {
     // 清空报表请求参数
     clearReoprtAjaxData() {
       this.$store.commit("clearReoprtAjaxData");
+    },
+    removeSwiperIndex() {
+      this.$store.commit("removeSwiperIndex");
     },
 
     // 点击展开弹出框，弹出时修改目标类型及报表类型

@@ -20,6 +20,7 @@ export default {
   },
   methods: {
     seePlanFromNative() {
+      console.log(this.item)
       this.$bridge.callhandler({
         type: "personPlanDetail",
         data: {
@@ -30,6 +31,7 @@ export default {
           userBp: this.reportAjaxData
             ? this.reportAjaxData.userbp
             : this.userInfo.partner,
+          objectid: this.item.objectid
         }
       });
     }

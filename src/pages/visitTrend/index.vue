@@ -75,20 +75,21 @@ export default {
       }
     };
   },
-  mounted() {
-    this.get_echarts();
+  created() {
+    this.$nextTick(() => {
+      this.get_echarts();
+    });
   },
   methods: {
     get_echarts: function() {
-
       this.reportMessage.et_trend.map(item => {
-        
-        item.date = item.date.split('-');
+        console.log(item)
+        // item.date = item.date.split("-");
         this.seven_option.xAxis.data.push(item.date[2]);
-        this.seven_option.series[0].data.push(item.visit_time)
-        this.seven_option.series[1].data.push(item.visit_num)
-      })
-      
+        this.seven_option.series[0].data.push(item.visit_time);
+        this.seven_option.series[1].data.push(item.visit_num);
+      });
+
       this.seven_chart = echarts.init(document.getElementById("seven"));
       // 把配置和数据放这里
       this.seven_chart.setOption(this.seven_option);
