@@ -19,7 +19,7 @@
           <RankingList v-if="item.list.length" :rankList="item.list.slice(0, 4)" :key="index" />
         </template>
       </div>
-      <ViewTitle title="已拜访问题统计" v-if="swiperList[0].question" />
+      <ViewTitle title="已拜访问题统计" @click="seeQuestionInNative" v-if="swiperList[0].question" />
       <QuestionList :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
@@ -73,7 +73,7 @@
           </div>
           <ViewTitle
             v-if="swiperItem.question"
-            title="已拜访经销商统计"
+            title="已拜访问题统计"
             @click="seeQuestionInNative"
             style="marginTop: 10px"
           />
@@ -125,7 +125,7 @@ export default {
     // 给销售员添加计划
     addPlanToSale() {
       this.$bridge.callhandler({
-        type: 'addPlan',
+        type: "addPlan",
         data: {
           appuser: this.reportAjaxData
             ? this.reportAjaxData.username
@@ -134,7 +134,7 @@ export default {
             ? this.reportAjaxData.userbp
             : this.userInfo.partner
         }
-      })
+      });
     },
     // 查看所有计划
     seeAllPlan(list) {
@@ -163,17 +163,23 @@ export default {
     },
     // 查看所有问题
     seeQuestionInNative() {
+      console.log(this.reportAjaxData);
       let data = {
+        im_date: this.terminalVisitQueryTime,
         sales_office: this.reportAjaxData
-          ? this.reportAjaxData.zorg1.replace('O', '')
+          ? this.reportAjaxData.zorg1.replace("O", "")
           : this.userInfo.sales_org.replace("O ", ""),
 
         sales_group: this.reportAjaxData
-          ? this.reportAjaxData.zorg2.replace('O', '')
+          ? this.reportAjaxData.zorg2
+            ? this.reportAjaxData.zorg2.replace("O", "")
+            : ""
           : this.userInfo.sales_group.replace("O ", ""),
 
         sales_station: this.reportAjaxData
-          ? this.reportAjaxData.zorg3.replace('O', '')
+          ? this.reportAjaxData.zorg3
+            ? this.reportAjaxData.zorg3.replace("O", "")
+            : ""
           : this.userInfo.sales_station.replace("O ", ""),
 
         ywy_no: this.reportAjaxData
