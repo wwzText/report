@@ -43,9 +43,6 @@
 
 <script>
 export default {
-  created(){
-    console.log(this.only)
-  },
   props: {
     rankList: Array, // 参与排名业务员列表
     rangMessageList: Array, // 用于展示的字段列表，复用时根据各自不同的配置改变显隐顺序

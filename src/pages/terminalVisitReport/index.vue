@@ -12,7 +12,7 @@
             :key="'aa' + index"
             :title="item.title"
             :describe="item.desc"
-            :message="'全部（' + (item.list.length - 1) +'）'"
+            :message="'全部（' + (item.list.length) +'）'"
             style="marginTop: 10px"
             @click="seeRankAllList(0, index)"
           />
@@ -73,7 +73,7 @@
                 :key="'w' + i"
                 :title="rankItem.title"
                 :describe="rankItem.desc"
-                :message="'全部（' + (rankItem.list.length - 1) +'）'"
+                :message="'全部（' + (rankItem.list.length) +'）'"
                 style="marginTop: 10px"
                 @click="seeRankAllList(index, i)"
               />
