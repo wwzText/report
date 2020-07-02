@@ -40,16 +40,24 @@ const terminalVisitReportStore = {
         rankIndex: 0,
         
         // swiper当前下标，用于页面跳转后的数据记录
-        curTitleIndex: 1
+        curTitleIndex: 0
     },
 
     mutations: {
+
+        // 保存拜访详情页swiper下标
         saveSwiperTitleIndex(state, payload) {
             console.log('页面离开', payload.index)
             state.curTitleIndex = payload.index
         },
         clearReoprtAjaxData(state) {
             state.reportAjaxData = null;
+            state.terminalVisitQueryTime = "";
+            state.curTitleIndex = 0
+        },
+
+        clearVisitTime(state) {
+            state.terminalVisitQueryTime = "";
         },
         /**
          * @param {Object} workCircleDetail 设置工作圈分享的数据

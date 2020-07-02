@@ -109,7 +109,6 @@ export default {
   methods: {
     // 关闭H5
     closeWebView() {
-      console.log(1);
       this.$bridge.callhandler({
         type: "closeWebView"
       });
@@ -118,7 +117,9 @@ export default {
     NativeCanClose() {
       this.$bridge.callhandler({
         type: "isBack",
-        data: "true"
+        data: {
+          isBack: true
+        }
       });
     },
     // 跳转到报表详情页面

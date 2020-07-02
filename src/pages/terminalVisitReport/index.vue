@@ -19,7 +19,12 @@
           <RankingList v-if="item.list.length" :rankList="item.list.slice(0, 4)" :key="index" />
         </template>
       </div>
-      <ViewTitle title="已拜访问题统计" @click="seeQuestionInNative" v-if="swiperList[0].question" />
+      <ViewTitle
+        title="已拜访问题统计"
+        style="marginTop: 10px"
+        @click="seeQuestionInNative"
+        v-if="swiperList[0].question"
+      />
       <QuestionList :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
@@ -111,7 +116,9 @@ export default {
     this.determineUrlByStoreParam();
     this.$bridge.callhandler({
       type: "isBack",
-      data: "false"
+      data: {
+        isBack: false
+      }
     });
   },
   data() {
