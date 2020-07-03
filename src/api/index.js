@@ -1,8 +1,10 @@
 import axios from 'axios';
+import Vue from 'vue';
+
 import apis from './apis';
 
-import store from '@/store'
-// axios.defaults.baseURL = '/api';
+import store from '@/store';
+
 import { SECRET_KEY } from '@/config/md5.config';
 import md5 from 'js-md5';
 
@@ -69,7 +71,8 @@ class Http {
 
     // 发送ajax请求
     static async request(url, data = {}, method = 'post',) {
-        console.log(url)
+
+        console.log(data)
         let userInfo = await Http.verificationUserInfo();
 
         // 服务器时间返回的数据
@@ -83,7 +86,7 @@ class Http {
 
         // 拼接url
         url = 'http://appuat.cresz.com.cn' + apis[url];
-        
+
         // 实际调用axios
         return await axios({
             method,
@@ -113,6 +116,12 @@ class Http {
             if (res.data.errcode === 200) {
                 console.log('接口返回原始数据', res.data.data)
                 return res.data.data
+            } else if (res.data.errcode === 1112) {
+                Vue.prototype.$bridge.callhandler({
+                    type: "loginOut"
+                  });
+                // Vue.prototype.$showToast(res.data.msg)
+                Vue.prototype.$hideLoading()
             }
         })
     }

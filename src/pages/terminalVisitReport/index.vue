@@ -16,7 +16,7 @@
             style="marginTop: 10px"
             @click="seeRankAllList(0, index)"
           />
-          
+
           <RankingList
             v-if="item.list.length"
             :rankList="item.list.slice(0, 4)"
@@ -27,7 +27,7 @@
         </template>
       </div>
       <ViewTitle
-        title="已拜访问题统计"
+        :title="'已' + reportTypeStr + '问题统计'"
         :neednavTo="dateOrMonth == 'DR'"
         style="marginTop: 10px;"
         @click="seeQuestionInNative"
@@ -54,7 +54,7 @@
 
           <ViewTitle
             v-if="swiperItem.showPlace"
-            title="分场所终端拜访率"
+            :title="'分场所终端' + reportTypeStr + '率'"
             message="查看"
             style="marginTop: 10px"
             @click="seePlace"
@@ -88,7 +88,7 @@
           </template>
           <ViewTitle
             v-if="swiperItem.question"
-            title="已拜访问题统计"
+            :title="'已'+reportTypeStr+'问题统计'"
             @click="seeQuestionInNative"
             :neednavTo="dateOrMonth == 'DR'"
             style="marginTop: 10px"
@@ -152,7 +152,8 @@ export default {
   },
   data() {
     return {
-      curTitleIndex: 0
+      curTitleIndex: 0,
+      reportTypeStr: ""
     };
   },
 
@@ -229,6 +230,7 @@ export default {
         data
       });
     },
+
     // 修改页面标题
     changePageTitleName() {
       let name = `${this.targetType == "ZD" ? "终端" : "经销商"}${
@@ -267,6 +269,7 @@ export default {
       // 判断是否有时间，第一次初始化的情况下是没有的
       if (!this.terminalVisitQueryTime) return;
 
+      this.reportTypeStr = this.reportType == "BF" ? "拜访" : (this.reportType == "ZF") ? "走访" : "督查";
       // this.swiperList = []
       let url = `${this.targetType}_${this.reportType}_${this.dateOrMonth}_${this.userOrOrganization}`;
       if (url === this.reportUrl && !bool) {

@@ -171,7 +171,9 @@ const terminalVisitReportStore = {
                 ...reportMessage.es_visit_summary,
                 ...reportMessage.es_summary
             };
+            
             context.state.reportUrl = payload.url;
+
             let swiperList = [];
             let swiperNavList = [];
             switch (payload.url) {
@@ -417,11 +419,11 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '拜访总数',
                                             value: 'visit_time',
-                                            util: '小时'
+                                            util: '次'
                                         }, {
                                             name: '平均拜访时长',
                                             value: 'avg_time',
-                                            util: '小时'
+                                            util: '分/次'
                                         }
                                     ]
                                 }
@@ -722,6 +724,7 @@ const terminalVisitReportStore = {
                                     desc: '走访总时长',
                                     list: reportMessage.et_visit_time,
                                     onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
                                     header: [
                                         {
                                             name: '走访总时长',
@@ -730,7 +733,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '走访总数',
                                             value: 'visit_time',
-                                            util: '小时'
+                                            util: '次'
                                         }, {
                                             name: '平均走访时长',
                                             value: 'avg_time',
@@ -766,7 +769,7 @@ const terminalVisitReportStore = {
                             rankLists: [
                                 {
                                     title: '所在工作站排行榜',
-                                    desc: '日均拜访家数',
+                                    desc: '日均走访家数',
                                     list: reportMessage.et_visit_rank,
                                     onlyValue: 'average_number',
                                     onlyUtil: '家',
@@ -862,15 +865,15 @@ const terminalVisitReportStore = {
                                 {
                                     name: '日均家数',
                                     value: headerMessage.average_number,
-                                    util: '家'
+                                    util: '家/人'
                                 }, {
                                     name: '走访天数',
                                     value: headerMessage.visit_days,
-                                    util: '天'
+                                    util: '天/人'
                                 }, {
                                     name: '日均走访时长',
                                     value: headerMessage.average_day_time,
-                                    util: '小时'
+                                    util: '小时/人'
                                 }
                             ],
                             rankLists: [

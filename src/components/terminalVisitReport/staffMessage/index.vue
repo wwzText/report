@@ -10,7 +10,7 @@
       class="see-record-btn"
       v-if="userOrOrganization == 'RY' && dateOrMonth == 'DR'"
       @click="seeVisitRecord"
-    >查看拜访记录></button>
+    >查看{{reportTypeStr}}记录></button>
   </div>
 </template>
 
@@ -18,6 +18,19 @@
 import { mapState } from "vuex";
 
 export default {
+  data() {
+    return {
+      reportTypeStr: ""
+    }
+  },
+  created() {
+    this.reportTypeStr =
+      this.reportType == "BF"
+        ? "拜访"
+        : this.reportType == "ZF"
+        ? "走访"
+        : "督查";
+  },
   methods: {
     seeVisitRecord() {
       let data = {

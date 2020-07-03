@@ -44,7 +44,6 @@ if (url.includes('?from')) {
   window.location.href = url;
 }
 
-
 new Vue({
   router,
   store,
