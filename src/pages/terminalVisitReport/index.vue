@@ -12,7 +12,7 @@
             :key="'aa' + index"
             :title="item.title"
             :describe="item.desc"
-            :message="'全部（' + (item.list.length) +'）'"
+            :message="'全部（' + (item.list[0].rank == 0 ? item.list.length - 1 : item.list.length) +'）'"
             style="marginTop: 10px"
             @click="seeRankAllList(0, index)"
           />
@@ -36,7 +36,7 @@
       <QuestionList style="marginTop: 1px;" :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
-    <div v-else style="marginTop: 10px">
+    <div v-if="swiperList.length > 1" style="marginTop: 10px">
       <titleNav
         :titleList="swiperNavList"
         :curTitleIndex="curTitleIndex"
@@ -73,7 +73,7 @@
                 :key="'w' + i"
                 :title="rankItem.title"
                 :describe="rankItem.desc"
-                :message="'全部（' + (rankItem.list.length) +'）'"
+                :message="'全部（' + (rankItem.list[0].rank == 0 ? rankItem.list.length-1 : rankItem.list.length) +'）'"
                 style="marginTop: 10px"
                 @click="seeRankAllList(index, i)"
               />
@@ -123,6 +123,7 @@ export default {
     planList
   },
   created() {
+    console.log('swiperList', this.swiperList)
     // 修改对应页面标题
     this.changePageTitleName();
 
@@ -199,7 +200,6 @@ export default {
     },
     // 查看所有问题
     seeQuestionInNative() {
-      console.log(this.reportAjaxData);
       let data = {
         im_date: this.terminalVisitQueryTime,
         sales_office: this.reportAjaxData
@@ -318,79 +318,9 @@ export default {
           : 1
         : userInfo.sales_station
         ? 3
-        : userInfosales_group
+        : userInfo.userInfosales_group
         ? 2
         : 1;
-      // if (this.userOrOrganization === "RY") {
-      //   queryObj["user_bp"] = havaAjaxData
-      //     ? reportAjaxData.userbp
-      //     : userInfo.partner;
-
-      //   queryObj["org_code"] = havaAjaxData
-      //     ? reportAjaxData.zposition
-      //     : userInfo.sales_station;
-      // } else {
-
-      // }
-
-      // if (this.userOrOrganization === "RY") {
-      //   queryObj["user_bp"] = this.reportAjaxData
-      //     ? this.reportAjaxData.userbp
-      //     : this.userInfo.partner;
-
-      //   queryObj["org_code"] = this.reportAjaxData
-      //     ? this.reportAjaxData.zposition
-      //     : this.userInfo.sales_station;
-      // } else {
-      //   if (this.reportAjaxData.zorg1) {
-      //     queryObj["org_code"] = this.reportAjaxData.zorg1;
-      //     queryObj["org_type"] = "1";
-      //   }
-      //   if (this.reportAjaxData.zorg2) {
-      //     queryObj["org_code"] = this.reportAjaxData.zorg2;
-      //     queryObj["org_type"] = "2";
-      //   }
-      //   if (this.reportAjaxData.zorg3) {
-      //     queryObj["org_code"] = this.reportAjaxData.zorg3;
-      //     queryObj["org_type"] = "3";
-      //   }
-      // }
-
-      // if (this.userOrOrganization === "RY" && this.reportType !== "BF") {
-      //   if (this.reportType == "ZF") {
-      //     queryObj["visit_type"] = "ZZ01";
-      //   } else {
-      //     queryObj["visit_type"] = "ZB03";
-      //   }
-
-      //   if (this.reportAjaxData) {
-      //     if (this.reportAjaxData.zorg1) {
-      //       queryObj["org_code"] = this.reportAjaxData.zorg1;
-      //       queryObj["org_type"] = "1";
-      //     }
-      //     if (this.reportAjaxData.zorg2) {
-      //       queryObj["org_code"] = this.reportAjaxData.zorg2;
-      //       queryObj["org_type"] = "2";
-      //     }
-      //     if (this.reportAjaxData.zorg3) {
-      //       queryObj["org_code"] = this.reportAjaxData.zorg3;
-      //       queryObj["org_type"] = "3";
-      //     }
-      //   } else {
-      //     if (this.userInfo.sales_office) {
-      //       queryObj["org_code"] = this.userInfo.sales_office;
-      //       queryObj["org_type"] = "1";
-      //     }
-      //     if (this.userInfo.sales_group) {
-      //       queryObj["org_code"] = this.userInfo.sales_group;
-      //       queryObj["org_type"] = "2";
-      //     }
-      //     if (this.userInfo.sales_station) {
-      //       queryObj["org_code"] = this.userInfo.sales_station;
-      //       queryObj["org_type"] = "3";
-      //     }
-      //   }
-      // }
       console.log(url, queryObj);
       this.getReportData(url, queryObj);
     },

@@ -195,7 +195,8 @@ export default {
     // 查看当前登陆用于自己的报表
     seeUserSelfReport() {
       this.$store.commit("setTerminalUserOrOrganization", {
-        type: "RY"
+        type: "RY",
+        reportAjaxData: null
       });
       this.$router.push("/report/terminalVisitReport");
     }

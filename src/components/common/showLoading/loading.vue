@@ -1,6 +1,6 @@
 <template>
-  <div class="loading-container" v-if="showLoadingBool">
-    <Loading vertical>{{loadingText}}</Loading>
+  <div class="loading-container" @click.stop v-if="showLoadingBool">
+    <Loading vertical color="#1989fa">{{loadingText}}</Loading>
   </div>
 </template>
 

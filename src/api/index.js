@@ -116,7 +116,7 @@ class Http {
             if (res.data.errcode === 200) {
                 console.log('接口返回原始数据', res.data.data)
                 return res.data.data
-            } else if (res.data.errcode === 1112) {
+            } else if (res.data.errcode == 1112) {
                 Vue.prototype.$bridge.callhandler({
                     type: "loginOut"
                   });

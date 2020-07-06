@@ -176,6 +176,7 @@ const terminalVisitReportStore = {
 
             let swiperList = [];
             let swiperNavList = [];
+            console.log('visit_num2', headerMessage.visit_num2)
             switch (payload.url) {
                 case 'ZD_BF_DR_RY':
                     swiperList = [
@@ -320,10 +321,14 @@ const terminalVisitReportStore = {
                             visitData: [
                                 {
                                     name: '有效拜访率',
-                                    value: headerMessage.visit_efficient
+                                    value: headerMessage.visit_efficient,
+                                    utilValue: headerMessage.visit_num2,
+                                    util: '家'
                                 }, {
                                     name: '拜访率',
-                                    value: headerMessage.visit_rate
+                                    value: headerMessage.visit_rate,
+                                    utilValue: headerMessage.visit_num1,
+                                    util: '家'
                                 }
                             ],
                             showPlace: true,
@@ -689,13 +694,8 @@ const terminalVisitReportStore = {
                                     name: '人均拜访数',
                                     value: headerMessage.average_number,
                                     util: '家'
-                                }, {
-                                    name: '有问题经销商数',
-                                    value: headerMessage.question_number,
-                                    util: '家'
                                 }
                             ],
-                            question: reportMessage.et_visit_quest
                         }
                     ];
                     break;
@@ -878,7 +878,7 @@ const terminalVisitReportStore = {
                             ],
                             rankLists: [
                                 {
-                                    title: '所在大区排行榜',
+                                    title: '同级排行榜',
                                     desc: '日均走访家数',
                                     list: reportMessage.et_rank_sameorg_egvtimes,
                                     onlyValue: 'average_number',
@@ -887,19 +887,19 @@ const terminalVisitReportStore = {
                                         {
                                             name: '日均走访家数',
                                             value: 'average_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '走访天数',
                                             value: 'visit_days',
-                                            util: '天'
+                                            util: '天/人'
                                         }, {
                                             name: '日均走访时长',
                                             value: 'average_day_time',
-                                            util: '小时'
+                                            util: '小时/人'
                                         }
                                     ]
                                 }, {
-                                    title: '管辖工作站排行榜',
+                                    title: '下级排行榜',
                                     desc: '日均走访家数',
                                     list: reportMessage.et_rank_suborg_egvtimes,
                                     onlyValue: 'average_number',
@@ -908,19 +908,19 @@ const terminalVisitReportStore = {
                                         {
                                             name: '日均走访家数',
                                             value: 'average_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '拜访天数',
                                             value: 'visit_days',
-                                            util: '天'
+                                            util: '天/人'
                                         }, {
                                             name: '日均走访时长',
                                             value: 'average_day_time',
-                                            util: '小时'
+                                            util: '小时/人'
                                         }
                                     ]
                                 }, {
-                                    title: '工作站直属管理员',
+                                    title: '直属管理员排行榜',
                                     desc: '日均走访家数',
                                     list: reportMessage.et_rank_direct_egvtimes,
                                     onlyValue: 'average_number',
@@ -961,66 +961,66 @@ const terminalVisitReportStore = {
 
                             rankLists: [
                                 {
-                                    title: '所在大区排行榜',
+                                    title: '同级排行榜',
                                     desc: '走访总时长',
                                     list: reportMessage.et_rank_sameorg_totaltime,
-                                    onlyValue: 'average_number',
-                                    onlyUtil: '家',
+                                    onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
                                     header: [
                                         {
                                             name: '走访总时长',
-                                            value: 'average_number',
+                                            value: 'visit_total_time',
                                             util: '家'
                                         }, {
-                                            name: '走访天数',
-                                            value: 'visit_days',
+                                            name: '走访总数',
+                                            value: 'visit_time',
                                             util: '天'
                                         }, {
-                                            name: '日均走访时长',
-                                            value: 'average_day_time',
-                                            util: '小时'
+                                            name: '平均走访时长',
+                                            value: 'avg_time',
+                                            util: 'min/次'
                                         }
                                     ]
                                 }, {
-                                    title: '管辖工作站排行榜',
+                                    title: '下级排行榜',
                                     desc: '走访总时长',
                                     list: reportMessage.et_rank_suborg_totaltime,
-                                    onlyValue: 'average_number',
-                                    onlyUtil: '家',
+                                    onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
                                     header: [
                                         {
                                             name: '走访总时长',
-                                            value: 'average_number',
+                                            value: 'visit_total_time',
                                             util: '家'
                                         }, {
-                                            name: '拜访天数',
-                                            value: 'visit_days',
+                                            name: '走访次数',
+                                            value: 'visit_time',
                                             util: '天'
                                         }, {
-                                            name: '日均走访时长',
-                                            value: 'average_day_time',
-                                            util: '小时'
+                                            name: '平均走访时长',
+                                            value: 'avg_time',
+                                            util: 'min/次'
                                         }
                                     ]
                                 }, {
-                                    title: '工作站直属管理员',
+                                    title: '直属管理员排行榜',
                                     desc: '走访总时长',
                                     list: reportMessage.et_rank_direct_totaltime,
-                                    onlyValue: 'average_number',
-                                    onlyUtil: '家',
+                                    onlyValue: 'visit_total_time',
+                                    onlyUtil: '小时',
                                     header: [
                                         {
                                             name: '走访总时长',
-                                            value: 'average_number',
+                                            value: 'visit_total_time',
                                             util: '家'
                                         }, {
-                                            name: '拜访天数',
-                                            value: 'visit_days',
+                                            name: '走访次数',
+                                            value: 'visit_time',
                                             util: '天'
                                         }, {
-                                            name: '日均走访时长',
-                                            value: 'average_day_time',
-                                            util: '小时'
+                                            name: '平均走访时长',
+                                            value: 'avg_time',
+                                            util: 'min/次'
                                         }
                                     ]
                                 }
@@ -1179,7 +1179,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '人均督查数',
                                     value: headerMessage.ave_number,
-                                    util: '家'
+                                    util: '家/人'
                                 }, {
                                     name: '终端总数',
                                     value: headerMessage.termial_number,
@@ -1189,7 +1189,7 @@ const terminalVisitReportStore = {
                             ],
                             rankLists: [
                                 {
-                                    title: '所在大区排行榜',
+                                    title: '同级排行榜',
                                     desc: '人均督查总数',
                                     list: reportMessage.et_rank_sameorg_egvnum,
                                     onlyValue: 'ave_number',
@@ -1202,7 +1202,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '人均督查数',
                                             value: 'ave_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '终端总数',
                                             value: 'termial_number',
@@ -1210,20 +1210,20 @@ const terminalVisitReportStore = {
                                         }
                                     ]
                                 }, {
-                                    title: '管辖工作站',
+                                    title: '下级排行榜',
                                     desc: '人均督查总数',
                                     list: reportMessage.et_rank_suborg_egvnum,
-                                    onlyValue: 'ave_number',
+                                    onlyValue: 'visit_number',
                                     onlyUtil: '家',
                                     header: [
                                         {
                                             name: '督查总数',
-                                            value: 'ave_number',
+                                            value: 'visit_number',
                                             util: '家'
                                         }, {
                                             name: '人均督查数',
                                             value: 'ave_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '终端总数',
                                             value: 'termial_number',
@@ -1244,7 +1244,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '人均督查数',
                                             value: 'ave_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '终端总数',
                                             value: 'termial_number',
@@ -1262,13 +1262,13 @@ const terminalVisitReportStore = {
                         {
                             visitData: [
                                 {
-                                    name: '督查总数',
+                                    name: '已督查数',
                                     value: headerMessage.visit_number,
                                     util: '家'
                                 }, {
-                                    name: '人均督查数',
+                                    name: '日均督查数',
                                     value: headerMessage.ave_number,
-                                    util: '家'
+                                    util: '家/人'
                                 }, {
                                     name: '终端总数',
                                     value: headerMessage.termial_number,
@@ -1278,28 +1278,28 @@ const terminalVisitReportStore = {
                             ],
                             rankLists: [
                                 {
-                                    title: '所在大区排行榜',
+                                    title: '同级排行榜',
                                     desc: '人均督查总数',
                                     list: reportMessage.et_rank_sameorg_egvnum,
                                     onlyValue: 'ave_number',
-                                    onlyUtil: '家',
+                                    onlyUtil: '家/人',
                                     header: [
-                                        {
-                                            name: '督查总数',
-                                            value: 'visit_number',
-                                            util: '家'
-                                        }, {
-                                            name: '人均督查数',
+                                       {
+                                            name: '日均督查数',
                                             value: 'ave_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '终端总数',
                                             value: 'termial_number',
                                             util: '家'
+                                        }, {
+                                            name: '督查家数',
+                                            value: 'visit_number',
+                                            util: '家'
                                         }
                                     ]
                                 }, {
-                                    title: '管辖工作站',
+                                    title: '下级排行榜',
                                     desc: '人均督查总数',
                                     list: reportMessage.et_rank_suborg_egvnum,
                                     onlyValue: 'ave_number',
@@ -1310,9 +1310,9 @@ const terminalVisitReportStore = {
                                             value: 'ave_number',
                                             util: '家'
                                         }, {
-                                            name: '人均督查数',
+                                            name: '日均督查数',
                                             value: 'ave_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '终端总数',
                                             value: 'termial_number',
@@ -1331,9 +1331,9 @@ const terminalVisitReportStore = {
                                             value: 'visit_number',
                                             util: '家'
                                         }, {
-                                            name: '人均督查数',
+                                            name: '日均督查数',
                                             value: 'ave_number',
-                                            util: '家'
+                                            util: '家/人'
                                         }, {
                                             name: '终端总数',
                                             value: 'termial_number',
@@ -1351,7 +1351,7 @@ const terminalVisitReportStore = {
                         {
                             visitData: [
                                 {
-                                    name: '走访总数',
+                                    name: '督查总数',
                                     value: headerMessage.visit_number,
                                     util: '家'
                                 }, {
@@ -1368,7 +1368,7 @@ const terminalVisitReportStore = {
                         {
                             visitData: [
                                 {
-                                    name: '走访总数',
+                                    name: '督查总数',
                                     value: headerMessage.visit_number,
                                     util: '家'
                                 }, {
@@ -1386,13 +1386,13 @@ const terminalVisitReportStore = {
                         {
                             visitData: [
                                 {
-                                    name: '走访总数',
+                                    name: '督查总数',
                                     value: headerMessage.visit_number,
                                     util: '家'
                                 }, {
-                                    name: '日均走访数',
+                                    name: '日均督查数',
                                     value: headerMessage.ave_number,
-                                    util: '家'
+                                    util: '家/人'
                                 }, {
                                     name: '有问题经销商数',
                                     value: headerMessage.question_number,
@@ -1407,13 +1407,13 @@ const terminalVisitReportStore = {
                         {
                             visitData: [
                                 {
-                                    name: '走访总数',
+                                    name: '督查总数',
                                     value: headerMessage.visit_number,
                                     util: '家'
                                 }, {
-                                    name: '日均走访数',
+                                    name: '日均督查数',
                                     value: headerMessage.ave_number,
-                                    util: '家'
+                                    util: '家/人'
                                 }, {
                                     name: '有问题经销商数',
                                     value: headerMessage.question_number,
