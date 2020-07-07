@@ -978,7 +978,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均走访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }, {
@@ -999,7 +999,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均走访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }, {
@@ -1020,7 +1020,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '平均走访时长',
                                             value: 'avg_time',
-                                            util: 'min/次'
+                                            util: '分/次'
                                         }
                                     ]
                                 }
@@ -1196,14 +1196,14 @@ const terminalVisitReportStore = {
                                     onlyUtil: '家',
                                     header: [
                                         {
-                                            name: '督查总数',
-                                            value: 'visit_number',
-                                            util: '家'
-                                        }, {
                                             name: '人均督查数',
                                             value: 'ave_number',
                                             util: '家/人'
                                         }, {
+                                            name: '督查总数',
+                                            value: 'visit_number',
+                                            util: '家'
+                                        },{
                                             name: '终端总数',
                                             value: 'termial_number',
                                             util: '家'

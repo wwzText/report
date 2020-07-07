@@ -11,35 +11,35 @@
       </div>
     </div>
     <div class="report-entry-main">
-      <div class="report-item" @click="showPeopleSelectPopup('ZD', 'BF')">
+      <div class="report-item" v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('ZD', 'BF')">
         <img src="./../../assets/img/ZD_BF.png" alt />
         <span>终端拜访</span>
       </div>
-      <div class="report-item" @click="showPeopleSelectPopup('JXS', 'BF')">
+      <div class="report-item" v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('JXS', 'BF')">
         <img src="./../../assets/img/JXS_BF.png" alt />
         <span>经销商拜访</span>
       </div>
 
-      <div class="report-item" @click="showPeopleSelectPopup('ZD', 'ZF')">
+      <div class="report-item" v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('ZD', 'ZF')">
         <img src="./../../assets/img/ZD_ZF.png" alt />
         <span>终端走访</span>
       </div>
-      <div class="report-item" @click="showPeopleSelectPopup('JXS', 'ZF')">
+      <div class="report-item" v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('JXS', 'ZF')">
         <img src="./../../assets/img/JXS_ZF.png" alt />
         <span>经销商走访</span>
       </div>
-      <div class="report-item" @click="showPeopleSelectPopup('ZD', 'DC')">
+      <div class="report-item" v-if="userInfo.appdc == 'X'" @click="showPeopleSelectPopup('ZD', 'DC')">
         <img src="./../../assets/img/ZD_DC.png" alt />
         <span>终端督查</span>
       </div>
-      <div class="report-item" @click="showPeopleSelectPopup('JXS', 'DC')">
+      <div class="report-item" v-if="userInfo.appdc == 'X'" @click="showPeopleSelectPopup('JXS', 'DC')">
         <img src="./../../assets/img/JXS_DC.png" alt />
         <span>经销商督查</span>
       </div>
     </div>
     <Popup v-model="showPopup" position="right" :style="{ height: '100%', width: '90%' }">
       <div class="see-self-report" @click="seeUserSelfReport">
-        <button>查看个人统计报表</button>
+        <button>查看个人统计看板</button>
         <img src="./../../assets/img/report_icon.png" alt srcset />
       </div>
       <input type="text" placeholder="请输入查询业务员名字关键字" class="saerch-input" v-model="searchKeyword" />
