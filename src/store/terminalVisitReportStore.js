@@ -610,7 +610,7 @@ const terminalVisitReportStore = {
                                         }
                                     ]
                                 }, {
-                                    title: '同级排行榜',
+                                    title: '下级排行榜',
                                     desc: '有效拜访率',
                                     list: reportMessage.et_rank_suborg_efficient,
                                     onlyValue: 'visit_efficient',

@@ -87,13 +87,13 @@
             </div>
           </template>
           <ViewTitle
-            v-if="swiperItem.question"
+            v-if="swiperItem.question && userOrOrganization == 'RY' && dateOrMonth == 'DR' && targetType == 'ZD' && (reportType == 'DC' || reportType == 'ZF')"
             :title="'已'+reportTypeStr+'问题统计'"
             @click="seeQuestionInNative"
             :neednavTo="dateOrMonth == 'DR'"
             style="marginTop: 10px"
           />
-          <QuestionList v-if="swiperItem.question" :list="swiperItem.question" />
+          <QuestionList v-if="swiperItem.question && userOrOrganization == 'RY' && dateOrMonth == 'DR' && targetType == 'ZD' && (reportType == 'DC' || reportType == 'ZF')" :list="swiperItem.question" />
           <ViewTitle
             v-if="swiperItem.planList"
             title="TA的拜访计划"
