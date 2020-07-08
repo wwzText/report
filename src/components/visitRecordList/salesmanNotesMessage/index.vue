@@ -9,7 +9,6 @@
             <span class="leave-time-detail">{{shareData.visit_out_time}}</span>
             <span class="iconfont iconshijian-01"></span>
             <span class="leave-time-detail">{{shareData.visit_long_time}}分</span>
-
         </div>
     </div>
 </template>

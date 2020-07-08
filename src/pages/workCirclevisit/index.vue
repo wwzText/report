@@ -1,39 +1,67 @@
 <template>
   <div class="work-share-container">
-    <!-- <salesmanMessage :shareData="shareData" />
-    <salesmanNotesMessage :shareData="shareData" />
-    <visitQuestion :shareData="shareData" />-->
-    <ViewTitle
-      title="评论点赞列表"
-      :neednavTo="false"
-      style="marginTop: 10px; marginBottom: 1px"
-    />
+    <div class="address-time-container">
+      <div class="address-main">
+        <img :src="typeImg" alt />
+        <span class="terminal_name">{{shareData.terminal_name}}/{{shareData.zzdhzxz_txt}}</span>
+      </div>
+      <div class="leave-time-container">
+        <span class="iconfont iconqiandao-01"></span>
+        <span class="leave-time-detail">{{shareData.visit_in_time}} --</span>
+        <span class="iconfont iconqiantui-01"></span>
+        <span class="leave-time-detail">{{shareData.visit_out_time}}</span>
+        <span class="iconfont iconshijian-01"></span>
+        <span class="leave-time-detail">{{shareData.visit_long_time}}分</span>
+      </div>
+    </div>
+    <div class="sales-message-container">
+      <div class="sales-message-main">
+        <img
+          :src="shareData.user_head ? shareData.user_head[0].value : './../../assets/img/default_head.png'"
+          alt
+          class="user-head-img"
+        />
+        <span class="partner_name">{{shareData.partner_name}}</span>
+        <span class="sales_position">{{shareData.position}}</span>
+        <span class="sales_visit_time">{{shareData.leave_data}}</span>
+      </div>
+      <div class="leave_notes-main">
+        <p class="leave_notes_title">离店备注</p>
+        <p class="leave-noter">{{shareData.leaving_note || '无'}}</p>
+      </div>
+    </div>
+    <ViewTitle title="检查项目"  :neednavTo="false" style="marginTop: 10px; marginBottom: 1px" />
+    <div class="check-info-container">
+      <visitQuestionCard :check_info="shareData.step_info" />
+    </div>
+
+    <div class="question-list" style="marginTop: 10px;">
+      <span class="question-title">存在的问题</span>
+      <visitQuestionCard :check_info="shareData.check_info" :onlyTrueFalse="true" />
+    </div>
+
     <visitGoodCommandList v-if="shareData.thumbups_tab" :shareData="shareData" />
-    <ViewTitle
-      title="图片"
-      :neednavTo="false"
-      style="marginTop: 10px; marginBottom: 1px"
-    />
+    <ViewTitle title="图片" :neednavTo="false" style="marginTop: 10px; marginBottom: 1px" />
     <visitImgList v-if="shareData.visit_photo_list" :shareData="shareData" />
   </div>
 </template>
 
 <script>
-import salesmanMessage from "@/components/visitRecordList/salesmanMessage"; // 业务员信息
-import salesmanNotesMessage from "@/components/visitRecordList/salesmanNotesMessage"; // 业务员离店备注
-import visitQuestion from "@/components/visitRecordList/visitQuestion"; // 拜访问题
 import visitImgList from "@/components/visitRecordList/visitImgList"; // 拜访照片列表
 import visitGoodCommandList from "@/components/visitRecordList/visitGoodCommandList"; // 拜访点赞评论列表
-
+import visitQuestionCard from '@/components/visitRecordList/visitQuestionCard'; // 标签
 import { getQueryObj } from "@/utils";
+
+const placeKa = require("./../../assets/img/placeKa.png");
+const placeRetail = require("./../../assets/img/placeRetail.png");
+const placeKTV = require("./../../assets/img/placeKTV.png");
+const placefood = require("./../../assets/img/placefood.png");
 
 export default {
   components: {
-    salesmanMessage,
-    salesmanNotesMessage,
-    visitQuestion,
     visitImgList,
-    visitGoodCommandList
+    visitGoodCommandList,
+    visitQuestionCard
   },
   created() {
     // 获取url上的参数
@@ -44,7 +72,8 @@ export default {
 
   data() {
     return {
-      shareData: {}
+      shareData: {},
+      typeImg: ""
     };
   },
 
@@ -58,6 +87,20 @@ export default {
           obj: getQueryObj()
         }
       );
+      switch (this.shareData.terminal_type) {
+        case "ZSNM01":
+          this.typeImg = placeKa;
+          break;
+        case "ZSNM02":
+          this.typeImg = placeRetail;
+          break;
+        case "ZSNM03":
+          this.typeImg = placeKTV;
+          break;
+        case "ZSNM04":
+          this.typeImg = placefood;
+          break;
+      }
       this.$hideLoading();
     }
   }
@@ -65,9 +108,107 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.work-share-container{
-  background-color: #D9D9D9;
+.work-share-container {
+  background-color: #d9d9d9;
   height: 100%;
   overflow: auto;
+}
+// 头部地址及进店离店时间
+.address-time-container {
+  background-color: white;
+  padding: 15px 10px;
+  box-sizing: border-box;
+  .leave-time-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    .iconqiandao-01,
+    .iconqiantui-01,
+    .iconshijian-01 {
+      color: @primaryColor;
+      font-size: 20px;
+    }
+    .leave-time-detail {
+      font-size: 12px;
+      color: @fontColor;
+    }
+    .iconshijian-01 {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+  .address-main {
+    display: flex;
+
+    .terminal_name {
+      font-size: 16px;
+      font-weight: 500;
+      margin-left: 10px;
+    }
+  }
+}
+
+// 业务员信息-离店备注
+.sales-message-container {
+  padding: 10px 15px;
+  background-color: white;
+  box-sizing: border-box;
+  margin-top: 1px;
+  .sales-message-main {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    .user-head-img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .partner_name {
+      font-size: 16px;
+    }
+    .sales_position {
+      font-size: 12px;
+      color: #989898;
+      flex: 1;
+    }
+    .sales_visit_time {
+      font-size: 12px;
+      color: #666;
+    }
+  }
+  .leave_notes-main {
+    .leave_notes_title {
+      font-size: 12px;
+      color: #989898;
+    }
+    .leave-noter {
+      font-size: 14px;
+      text-overflow: -o-ellipsis-lastline;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
+
+// 检查项目
+.check-info-container{
+  padding: 15px 10px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.question-list{
+  background:rgba(255,246,245,1);
+  padding: 15px 10px;
+  box-sizing: border-box;
+  .question-title{
+    font-size: 16px;
+    color: #DB2B2B;
+    font-weight: bold;
+  }
 }
 </style>

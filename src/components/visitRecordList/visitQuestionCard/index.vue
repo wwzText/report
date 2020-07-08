@@ -1,16 +1,22 @@
 <template>
   <!-- 拜访问题标签 -->
   <ul class="question-card-container">
-    <li v-for="(item, index) in check_info" :key="index">
-      <span :class="judgeClass(item.step_result)">{{item.step_name}}</span>
-    </li>
+    <template v-for="(item, index) in check_info">
+      <li :key="index" v-if="!onlyTrueFalse || item.step_result != 0">
+        <span :class="judgeClass(item.step_result)">{{item.step_name}}</span>
+      </li>
+    </template>
   </ul>
 </template>
 
 <script>
 export default {
   props: {
-    check_info: Array
+    check_info: Array,
+    onlyTrueFalse: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {};
@@ -20,16 +26,24 @@ export default {
     // 根据问题的类型返回不同的class，改变颜色
     judgeClass(type) {
       let className = "";
-      switch (type * 1) {
-        case 1:
-          className = "not-question";
-          break;
-        case 2:
-          className = "have-question";
-          break;
-        case 0:
-          className = "not-judge";
-          break;
+      if (!this.onlyTrueFalse) {
+        switch (type * 1) {
+          case 1:
+            className = "not-question";
+            break;
+          case 2:
+            className = "have-question";
+            break;
+          case 0:
+            className = "not-judge";
+            break;
+        }
+      } else {
+        switch (type * 1) {
+          case 1:
+            className = "have-question";
+            break;
+        }
       }
       return className;
     }

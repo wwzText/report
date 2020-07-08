@@ -1,7 +1,7 @@
 <template>
   <!-- 拜访照片列表 -->
   <ul class="visit-images-intercept-container">
-    <li v-for="(item, index) in shareData.visit_photo_list" :key="index" class="visit-item">
+    <li v-for="(item, index) in shareData.visit_photo_list.slice(0, 4)" :key="index" class="visit-item">
       <vanImage class="img-item" :src="item" @click="previewImg(index)" />
       <div v-if="index == 3" class="tip-more-container" @click="seeAllVisitImg">
           <span class="tip-text">查看全部</span>

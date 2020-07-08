@@ -160,7 +160,6 @@ const terminalVisitReportStore = {
             // 进店离店时间
             workCircleDetail.visit_in_time = timeStampToTime(workCircleDetail.visit_in_time, 'H:M');
             workCircleDetail.visit_out_time = timeStampToTime(workCircleDetail.visit_out_time, 'H:M');
-            console.log(workCircleDetail)
             context.commit('setShareWorkCircleDetail', {
                 workCircleDetail
             });
