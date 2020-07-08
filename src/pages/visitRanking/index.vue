@@ -74,7 +74,6 @@ export default {
         this.showMonthSelect = true;
       } else {
         this.showCalenar = true;
-        console.log(this.showCalenar)
       }
     },
 
@@ -101,7 +100,6 @@ export default {
 
     // 选择排名类型
     selectRankingType(e) {
-      console.log(e);
       this.headerList.map((item, index) => {
         if (item.name == e.name) {
           this.CompSwiperIndex = index;

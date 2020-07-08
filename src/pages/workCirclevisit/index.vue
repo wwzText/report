@@ -1,10 +1,20 @@
 <template>
-  <div>
-    <salesmanMessage :shareData="shareData" />
+  <div class="work-share-container">
+    <!-- <salesmanMessage :shareData="shareData" />
     <salesmanNotesMessage :shareData="shareData" />
-    <visitQuestion :shareData="shareData" />
-    <visitImgList :shareData="shareData" />
-    <visitGoodCommandList :shareData="shareData" />
+    <visitQuestion :shareData="shareData" />-->
+    <ViewTitle
+      title="评论点赞列表"
+      :neednavTo="false"
+      style="marginTop: 10px; marginBottom: 1px"
+    />
+    <visitGoodCommandList v-if="shareData.thumbups_tab" :shareData="shareData" />
+    <ViewTitle
+      title="图片"
+      :neednavTo="false"
+      style="marginTop: 10px; marginBottom: 1px"
+    />
+    <visitImgList v-if="shareData.visit_photo_list" :shareData="shareData" />
   </div>
 </template>
 
@@ -28,7 +38,8 @@ export default {
   created() {
     // 获取url上的参数
     this.getWorkShareData();
-    document.title = '工作圈分享';
+
+    document.title = "工作圈分享";
   },
 
   data() {
@@ -40,15 +51,23 @@ export default {
   methods: {
     // 获取分享的参数
     async getWorkShareData() {
-      // this.$showLoading();
+      this.$showLoading();
       this.shareData = await this.$store.dispatch(
         "getShareTerminalVisitDetail",
         {
           obj: getQueryObj()
         }
       );
-      // this.$hideLoading();
+      this.$hideLoading();
     }
   }
 };
 </script>
+
+<style lang="less" scoped>
+.work-share-container{
+  background-color: #D9D9D9;
+  height: 100%;
+  overflow: auto;
+}
+</style>

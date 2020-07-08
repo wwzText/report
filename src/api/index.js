@@ -72,8 +72,8 @@ class Http {
     // 发送ajax请求
     static async request(url, data = {}, method = 'post',) {
 
-        console.log(data)
-        let userInfo = await Http.verificationUserInfo();
+        let userInfo = null;
+        userInfo = await Http.verificationUserInfo();
 
         // 服务器时间返回的数据
         let webTimeBack = await Http.getWebTime();
@@ -114,14 +114,58 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
-                console.log('接口返回原始数据', res.data.data)
                 return res.data.data
             } else if (res.data.errcode == 1112) {
                 Vue.prototype.$bridge.callhandler({
                     type: "loginOut"
-                  });
+                });
                 // Vue.prototype.$showToast(res.data.msg)
                 Vue.prototype.$hideLoading()
+            }
+        })
+    }
+
+    // share
+    static async share(url, data = {}, method = 'post',) {
+
+        // 服务器时间返回的数据
+        let webTimeBack = await Http.getWebTime();
+
+        // 参数签名
+        let sign = Http.dataSign(data, webTimeBack);
+
+        // 服务器时间戳
+        let timestamp = webTimeBack.appserver_time;
+
+        // 拼接url
+        url = 'https://app.cresz.com.cn' + apis[url];
+
+        // 实际调用axios
+        return await axios({
+            method,
+            url,
+            data: {
+                data: JSON.stringify(data),
+                sign,
+                timestamp,
+            },
+
+            transformRequest: [
+                function (data) {
+                    let ret = ''
+                    for (let it in data) {
+                        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                    }
+                    ret = ret.substring(0, ret.lastIndexOf('&'));
+                    return ret
+                }
+            ],
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        }).then(res => {
+            if (res.data.errcode === 200) {
+                return res.data.data
             }
         })
     }

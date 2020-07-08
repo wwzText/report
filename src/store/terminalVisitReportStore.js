@@ -45,7 +45,7 @@ const terminalVisitReportStore = {
         swiperIndex: 0,
 
         rankIndex: 0,
-        
+
     },
 
     mutations: {
@@ -61,7 +61,7 @@ const terminalVisitReportStore = {
             state.reportUrl = ''
         },
         // 首页重置swiper下标
-        removeSwiperIndex(state){
+        removeSwiperIndex(state) {
             state.swiperIndex = 0
         },
         clearVisitTime(state) {
@@ -71,6 +71,7 @@ const terminalVisitReportStore = {
          * @param {Object} workCircleDetail 设置工作圈分享的数据
          */
         setShareWorkCircleDetail(state, payload) {
+            console.log(payload.workCircleDetail)
             state.shareWorkCircleDetail = payload.workCircleDetail
         },
 
@@ -83,12 +84,11 @@ const terminalVisitReportStore = {
                 (state.userOrOrganization === 'RY') ?
                     'ZZ ' : 'RY';
         },
-        
+
 
         setTerminalUserOrOrganization(state, payload) {
             state.userOrOrganization = payload.type;
             state.reportAjaxData = payload.reportAjaxData;
-            console.log(state.reportAjaxData)
         },
 
         // 改变日期时间状态
@@ -128,34 +128,42 @@ const terminalVisitReportStore = {
          * @description 获取工作圈分享的数据，仅一次
          */
         async getShareTerminalVisitDetail(context, payload) {
-            let workCircleDetail = await Http.request("getWorkCircleDetail", {
+            
+            let workCircleDetail = await Http.share("getWorkCircleDetail", {
                 ...payload.obj
             });
             workCircleDetail = workCircleDetail[0];
 
+            
             // 实际用户头像换取
             workCircleDetail.user_head = await getImgOriginalUrl(workCircleDetail.user_head)
+
             workCircleDetail.leave_data = timeStampToTime(workCircleDetail.visit_out_time, 'MM月DD日 W');
             // 拜访时长
-            workCircleDetail.visit_long_time = ((workCircleDetail.visit_out_time - workCircleDetail.visit_in_time) / 1000).toFixed(0)
+            let a = (workCircleDetail.visit_out_time - workCircleDetail.visit_in_time)
+            workCircleDetail.visit_long_time = `${(a/1000/60).toFixed(0)}`
 
-            // 拜访照片
-            let list = [];
-            workCircleDetail.photo_info.map(item => {
-                list.push(item.photoid)
-            })
-            let visitImgList = await getImgOriginalUrl(list)
-            workCircleDetail['visit_photo_list'] = [];
-            visitImgList.map(item => {
-                workCircleDetail.visit_photo_list.push(item.value)
-            })
-
+            if (workCircleDetail.photo_info.length) {
+                // 拜访照片
+                let list = [];
+                workCircleDetail.photo_info.map(item => {
+                    list.push(item.photoid)
+                })
+                let visitImgList = await getImgOriginalUrl(list)
+                workCircleDetail['visit_photo_list'] = [];
+                visitImgList.map(item => {
+                    workCircleDetail.visit_photo_list.push(item.value)
+                })
+            }
+            
 
             // 进店离店时间
-            workCircleDetail.visit_in_time = timeStampToTime(workCircleDetail.visit_in_time, 'M:S');
-            workCircleDetail.visit_out_time = timeStampToTime(workCircleDetail.visit_out_time, 'M:S');
-
-            context.commit('setShareWorkCircleDetail', workCircleDetail);
+            workCircleDetail.visit_in_time = timeStampToTime(workCircleDetail.visit_in_time, 'H:M');
+            workCircleDetail.visit_out_time = timeStampToTime(workCircleDetail.visit_out_time, 'H:M');
+            console.log(workCircleDetail)
+            context.commit('setShareWorkCircleDetail', {
+                workCircleDetail
+            });
 
             return workCircleDetail
         },
@@ -171,12 +179,11 @@ const terminalVisitReportStore = {
                 ...reportMessage.es_visit_summary,
                 ...reportMessage.es_summary
             };
-            
+
             context.state.reportUrl = payload.url;
 
             let swiperList = [];
             let swiperNavList = [];
-            console.log('visit_num2', headerMessage.visit_num2)
             switch (payload.url) {
                 case 'ZD_BF_DR_RY':
                     swiperList = [
@@ -1203,7 +1210,7 @@ const terminalVisitReportStore = {
                                             name: '督查总数',
                                             value: 'visit_number',
                                             util: '家'
-                                        },{
+                                        }, {
                                             name: '终端总数',
                                             value: 'termial_number',
                                             util: '家'
@@ -1284,7 +1291,7 @@ const terminalVisitReportStore = {
                                     onlyValue: 'ave_number',
                                     onlyUtil: '家/人',
                                     header: [
-                                       {
+                                        {
                                             name: '日均督查数',
                                             value: 'ave_number',
                                             util: '家/人'

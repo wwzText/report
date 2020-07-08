@@ -83,7 +83,6 @@ export default {
   methods: {
     get_echarts: function() {
       this.reportMessage.et_trend.map(item => {
-        console.log(item)
         // item.date = item.date.split("-");
         this.seven_option.xAxis.data.push(item.date[2]);
         this.seven_option.series[0].data.push(item.visit_time);

@@ -3,23 +3,37 @@
   <div class="salesman-message-container">
     <img
       class="salesman-header"
-      :src="shareData.user_head ? shareData.user_head[0].value : ''"
+      :src="shareWorkCircleDetail ? shareWorkCircleDetail.user_head[0].value : ''"
       alt
     />
     <div class="salesman-message-value-container">
       <div class="salesman-name-container">
-        <span class="salesman-name">{{shareData.partner_name}}</span>
-        <span class="salesman-visit-time">{{shareData.leave_data}}</span>
+        <span class="salesman-name">{{shareWorkCircleDetail ? shareWorkCircleDetail.partner_name : ''}}</span>
+        <span class="salesman-visit-time">{{shareWorkCircleDetail ? shareWorkCircleDetail.leave_data : ''}}</span>
       </div>
-      <p class="salesman-address">{{shareData.position}}</p>
+      <p class="salesman-address">{{shareWorkCircleDetail ? shareWorkCircleDetail.position : ''}}</p>
     </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
-  props: {
-    shareData: Object
+  data() {
+    return {
+      shareData: {}
+    }
+  },
+  // watch: {
+  //   shareWorkCircleDetail(val) {
+  //     console.log(val)
+  //     this.shareData = val
+  //   }
+  // },
+  computed: {
+    ...mapState({
+      shareWorkCircleDetail: state => state.terminalVisitReportStore.shareWorkCircleDetail
+    })
   }
 };
 </script>

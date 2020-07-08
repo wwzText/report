@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 import visitQuestionCard from './../visitQuestionCard';
 export default {
     components: {
@@ -18,6 +20,11 @@ export default {
     },
     props: {
         shareData: Object
+    },
+    computed: {
+        ...mapState({
+            
+        })
     }
 }
 </script>

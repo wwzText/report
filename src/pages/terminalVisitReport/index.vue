@@ -123,7 +123,6 @@ export default {
     planList
   },
   created() {
-    console.log('swiperList', this.swiperList)
     // 修改对应页面标题
     this.changePageTitleName();
 
@@ -321,7 +320,6 @@ export default {
         : userInfo.userInfosales_group
         ? 2
         : 1;
-      console.log(url, queryObj);
       this.getReportData(url, queryObj);
     },
 

@@ -26,7 +26,6 @@ const organizationTreeStore = {
     actions: {
         // 获取组织树，如果已获取直接返回，没有就调用接口获取并存储
         async getLocalOrganizationTree(context) {
-            console.log(context.state.organizationTree)
             if (context.state.organizationTree.length) {
                 return context.state.organizationTree
             } else {

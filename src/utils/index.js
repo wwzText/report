@@ -60,11 +60,14 @@ export const getQueryObj = () => {
  * @description 通过ids获取实际的图片路径
  */
 export const getImgOriginalUrl = async (ids) => {
+
     if (!(ids instanceof Array)) {
         ids = [ids]
     }
-    let originalImgObject = await Http.request('getImgOriginal', {
+
+    let originalImgObject = await Http.share('getImgOriginal', {
         objectIds: ids
     })
+    
     return originalImgObject
 }

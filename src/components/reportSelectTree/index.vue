@@ -50,7 +50,6 @@ export default {
         reportAjaxData: item
       });
       
-      console.log(item)
       this.$router.push("/report/terminalVisitReport");
     },
     rightName(item) {
