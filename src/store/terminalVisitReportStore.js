@@ -451,19 +451,19 @@ const terminalVisitReportStore = {
                                 {
                                     name: '日均家数',
                                     value: headerMessage.average_number,
-                                    util: '家'
+                                    util: '家/人'
                                 }, {
                                     name: '日均次数',
                                     value: headerMessage.average_visit_time,
-                                    util: '次'
+                                    util: '次/人'
                                 }, {
                                     name: '拜访天数',
                                     value: headerMessage.visit_days,
-                                    util: '天'
+                                    util: '天/人'
                                 }, {
                                     name: '日均拜访时长',
                                     value: headerMessage.average_day_time,
-                                    util: '小时'
+                                    util: '小时/人'
                                 }
                             ],
                             rankLists: [
@@ -525,11 +525,11 @@ const terminalVisitReportStore = {
                                 {
                                     name: '拜访总时长',
                                     value: headerMessage.visit_total_time,
-                                    util: '小时'
+                                    util: '小时/人'
                                 }, {
                                     name: '拜访总数',
                                     value: headerMessage.visit_time,
-                                    util: '次'
+                                    util: '次/人'
                                 }, {
                                     name: '平均拜访时长',
                                     value: headerMessage.avg_time,
@@ -848,7 +848,7 @@ const terminalVisitReportStore = {
                                 {
                                     name: '走访总时长',
                                     value: headerMessage.visit_total_time,
-                                    util: '家'
+                                    util: '小时'
                                 }, {
                                     name: '走访总数',
                                     value: headerMessage.visit_time,
@@ -856,7 +856,7 @@ const terminalVisitReportStore = {
                                 }, {
                                     name: '平均走访时长',
                                     value: headerMessage.avg_time,
-                                    util: '家'
+                                    util: '分/次'
                                 }
                             ],
                             question: reportMessage.et_visit_quest

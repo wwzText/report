@@ -30,7 +30,7 @@
         <p class="leave-noter">{{shareData.leaving_note || '无'}}</p>
       </div>
     </div>
-    <ViewTitle title="检查项目"  :neednavTo="false" style="marginTop: 10px; marginBottom: 1px" />
+    <ViewTitle title="检查项目" :neednavTo="false" style="marginTop: 10px; marginBottom: 1px" />
     <div class="check-info-container">
       <visitQuestionCard :check_info="shareData.step_info" />
     </div>
@@ -38,6 +38,29 @@
     <div class="question-list" style="marginTop: 10px;">
       <span class="question-title">存在的问题</span>
       <visitQuestionCard :check_info="shareData.check_info" :onlyTrueFalse="true" />
+    </div>
+
+    <div class="comment-container">
+      <ViewTitle title="点评留言列表" :neednavTo="false">
+        <div class="comment-num-main">
+          <span class="iconfont iconpinglun-01"></span>
+          <span class="good-num" v-if="shareData.commend">{{shareData.commend.comments_num}}</span>
+        </div>
+      </ViewTitle>
+      <div class="comment-list-container" v-if="shareData.commend">
+        <p
+          class="comment-item"
+          v-for="item in shareData.commend.comments_tab"
+          :key="item.commend_id"
+        >
+          <span class="comment-from-name">{{item.from_name}}:</span>
+          <span>{{item.zcomment}}</span>
+        </p>
+        <div class="comment-read-container">
+          <span class="comment-read-num">已读：{{shareData.commend.read_num}}人</span>
+          <span class="comment-not-read-num">未读：{{shareData.commend.no_read_num}}人</span>
+        </div>
+      </div>
     </div>
 
     <visitGoodCommandList v-if="shareData.thumbups_tab" :shareData="shareData" />
@@ -49,7 +72,7 @@
 <script>
 import visitImgList from "@/components/visitRecordList/visitImgList"; // 拜访照片列表
 import visitGoodCommandList from "@/components/visitRecordList/visitGoodCommandList"; // 拜访点赞评论列表
-import visitQuestionCard from '@/components/visitRecordList/visitQuestionCard'; // 标签
+import visitQuestionCard from "@/components/visitRecordList/visitQuestionCard"; // 标签
 import { getQueryObj } from "@/utils";
 
 const placeKa = require("./../../assets/img/placeKa.png");
@@ -166,11 +189,13 @@ export default {
     }
     .partner_name {
       font-size: 16px;
+      margin-right: 10px;
     }
     .sales_position {
       font-size: 12px;
       color: #989898;
       flex: 1;
+      margin-right: 10px;
     }
     .sales_visit_time {
       font-size: 12px;
@@ -195,19 +220,71 @@ export default {
 }
 
 // 检查项目
-.check-info-container{
+.check-info-container {
   padding: 15px 10px;
   box-sizing: border-box;
   background-color: white;
 }
 
-.question-list{
-  background:rgba(255,246,245,1);
+// 点评列表
+.comment-container {
+  margin-top: 10px;
+  .comment-num-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    .iconpinglun-01 {
+      color: @primaryColor;
+      font-size: 20px;
+      margin-left: 15px;
+      margin-right: 2px;
+    }
+    .good-num {
+      font-size: 14px;
+      color: @fontColor;
+    }
+  }
+  .comment-list-container {
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    .comment-item {
+      background: #f7f7f7;
+      padding: 10px;
+      box-sizing: border-box;
+      font-size: 14px;
+      align-self: stretch;
+      .comment-from-name{
+        color: #2986E6;
+      }
+    }
+    .comment-read-container{
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      .comment-read-num,
+      .comment-not-read-num{
+        font-size: 14px;
+      }
+      .comment-not-read-num{
+        color: #2986E6;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.question-list {
+  background: rgba(255, 246, 245, 1);
   padding: 15px 10px;
   box-sizing: border-box;
-  .question-title{
+  .question-title {
     font-size: 16px;
-    color: #DB2B2B;
+    color: #db2b2b;
     font-weight: bold;
   }
 }
