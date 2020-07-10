@@ -1268,7 +1268,7 @@ const terminalVisitReportStore = {
                         {
                             visitData: [
                                 {
-                                    name: '已督查数',
+                                    name: '已督查家数',
                                     value: headerMessage.visit_number,
                                     util: '家'
                                 }, {
@@ -1299,7 +1299,7 @@ const terminalVisitReportStore = {
                                             value: 'termial_number',
                                             util: '家'
                                         }, {
-                                            name: '督查家数',
+                                            name: '已督查家数',
                                             value: 'visit_number',
                                             util: '家'
                                         }

@@ -50,7 +50,8 @@ const organizationTreeStore = {
             }
 
             let tree = await Http.request("getOrganizationList", {
-                appuser: store.state.userInfoStore.userInfo.appuser
+                appuser: store.state.userInfoStore.userInfo.appuser,
+                im_org: 'REPORT'
             });
 
             context.state.organizationTree = tree;
