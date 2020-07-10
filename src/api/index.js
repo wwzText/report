@@ -9,11 +9,14 @@ import { SECRET_KEY } from '@/config/md5.config';
 import md5 from 'js-md5';
 
 class Http {
+
+    static urlBefore = 'https://app.cresz.com.cn'
+    // static urlBefore = 'http://appuat.cresz.com.cn'
     static instance = axios.create({
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        baseURL: 'https://app.cresz.com.cn'
+        baseURL: Http.urlBefore
     })
     // 获取服务端时间的时间戳
     static async getWebTime() {
@@ -85,7 +88,7 @@ class Http {
         let timestamp = webTimeBack.appserver_time;
 
         // 拼接url
-        url = 'https://app.cresz.com.cn' + apis[url];
+        url = Http.urlBefore + apis[url];
 
         // 实际调用axios
         return await axios({
@@ -138,7 +141,7 @@ class Http {
         let timestamp = webTimeBack.appserver_time;
 
         // 拼接url
-        url = 'https://app.cresz.com.cn' + apis[url];
+        url = Http.urlBefore + apis[url];
 
         // 实际调用axios
         return await axios({

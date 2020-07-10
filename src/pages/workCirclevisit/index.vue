@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <visitGoodCommandList v-if="shareData.thumbups_tab" :shareData="shareData" />
+    <visitGoodCommandList :shareData="shareData" />
     <ViewTitle title="图片" :neednavTo="false" style="marginTop: 10px; marginBottom: 1px" />
     <visitImgList v-if="shareData.visit_photo_list" :shareData="shareData" />
   </div>

@@ -472,7 +472,7 @@ const terminalVisitReportStore = {
                                     desc: '日均家数',
                                     list: reportMessage.et_rank_sameorg_egvnumber,
                                     onlyValue: 'average_number',
-                                    onlyUtil: '家',
+                                    onlyUtil: '家/人',
                                     header: [
                                         {
                                             name: '日均拜访家数',
@@ -542,7 +542,7 @@ const terminalVisitReportStore = {
                                     desc: '拜访总时长',
                                     list: reportMessage.et_rank_sameorg_egvtimes,
                                     onlyValue: 'visit_total_time',
-                                    onlyUtil: '小时',
+                                    onlyUtil: '小时/人',
                                     header: [
                                         {
                                             name: '拜访总时长',
@@ -805,7 +805,7 @@ const terminalVisitReportStore = {
                                     util: '小时'
                                 }, {
                                     name: '走访总数',
-                                    value: headerMessage.visit_number,
+                                    value: headerMessage.visit_time,
                                     util: '次'
                                 }, {
                                     name: '平均走访时长',
@@ -916,7 +916,7 @@ const terminalVisitReportStore = {
                                             value: 'average_number',
                                             util: '家/人'
                                         }, {
-                                            name: '拜访天数',
+                                            name: '走访天数',
                                             value: 'visit_days',
                                             util: '天/人'
                                         }, {
