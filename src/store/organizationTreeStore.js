@@ -53,7 +53,7 @@ const organizationTreeStore = {
                 appuser: store.state.userInfoStore.userInfo.appuser,
                 im_org: 'REPORT'
             });
-
+            console.log('tree', tree)
             context.state.organizationTree = tree;
             return tree
 
