@@ -320,7 +320,9 @@ export default {
         : userInfo.userInfosales_group
         ? 2
         : 1;
+      console.log('参数', queryObj)
       this.getReportData(url, queryObj);
+
     },
 
     // 根据store中的很多参数实际发起请求
