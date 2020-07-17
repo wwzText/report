@@ -41,7 +41,7 @@
         :titleList="swiperNavList"
         :curTitleIndex="curTitleIndex"
         @navTitleIndexChange="navTitleIndexChange"
-      />
+      /> 
       <Swipe
         indicator-color="white"
         :loop="false"
@@ -300,14 +300,14 @@ export default {
       } else {
         queryObj["visit_type"] = "ZB03";
       }
-
+      console.log(userInfo)
       queryObj["org_code"] = havaAjaxData
-        ? this.reportAjaxData.zorg3 ||
-          this.reportAjaxData.zorg2 ||
-          this.reportAjaxData.zorg1
-        : userInfo.sales_station ||
-          userInfo.sales_group ||
-          userInfo.sales_office;
+        ? this.reportAjaxData.zorg3.replace("O ", "") ||
+          this.reportAjaxData.zorg2.replace("O ", "") ||
+          this.reportAjaxData.zorg1.replace("O ", "")
+        : userInfo.sales_station.replace("O ", "") ||
+          userInfo.sales_group.replace("O ", "") ||
+          userInfo.sales_office.replace("O ", "");
 
       queryObj["org_type"] = havaAjaxData
         ? this.reportAjaxData.zorg3
@@ -317,7 +317,7 @@ export default {
           : 1
         : userInfo.sales_station
         ? 3
-        : userInfo.userInfosales_group
+        : userInfo.sales_group
         ? 2
         : 1;
       console.log('参数', queryObj)

@@ -10,10 +10,9 @@ import md5 from 'js-md5';
 
 class Http {
 
-    // static urlBefore = 'https://app.cresz.com.cn'
-    // static urlBefore = 'https://appuat.cresz.com.cn'
+    static urlBefore = 'http://app.cresz.com.cn'
+    // static urlBefore = 'http://appuat.cresz.com.cn'
 
-    static urlBefore = 'https://192.168.1.111'
     static instance = axios.create({
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -119,12 +118,12 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
+                console.log(res.data.data)
                 return res.data.data
             } else if (res.data.errcode == 1112) {
                 Vue.prototype.$bridge.callhandler({
                     type: "loginOut"
                 });
-                // Vue.prototype.$showToast(res.data.msg)
                 Vue.prototype.$hideLoading()
             }
         })

@@ -3,7 +3,7 @@
   <div>
     <Collapse v-model="activeName" accordion>
       <template v-for="(item, index) in tree">
-        <Collapse-item :value="1" v-if="item.children" :key="item.id" :title="rightName(item)" :name="item.id">
+        <Collapse-item  v-if='!item.usertxt' :key="item.id" :title="rightName(item)" :name="item.id">
           <!-- {{item.name}} -->
           <template #value>
             <img @click="navToVisitReport('ZZ', item)" class="pc-img" src="./../../assets/img/report_icon.png" alt />

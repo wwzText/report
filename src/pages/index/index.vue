@@ -37,8 +37,8 @@
         <span>经销商督查</span>
       </div>
     </div>
-    <Popup v-model="showPopup" position="right" :style="{ height: '100%', width: '90%' }">
-      <div class="see-self-report" @click="seeUserSelfReport">
+    <Popup v-model="showPopup" position="right" class="pop" :style="{ height: '100%', width: '80%' }">
+      <div class="see-self-report" @click="seeUserSelfReport" v-if="(userInfo.sales_station != '' || userInfo.sales_group != '' || userInfo.sales_office != '')">
         <button>查看个人统计看板</button>
         <img src="./../../assets/img/report_icon.png" alt srcset />
       </div>
@@ -184,11 +184,9 @@ export default {
     async getOrgInfo() {
       this.$showLoading();
       await this.$store.dispatch("getUserInfo");
-
       this.organizationList = await this.$store.dispatch(
         "getLocalOrganizationTree"
       );
-
       this.$hideLoading();
     },
 
@@ -206,7 +204,6 @@ export default {
 
 <style lang="less" scoped>
 .saerch-input {
-  width: 300px;
   height: 40px;
   margin: 10px 10px;
   padding-left: 10px;

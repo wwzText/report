@@ -12,6 +12,7 @@ import Vconsole from 'vconsole'
 let vConsole = new Vconsole()
 Vue.use(vConsole)
 
+
 // 引用调用原生方法绑定在Vue上
 import Bridge from './utils/bridge.js'
 Vue.prototype.$bridge = Bridge
