@@ -300,11 +300,13 @@ export default {
       } else {
         queryObj["visit_type"] = "ZB03";
       }
-      console.log(userInfo)
+      console.log('havaAjaxData', havaAjaxData)
+      console.log('userInfo',userInfo)
+      console.log('reportAjaxData', this.reportAjaxData)
       queryObj["org_code"] = havaAjaxData
-        ? this.reportAjaxData.zorg3.replace("O ", "") ||
-          this.reportAjaxData.zorg2.replace("O ", "") ||
-          this.reportAjaxData.zorg1.replace("O ", "")
+        ? this.reportAjaxData.zorg3 ||
+          this.reportAjaxData.zorg2 ||
+          this.reportAjaxData.zorg1
         : userInfo.sales_station.replace("O ", "") ||
           userInfo.sales_group.replace("O ", "") ||
           userInfo.sales_office.replace("O ", "");

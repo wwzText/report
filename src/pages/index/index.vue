@@ -37,14 +37,14 @@
         <span>经销商督查</span>
       </div>
     </div>
-    <Popup v-model="showPopup" position="right" class="pop" :style="{ height: '100%', width: '80%' }">
+    <Popup v-model="showPopup" position="right" class="pop" :style="{ height: '100%', width: '90%' }">
       <div class="see-self-report" @click="seeUserSelfReport" v-if="(userInfo.sales_station != '' || userInfo.sales_group != '' || userInfo.sales_office != '')">
         <button>查看个人统计看板</button>
         <img src="./../../assets/img/report_icon.png" alt srcset />
       </div>
       <input type="text" placeholder="请输入查询业务员名字关键字" class="saerch-input" v-model="searchKeyword" />
-      <reportSelectTree v-if="searchKeyword == ''" :tree="organizationList" />
-      <template v-if="searchKeyword != ''">
+      <reportSelectTree style="overflow: auto; flex: 1;" v-if="searchKeyword == ''" :tree="organizationList" />
+      <template v-if="searchKeyword != ''"  style="overflow: auto; flex: 1;">
         <div
           v-for="(item, index) in searchRuleList"
           :key="'people' + index"
@@ -203,11 +203,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url("./../../assets/less/theme.less");
+@import url("./index.less");
 .saerch-input {
   height: 40px;
   margin: 10px 10px;
   padding-left: 10px;
   box-sizing: border-box;
 }
-@import url("./index.less");
 </style>

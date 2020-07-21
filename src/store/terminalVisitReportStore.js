@@ -358,6 +358,7 @@ const terminalVisitReportStore = {
                                         }, {
                                             name: '拜访总数',
                                             value: 'visit_num1',
+                                            util: '家'
                                         }
                                     ]
                                 }
