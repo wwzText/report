@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p class="last_update_date">数据最后更新时间：{{headerMessage.last_update_date}} {{headerMessage.last_update_time}}</p>
     <switchDataMonth />
     <staffMessage />
     <!-- 没有swiper的状态 -->
@@ -300,9 +301,7 @@ export default {
       } else {
         queryObj["visit_type"] = "ZB03";
       }
-      console.log('havaAjaxData', havaAjaxData)
-      console.log('userInfo',userInfo)
-      console.log('reportAjaxData', this.reportAjaxData)
+      
       queryObj["org_code"] = havaAjaxData
         ? this.reportAjaxData.zorg3 ||
           this.reportAjaxData.zorg2 ||
@@ -322,7 +321,7 @@ export default {
         : userInfo.sales_group
         ? 2
         : 1;
-      console.log('参数', queryObj)
+        
       this.getReportData(url, queryObj);
 
     },
@@ -360,7 +359,8 @@ export default {
       userInfo: state => state.userInfoStore.userInfo,
       reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData,
       swiperIndex: state => state.terminalVisitReportStore.swiperIndex,
-      reportUrl: state => state.terminalVisitReportStore.reportUrl
+      reportUrl: state => state.terminalVisitReportStore.reportUrl,
+      headerMessage: state => state.terminalVisitReportStore.headerMessage,
     })
   }
 };

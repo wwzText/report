@@ -1,7 +1,0 @@
-class indexModule {
-
-}
-
-export {
-    indexModule
-}

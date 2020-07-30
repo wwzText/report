@@ -71,7 +71,7 @@ const terminalVisitReportStore = {
          * @param {Object} workCircleDetail 设置工作圈分享的数据
          */
         setShareWorkCircleDetail(state, payload) {
-            console.log(payload.workCircleDetail)
+            
             state.shareWorkCircleDetail = payload.workCircleDetail
         },
 
