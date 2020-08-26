@@ -10,8 +10,8 @@ import md5 from 'js-md5';
 
 class Http {
 
-    // static urlBefore = 'http://app.cresz.com.cn'
-    static urlBefore = 'http://appuat.cresz.com.cn'
+    static urlBefore = 'http://app.cresz.com.cn'
+    // static urlBefore = 'http://appuat.cresz.com.cn'
 
     static instance = axios.create({
         headers: {
