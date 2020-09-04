@@ -10,15 +10,15 @@ import md5 from 'js-md5';
 
 class Http {
 
-    static urlBefore = 'http://app.cresz.com.cn'
-    // static urlBefore = 'http://appuat.cresz.com.cn'
+    static urlBefore = 'https://app.cresz.com.cn'
+    // static urlBefore = 'https://appuat.cresz.com.cn'
 
     static instance = axios.create({
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         baseURL: Http.urlBefore
-    })
+    })   
     // 获取服务端时间的时间戳
     static async getWebTime() {
         return new Promise((resolve, reject) => {
@@ -33,6 +33,8 @@ class Http {
             })
         })
     }
+
+
 
     // 参数签名方法
     static dataSign(data, webTimeBack) {
@@ -90,7 +92,8 @@ class Http {
 
         // 拼接url
         url = Http.urlBefore + apis[url];
-
+        console.log('url', url)
+        console.log('data', data)
         // 实际调用axios
         return await axios({
             method,

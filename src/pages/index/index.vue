@@ -7,44 +7,81 @@
       <img src="./../../assets/img/index_banner.png" class="index-banner-img" alt />
       <div class="index-page-header">
         <span class="iconfont iconhoutui-01" @click="closeWebView"></span>
-        <span class="index-page-header-title">分享报表</span>
+        <span class="index-page-header-title">分析报表</span>
       </div>
     </div>
     <div class="report-entry-main">
-      <div class="report-item" v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('ZD', 'BF')">
+      <div
+        class="report-item"
+        v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'"
+        @click="showPeopleSelectPopup('ZD', 'BF')"
+      >
         <img src="./../../assets/img/ZD_BF.png" alt />
         <span>终端拜访</span>
       </div>
-      <div class="report-item" v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('JXS', 'BF')">
+      <div
+        class="report-item"
+        v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'"
+        @click="showPeopleSelectPopup('JXS', 'BF')"
+      >
         <img src="./../../assets/img/JXS_BF.png" alt />
         <span>经销商拜访</span>
       </div>
 
-      <div class="report-item" v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('ZD', 'ZF')">
+      <div
+        class="report-item"
+        v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'"
+        @click="showPeopleSelectPopup('ZD', 'ZF')"
+      >
         <img src="./../../assets/img/ZD_ZF.png" alt />
         <span>终端走访</span>
       </div>
-      <div class="report-item" v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'" @click="showPeopleSelectPopup('JXS', 'ZF')">
+      <div
+        class="report-item"
+        v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'"
+        @click="showPeopleSelectPopup('JXS', 'ZF')"
+      >
         <img src="./../../assets/img/JXS_ZF.png" alt />
         <span>经销商走访</span>
       </div>
-      <div class="report-item" v-if="userInfo.appdc == 'X'" @click="showPeopleSelectPopup('ZD', 'DC')">
+      <div
+        class="report-item"
+        v-if="userInfo.appdc == 'X'"
+        @click="showPeopleSelectPopup('ZD', 'DC')"
+      >
         <img src="./../../assets/img/ZD_DC.png" alt />
         <span>终端督查</span>
       </div>
-      <div class="report-item" v-if="userInfo.appdc == 'X'" @click="showPeopleSelectPopup('JXS', 'DC')">
+      <div
+        class="report-item"
+        v-if="userInfo.appdc == 'X'"
+        @click="showPeopleSelectPopup('JXS', 'DC')"
+      >
         <img src="./../../assets/img/JXS_DC.png" alt />
         <span>经销商督查</span>
       </div>
     </div>
-    <Popup v-model="showPopup" position="right" class="pop" :style="{ height: '100%', width: '90%' }">
-      <div class="see-self-report" @click="seeUserSelfReport" v-if="(userInfo.sales_station != '' || userInfo.sales_group != '' || userInfo.sales_office != '')">
+    <Popup
+      v-model="showPopup"
+      position="right"
+      class="pop"
+      :style="{ height: '100%', width: '90%' }"
+    >
+      <div
+        class="see-self-report"
+        @click="seeUserSelfReport"
+        v-if="(userInfo.sales_station != '' || userInfo.sales_group != '' || userInfo.sales_office != '')"
+      >
         <button>查看个人统计看板</button>
         <img src="./../../assets/img/report_icon.png" alt srcset />
       </div>
       <input type="text" placeholder="请输入查询业务员名字关键字" class="saerch-input" v-model="searchKeyword" />
-      <reportSelectTree style="overflow: auto; flex: 1;" v-if="searchKeyword == ''" :tree="organizationList" />
-      <template v-if="searchKeyword != ''"  style="overflow: auto; flex: 1;">
+      <reportSelectTree
+        style="overflow: auto; flex: 1;"
+        v-if="searchKeyword == ''"
+        :tree="organizationList"
+      />
+      <template v-if="searchKeyword != ''" style="overflow: auto; flex: 1;">
         <div
           v-for="(item, index) in searchRuleList"
           :key="'people' + index"
@@ -73,7 +110,7 @@ export default {
     this.removeSwiperIndex();
 
     this.$store.commit("changeHeaderNavTitle", {
-      name: ""
+      name: "",
     });
   },
   mounted() {
@@ -81,7 +118,7 @@ export default {
     this.getOrgInfo();
   },
   components: {
-    reportSelectTree
+    reportSelectTree,
   },
   data() {
     return {
@@ -90,30 +127,26 @@ export default {
       organizationList: [], // 组织树
       searchKeyword: "", // 业务员搜索
       timer: null,
-      searchRuleList: [] // 通过关键词搜索出了的
+      searchRuleList: [], // 通过关键词搜索出了的
     };
   },
   watch: {
     searchKeyword(val) {
-      if (val == "") {
-        this.searchRuleList = [];
-        return;
-      }
-
+      this.searchRuleList = [];
       this.$showLoading();
       this.keyWordThrottle();
-    }
+    },
   },
   computed: {
     ...mapState({
-      userInfo: state => state.userInfoStore.userInfo
-    })
+      userInfo: (state) => state.userInfoStore.userInfo,
+    }),
   },
   methods: {
     // 关闭H5
     closeWebView() {
       this.$bridge.callhandler({
-        type: "closeWebView"
+        type: "closeWebView",
       });
     },
     // 调用原生方法，表示这个页面可以在手机上直接使用android手机的返回按钮退出webview
@@ -121,15 +154,15 @@ export default {
       this.$bridge.callhandler({
         type: "isBack",
         data: {
-          isBack: true
-        }
+          isBack: true,
+        },
       });
     },
     // 跳转到报表详情页面
     navToVisitReport(payload, item) {
       this.$store.commit("setTerminalUserOrOrganization", {
         type: payload === "RY" ? "RY" : "ZZ",
-        reportAjaxData: item
+        reportAjaxData: item,
       });
       this.$router.push("/report/terminalVisitReport");
     },
@@ -150,7 +183,7 @@ export default {
     },
     // 在本地组织数中搜索
     searchSeleByKeywordFromLocal(list = this.organizationList) {
-      list.map(item => {
+      list.map((item) => {
         if (item.children) {
           this.searchSeleByKeywordFromLocal(item.children);
         }
@@ -175,7 +208,7 @@ export default {
     showPeopleSelectPopup(targetType, reportType) {
       this.$store.commit("changeTargetAndReportType", {
         targetType,
-        reportType
+        reportType,
       });
       this.showPopup = true;
     },
@@ -194,11 +227,11 @@ export default {
     seeUserSelfReport() {
       this.$store.commit("setTerminalUserOrOrganization", {
         type: "RY",
-        reportAjaxData: null
+        reportAjaxData: null,
       });
       this.$router.push("/report/terminalVisitReport");
-    }
-  }
+    },
+  },
 };
 </script>
 
