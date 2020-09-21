@@ -93,7 +93,7 @@ class Http {
         // 拼接url
         url = Http.urlBefore + apis[url];
         console.log('url', url)
-        console.log('data', data)
+        console.log('data', JSON.stringify(data))
         // 实际调用axios
         return await axios({
             method,
