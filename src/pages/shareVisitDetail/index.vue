@@ -3,27 +3,27 @@
     <div class="address-time-container">
       <div class="address-main">
         <img :src="typeImg" alt />
-        <span class="terminal_name">{{shareData.terminal_name || '终端名字'}}/{{shareData.zzdhzxz_txt}}</span>
+        <span class="terminal_name">{{shareData.terminal_name || '终端名字'}}</span>
       </div>
       <div class="leave-time-container">
         <span class="iconfont iconqiandao-01"></span>
-        <span class="leave-time-detail">{{shareData.visit_in_time}} --</span>
+        <span class="leave-time-detail">{{shareData.visit_in_time || '15:30'}} --</span>
         <span class="iconfont iconqiantui-01"></span>
-        <span class="leave-time-detail">{{shareData.visit_out_time}}</span>
+        <span class="leave-time-detail">{{shareData.visit_out_time || '16:30'}}</span>
         <span class="iconfont iconshijian-01"></span>
-        <span class="leave-time-detail">{{shareData.visit_long_time}}分</span>
+        <span class="leave-time-detail">{{shareData.visit_long_time || '60'}}分</span>
       </div>
     </div>
     <div class="sales-message-container">
       <div class="sales-message-main">
         <img
-          :src="shareData.user_head ? shareData.user_head[0].value : './../../assets/img/default_head.png'"
+          src="./../../assets/img/default_head.png"
           alt
           class="user-head-img"
         />
-        <span class="partner_name">{{shareData.partner_name}}</span>
+        <span class="partner_name">{{shareData.partner_name || '业务员名字'}}</span>
         <span class="sales_position">{{shareData.position}}</span>
-        <span class="sales_visit_time">{{shareData.leave_data}}</span>
+        <span class="sales_visit_time">{{shareData.leave_data || '12月10日 周四'}}</span>
       </div>
       <div class="leave_notes-main">
         <p class="leave_notes_title">离店备注</p>
@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <visitGoodCommandList :shareData="shareData" />
+    <!-- <visitGoodCommandList :shareData="shareData" /> -->
     <ViewTitle title="图片" :neednavTo="false" style="marginTop: 10px; marginBottom: 1px" />
     <visitImgList v-if="shareData.visit_photo_list" :shareData="shareData" />
   </div>
@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       shareData: {},
-      typeImg: ""
+      typeImg: placeKa
     };
   },
 
