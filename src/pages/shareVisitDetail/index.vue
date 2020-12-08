@@ -3,7 +3,7 @@
     <div class="address-time-container">
       <div class="address-main">
         <img :src="typeImg" alt />
-        <span class="terminal_name">{{shareData.terminal_name}}/{{shareData.zzdhzxz_txt}}</span>
+        <span class="terminal_name">{{shareData.terminal_name || '终端名字'}}/{{shareData.zzdhzxz_txt}}</span>
       </div>
       <div class="leave-time-container">
         <span class="iconfont iconqiandao-01"></span>
@@ -88,7 +88,7 @@ export default {
   },
   created() {
     // 获取url上的参数
-    this.getWorkShareData();
+    // this.getWorkShareData();
 
     document.title = "工作圈分享";
   },

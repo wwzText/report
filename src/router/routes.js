@@ -28,6 +28,10 @@ const routes = [
     path: '/workCirclevisit',
     name: 'workCirclevisit',
     component: () => import('@/pages/workCirclevisit')
+  }, {
+    path: '/shareVisitDetail',
+    name: 'shareVisitDetail',
+    component: () => import('@/pages/shareVisitDetail')
   }
 ]
 

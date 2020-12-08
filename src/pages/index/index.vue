@@ -16,7 +16,7 @@
         v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'"
         @click="showPeopleSelectPopup('ZD', 'BF')"
       >
-        <img src="./../../assets/img/ZD_BF.png" alt />
+        <img src="./../../assets/img/zd_bf.png" alt />
         <span>终端拜访</span>
       </div>
       <div
@@ -24,7 +24,7 @@
         v-if="userInfo.appxs == 'X' || userInfo.appgl == 'X' || userInfo.appdc == 'X'"
         @click="showPeopleSelectPopup('JXS', 'BF')"
       >
-        <img src="./../../assets/img/JXS_BF.png" alt />
+        <img src="./../../assets/img/jxs_bf.png" alt />
         <span>经销商拜访</span>
       </div>
 
@@ -33,7 +33,7 @@
         v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'"
         @click="showPeopleSelectPopup('ZD', 'ZF')"
       >
-        <img src="./../../assets/img/ZD_ZF.png" alt />
+        <img src="./../../assets/img/zd_zf.png" alt />
         <span>终端走访</span>
       </div>
       <div
@@ -41,7 +41,7 @@
         v-if="userInfo.appgl == 'X' || userInfo.appdc == 'X'"
         @click="showPeopleSelectPopup('JXS', 'ZF')"
       >
-        <img src="./../../assets/img/JXS_ZF.png" alt />
+        <img src="./../../assets/img/jxs_zf.png" alt />
         <span>经销商走访</span>
       </div>
       <div
@@ -49,7 +49,7 @@
         v-if="userInfo.appdc == 'X'"
         @click="showPeopleSelectPopup('ZD', 'DC')"
       >
-        <img src="./../../assets/img/ZD_DC.png" alt />
+        <img src="./../../assets/img/zd_dc.png" alt />
         <span>终端督查</span>
       </div>
       <div
@@ -57,7 +57,7 @@
         v-if="userInfo.appdc == 'X'"
         @click="showPeopleSelectPopup('JXS', 'DC')"
       >
-        <img src="./../../assets/img/JXS_DC.png" alt />
+        <img src="./../../assets/img/jxs_dc.png" alt />
         <span>经销商督查</span>
       </div>
     </div>
