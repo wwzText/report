@@ -1,4 +1,5 @@
 import { Http } from '@/api';
+import { APP_VERSION } from '@/config/system.config.js';
 /**
  * @param {Number, String} timeStamp 需要转化的时间戳
  * @param {String} timeReturnFormat 时间转化格式
@@ -59,15 +60,32 @@ export const getQueryObj = () => {
  * @param {ArrayList} ids id列表
  * @description 通过ids获取实际的图片路径
  */
-export const getImgOriginalUrl = async (ids) => {
+export const getImgOriginalUrl = async (ids, WxKey = {}) => {
 
     if (!(ids instanceof Array)) {
         ids = [ids]
     }
+    // 腾讯云平台上的照片
+    let WxImageList = [];
 
-    let originalImgObject = await Http.share('getImgOriginal', {
-        objectIds: ids
-    })
+    for (let i = 0; i < ids.length; i++) {
+        if(ids[i].indexOf('TCOS') != -1) {
+
+            // TCOS表示这张图片是腾讯云上的照片，前端直接拼接路径
+            WxImageList.push({
+                key: ids[i],
+                value: APP_VERSION === 'dev' ? `https://sfa-dev-1259627966.cos.ap-chengdu.myqcloud.com/${ids[i]}` : `https://sfa-prd-1259627966.cos.ap-chengdu.myqcloud.com/${ids[i]}`
+            })
+            ids.splice(i, 1);
+            i --
+        }
+    }
+    let originalImgObject = [];
+    if(ids.length) {
+        originalImgObject = await Http.share('getImgOriginal', {
+            objectIds: ids
+        })
+    }
     
-    return originalImgObject
+    return [...originalImgObject, ...WxImageList]
 }

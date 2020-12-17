@@ -33,6 +33,7 @@ const JXS_DC_DY_ZZ = '/h5/report/getIF8191Lst'; // 经销商-走访-当月-组�
 const getOrganizationList = '/h5/report/getIF8119Lst'; // 获取组织人员列表
 const getOrgInfo = '/h5/report/getOrgInfo'; // 获取组织结构
 const getVisitRecordList = '/h5/report/getWorkCircleVisitMessages'; // 获取拜访记录列表
+const getVisitDetail = '/h5/report/getWorkCircleTerminalVisitAndSupervisorDetail'; // 获取督导工作详情
 
 module.exports = {
     getWebTime,
@@ -66,5 +67,6 @@ module.exports = {
     JXS_DC_DY_ZZ,
     getOrganizationList,
     getOrgInfo,
-    getVisitRecordList
+    getVisitRecordList,
+    getVisitDetail
 }

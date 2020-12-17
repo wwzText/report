@@ -134,7 +134,6 @@ const terminalVisitReportStore = {
             });
             workCircleDetail = workCircleDetail[0];
 
-            
             // 实际用户头像换取
             workCircleDetail.user_head = await getImgOriginalUrl(workCircleDetail.user_head)
 
@@ -167,6 +166,40 @@ const terminalVisitReportStore = {
             return workCircleDetail
         },
 
+        async getSupervisionWorkDetail(context, payload) {
+            let initSupervisionWorkDetail = await Http.share('getVisitDetail', {
+                ...payload.obj
+            })
+            initSupervisionWorkDetail = initSupervisionWorkDetail[0];
+            debugger
+            // 实际用户头像换取
+            initSupervisionWorkDetail.user_head = await getImgOriginalUrl(initSupervisionWorkDetail.user_head)
+
+            initSupervisionWorkDetail.leave_data = timeStampToTime(initSupervisionWorkDetail.visit_out_time, 'MM月DD日 W');
+            // 拜访时长
+            let a = (initSupervisionWorkDetail.visit_out_time - initSupervisionWorkDetail.visit_in_time)
+            initSupervisionWorkDetail.visit_long_time = `${(a/1000/60).toFixed(0)}`;
+
+            if (initSupervisionWorkDetail.photo_info.length) {
+                // 拜访照片
+                let list = [];
+                initSupervisionWorkDetail.photo_info.map(item => {
+                    list.push(item.photoid)
+                })
+                let visitImgList = await getImgOriginalUrl(list)
+                initSupervisionWorkDetail['visit_photo_list'] = [];
+                visitImgList.map(item => {
+                    initSupervisionWorkDetail.visit_photo_list.push(item.value)
+                })
+            }
+            // 进店离店时间
+            initSupervisionWorkDetail.visit_in_time = timeStampToTime(initSupervisionWorkDetail.visit_in_time, 'H:M');
+            initSupervisionWorkDetail.visit_out_time = timeStampToTime(initSupervisionWorkDetail.visit_out_time, 'H:M');
+
+            return initSupervisionWorkDetail
+
+            console.log(initSupervisionWorkDetail)
+        },
         /**
          * @description 获取报表数据
          */

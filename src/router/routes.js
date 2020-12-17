@@ -29,9 +29,9 @@ const routes = [
     name: 'workCirclevisit',
     component: () => import('@/pages/workCirclevisit')
   }, {
-    path: '/shareVisitDetail',
-    name: 'shareVisitDetail',
-    component: () => import('@/pages/shareVisitDetail')
+    path: '/visitDetail',
+    name: 'visitDetail',
+    component: () => import('@/pages/visitDetail')
   }
 ]
 

@@ -88,7 +88,7 @@ export default {
   },
   created() {
     // 获取url上的参数
-    // this.getWorkShareData();
+    this.getWorkShareData();
 
     document.title = "工作圈分享";
   },
@@ -101,29 +101,15 @@ export default {
   },
 
   methods: {
-    // 获取分享的参数
+    // 获取督导拜访详情
     async getWorkShareData() {
       this.$showLoading();
       this.shareData = await this.$store.dispatch(
-        "getShareTerminalVisitDetail",
+        "getSupervisionWorkDetail",
         {
           obj: getQueryObj()
         }
       );
-      switch (this.shareData.terminal_type) {
-        case "ZSNM01":
-          this.typeImg = placeKa;
-          break;
-        case "ZSNM02":
-          this.typeImg = placeRetail;
-          break;
-        case "ZSNM03":
-          this.typeImg = placeKTV;
-          break;
-        case "ZSNM04":
-          this.typeImg = placefood;
-          break;
-      }
       this.$hideLoading();
     }
   }
