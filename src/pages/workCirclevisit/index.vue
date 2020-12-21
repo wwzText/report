@@ -95,7 +95,10 @@ export default {
 
   data() {
     return {
-      shareData: {},
+      shareData: {
+        thumbups_tab: [],
+        comments_tab: []
+      },
       typeImg: ""
     };
   },

@@ -56,11 +56,6 @@ const organizationTreeStore = {
             
             context.state.organizationTree = tree;
             return tree
-
-            // return context.commit('verificationAndSetOrganization', {
-            //     orgLevel,
-            //     organizationList
-            // })
         },
 
     }

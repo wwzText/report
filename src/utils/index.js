@@ -60,8 +60,8 @@ export const getQueryObj = () => {
  * @param {ArrayList} ids id列表
  * @description 通过ids获取实际的图片路径
  */
-export const getImgOriginalUrl = async (ids, WxKey = {}) => {
-
+export const getImgOriginalUrl = async (ids) => {
+    if(!ids) return null;
     if (!(ids instanceof Array)) {
         ids = [ids]
     }

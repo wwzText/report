@@ -71,7 +71,7 @@ const terminalVisitReportStore = {
          * @param {Object} workCircleDetail 设置工作圈分享的数据
          */
         setShareWorkCircleDetail(state, payload) {
-            
+
             state.shareWorkCircleDetail = payload.workCircleDetail
         },
 
@@ -128,19 +128,20 @@ const terminalVisitReportStore = {
          * @description 获取工作圈分享的数据，仅一次
          */
         async getShareTerminalVisitDetail(context, payload) {
-            
+
             let workCircleDetail = await Http.share("getWorkCircleDetail", {
                 ...payload.obj
             });
             workCircleDetail = workCircleDetail[0];
 
+            workCircleDetail.thumbups_tab = workCircleDetail.thumbups_tab || [];
+            workCircleDetail.comments_tab = workCircleDetail.comments_tab || [];
             // 实际用户头像换取
             workCircleDetail.user_head = await getImgOriginalUrl(workCircleDetail.user_head)
-
             workCircleDetail.leave_data = timeStampToTime(workCircleDetail.visit_out_time, 'MM月DD日 W');
             // 拜访时长
             let a = (workCircleDetail.visit_out_time - workCircleDetail.visit_in_time)
-            workCircleDetail.visit_long_time = `${(a/1000/60).toFixed(0)}`
+            workCircleDetail.visit_long_time = `${(a / 1000 / 60).toFixed(0)}`
 
             if (workCircleDetail.photo_info.length) {
                 // 拜访照片
@@ -154,7 +155,7 @@ const terminalVisitReportStore = {
                     workCircleDetail.visit_photo_list.push(item.value)
                 })
             }
-            
+
 
             // 进店离店时间
             workCircleDetail.visit_in_time = timeStampToTime(workCircleDetail.visit_in_time, 'H:M');
@@ -178,7 +179,7 @@ const terminalVisitReportStore = {
             initSupervisionWorkDetail.leave_data = timeStampToTime(initSupervisionWorkDetail.visit_out_time, 'MM月DD日 W');
             // 拜访时长
             let a = (initSupervisionWorkDetail.visit_out_time - initSupervisionWorkDetail.visit_in_time)
-            initSupervisionWorkDetail.visit_long_time = `${(a/1000/60).toFixed(0)}`;
+            initSupervisionWorkDetail.visit_long_time = `${(a / 1000 / 60).toFixed(0)}`;
 
             if (initSupervisionWorkDetail.photo_info.length) {
                 // 拜访照片
@@ -197,15 +198,21 @@ const terminalVisitReportStore = {
             initSupervisionWorkDetail.visit_out_time = timeStampToTime(initSupervisionWorkDetail.visit_out_time, 'H:M');
 
             return initSupervisionWorkDetail
-
-            console.log(initSupervisionWorkDetail)
         },
         /**
          * @description 获取报表数据
          */
         async getReportData(context, payload) {
 
-            let reportMessage = await Http.request(payload.url, payload.queryObj);
+            let reportMessage = await Http.request(payload.url, {
+                appuser: 10097362,
+                org_code: "50005290",
+                start_date: '2020-12-01',
+                end_date: '2020-12-31',
+                user_bp: "0010097362",
+                visit_type: 'ZB03',
+                org_type: "1",
+            });
             // 头部板块，仅将数据返回就好
             let headerMessage = {
                 ...reportMessage.es_visit_summary,
