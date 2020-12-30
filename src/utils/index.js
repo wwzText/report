@@ -7,16 +7,22 @@ import { APP_VERSION } from '@/config/system.config.js';
  * @description 时间戳转化为时间
  */
 export const timeStampToTime = (timeStamp, timeReturnFormat = 'YYYY-MM-DD', notNeedZero = true) => {
-    var timeOriginalObj = new Date(timeStamp * 1);
+    let timeOriginalObj
+    if (timeStamp) {
+        timeOriginalObj = new Date(timeStamp * 1);
+    } else {
+        timeOriginalObj = new Date();
+    }
+
     let week = '';
     let getDay = timeOriginalObj.getDay();
-    if(getDay == 0) week = "星期日"
-    if(getDay == 1) week = "星期一"
-    if(getDay == 2) week = "星期二"
-    if(getDay == 3) week = "星期三"
-    if(getDay == 4) week = "星期四"
-    if(getDay == 5) week = "星期五"
-    if(getDay == 6) week = "星期六"
+    if (getDay == 0) week = "星期日"
+    if (getDay == 1) week = "星期一"
+    if (getDay == 2) week = "星期二"
+    if (getDay == 3) week = "星期三"
+    if (getDay == 4) week = "星期四"
+    if (getDay == 5) week = "星期五"
+    if (getDay == 6) week = "星期六"
 
     return timeReturnFormat.replace(/YYYY|MM|DD|H|M|S|W/ig, function (matches) {
         return ({
@@ -47,7 +53,9 @@ const zero = (num, notNeedZero) => {
  * @description 获取url携带的参数
  */
 export const getQueryObj = () => {
+    console.log(location.href)
     let query = location.href.split("?")[1].split("&");
+
     let queryObj = {};
     query.map(item => {
         let itemArr = item.split("=");
@@ -61,7 +69,7 @@ export const getQueryObj = () => {
  * @description 通过ids获取实际的图片路径
  */
 export const getImgOriginalUrl = async (ids) => {
-    if(!ids) return null;
+    if (!ids) return null;
     if (!(ids instanceof Array)) {
         ids = [ids]
     }
@@ -69,7 +77,7 @@ export const getImgOriginalUrl = async (ids) => {
     let WxImageList = [];
 
     for (let i = 0; i < ids.length; i++) {
-        if(ids[i].indexOf('TCOS') != -1) {
+        if (ids[i].indexOf('TCOS') != -1) {
 
             // TCOS表示这张图片是腾讯云上的照片，前端直接拼接路径
             WxImageList.push({
@@ -77,15 +85,15 @@ export const getImgOriginalUrl = async (ids) => {
                 value: APP_VERSION === 'dev' ? `https://sfa-dev-1259627966.cos.ap-chengdu.myqcloud.com/${ids[i]}` : `https://sfa-prd-1259627966.cos.ap-chengdu.myqcloud.com/${ids[i]}`
             })
             ids.splice(i, 1);
-            i --
+            i--
         }
     }
     let originalImgObject = [];
-    if(ids.length) {
+    if (ids.length) {
         originalImgObject = await Http.share('getImgOriginal', {
             objectIds: ids
         })
     }
-    
+
     return [...originalImgObject, ...WxImageList]
 }
