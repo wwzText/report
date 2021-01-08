@@ -33,7 +33,7 @@ const routes = [
     name: 'visitDetail',
     component: () => import('@/pages/visitDetail')
   }, {
-    path: '/summary/index',
+    path: '/crmLife',
     name: 'crmLife',
     component: () => import('@/pages/crmLife')
   }

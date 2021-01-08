@@ -87,8 +87,7 @@ class Http {
 
         // 拼接url
         url = Http.BASEURL + apis[url];
-        console.log('url', url)
-        console.log('data', JSON.stringify(data))
+        
         // 实际调用axios
         return await axios({
             method,
@@ -116,10 +115,8 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
-                console.log(res.data.data)
                 return res.data.data
             } else if (res.data.errcode == 1112) {
-                debugger
                 Vue.prototype.$bridge.callhandler({
                     type: "loginOut"
                 });

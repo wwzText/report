@@ -59,7 +59,7 @@ export const getQueryObj = () => {
     let queryObj = {};
     query.map(item => {
         let itemArr = item.split("=");
-        queryObj[itemArr[0]] = itemArr[1];
+        queryObj[itemArr[0]] = decodeURIComponent(itemArr[1]);
     });
     return queryObj;
 }

@@ -35,6 +35,13 @@ const getOrgInfo = '/h5/report/getOrgInfo'; // 获取组织结构
 const getVisitRecordList = '/h5/report/getWorkCircleVisitMessages'; // 获取拜访记录列表
 const getVisitDetail = '/h5/report/getWorkCircleTerminalVisitAndSupervisorDetail'; // 获取督导工作详情
 
+const getCrmDetail = '/summary/getCrmLifeInfo'; // 获取CRM人生详情
+const getXunzhangInfo = '/summary/getXunzhangInfo'; // 获取勋章详情
+const addFlag = '/summary/addYearflag'; // 新增flag
+const addPhoto = '/summary/addPhoto'; // 新增最牛图片
+const delPhoto = '/summary/deletePhoto'; // 删除最牛照片
+const good = '/summary/addParis'; // 点赞
+
 module.exports = {
     getWebTime,
     getWorkCircleDetail,
@@ -68,5 +75,12 @@ module.exports = {
     getOrganizationList,
     getOrgInfo,
     getVisitRecordList,
-    getVisitDetail
+    getVisitDetail,
+
+    getCrmDetail,
+    getXunzhangInfo,
+    addFlag,
+    addPhoto,
+    delPhoto,
+    good
 }

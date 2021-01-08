@@ -4,20 +4,6 @@
 .swiper-container {
   height: 100%;
 }
-.crm-all-main1 {
-  width: 100%;
-  height: 100%;
-  background-image: url('../../assets/img/crm_life/crm_page_bg.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-.crm-all-main2 {
-  width: 100%;
-  height: 100%;
-  background-image: url('../../assets/img/crm_life/crm_page_bg2.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
 .crm-content-bg2 {
   width: 90%;
   height: 100%;
@@ -70,18 +56,6 @@
   color: #DCCF03;
   font-weight: 500;
 }
-.swiper2-text {
-  color: white;
-  font-size: 14px;
-  margin: 0 auto 5px;
-}
-.swiper2-number {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  align-items: center;
-  margin-top: 20px;
-}
 .swiper3-text {
   color: white;
   font-size: 14px;
@@ -101,4 +75,153 @@
   color: white;
   font-size: 14px;
   line-height: 1.5;
+}
+.swiper7-text {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.swiper2-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+.swiper2-main .swiper2-item {
+  width: 50%;
+  margin-top: 20px;
+  font-size: 14px;
+  color: white;
+}
+.medal-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 400px;
+  overflow-y: auto;
+}
+.medal-main .medal-item {
+  width: 102px;
+  height: 102px;
+  margin-bottom: 30px;
+}
+.condition-main {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.condition-main .condition-view {
+  background-color: white;
+  width: 310px;
+  height: 168px;
+  border-radius: 5px;
+  position: absolute;
+  left: 50%;
+  margin-left: -155px;
+  top: 50%;
+  margin-top: -84px;
+  display: flex;
+  padding: 0 18px;
+  align-items: center;
+  box-sizing: border-box;
+}
+.condition-main .condition-view .medal-item {
+  width: 102px;
+  height: 102px;
+  margin-right: 14px;
+}
+.condition-main .condition-view .condition-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.condition-main .condition-view .condition-text .condition-title {
+  font-size: 18px;
+  color: #DC6858;
+}
+.condition-main .condition-view .condition-text .medal-text {
+  font-size: 15px;
+  color: black;
+}
+.condition-main .condition-view .condition-text .medal-number {
+  font-size: 15px;
+  color: #DC6858;
+  font-weight: 700;
+}
+.flag-main .unchoose-flag-main {
+  width: 276px;
+  height: 246px;
+  border: 2px solid #7B1C16;
+  border-radius: 5px;
+  background: #B84332;
+  padding: 24px 0 30px 15px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+.flag-main .unchoose-flag-main .unchoose-flag-contaion {
+  width: 600px;
+}
+.flag-main .flag-item {
+  display: inline-block;
+  font-size: 14px;
+  color: white;
+  padding: 10px 16px;
+  border: 1px solid white;
+  border-radius: 35px;
+  margin: 0 15px 12px 0;
+}
+.file-btn-main {
+  width: 276px;
+  height: 200px;
+  border: 2px solid #7B1C16;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.file-btn-main .file-actual-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  color: transparent;
+  font-size: 0;
+  position: absolute;
+  display: none;
+}
+.file-btn-main .hypothesis-btn {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  margin-left: -21px;
+}
+.file-btn-main .best-img {
+  width: 100%;
+  height: 100%;
+}
+.remove-img-btn {
+  display: block;
+  width: 120px;
+  height: 42px;
+  border-radius: 21px;
+  color: white;
+  background-color: #CBC458;
+  margin: 20px auto 0;
+}
+.good-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #DC6858;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px auto 5px;
+}
+.good-btn .good-img {
+  width: 35px;
+  height: 35px;
 }
