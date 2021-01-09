@@ -87,7 +87,7 @@ class Http {
 
         // 拼接url
         url = Http.BASEURL + apis[url];
-        
+
         // 实际调用axios
         return await axios({
             method,

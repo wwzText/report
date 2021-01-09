@@ -172,7 +172,7 @@ const terminalVisitReportStore = {
                 ...payload.obj
             })
             initSupervisionWorkDetail = initSupervisionWorkDetail[0];
-            debugger
+
             // 实际用户头像换取
             initSupervisionWorkDetail.user_head = await getImgOriginalUrl(initSupervisionWorkDetail.user_head)
 

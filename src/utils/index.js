@@ -53,7 +53,6 @@ const zero = (num, notNeedZero) => {
  * @description 获取url携带的参数
  */
 export const getQueryObj = () => {
-    console.log(location.href)
     let query = location.href.split("?")[1].split("&");
 
     let queryObj = {};

@@ -304,7 +304,7 @@
               CRM作为公司终端信息化管理工具，
             </p>
             <p class="text">
-              我们一只想让自己更懂您、更赋能与业务、更友好、更便捷，当然也要更快更准。
+              我们一直想让自己更懂您、更赋能与业务、更友好、更便捷，当然也要更快更准。
             </p>
             <p class="text">
               也祝您在新的一年工作顺利，万事如意；携手决战高端，开创美好未来。
@@ -578,9 +578,7 @@ export default {
 
   methods: {
     chooseBestImg() {
-      console.log(this.$refs.imgChange)
       this.$refs.imgChange.click();
-
     },
 
     async delPhoto() {
@@ -643,7 +641,6 @@ export default {
     },
     chooseImage(e) {
       let that = this;
-      console.log('调用选照片')
       if (that.isWx) return;
       this.$showLoading();
       let fileObj = e.target.files[0];
@@ -672,10 +669,8 @@ export default {
           Body: fileObj,
         },
         function (err, data) {
-          console.log(err);
           if (data) {
             getImgOriginalUrl(data.Location).then((imgRes) => {
-              console.log(imgRes[0]);
               that.bestImg = "https://" + imgRes[0].key;
               that.upLoadKey = imgRes[0].key;
               that.uploadImgToServe();
