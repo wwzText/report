@@ -13,7 +13,7 @@ class Http {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         baseURL: Http.BASEURL
-    })   
+    })
     // 获取服务端时间的时间戳
     static async getWebTime() {
         return new Promise((resolve, reject) => {
