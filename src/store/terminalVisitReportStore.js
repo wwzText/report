@@ -204,15 +204,7 @@ const terminalVisitReportStore = {
          */
         async getReportData(context, payload) {
 
-            let reportMessage = await Http.request(payload.url, {
-                appuser: 10097362,
-                org_code: "50005290",
-                start_date: '2020-12-01',
-                end_date: '2020-12-31',
-                user_bp: "0010097362",
-                visit_type: 'ZB03',
-                org_type: "1",
-            });
+            let reportMessage = await Http.request(payload.url,payload.queryObj);
             // 头部板块，仅将数据返回就好
             let headerMessage = {
                 ...reportMessage.es_visit_summary,
