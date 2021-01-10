@@ -225,6 +225,33 @@
   width: 35px;
   height: 35px;
 }
-.animate__bounce:root {
-  --animate-delay: 2s;
+.ms1 {
+  animation-delay: 100ms;
+}
+.ms2 {
+  animation-delay: 200ms;
+}
+.ms3 {
+  animation-delay: 300ms;
+}
+.ms4 {
+  animation-delay: 400ms;
+}
+.ms5 {
+  animation-delay: 500ms;
+}
+.ms6 {
+  animation-delay: 600ms;
+}
+.ms7 {
+  animation-delay: 700ms;
+}
+.ms8 {
+  animation-delay: 800ms;
+}
+.ms9 {
+  animation-delay: 900ms;
+}
+.ms10 {
+  animation-delay: 1000ms;
 }

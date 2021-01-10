@@ -7,41 +7,61 @@
       >
         <SwiperSlide>
           <div class="text-main" v-if="initialSlide == 0">
-            <p class="text center animate__animated animate__bounce animate__delay-2s">过去的一年，您的平安与焦虑</p>
-            <p class="text center">我们记得</p>
-            <p class="text center ">过去的一年，您的身影与汗水</p>
-            <p class="text center">我们记得</p>
-            <p class="text center">过去的一年，您的努力与拼搏</p>
-            <p class="text center">我们记得</p>
-            <p class="text center">过去的一年，您的笑脸与喜悦</p>
-            <p class="text center">我们记得</p>
-            <p class="text center">这一刻，请我们一起打开这封属于您的</p>
-            <p class="text center">2020年CRM年度账单</p>
+            <p class="text center animate__animated animate__fadeInDown ms1">
+              过去的一年，您的平安与焦虑
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms2">
+              我们记得
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms3">
+              过去的一年，您的身影与汗水
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms4">
+              我们记得
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms5">
+              过去的一年，您的努力与拼搏
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms6">
+              我们记得
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms7">
+              过去的一年，您的笑脸与喜悦
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms8">
+              我们记得
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms9">
+              这一刻，请我们一起打开这封属于您的
+            </p>
+            <p class="text center animate__animated animate__fadeInDown ms10">
+              2020年CRM年度账单
+            </p>
           </div>
         </SwiperSlide>
         <!-- 走进一线 -->
         <SwiperSlide>
-          <div class="text-main animated fadeIn delay-2s" v-if="initialSlide == 1">
-            <p class="text center">走进一线</p>
-            <p class="text">
+          <div class="text-main" v-if="initialSlide == 1">
+            <p class="title">走进一线</p>
+            <p class="text animate__animated animate__fadeIn" style="margin-top: 40px">
               侯总在年初提出了“五点一线”，年中提倡“深入一线”；“一线”是今年的重中之重，也一直是我们雪花人的制胜法宝，那么，这一年您在一线终端
             </p>
             <div class="swiper2-main">
-              <div class="swiper2-item">
+              <div class="swiper2-item animate__animated animate__fadeInLeft">
                 <p class="text">累计拜访了</p>
                 <p>
                   <span class="number">{{ detail.total_cishu || 0 }}</span
                   >次终端
                 </p>
               </div>
-              <div class="swiper2-item">
+              <div class="swiper2-item animate__animated animate__fadeInRight">
                 <p class="text">累计新增了</p>
                 <p>
                   <span class="number">{{ detail.new_ternimal_num || 0 }}</span
                   >家终端
                 </p>
               </div>
-              <div class="swiper2-item">
+              <div class="swiper2-item animate__animated animate__fadeInLeft">
                 <p class="text">累计修改了</p>
                 <p>
                   <span class="number">{{ detail.fix_ternimal_num || 0 }}</span
@@ -53,23 +73,23 @@
         </SwiperSlide>
         <!-- 深耕终端 -->
         <SwiperSlide>
-          <div class="text-main">
+          <div class="text-main" v-if="initialSlide == 2">
             <p class="title">深耕终端</p>
-            <p class="text left">
+            <p class="text left animate__animated animate__fadeIn" style="margin-top: 40px">
               终端做的好坏，有的人说是靠产品，有的人说是靠政策，只有您知道靠的是走心。
             </p>
-            <p class="text left">这一年，您在终端身上投入了大量的时间：</p>
+            <p class="text left animate__animated animate__fadeIn">这一年，您在终端身上投入了大量的时间：</p>
           </div>
           <div style="padding-top: 20px" class="text-comp">
-            <p class="swiper3-text">
+            <p class="swiper3-text animate__animated animate__fadeIn">
               有<span class="number">{{ detail.tianshu || 0 }}</span
               >天您不顾风雨，不顾酷暑和寒冬，走进一家又一家终端；
             </p>
-            <p class="swiper3-text">
+            <p class="swiper3-text animate__animated animate__fadeInRight">
               有<span class="number">{{ detail.pic_num || 0 }}</span
               >张照片记录下您对终端的投入与付出；
             </p>
-            <p class="swiper3-text">我们知道，您做的还有更多更多</p>
+            <p class="swiper3-text animate__animated animate__fadeInDown">我们知道，您做的还有更多更多</p>
           </div>
         </SwiperSlide>
         <!-- 您的专场 -->
