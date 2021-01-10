@@ -225,3 +225,6 @@
   width: 35px;
   height: 35px;
 }
+.animate__bounce:root {
+  --animate-delay: 2s;
+}

@@ -6,10 +6,10 @@
         @slideChangeTransitionEnd="slideChangeTransitionEnd"
       >
         <SwiperSlide>
-          <div class="text-main animated fadeIn">
-            <p class="text center">过去的一年，您的平安与焦虑</p>
+          <div class="text-main" v-if="initialSlide == 0">
+            <p class="text center animate__animated animate__bounce animate__delay-2s">过去的一年，您的平安与焦虑</p>
             <p class="text center">我们记得</p>
-            <p class="text center">过去的一年，您的身影与汗水</p>
+            <p class="text center ">过去的一年，您的身影与汗水</p>
             <p class="text center">我们记得</p>
             <p class="text center">过去的一年，您的努力与拼搏</p>
             <p class="text center">我们记得</p>
@@ -21,7 +21,7 @@
         </SwiperSlide>
         <!-- 走进一线 -->
         <SwiperSlide>
-          <div class="text-main animated fadeIn">
+          <div class="text-main animated fadeIn delay-2s" v-if="initialSlide == 1">
             <p class="text center">走进一线</p>
             <p class="text">
               侯总在年初提出了“五点一线”，年中提倡“深入一线”；“一线”是今年的重中之重，也一直是我们雪花人的制胜法宝，那么，这一年您在一线终端
@@ -30,21 +30,21 @@
               <div class="swiper2-item">
                 <p class="text">累计拜访了</p>
                 <p>
-                  <span class="number">{{ detail.total_cishu || 0}}</span
+                  <span class="number">{{ detail.total_cishu || 0 }}</span
                   >次终端
                 </p>
               </div>
               <div class="swiper2-item">
                 <p class="text">累计新增了</p>
                 <p>
-                  <span class="number">{{ detail.new_ternimal_num || 0}}</span
+                  <span class="number">{{ detail.new_ternimal_num || 0 }}</span
                   >家终端
                 </p>
               </div>
               <div class="swiper2-item">
                 <p class="text">累计修改了</p>
                 <p>
-                  <span class="number">{{ detail.fix_ternimal_num || 0}}</span
+                  <span class="number">{{ detail.fix_ternimal_num || 0 }}</span
                   >家终端信息
                 </p>
               </div>
@@ -62,11 +62,11 @@
           </div>
           <div style="padding-top: 20px" class="text-comp">
             <p class="swiper3-text">
-              有<span class="number">{{ detail.tianshu || 0}}</span
+              有<span class="number">{{ detail.tianshu || 0 }}</span
               >天您不顾风雨，不顾酷暑和寒冬，走进一家又一家终端；
             </p>
             <p class="swiper3-text">
-              有<span class="number">{{ detail.pic_num || 0}}</span
+              有<span class="number">{{ detail.pic_num || 0 }}</span
               >张照片记录下您对终端的投入与付出；
             </p>
             <p class="swiper3-text">我们知道，您做的还有更多更多</p>
@@ -76,7 +76,9 @@
         <SwiperSlide>
           <div class="text-main">
             <p class="title">您的专场</p>
-            <p class="number" style="margin-top: 40px" v-if="detail.spec_day">{{ detail.spec_day || '0000-00-00' }}</p>
+            <p class="number" style="margin-top: 40px" v-if="detail.spec_day">
+              {{ detail.spec_day || "0000-00-00" }}
+            </p>
             <p class="text">特别的一天</p>
             <p class="text">这一天对我们很普通，对您很特别</p>
             <p class="text">还记得么？</p>
@@ -85,7 +87,7 @@
             </p>
             <p class="swiper4-text">
               我们默默的数着您走进走出
-              <span class="number">{{ detail.spec_terminal_num || 0}}</span
+              <span class="number">{{ detail.spec_terminal_num || 0 }}</span
               >家终端
             </p>
             <p class="swiper4-text" style="margin-top: 20px">努力看得见</p>
@@ -99,7 +101,7 @@
             <p class="swiper4-text">
               您也去点赞评论了
               <span class="number">{{
-                (detail.to_prais_num * 1 + detail.to_commented_num * 1)  || 0
+                detail.to_prais_num * 1 + detail.to_commented_num * 1 || 0
               }}</span
               >次优秀同事的工作圈；
             </p>
@@ -110,7 +112,7 @@
           <div class="text-main">
             <p class="title">最时刻</p>
             <p class="text" style="margin-top: 20px">您最常去的终端是：</p>
-            <p class="number">{{ detail.xn60 || '无数据' }}</p>
+            <p class="number">{{ detail.xn60 || "无数据" }}</p>
             <p class="text">这家的业务目标都达成了么</p>
             <p class="swiper5-text" style="margin-top: 30px">
               您最早进店的一次是<span class="number">{{ minInObj[1] }}</span
@@ -129,8 +131,10 @@
               >终端
             </p>
             <p class="swiper5-text" style="margin-top: 30px">
-              您最常去拜访的时间段是<span class="number">{{ detail.kh8  || 0}}</span
-              >点到<span class="number">{{ detail.kh8 * 1 + 1  || 0}}</span
+              您最常去拜访的时间段是<span class="number">{{
+                detail.kh8 || 0
+              }}</span
+              >点到<span class="number">{{ detail.kh8 * 1 + 1 || 0 }}</span
               >点
             </p>
           </div>
@@ -298,7 +302,8 @@
               >天
             </p>
             <p class="swiper7-text">
-              也是2021年的第<span class="number">{{crd}}</span>天
+              也是2021年的第<span class="number">{{ crd }}</span
+              >天
             </p>
             <p class="text" style="margin-top: 20px">
               CRM作为公司终端信息化管理工具，
@@ -454,6 +459,7 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
+import "animate.css";
 import COS from "@/assets/cos-js-sdk-v5.min.js";
 import { APP_VERSION } from "@/config/system.config.js";
 import {
@@ -588,8 +594,8 @@ export default {
           name: this.queryObj.appuser,
           photoid: this.upLoadKey,
         });
-        this.bestImg = '';
-        this.upLoadKey = '';
+        this.bestImg = "";
+        this.upLoadKey = "";
         this.detail.most_photo_be_parisd = 0;
       }
     },
@@ -599,15 +605,17 @@ export default {
         appuser: this.queryObj.account,
         name: this.queryObj.appuser,
       });
-      if(!crmLifeDetail) {
+      if (!crmLifeDetail) {
         this.$hideLoading();
         return;
       }
-      this.chooseFlagList = crmLifeDetail.year_flag ? crmLifeDetail.year_flag.split(',') : [];
+      this.chooseFlagList = crmLifeDetail.year_flag
+        ? crmLifeDetail.year_flag.split(",")
+        : [];
       this.bestImg = crmLifeDetail.most_photo
         ? "https://" + crmLifeDetail.most_photo
         : "";
-      this.upLoadKey = crmLifeDetail.most_photo || '';
+      this.upLoadKey = crmLifeDetail.most_photo || "";
       this.minInObj =
         crmLifeDetail.kd4 !== "00000000"
           ? crmLifeDetail.kd4.split("-")
@@ -725,7 +733,7 @@ export default {
 
     // 移除年度寄语
     async removeFlag(index) {
-      if(this.isWx) {
+      if (this.isWx) {
         return;
       }
       this.$showLoading();
@@ -745,7 +753,7 @@ export default {
           appuser: this.queryObj.account,
           name: this.queryObj.appuser,
         });
-        localStorage.setItem('isGood', true)
+        localStorage.setItem("isGood", true);
         this.detail.most_photo_be_parisd += 1;
       }
     },
