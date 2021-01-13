@@ -88,6 +88,10 @@ class Http {
         // 拼接url
         url = Http.BASEURL + apis[url];
 
+        // console.log('data === ', JSON.stringify(data))
+        // console.log('imei === ', userInfo.imei)
+        // console.log('user_token === ', userInfo.user_token)
+        
         // 实际调用axios
         return await axios({
             method,
@@ -114,12 +118,13 @@ class Http {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }).then(res => {
+            console.log(res)
             if (res.data.errcode === 200) {
                 return res.data.data
             } else if (res.data.errcode == 1112) {
-                Vue.prototype.$bridge.callhandler({
-                    type: "loginOut"
-                });
+                // Vue.prototype.$bridge.callhandler({
+                //     type: "loginOut"
+                // });
                 Vue.prototype.$hideLoading()
             }
         })

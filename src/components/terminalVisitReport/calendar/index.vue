@@ -54,6 +54,14 @@ export default {
       }
       return num;
     }
+  },
+  watch: {
+    showCalenar(val) {
+      console.log(val)
+      if(!val) {
+        this.$emit('changeDate')
+      }
+    }
   }
 };
 </script>

@@ -2,7 +2,7 @@
  * 报表列表页面
  */
 <template>
-  <div class="index-page-container">
+  <div class="index-page-container" v-if="userInfo">
     <div class="index-banner-main">
       <img src="./../../assets/img/index_banner.png" class="index-banner-img" alt />
       <div class="index-page-header">

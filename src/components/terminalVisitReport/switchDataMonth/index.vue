@@ -34,7 +34,8 @@ export default {
       useDate: true, // 是否按日期查看对应数据
       showCalenar: false, // 是否展示日历选择组件
       showMonthSelect: false, // 是否展示月份选择组件
-      showSelectDate: "" // 用于查询数据的日期或月份
+      showSelectDate: "", // 用于查询数据的日期或月份
+      terminalVisitQueryTime: ''
     };
   },
   methods: {
@@ -55,7 +56,7 @@ export default {
     // 日历确认回调
     changeDate(obj) {
       this.showCalenar = false;
-      this.showSelectDate = obj.timeStr;
+      this.showSelectDate = obj.timeStr || this.showSelectDate;
     },
 
     // 关闭月份选择弹窗，判断是否携带参数

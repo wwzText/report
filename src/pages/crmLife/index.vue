@@ -4,6 +4,7 @@
       <swiper
         :options="swiperOptionsObject"
         @slideChangeTransitionEnd="slideChangeTransitionEnd"
+        @touchStart="swiperTouchStart"
       >
         <SwiperSlide>
           <div class="text-main" v-if="initialSlide == 0">
@@ -34,7 +35,7 @@
             <p class="text center animate__animated animate__fadeInDown ms9">
               这一刻，请我们一起打开这封属于您的
             </p>
-            <p class="text center animate__animated animate__fadeInDown ms10">
+            <p class="number center animate__animated animate__fadeInDown ms10">
               2020年CRM年度账单
             </p>
           </div>
@@ -43,7 +44,7 @@
         <SwiperSlide>
           <div class="text-main" v-if="initialSlide == 1">
             <p class="title">走进一线</p>
-            <p class="text animate__animated animate__fadeIn" style="margin-top: 40px">
+            <p class="text animate__animated animate__fadeInDown" style="margin-top: 40px">
               侯总在年初提出了“五点一线”，年中提倡“深入一线”；“一线”是今年的重中之重，也一直是我们雪花人的制胜法宝，那么，这一年您在一线终端
             </p>
             <div class="swiper2-main">
@@ -80,8 +81,8 @@
             </p>
             <p class="text left animate__animated animate__fadeIn">这一年，您在终端身上投入了大量的时间：</p>
           </div>
-          <div style="padding-top: 20px" class="text-comp">
-            <p class="swiper3-text animate__animated animate__fadeIn">
+          <div style="padding-top: 20px" class="text-comp" v-if="initialSlide == 2">
+            <p class="swiper3-text animate__animated animate__fadeInLeft">
               有<span class="number">{{ detail.tianshu || 0 }}</span
               >天您不顾风雨，不顾酷暑和寒冬，走进一家又一家终端；
             </p>
@@ -94,33 +95,33 @@
         </SwiperSlide>
         <!-- 您的专场 -->
         <SwiperSlide>
-          <div class="text-main">
+          <div class="text-main" v-if="initialSlide == 3">
             <p class="title">您的专场</p>
-            <p class="number" style="margin-top: 40px" v-if="detail.spec_day">
+            <p class="number animate__animated animate__zoomIn" style="margin-top: 40px" v-if="detail.spec_day">
               {{ detail.spec_day || "0000-00-00" }}
             </p>
-            <p class="text">特别的一天</p>
-            <p class="text">这一天对我们很普通，对您很特别</p>
-            <p class="text">还记得么？</p>
-            <p class="swiper4-text" style="margin-top: 20px">
+            <p class="text animate__animated animate__fadeIn ms2">特别的一天</p>
+            <p class="text animate__animated animate__fadeIn ms3">这一天对我们很普通，对您很特别</p>
+            <p class="text animate__animated animate__fadeIn ms4">还记得么？</p>
+            <p class="swiper4-text animate__animated animate__fadeIn ms5" style="margin-top: 20px">
               您忙碌的背影遮住了流下的汗水；
             </p>
-            <p class="swiper4-text">
+            <p class="swiper4-text animate__animated animate__fadeIn ms6">
               我们默默的数着您走进走出
-              <span class="number">{{ detail.spec_terminal_num || 0 }}</span
+              <span class="number animate__animated animate__flipInX ms12">{{ detail.spec_terminal_num || 0 }}</span
               >家终端
             </p>
-            <p class="swiper4-text" style="margin-top: 20px">努力看得见</p>
-            <p class="swiper4-text">这一年您拜访记录在工作圈被大家点赞了</p>
-            <p class="swiper4-text">
-              <span class="number">{{ detail.be_praised_num || 0 }}</span
+            <p class="swiper4-text animate__animated animate__fadeIn ms7" style="margin-top: 20px">努力看得见</p>
+            <p class="swiper4-text animate__animated animate__fadeIn ms8">这一年您拜访记录在工作圈被大家点赞了</p>
+            <p class="swiper4-text animate__animated animate__fadeIn ms9">
+              <span class="number animate__animated animate__flipInX ms12">{{ detail.be_praised_num || 0 }}</span
               >次，评论了
-              <span class="number">{{ detail.be_commented_num || 0 }}</span
+              <span class="number animate__animated animate__flipInX ms12">{{ detail.be_commented_num || 0 }}</span
               >次；
             </p>
-            <p class="swiper4-text">
+            <p class="swiper4-text animate__animated animate__fadeIn ms10">
               您也去点赞评论了
-              <span class="number">{{
+              <span class="number animate__animated animate__flipInX ms12">{{
                 detail.to_prais_num * 1 + detail.to_commented_num * 1 || 0
               }}</span
               >次优秀同事的工作圈；
@@ -129,54 +130,49 @@
         </SwiperSlide>
         <!-- 最时刻 -->
         <SwiperSlide>
-          <div class="text-main">
+          <div class="text-main" v-if="initialSlide == 4">
             <p class="title">最时刻</p>
-            <p class="text" style="margin-top: 20px">您最常去的终端是：</p>
-            <p class="number">{{ detail.xn60 || "无数据" }}</p>
-            <p class="text">这家的业务目标都达成了么</p>
-            <p class="swiper5-text" style="margin-top: 30px">
-              您最早进店的一次是<span class="number">{{ minInObj[1] }}</span
-              >月<span class="number">{{ minInObj[2] }}</span
-              >日<span class="number">{{ maxInObj[0] }}</span
-              >点<span class="number">{{ maxInObj[1] }}</span
-              >分进入<span class="number">{{ detail.kd7 }}</span
+            <p class="text animate__animated animate__fadeIn" style="margin-top: 40px">您最常去的终端是：</p>
+            <p class="number animate__animated animate__flipInX ms2">{{ detail.xn60 || "无数据" }}</p>
+            <p class="text animate__animated animate__fadeIn">这家的业务目标都达成了么</p>
+            <p class="swiper5-text animate__animated animate__fadeIn" style="margin-top: 30px">
+              您最早进店的一次是<span class="number animate__animated animate__flipInX ms2">{{ minInObj[1] }}</span
+              >月<span class="number animate__animated animate__flipInX ms2">{{ minInObj[2] }}</span
+              >日<span class="number animate__animated animate__flipInX ms2">{{ maxInObj[0] }}</span
+              >点<span class="number animate__animated animate__flipInX ms2">{{ maxInObj[1] }}</span
+              >分进入<span class="number animate__animated animate__flipInX ms2">{{ detail.kd7 }}</span
               >终端
             </p>
-            <p class="swiper5-text" style="margin-top: 30px">
-              您最晚离开的一次是<span class="number">{{ minOutObj[1] }}</span
-              >月<span class="number">{{ minOutObj[2] }}</span
-              >日<span class="number">{{ maxOutObj[0] }}</span
-              >点<span class="number">{{ maxOutObj[1] }}</span
-              >分离开<span class="number">{{ detail.kh7 }}</span
+            <p class="swiper5-text animate__animated animate__fadeIn" style="margin-top: 30px">
+              您最晚离开的一次是<span class="number animate__animated animate__flipInX ms2">{{ minOutObj[1] }}</span
+              >月<span class="number animate__animated animate__flipInX ms2">{{ minOutObj[2] }}</span
+              >日<span class="number animate__animated animate__flipInX ms2">{{ maxOutObj[0] }}</span
+              >点<span class="number animate__animated animate__flipInX ms2">{{ maxOutObj[1] }}</span
+              >分离开<span class="number animate__animated animate__flipInX ms2">{{ detail.kh7 }}</span
               >终端
             </p>
-            <p class="swiper5-text" style="margin-top: 30px">
-              您最常去拜访的时间段是<span class="number">{{
+            <p class="swiper5-text animate__animated animate__fadeIn" style="margin-top: 30px">
+              您最常去拜访的时间段是<span class="number animate__animated animate__flipInX ms2">{{
                 detail.kh8 || 0
               }}</span
-              >点到<span class="number">{{ detail.kh8 * 1 + 1 || 0 }}</span
+              >点到<span class="number animate__animated animate__flipInX ms2">{{ detail.kh8 * 1 + 1 || 0 }}</span
               >点
             </p>
           </div>
         </SwiperSlide>
         <!-- 这一刻，敬自己 -->
         <SwiperSlide>
-          <div class="text-main">
+          <div class="text-main" v-if="initialSlide == 5">
             <p class="title" style="margin-bottom: 40px">这一刻，敬自己</p>
-            <p class="swiper6-text">
+            <p class="swiper6-text animate__animated animate__fadeIn">
               疫情期间，您也在积极响应国家及公司的复工安排。
             </p>
-            <p class="swiper6-text" style="margin-top: 30px">
+            <p class="swiper6-text animate__animated animate__fadeIn" style="margin-top: 30px">
               在<span class="number">{{ fristVisitObj[1] }}</span
               >月<span>{{ fristVisitObj[2] }}</span
               >日您便开始了疫情期间的第一次拜访。
             </p>
-            <!-- <p class="swiper6-text">
-              这期间，您拜访了
-              <span class="number">1</span
-              >家终端，安抚终端担扰，告诉他们我们雪花与您们同在；
-            </p> -->
-            <p class="swiper6-text" style="margin-top: 30px">
+            <p class="swiper6-text animate__animated animate__fadeIn" style="margin-top: 30px">
               这期间，您有<span class="number">{{
                 detail.sickness_visit_days || 0
               }}</span
@@ -188,7 +184,7 @@
         <SwiperSlide v-if="detail.xunzhan.length">
           <div class="text-main">
             <p class="title" style="margin-bottom: 40px">点亮您的勋章</p>
-            <div class="medal-main">
+            <div class="medal-main" ref="medal">
               <img
                 @click="medalCondition('叫我战神', 'jwzs')"
                 v-if="detail.xunzhan.indexOf('叫我战神') != -1"
@@ -384,89 +380,89 @@
         <img
           :src="jwzs"
           v-if="xunzhangDetail.imgName == 'jwzs'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="kwcw"
           v-if="xunzhangDetail.imgName == 'kwcw'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="kyys"
           v-if="xunzhangDetail.imgName == 'kyys'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="mmgy"
           v-if="xunzhangDetail.imgName == 'mmgy'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="qhh"
           v-if="xunzhangDetail.imgName == 'qhh'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="qsmp"
           v-if="xunzhangDetail.imgName == 'qsmp'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="qngs"
           v-if="xunzhangDetail.imgName == 'qngs'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="szgb"
           v-if="xunzhangDetail.imgName == 'szgb'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="mcqh"
           v-if="xunzhangDetail.imgName == 'mcqh'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="wwgz"
           v-if="xunzhangDetail.imgName == 'wwgz'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="whzx"
           v-if="xunzhangDetail.imgName == 'whzx'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="xmx"
           v-if="xunzhangDetail.imgName == 'xmx'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="ywdn"
           v-if="xunzhangDetail.imgName == 'ywdn'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="ymz"
           v-if="xunzhangDetail.imgName == 'ymz'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="zqn"
           v-if="xunzhangDetail.imgName == 'zqn'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <img
           :src="wsqb"
           v-if="xunzhangDetail.imgName == 'wsqb'"
-          class="medal-item"
+          class="medal-item animate__animated animate__zoomInDown"
         />
         <div class="condition-text">
           <p class="condition-title">解锁条件：</p>
-          <p class="medal-text" style="margin-bottom: 20px">
+          <p class="medal-text animate__animated animate__fadeInDown" style="margin-bottom: 20px">
             {{ xunzhangDetail.condition }}
           </p>
-          <p class="medal-text">
+          <p class="medal-text animate__animated animate__fadeInDown">
             已有 <span class="medal-number">{{ xunzhangDetail.num }}</span
             >人获得勋章「{{ xunzhangDetail.xunzhang }}」
           </p>
@@ -514,12 +510,7 @@ let swiperOptions = {
   width: window.innerWidth,
   zoom: true,
   initialSlide: 0,
-  direction: "vertical",
-  on: {
-    slideChangeTransitionEnd() {
-      this.initialSlide = this.activeIndex;
-    },
-  },
+  direction: "vertical"
 };
 export default {
   components: {
@@ -706,6 +697,13 @@ export default {
           }
         }
       );
+    },
+
+    // 滑动
+    swiperTouchStart() {
+      if(this.initialSlide == 6) {
+        console.log(this.$refs.medal)
+      }
     },
 
     // 上传照片去服务器
