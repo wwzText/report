@@ -118,13 +118,13 @@ class Http {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }).then(res => {
-            console.log(res)
+            // console.log('res === ', res)
             if (res.data.errcode === 200) {
                 return res.data.data
             } else if (res.data.errcode == 1112) {
-                // Vue.prototype.$bridge.callhandler({
-                //     type: "loginOut"
-                // });
+                Vue.prototype.$bridge.callhandler({
+                    type: "loginOut"
+                });
                 Vue.prototype.$hideLoading()
             }
         })

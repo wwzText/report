@@ -50,7 +50,7 @@ export default {
         } else {
           list.push({
             showTimeStr: `${year - 1}年${12 + month - i}月`,
-            chooseTimeStr: `${year}-${this.zero(month - i)}`
+            chooseTimeStr: `${year - 1}-${this.zero(12 + month - i)}`
           });
         }
       }

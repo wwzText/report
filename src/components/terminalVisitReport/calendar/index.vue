@@ -57,7 +57,6 @@ export default {
   },
   watch: {
     showCalenar(val) {
-      console.log(val)
       if(!val) {
         this.$emit('changeDate')
       }
