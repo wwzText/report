@@ -124,7 +124,6 @@ class Http {
                 console.log(res.data.data)
                 return res.data.data
             } else if (res.data.errcode == 1112) {
-                debugger
                 Vue.prototype.$bridge.callhandler({
                     type: "loginOut"
                 });
