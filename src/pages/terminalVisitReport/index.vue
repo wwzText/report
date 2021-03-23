@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p class="last_update_date">数据最后更新时间：{{headerMessage.last_update_date}} {{headerMessage.last_update_time}}</p>
+    <p class="last_update_date">
+      数据最后更新时间：{{ headerMessage.last_update_date }}
+      {{ headerMessage.last_update_time }}
+    </p>
     <switchDataMonth />
     <staffMessage />
     <!-- 没有swiper的状态 -->
@@ -13,8 +16,14 @@
             :key="'aa' + index"
             :title="item.title"
             :describe="item.desc"
-            :message="'全部（' + (item.list[0].rank == 0 ? item.list.length - 1 : item.list.length) +'）'"
-            style="marginTop: 10px"
+            :message="
+              '全部（' +
+              (item.list[0].rank == 0
+                ? item.list.length - 1
+                : item.list.length) +
+              '）'
+            "
+            style="margintop: 10px"
             @click="seeRankAllList(0, index)"
           />
 
@@ -30,19 +39,19 @@
       <ViewTitle
         :title="'已' + reportTypeStr + '问题统计'"
         :neednavTo="dateOrMonth == 'DR'"
-        style="marginTop: 10px;"
+        style="margintop: 10px"
         @click="seeQuestionInNative"
         v-if="swiperList[0].question"
       />
-      <QuestionList style="marginTop: 1px;" :list="swiperList[0].question" />
+      <QuestionList style="margintop: 1px" :list="swiperList[0].question" />
     </div>
     <!-- 有swiper的状态 -->
-    <div v-if="swiperList.length > 1" style="marginTop: 10px">
+    <div v-if="swiperList.length > 1" style="margintop: 10px">
       <titleNav
         :titleList="swiperNavList"
         :curTitleIndex="curTitleIndex"
         @navTitleIndexChange="navTitleIndexChange"
-      /> 
+      />
       <Swipe
         indicator-color="white"
         :loop="false"
@@ -51,20 +60,25 @@
         ref="visitSwipe"
       >
         <SwipeItem v-for="(swiperItem, index) in swiperList" :key="'o' + index">
-          <visitData :visitData="swiperItem.visitData" style="marginTop: 10px" />
+          <visitData
+            :visitData="swiperItem.visitData"
+            style="margintop: 10px"
+          />
 
           <ViewTitle
             v-if="swiperItem.showPlace"
             :title="'分场所终端' + reportTypeStr + '率'"
             message="查看"
-            style="marginTop: 10px"
+            style="margintop: 10px"
             @click="seePlace"
           />
           <ViewTitle
             v-if="swiperItem.trend"
-            :title="'查看当月' + (reportType == 'BF' ? '拜访' : '走访') + '趋势'"
+            :title="
+              '查看当月' + (reportType == 'BF' ? '拜访' : '走访') + '趋势'
+            "
             message="查看"
-            style="marginTop: 10px"
+            style="margintop: 10px"
             @click="seeTrend"
           />
           <template v-if="swiperItem.rankLists">
@@ -74,8 +88,14 @@
                 :key="'w' + i"
                 :title="rankItem.title"
                 :describe="rankItem.desc"
-                :message="'全部（' + (rankItem.list[0].rank == 0 ? rankItem.list.length-1 : rankItem.list.length) +'）'"
-                style="marginTop: 10px"
+                :message="
+                  '全部（' +
+                  (rankItem.list[0].rank == 0
+                    ? rankItem.list.length - 1
+                    : rankItem.list.length) +
+                  '）'
+                "
+                style="margintop: 10px"
                 @click="seeRankAllList(index, i)"
               />
               <RankingList
@@ -88,21 +108,38 @@
             </div>
           </template>
           <ViewTitle
-            v-if="swiperItem.question && userOrOrganization == 'RY' && dateOrMonth == 'DR' && targetType == 'ZD' && (reportType == 'DC' || reportType == 'ZF')"
-            :title="'已'+reportTypeStr+'问题统计'"
+            v-if="
+              swiperItem.question &&
+              userOrOrganization == 'RY' &&
+              dateOrMonth == 'DR' &&
+              targetType == 'ZD' &&
+              (reportType == 'DC' || reportType == 'ZF')
+            "
+            :title="'已' + reportTypeStr + '问题统计'"
             @click="seeQuestionInNative"
             :neednavTo="dateOrMonth == 'DR'"
-            style="marginTop: 10px"
+            style="margintop: 10px"
           />
-          <QuestionList v-if="swiperItem.question && userOrOrganization == 'RY' && dateOrMonth == 'DR' && targetType == 'ZD' && (reportType == 'DC' || reportType == 'ZF')" :list="swiperItem.question" />
+          <QuestionList
+            v-if="
+              swiperItem.question &&
+              userOrOrganization == 'RY' &&
+              dateOrMonth == 'DR' &&
+              targetType == 'ZD' &&
+              (reportType == 'DC' || reportType == 'ZF')
+            "
+            :list="swiperItem.question"
+          />
           <ViewTitle
             v-if="swiperItem.planList"
             title="TA的拜访计划"
             @click="seeAllPlan(swiperItem.planList)"
-            style="marginTop: 10px"
+            style="margintop: 10px"
           />
           <div class="add-visit-btn-main" v-if="swiperItem.planList">
-            <button class="add-visit-btn" @click="addPlanToSale">给Ta新增拜访计划+</button>
+            <button class="add-visit-btn" @click="addPlanToSale">
+              给Ta新增拜访计划+
+            </button>
           </div>
           <planList :planList="swiperItem.planList" />
         </SwipeItem>
@@ -121,7 +158,7 @@ export default {
   components: {
     switchDataMonth,
     staffMessage,
-    planList
+    planList,
   },
   created() {
     // 修改对应页面标题
@@ -134,27 +171,27 @@ export default {
     this.$bridge.callhandler({
       type: "isBack",
       data: {
-        isBack: false
-      }
+        isBack: false,
+      },
     });
 
     if (this.swiperIndex) {
       this.$nextTick(() => {
         this.navTitleIndexChange({
-          index: this.swiperIndex
+          index: this.swiperIndex,
         });
       });
     }
   },
   destroyed() {
     this.$store.commit("saveSwiperTitleIndex", {
-      index: this.curTitleIndex
+      index: this.curTitleIndex,
     });
   },
   data() {
     return {
       curTitleIndex: 0,
-      reportTypeStr: ""
+      reportTypeStr: "",
     };
   },
 
@@ -169,8 +206,8 @@ export default {
             : this.userInfo.appuser,
           userBp: this.reportAjaxData
             ? this.reportAjaxData.userbp
-            : this.userInfo.partner
-        }
+            : this.userInfo.partner,
+        },
       });
     },
     // 查看所有计划
@@ -184,8 +221,8 @@ export default {
 
           userBp: this.reportAjaxData
             ? this.reportAjaxData.userbp
-            : this.userInfo.partner
-        }
+            : this.userInfo.partner,
+        },
       });
     },
 
@@ -223,11 +260,11 @@ export default {
           : this.userInfo.appuser,
 
         detail_type: `${this.targetType}_${this.reportType}`,
-        warning: "X"
+        warning: "X",
       };
       this.$bridge.callhandler({
         type: "navToAppPath",
-        data
+        data,
       });
     },
 
@@ -242,7 +279,7 @@ export default {
       }`;
 
       this.$store.commit("changeHeaderNavTitle", {
-        name
+        name,
       });
     },
 
@@ -250,7 +287,7 @@ export default {
     seeRankAllList(index, i) {
       this.$store.commit("changeSwiperIndex", {
         index,
-        i
+        i,
       });
       this.$router.push("visitRanking");
     },
@@ -269,7 +306,12 @@ export default {
       // 判断是否有时间，第一次初始化的情况下是没有的
       if (!this.terminalVisitQueryTime) return;
 
-      this.reportTypeStr = this.reportType == "BF" ? "拜访" : (this.reportType == "ZF") ? "走访" : "督查";
+      this.reportTypeStr =
+        this.reportType == "BF"
+          ? "拜访"
+          : this.reportType == "ZF"
+          ? "走访"
+          : "督查";
       // this.swiperList = []
       let url = `${this.targetType}_${this.reportType}_${this.dateOrMonth}_${this.userOrOrganization}`;
       if (url === this.reportUrl && !bool) {
@@ -277,7 +319,7 @@ export default {
       }
       let queryObj = {
         appuser: this.userInfo.appuser,
-        org_code: this.userInfo.sales_station
+        org_code: this.userInfo.sales_station,
       };
 
       // 判断日期方式，按月份筛选月份只取月，日期自己加上去，按日期正常传
@@ -301,7 +343,7 @@ export default {
       } else {
         queryObj["visit_type"] = "ZB03";
       }
-      
+
       queryObj["org_code"] = havaAjaxData
         ? this.reportAjaxData.zorg3 ||
           this.reportAjaxData.zorg2 ||
@@ -321,9 +363,8 @@ export default {
         : userInfo.sales_group
         ? 2
         : 1;
-        
-      this.getReportData(url, queryObj);
 
+      this.getReportData(url, queryObj);
     },
 
     // 根据store中的很多参数实际发起请求
@@ -331,38 +372,38 @@ export default {
       this.$showLoading();
       await this.$store.dispatch("getReportData", {
         url,
-        queryObj
+        queryObj,
       });
       this.$hideLoading();
-    }
+    },
   },
 
   watch: {
     // 监听切换日期
     terminalVisitQueryTime() {
       this.determineUrlByStoreParam(true);
-    }
+    },
   },
 
   computed: {
     ...mapState({
-      userOrOrganization: state =>
+      userOrOrganization: (state) =>
         state.terminalVisitReportStore.userOrOrganization,
-      dateOrMonth: state => state.terminalVisitReportStore.dateOrMonth,
-      targetType: state => state.terminalVisitReportStore.targetType,
-      reportType: state => state.terminalVisitReportStore.reportType,
-      terminalVisitQueryTime: state =>
+      dateOrMonth: (state) => state.terminalVisitReportStore.dateOrMonth,
+      targetType: (state) => state.terminalVisitReportStore.targetType,
+      reportType: (state) => state.terminalVisitReportStore.reportType,
+      terminalVisitQueryTime: (state) =>
         state.terminalVisitReportStore.terminalVisitQueryTime,
-      reportMessage: state => state.terminalVisitReportStore.reportMessage,
-      swiperList: state => state.terminalVisitReportStore.swiperList,
-      swiperNavList: state => state.terminalVisitReportStore.swiperNavList,
-      userInfo: state => state.userInfoStore.userInfo,
-      reportAjaxData: state => state.terminalVisitReportStore.reportAjaxData,
-      swiperIndex: state => state.terminalVisitReportStore.swiperIndex,
-      reportUrl: state => state.terminalVisitReportStore.reportUrl,
-      headerMessage: state => state.terminalVisitReportStore.headerMessage,
-    })
-  }
+      reportMessage: (state) => state.terminalVisitReportStore.reportMessage,
+      swiperList: (state) => state.terminalVisitReportStore.swiperList,
+      swiperNavList: (state) => state.terminalVisitReportStore.swiperNavList,
+      userInfo: (state) => state.userInfoStore.userInfo,
+      reportAjaxData: (state) => state.terminalVisitReportStore.reportAjaxData,
+      swiperIndex: (state) => state.terminalVisitReportStore.swiperIndex,
+      reportUrl: (state) => state.terminalVisitReportStore.reportUrl,
+      headerMessage: (state) => state.terminalVisitReportStore.headerMessage,
+    }),
+  },
 };
 </script>
 

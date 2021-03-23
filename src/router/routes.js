@@ -28,6 +28,14 @@ const routes = [
     path: '/workCirclevisit',
     name: 'workCirclevisit',
     component: () => import('@/pages/workCirclevisit')
+  }, {
+    path: '/visitDetail',
+    name: 'visitDetail',
+    component: () => import('@/pages/visitDetail')
+  }, {
+    path: '/crmLife',
+    name: 'crmLife',
+    component: () => import('@/pages/crmLife')
   }
 ]
 

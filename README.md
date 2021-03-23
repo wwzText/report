@@ -3,6 +3,7 @@
 ## 项目描述
 > 雪花crm系统*报表*H5 入口是pages/entry
 > 雪花工作圈拜访分享 *分享*H5 入口是pages/workCirclevisit
+> 雪花工作圈 *督导工作详情分享* pages/shareVisitDetail
 
 ## 构建工具
 > vue脚手架3.+，ui框架使用vant

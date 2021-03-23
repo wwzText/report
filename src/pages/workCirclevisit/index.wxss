@@ -1,0 +1,146 @@
+.work-share-container {
+  background-color: #d9d9d9;
+  height: 100%;
+  overflow: auto;
+}
+.address-time-container {
+  background-color: white;
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+.address-time-container .leave-time-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.address-time-container .leave-time-container .iconqiandao-01,
+.address-time-container .leave-time-container .iconqiantui-01,
+.address-time-container .leave-time-container .iconshijian-01 {
+  color: #2986e6;
+  font-size: 20px;
+}
+.address-time-container .leave-time-container .leave-time-detail {
+  font-size: 12px;
+  color: #333;
+}
+.address-time-container .leave-time-container .iconshijian-01 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.address-time-container .address-main {
+  display: flex;
+}
+.address-time-container .address-main .terminal_name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+.sales-message-container {
+  padding: 10px 15px;
+  background-color: white;
+  box-sizing: border-box;
+  margin-top: 1px;
+}
+.sales-message-container .sales-message-main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.sales-message-container .sales-message-main .user-head-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.sales-message-container .sales-message-main .partner_name {
+  font-size: 16px;
+  margin-right: 10px;
+}
+.sales-message-container .sales-message-main .sales_position {
+  font-size: 12px;
+  color: #989898;
+  flex: 1;
+  margin-right: 10px;
+}
+.sales-message-container .sales-message-main .sales_visit_time {
+  font-size: 12px;
+  color: #666;
+}
+.sales-message-container .leave_notes-main .leave_notes_title {
+  font-size: 12px;
+  color: #989898;
+}
+.sales-message-container .leave_notes-main .leave-noter {
+  font-size: 14px;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.check-info-container {
+  padding: 15px 10px;
+  box-sizing: border-box;
+  background-color: white;
+}
+.comment-container {
+  margin-top: 10px;
+}
+.comment-container .comment-num-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.comment-container .comment-num-main .iconpinglun-01 {
+  color: #2986e6;
+  font-size: 20px;
+  margin-left: 15px;
+  margin-right: 2px;
+}
+.comment-container .comment-num-main .good-num {
+  font-size: 14px;
+  color: #333;
+}
+.comment-container .comment-list-container {
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+.comment-container .comment-list-container .comment-item {
+  background: #f7f7f7;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  align-self: stretch;
+}
+.comment-container .comment-list-container .comment-item .comment-from-name {
+  color: #2986E6;
+}
+.comment-container .comment-list-container .comment-read-container {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.comment-container .comment-list-container .comment-read-container .comment-read-num,
+.comment-container .comment-list-container .comment-read-container .comment-not-read-num {
+  font-size: 14px;
+}
+.comment-container .comment-list-container .comment-read-container .comment-not-read-num {
+  color: #2986E6;
+  margin-left: 10px;
+}
+.question-list {
+  background: #fff6f5;
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+.question-list .question-title {
+  font-size: 16px;
+  color: #db2b2b;
+  font-weight: bold;
+}

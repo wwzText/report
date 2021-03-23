@@ -1,23 +1,18 @@
 import axios from 'axios';
 import Vue from 'vue';
-
 import apis from './apis';
-
 import store from '@/store';
-
 import { SECRET_KEY } from '@/config/md5.config';
 import md5 from 'js-md5';
-
+import { APP_VERSION } from '@/config/system.config.js';
 class Http {
-
-    static urlBefore = 'https://app.cresz.com.cn'
-    // static urlBefore = 'https://appuat.cresz.com.cn'
+    static BASEURL = APP_VERSION === 'dev' ? 'https://appuat.cresz.com.cn' : 'https://app.cresz.com.cn'
 
     static instance = axios.create({
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        baseURL: Http.urlBefore
+        baseURL: Http.BASEURL
     })   
     // 获取服务端时间的时间戳
     static async getWebTime() {
@@ -91,9 +86,8 @@ class Http {
         let timestamp = webTimeBack.appserver_time;
 
         // 拼接url
-        url = Http.urlBefore + apis[url];
-        console.log('url', url)
-        console.log('data', JSON.stringify(data))
+        url = Http.BASEURL + apis[url];
+
         // 实际调用axios
         return await axios({
             method,
@@ -121,7 +115,6 @@ class Http {
             },
         }).then(res => {
             if (res.data.errcode === 200) {
-                console.log(res.data.data)
                 return res.data.data
             } else if (res.data.errcode == 1112) {
                 Vue.prototype.$bridge.callhandler({
@@ -145,7 +138,7 @@ class Http {
         let timestamp = webTimeBack.appserver_time;
 
         // 拼接url
-        url = Http.urlBefore + apis[url];
+        url = Http.BASEURL + apis[url];
 
         // 实际调用axios
         return await axios({
